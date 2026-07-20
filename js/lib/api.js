@@ -105,6 +105,12 @@ window.PAPI = (function () {
             var _that = this;
 
             api_request(account, '/api/v2/credentials', 'POST', credential, function (r) {
+                // On a failed POST, r is the api_request error object (no
+                // credential_id/guid). Don't invoke the success callback —
+                // otherwise the caller would push a phantom credential.
+                if (!r || r.error) {
+                    return;
+                }
                 credential.credential_id = r.credential_id;
                 credential.guid = r.guid;
                 credential = _that.decryptCredential(credential, _key);
@@ -178,7 +184,13 @@ window.PAPI = (function () {
 
             credential.expire_time = new Date(credential.expire_time).getTime() / 1000;
 
-            api_request(account, '/api/v2/credentials/' + credential.guid, 'PATCH', _credential, function () {
+            api_request(account, '/api/v2/credentials/' + credential.guid, 'PATCH', _credential, function (r) {
+                // Only report success when the server actually accepted the
+                // PATCH; otherwise the caller would update its cache, delete
+                // the mined data and show "credential updated" on a failure.
+                if (r && r.error) {
+                    return;
+                }
                 callback(credential);
             });
         }
