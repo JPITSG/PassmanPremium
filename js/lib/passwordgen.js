@@ -19,38 +19,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-function Arcfour () {
-    this.j = this.i = 0, this.S = []
-}
 
-function ARC4init (r) {
-    var t, n, e;
-    for (t = 0; 256 > t; ++t)this.S[t] = t
-    for (t = n = 0; 256 > t; ++t)n = n + this.S[t] + r[t % r.length] & 255, e = this.S[t], this.S[t] = this.S[n], this.S[n] = e
-    this.j = this.i = 0
-}
+// Password generation backed directly by the Web Crypto CSPRNG. The old
+// ARC4-based PRNG (seeded once, then re-seeded with the clock on every
+// call), its modulo-biased range reduction and the biased
+// random-comparator shuffle are gone.
 
-function ARC4next () {
-    var r;
-    return this.i = this.i + 1 & 255, this.j = this.j + this.S[this.i] & 255, r = this.S[this.i], this.S[this.i] = this.S[this.j], this.S[this.j] = r, this.S[r + this.S[this.i] & 255]
-}
-
-function prng_newstate () {
-    return new Arcfour
+/**
+ * Uniformly distributed random integer in [min, max], drawn from
+ * crypto.getRandomValues with rejection sampling (no modulo bias).
+ */
+function get_random (min, max) {
+    var range = max - min + 1;
+    if (range <= 0) {
+        return min;
+    }
+    var maxUnbiased = Math.floor(4294967296 / range) * range - 1;
+    var buf = new Uint32Array(1);
+    var x;
+    do {
+        window.crypto.getRandomValues(buf);
+        x = buf[0];
+    } while (x > maxUnbiased);
+    return min + (x % range);
 }
 
 function generatePassword (r, t, n, e, o, i, p, g) {
     var _, a, s, f, d, h, u, l, c, v, w, y, m;
-    if (void 0 === r && (r = 8 + get_random(0, 1)), r > 256 && (r = 256, document.getElementById("length").value = 256), i > 256 && (i = 256), void 0 === t && (t = !0), void 0 === n && (n = !0), void 0 === e && (e = !0), void 0 === o && (o = !1), void 0 === i && (i = 0), void 0 === p && (p = !1), void 0 === g && (g = !0), _ = 0, a = 0, s = 0, g && (_ = a = s = 1), f = [], n && _ > 0)for (d = 0; _ > d; d++)f[f.length] = "L"
+    if (void 0 === r && (r = 8 + get_random(0, 1)), r > 256 && (r = 256), i > 256 && (i = 256), void 0 === t && (t = !0), void 0 === n && (n = !0), void 0 === e && (e = !0), void 0 === o && (o = !1), void 0 === i && (i = 0), void 0 === p && (p = !1), void 0 === g && (g = !0), _ = 0, a = 0, s = 0, g && (_ = a = s = 1), f = [], n && _ > 0)for (d = 0; _ > d; d++)f[f.length] = "L"
     if (t && a > 0)for (d = 0; a > d; d++)f[f.length] = "U"
     if (e && i > 0)for (d = 0; i > d; d++)f[f.length] = "D"
     if (o && s > 0)for (d = 0; s > d; d++)f[f.length] = "S"
     for (; f.length < r;)f[f.length] = "A"
+    // unbiased Fisher-Yates shuffle (the old random-comparator sort was biased)
+    for (var si = f.length - 1; si > 0; si--) {
+        var sj = get_random(0, si), st = f[si];
+        f[si] = f[sj], f[sj] = st;
+    }
     // with every character class disabled the combined pool stays empty —
     // fall back to lowercase rather than returning an empty password
-    for (f.sort(function () {
-        return 2 * get_random(0, 1) - 1
-    }), h = "", u = "abcdefghjkmnpqrstuvwxyz", p || (u += "ilo"), n && (h += u), l = "ABCDEFGHJKMNPQRSTUVWXYZ", p || (l += "ILO"), t && (h += l), c = "23456789", p || (c += "10"), e && (h += c), v = "!@#$%^&*", o && (h += v), h || (h = u), w = "", y = 0; r > y; y++) {
+    for (h = "", u = "abcdefghjkmnpqrstuvwxyz", p || (u += "ilo"), n && (h += u), l = "ABCDEFGHJKMNPQRSTUVWXYZ", p || (l += "ILO"), t && (h += l), c = "23456789", p || (c += "10"), e && (h += c), v = "!@#$%^&*", o && (h += v), h || (h = u), w = "", y = 0; r > y; y++) {
         switch (f[y]) {
             case"L":
                 m = u;
@@ -72,53 +80,10 @@ function generatePassword (r, t, n, e, o, i, p, g) {
     return w
 }
 
-function rng_seed_int (r) {
-    rng_pool[rng_pptr++] ^= 255 & r, rng_pool[rng_pptr++] ^= r >> 8 & 255, rng_pool[rng_pptr++] ^= r >> 16 & 255, rng_pool[rng_pptr++] ^= r >> 24 & 255, rng_pptr >= rng_psize && (rng_pptr -= rng_psize)
-}
-
-function rng_seed_time () {
-    rng_seed_int((new Date).getTime())
-}
-
-function rng_get_byte () {
-    if (null == rng_state) {
-        for (rng_seed_time(), rng_state = prng_newstate(), rng_state.init(rng_pool), rng_pptr = 0; rng_pptr < rng_pool.length; ++rng_pptr)rng_pool[rng_pptr] = 0
-        rng_pptr = 0
-    }
-    return rng_state.next()
-}
-
-function rng_get_bytes (r) {
-    var t;
-    for (t = 0; t < r.length; ++t)r[t] = rng_get_byte()
-}
-
-function SecureRandom () {
-}
-
-function get_random (r, t) {
-    var n, e, o, i = t - r + 1
-    for (rng_seed_time(), n = [], e = 0; 4 > e; e++)n[e] = 0
-    for (rng_get_bytes(n), o = 0, e = 0; 4 > e; e++)o *= 256, o += n[e]
-    return o %= i, o += r
-}
-
 function get_random_password (r, t) {
     var n;
     var pwlen, newpw;
-    for ("number" != typeof r && (r = 12), "number" != typeof t && (t = 16), r > t && (n = r, r = t, t = n), pwlen = get_random(r, t), newpw = ""; newpw.length < pwlen;)newpw += String.fromCharCode(get_random(32, 127))
+    // printable ASCII only — 0x7F (DEL) is not a usable password character
+    for ("number" != typeof r && (r = 12), "number" != typeof t && (t = 16), r > t && (n = r, r = t, t = n), pwlen = get_random(r, t), newpw = ""; newpw.length < pwlen;)newpw += String.fromCharCode(get_random(32, 126))
     return newpw
 }
-
-var rng_psize, rng_state, rng_pool, rng_pptr, t, z, crypt_obj, num, buf, i
-if (Arcfour.prototype.init = ARC4init, Arcfour.prototype.next = ARC4next, rng_psize = 256, null == rng_pool) {
-    /** global: navigator */
-    if (rng_pool = [], rng_pptr = 0, "undefined" != typeof navigator && "Netscape" == navigator.appName && navigator.appVersion < "5" && "undefined" != typeof window && window.crypto)for (z = window.crypto.random(32), t = 0; t < z.length; ++t)rng_pool[rng_pptr++] = 255 & z.charCodeAt(t)
-    try {
-        if (crypt_obj = null, "undefined" != typeof window && void 0 !== window.crypto ? crypt_obj = window.crypto : "undefined" != typeof window && void 0 !== window.msCrypto && (crypt_obj = window.msCrypto), void 0 !== crypt_obj && "function" == typeof crypt_obj.getRandomValues && rng_psize > rng_pptr)for (num = Math.floor((rng_psize - rng_pptr) / 2) + 1, buf = new Uint16Array(num), crypt_obj.getRandomValues(buf), i = 0; i < buf.length; i++)t = buf[i], rng_pool[rng_pptr++] = t >>> 8, rng_pool[rng_pptr++] = 255 & t
-    } catch (e) {
-    }
-    for (; rng_psize > rng_pptr;)t = Math.floor(65536 * sjcl.random.randomWords(1)), rng_pool[rng_pptr++] = t >>> 8, rng_pool[rng_pptr++] = 255 & t
-    rng_pptr = 0, rng_seed_time()
-}
-SecureRandom.prototype.nextBytes = rng_get_bytes;

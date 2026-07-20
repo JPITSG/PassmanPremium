@@ -162,11 +162,19 @@ $j(document).ready(function () {
     }
 
     function getMaxZ() {
-        return Math.max.apply(null,
-            $j.map($j('body *'), function (e) {
-                if ($j(e).css('position') !== 'static')
-                    return parseInt($j(e).css('z-index')) || 1;
-            }));
+        // Math.max.apply throws RangeError on pages with very many
+        // positioned elements (argument limit) and returns -Infinity when
+        // there are none — compute the max in a loop instead
+        var maxZ = 0;
+        $j('body *').each(function () {
+            if ($j(this).css('position') !== 'static') {
+                var z = parseInt($j(this).css('z-index')) || 1;
+                if (z > maxZ) {
+                    maxZ = z;
+                }
+            }
+        });
+        return maxZ;
     }
 
     var activeForm;
