@@ -1,0 +1,528 @@
+{
+  "refresh_credential_list": {
+    "message": "Endurlesa lista yfir auðkenni",
+    "description": "Refresh the credential list"
+  },
+  "extDescription": {
+    "message": "Passman - Lykilorðastýring fyrir NextCloud / ownCloud",
+    "description": "Extension description"
+  },
+  "save_to": {
+    "message": "Vista í $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "vault": {
+    "message": "Lykilorðageymsla",
+    "description": "Vault"
+  },
+  "ignore_site_tab": {
+    "message": "Hunsa vefsvæði / síðu",
+    "description": "Invalid server URL"
+  },
+  "account_added": {
+    "message": "Aðgangi bætt við.",
+    "description": "Search"
+  },
+  "label": {
+    "message": "Skýring",
+    "description": "Label"
+  },
+  "ignore_protocol": {
+    "message": "Hunsa samskiptamáta við samanburð vefsvæða",
+    "description": "Ignore protocol for site matching"
+  },
+  "settings": {
+    "message": "Stillingar",
+    "description": "Settings"
+  },
+  "finish": {
+    "message": "Ljúka",
+    "description": "Finish"
+  },
+  "detected_changed_url": {
+    "message": "Fann breytta URL-slóð fyrir",
+    "description": "Detected changed URL for"
+  },
+  "add_custom_field": {
+    "message": "Bæta við sérsniðnu gagnasviði",
+    "description": "Add a custom field"
+  },
+  "enable_update_url": {
+    "message": "Ask to update credential URL if it doesn't match the current URL",
+    "description": "Enable form auto submit"
+  },
+  "credentials": {
+    "message": "auðkenni",
+    "description": "credentials"
+  },
+  "password_picker_gotolist": {
+    "message": "When a password is found, go to list rather than last active tab",
+    "description": "Disable password picker"
+  },
+  "search": {
+    "message": "Leita",
+    "description": "Search"
+  },
+  "toggle_advanced": {
+    "message": "Víxla ítarlegum valkostum af/á",
+    "description": "Toggle advanced options"
+  },
+  "extension_locked": {
+    "message": "Passman-viðaukinn er læstur, aflæstu til að nota hann",
+    "description": "When the extension is locked, and requires an unlock to use it"
+  },
+  "update": {
+    "message": "Uppfæra",
+    "description": "Update"
+  },
+  "unlock": {
+    "message": "Aflæsa",
+    "description": "Unlock"
+  },
+  "invalid_vault_password": {
+    "message": "Ógildur lykill að lykilorðageymslu!",
+    "description": "Vault password"
+  },
+  "msg_reset_extension": {
+    "message": "Þú getur endurstillt lykilorðið þitt. Þetta mun frumstilla viðbótina á sjálfgefna stöðu.",
+    "description": "Search"
+  },
+  "no_vaults": {
+    "message": "Því miður, engar lykilorðageymslur fundust. Útbúðu lykilorðageymslu í Nextcloud / ownCloud forritinu og prófaðu svo aftur.",
+    "description": "Search"
+  },
+  "edit": {
+    "message": "Breyta",
+    "description": "Edit"
+  },
+  "min_digits": {
+    "message": "Lágmarksfjöldi tölustafa",
+    "description": "Minimum amount of digits"
+  },
+  "enter_master_password_desc": {
+    "message": "This password will be used to encrypt all your settings in the extension. You can choose to save this password locally, but it will be saved in PLAINTEXT.",
+    "description": "Enter master password"
+  },
+  "select_vault": {
+    "message": "Velja lykilorðageymslu",
+    "description": "Search"
+  },
+  "enable_autofill": {
+    "message": "Virkja sjálfvirka útfyllingu forma",
+    "description": "Disable auto fill of forms"
+  },
+  "add_account": {
+    "message": "Bæta við notandaaðgangi",
+    "description": "Add account"
+  },
+  "credential": {
+    "message": "auðkenni",
+    "description": "credential"
+  },
+  "delete": {
+    "message": "Eyða",
+    "description": "Delete"
+  },
+  "forgot_password": {
+    "message": "Gleymdirðu lykilorði?",
+    "description": "Search"
+  },
+  "invalid_server_settings": {
+    "message": "Ógildar stillingar þjóns",
+    "description": "Search"
+  },
+  "nextcloud_settings": {
+    "message": "Stillingar Nextcloud / ownCloud þjóns",
+    "description": "Nextcloud / ownCloud server settings"
+  },
+  "use_generated_password": {
+    "message": "Nota lykilorð",
+    "description": "Use password"
+  },
+  "one_time_password": {
+    "message": "ESL (eins-skiptis-leyniorð)",
+    "description": "One time password"
+  },
+  "list": {
+    "message": "Listi",
+    "description": "List"
+  },
+  "ignore_site": {
+    "message": "Hunsa vefsvæði",
+    "description": "Update"
+  },
+  "select_default_vault": {
+    "message": "Veldu sjálfgefna lykilorðageymslu",
+    "description": "Select default vault"
+  },
+  "site_ignored": {
+    "message": "Vefsvæði hunsað",
+    "description": "Site ignored"
+  },
+  "value": {
+    "message": "Gildi",
+    "description": "Custom fields"
+  },
+  "ignore_path": {
+    "message": "Hunsa slóð við samanburð vefsvæða",
+    "description": "Ignore path for site matching"
+  },
+  "custom_fields": {
+    "message": "Sérsniðnir reitir",
+    "description": "Custom fields"
+  },
+  "show_adv": {
+    "message": "Birta ítarlega valkosti",
+    "description": "Disable password picker"
+  },
+  "invalid_master_password": {
+    "message": "Ógilt aðallykilorð!",
+    "description": "When the master password is invalid"
+  },
+  "general": {
+    "message": "Almennt",
+    "description": "Custom fields"
+  },
+  "no_password_match": {
+    "message": "Lykilorðin stemma ekki",
+    "description": "When comparing passwords"
+  },
+  "close": {
+    "message": "Loka",
+    "description": "Close"
+  },
+  "prev": {
+    "message": "Fyrra",
+    "description": "Previous"
+  },
+  "add_hint": {
+    "message": "Eftir að þú hefur útbúið þau, geturðu breytt auðkennunum í Passman",
+    "description": "After creating it, you can edit the credential in Passman"
+  },
+  "text": {
+    "message": "texti",
+    "description": "To describe a textual input field"
+  },
+  "reset_extension": {
+    "message": "Núllstilla viðauka",
+    "description": "Search"
+  },
+  "default_vault": {
+    "message": "Sjálfgefin lykilorðageymsla",
+    "description": "Default vault"
+  },
+  "ignore_port": {
+    "message": "Hunsa gáttir við samanburð vefsvæða",
+    "description": "Ignore port for site matching"
+  },
+  "master_password": {
+    "message": "Stilltu aðallykilorð",
+    "description": "Set a master password"
+  },
+  "disable_picker_text": {
+    "message": "Myndirðu vilja gera Passman óvirkt á þessari síðu, eða fyrir allt vefsvæðið?",
+    "description": "Would you like to disable Passman for the current page, or for the entire website?"
+  },
+  "password": {
+    "message": "Lykilorð",
+    "description": "Password"
+  },
+  "copy": {
+    "message": "Afrita",
+    "description": "Copy"
+  },
+  "begin": {
+    "message": "Hefjumst handa!",
+    "description": "Let's begin!"
+  },
+  "intro_text": {
+    "message": "This wizard will guide you trough the steps to set up the extension and keep all your passwords synchronized.",
+    "description": "Cancel"
+  },
+  "credential_deleted": {
+    "message": "Eyddi auðkennum",
+    "description": "Credential deleted"
+  },
+  "ignore_site_placeholder": {
+    "message": "Enter a domain or TLD to ignore and press ↵",
+    "description": "Disable auto fill of forms"
+  },
+  "ignored_sites": {
+    "message": "Hunsa vefsvæði / síður",
+    "description": "Ignored sites"
+  },
+  "toggle_visibility": {
+    "message": "Víxla sýnileika",
+    "description": "Toggle visibility"
+  },
+  "master_pw_warning": {
+    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "description": "Remember master password"
+  },
+  "remember_master_password": {
+    "message": "Muna aðallykilorð",
+    "description": "Remember master password"
+  },
+  "btn_save_site": {
+    "message": "Vista auðkenni fyrir þetta vefsvæði",
+    "description": "Save credentials for this site"
+  },
+  "browser_action_title_locked": {
+    "message": "Passman - Læst",
+    "description": "Browser extension title when the extension is locked"
+  },
+  "label_required": {
+    "message": "Fylltu út skýringu",
+    "description": "When comparing passwords"
+  },
+  "enter_master_password": {
+    "message": "Settu inn aðallykilorð",
+    "description": "Enter master password"
+  },
+  "vault_password": {
+    "message": "Lykilorð að lykilorðageymslu",
+    "description": "Vault password"
+  },
+  "select_password_picker_default_tab": {
+    "message": "When the Password picker is unable to find any credentials, it will go to:",
+    "description": "Select password picker default tab"
+  },
+  "save_site": {
+    "message": "Vista vefsvæðið",
+    "description": "Save site"
+  },
+  "extra_accounts": {
+    "message": "Þegar uppsetningarferlinu er lokið, geturðu bætt við fleiri aðgöngum.",
+    "description": "Search"
+  },
+  "next": {
+    "message": "Næsta",
+    "description": "Next"
+  },
+  "avoid_ambiguous": {
+    "message": "Forðast vafasama stafi",
+    "description": "Avoid ambiguous characters"
+  },
+  "disable_site": {
+    "message": "Gera vefsvæði óvirkt",
+    "description": "Disable site"
+  },
+  "url_ignored": {
+    "message": "Slóð hunsuð",
+    "description": "URL ignored"
+  },
+  "saving_to": {
+    "message": "Vista í $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "enable_password_picker": {
+    "message": "Virkja lykilorðaveljara",
+    "description": "Disable password picker"
+  },
+  "auto_login": {
+    "message": "Passman er að skrá þig inn sem $USERNAME$",
+    "description": "Amount of the credentials in the database",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "MyUsername"
+      }
+    }
+  },
+  "default_vault_desc": {
+    "message": "Select the vault that you want to keep in sync with the webbrowser.",
+    "description": "Select the vault that you want to keep in sync with the webbrowser."
+  },
+  "detected_new_login": {
+    "message": "Fann nýja innskráningu",
+    "description": "Detected new login"
+  },
+  "detected_changed_login": {
+    "message": "Fann að lykilorði notanda hefur verið breytt",
+    "description": "Detected changed password for user"
+  },
+  "invalid_response_from_server": {
+    "message": "Ógilt svar frá þjóni: [$STATUS_CODE$] $STATUS_TEXT$",
+    "description": "No credentials found for the current site",
+    "placeholders": {
+      "status_code": {
+        "content": "$1",
+        "example": "404"
+      },
+      "status_text": {
+        "content": "$2",
+        "example": "Page not found"
+      }
+    }
+  },
+  "save": {
+    "message": "Vista",
+    "description": "Save"
+  },
+  "generate_password": {
+    "message": "Framleiða lykilorð",
+    "description": "Generate password"
+  },
+  "edit_insufficient_permissions": {
+    "message": "You don't have the permission to edit this credential.",
+    "description": "You don't have permissions to edit this credential."
+  },
+  "server_url": {
+    "message": "URL-slóð vefþjóns",
+    "description": "Server URL"
+  },
+  "disable_page": {
+    "message": "Gera síðu óvirka",
+    "description": "Disable page"
+  },
+  "hide_adv": {
+    "message": "Fela ítarlega valkosti",
+    "description": "Disable password picker"
+  },
+  "cancel": {
+    "message": "Hætta við",
+    "description": "Cancel"
+  },
+  "add": {
+    "message": "Bæta við",
+    "description": "Add"
+  },
+  "credential_updated": {
+    "message": "Uppfærði auðkenni",
+    "description": "updated, lowercase"
+  },
+  "no_credentials_found": {
+    "message": "Engin persónuauðkenni fundust",
+    "description": "No credentials found for the current site"
+  },
+  "extName": {
+    "message": "Passman",
+    "description": "Extension name"
+  },
+  "lock_extension": {
+    "message": "Læsa viðauka",
+    "description": "Title on the PayPal button"
+  },
+  "search_for": {
+    "message": "Leita að",
+    "description": "No credentials found for the current site"
+  },
+  "password_repeat": {
+    "message": "Lykilorð (endurtaka)",
+    "description": "Password"
+  },
+  "credential_saved": {
+    "message": "Auðkenni vistuð",
+    "description": "saved, lowercase"
+  },
+  "require_every_character_type": {
+    "message": "Krefjast allra stafagerða",
+    "description": "Require every character type"
+  },
+  "enable_debug": {
+    "message": "Virkja villuskráningarham",
+    "description": "Enable debug mode"
+  },
+  "email": {
+    "message": "Tölvupóstur",
+    "description": "E-mail"
+  },
+  "welcome_to_passman": {
+    "message": "Welcome to the Passman webextension",
+    "description": "Intro at the setup"
+  },
+  "browser_action_title_login": {
+    "message": "Passman - fann $CREDENTIAL_AMOUNT$ $PLURAL$ fyrir þessa síðu",
+    "description": "String for the browser action",
+    "placeholders": {
+      "credential_amount": {
+        "content": "$1",
+        "example": "4"
+      },
+      "plural": {
+        "content": "$2",
+        "example": "credentials"
+      }
+    }
+  },
+  "http_warning": {
+    "message": "Þú ert að nota HTTP! Innskráningarauðkenni verða send sem hreinn texti. Passman auðkennin þín eru samt dulrituð.",
+    "description": "Warning for http connections"
+  },
+  "done": {
+    "message": "Lokið",
+    "description": "Done"
+  },
+  "no_credentials_found_for_site": {
+    "message": "No credentials found for this site.",
+    "description": "No credentials found for the current site"
+  },
+  "enable_autosubmit": {
+    "message": "Virkja sjálfvirka sendingu eftir að aðgangur hefur verið valinn",
+    "description": "Enable form auto submit"
+  },
+  "saving": {
+    "message": "Vistun",
+    "description": "Saving"
+  },
+  "url": {
+    "message": "Slóð (URL)",
+    "description": "URL"
+  },
+  "iam_sure": {
+    "message": "Já, ég er viss!",
+    "description": "Search"
+  },
+  "no_sites_ignored": {
+    "message": "Engin vefsvæði hunsuð",
+    "description": "No sites ignored"
+  },
+  "accounts": {
+    "message": "Notandaaðgangar",
+    "description": "Accounts"
+  },
+  "password_generator": {
+    "message": "Gerð lykilorða",
+    "description": "Password generator"
+  },
+  "empty_master_key": {
+    "message": "Auður aðallykill!",
+    "description": "Empty master key!"
+  },
+  "ignore_subdomain": {
+    "message": "Hunsa undirlén við samanburð vefsvæða",
+    "description": "Password"
+  },
+  "btn_search": {
+    "message": "Leita að auðkennum",
+    "description": "Search credentials"
+  },
+  "credential_created": {
+    "message": "Bjó til auðkenni",
+    "description": "Credential created"
+  },
+  "username": {
+    "message": "Notandanafn",
+    "description": "Username"
+  },
+  "pw_length": {
+    "message": "Lengd lykilorðs",
+    "description": "Password length"
+  },
+  "refresh_timer": {
+    "message": "Endurlesa tímamælingu [sek]",
+    "description": "Password"
+  }
+}

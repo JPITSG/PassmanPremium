@@ -1,0 +1,156 @@
+/* Passman doorhanger (save / update bar) — floating card at the top of the
+   page, design language shared with the popup. Runs in a 60px-tall iframe
+   (inject.js contract); the vault dropdown rows must be exactly 29px tall
+   because inject.js grows the iframe by accounts.length * 29.
+
+   Layout stays float-based on purpose: doorhanger.js appends buttons in
+   primary-first order and relies on float:right to put Save rightmost. */
+
+body {
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	background: transparent;
+	font: 13px/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+#password-toolbar {
+	position: relative;
+	height: 44px;
+	margin: 6px 8px;
+	padding: 0 7px 0 12px;
+	background: var(--card);
+	color: var(--text);
+	border: 1px solid var(--border-strong);
+	border-radius: 10px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.08);
+	font-size: 13px;
+}
+:root[data-theme="light"] #password-toolbar {
+	box-shadow: 0 6px 18px rgba(18, 26, 38, 0.18);
+}
+
+#password-toolbar .toolbar-text {
+	float: left;
+	display: inline-block;
+	max-width: calc(100% - 350px);
+	margin-top: 12px;
+	padding-left: 24px;
+	color: var(--text);
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background: url('/icons/icon.svg') no-repeat left center / 16px 16px;
+}
+
+#password-toolbar .passman-btn {
+	outline: none;
+	float: right;
+	display: inline-block;
+	height: 30px;
+	line-height: 28px;
+	margin: 7px 0 0 6px;
+	padding: 0 12px;
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: 600;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	user-select: none;
+	background: transparent;
+	color: var(--muted);
+	border: 1px solid var(--border);
+	border-radius: 7px;
+	transition: color 0.2s, background 0.2s, border-color 0.2s, filter 0.2s;
+}
+#password-toolbar .passman-btn:hover {
+	background: var(--hover-wash);
+	color: var(--text);
+	border-color: var(--border-strong);
+}
+
+#password-toolbar .passman-btn.btn-success {
+	background: var(--grad);
+	border-color: transparent;
+	color: var(--on-accent);
+	font-weight: 700;
+	box-shadow: 0 3px 10px var(--accent-glow);
+}
+#password-toolbar .passman-btn.btn-success:hover {
+	color: var(--on-accent);
+	filter: brightness(1.06);
+	box-shadow: 0 4px 14px var(--accent-glow-strong);
+}
+
+#password-toolbar .passman-btn.btn-cancel { color: var(--muted); }
+#password-toolbar .passman-btn.btn-cancel:hover {
+	color: var(--danger);
+	background: var(--danger-soft);
+	border-color: var(--danger-border);
+}
+
+#password-toolbar .passman-btn.btn-ignore:hover,
+#password-toolbar .passman-btn.btn-updateUrl:hover { color: var(--accent-text); }
+
+#password-toolbar .passman-btn.btn-save .btn-txt { padding-right: 2px; }
+
+/* vault chooser chip (multi-account) */
+#password-toolbar .passman-btn.caret-container {
+	background: var(--accent-softer);
+	border-color: var(--accent-border);
+	color: var(--accent-text);
+	max-width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#password-toolbar .passman-btn.caret-container:hover {
+	background: var(--accent-soft);
+	border-color: var(--accent1);
+	color: var(--accent-text);
+}
+#password-toolbar .caret-container > .caret-container-txt {
+	border-bottom: 1px dashed var(--accent-border);
+}
+
+/* vault dropdown — 29px rows, see inject.js resize contract */
+#password-toolbar .select_account {
+	position: absolute;
+	top: 45px;
+	right: 0;
+	width: 220px;
+	padding: 2px 0;
+	color: var(--text);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background: var(--card-hover);
+	border: 1px solid var(--border-strong);
+	border-radius: 8px;
+	box-shadow: var(--shadow-pop);
+}
+#password-toolbar .select_account .account {
+	display: block;
+	box-sizing: border-box;
+	height: 29px;
+	padding: 5px 12px;
+	line-height: 19px;
+	clear: both;
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--text);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: left;
+	cursor: pointer;
+	transition: background 0.15s, color 0.15s;
+}
+#password-toolbar .select_account .account:hover {
+	color: var(--accent-text);
+	background: var(--accent-soft);
+	text-decoration: none;
+}

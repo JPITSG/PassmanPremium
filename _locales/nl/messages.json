@@ -1,0 +1,528 @@
+{
+  "refresh_credential_list": {
+    "message": "Verversen lijst inloggegevens",
+    "description": "Refresh the credential list"
+  },
+  "extDescription": {
+    "message": "Passman - de wachtwoordbeheerder voor NextCloud / ownCloud",
+    "description": "Extension description"
+  },
+  "save_to": {
+    "message": "Opslaan in $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "vault": {
+    "message": "Kluis",
+    "description": "Vault"
+  },
+  "ignore_site_tab": {
+    "message": "Negeren site / pagina",
+    "description": "Invalid server URL"
+  },
+  "account_added": {
+    "message": "Account toegevoegd.",
+    "description": "Search"
+  },
+  "label": {
+    "message": "Label",
+    "description": "Label"
+  },
+  "ignore_protocol": {
+    "message": "Negeer protocol voor bijpassende site",
+    "description": "Ignore protocol for site matching"
+  },
+  "settings": {
+    "message": "Instellingen",
+    "description": "Settings"
+  },
+  "finish": {
+    "message": "Afronden",
+    "description": "Finish"
+  },
+  "detected_changed_url": {
+    "message": "Aangepaste URL gevonden voor",
+    "description": "Detected changed URL for"
+  },
+  "add_custom_field": {
+    "message": "Toevoegen maatwerkveld",
+    "description": "Add a custom field"
+  },
+  "enable_update_url": {
+    "message": "Vragen om de inloggegevens-URL bij te werken als die niet overeenkomt met de huidige URL",
+    "description": "Enable form auto submit"
+  },
+  "credentials": {
+    "message": "Inloggegevens",
+    "description": "credentials"
+  },
+  "password_picker_gotolist": {
+    "message": "Als een wachtwoord is gevonden, ga naar de lijst in plaats van naar de laatst actieve tab",
+    "description": "Disable password picker"
+  },
+  "search": {
+    "message": "Zoek",
+    "description": "Search"
+  },
+  "toggle_advanced": {
+    "message": "Geavanceerde opties omschakelen",
+    "description": "Toggle advanced options"
+  },
+  "extension_locked": {
+    "message": "Passman uitbreiding is vergrendeld, ontgrendel om te gebruiken",
+    "description": "When the extension is locked, and requires an unlock to use it"
+  },
+  "update": {
+    "message": "Bijwerken",
+    "description": "Update"
+  },
+  "unlock": {
+    "message": "Ontgrendel",
+    "description": "Unlock"
+  },
+  "invalid_vault_password": {
+    "message": "ongeldige kluissleutel!",
+    "description": "Vault password"
+  },
+  "msg_reset_extension": {
+    "message": "Je kunt alleen je wachtwoord resetten. Dit zal de extensie terugzetten naar de standaard waarde.",
+    "description": "Search"
+  },
+  "no_vaults": {
+    "message": "Sorry, geen kluis gevonden. Creëer een kluis via de Nextcloud / ownCloud app en probeer het opnieuw.",
+    "description": "Search"
+  },
+  "edit": {
+    "message": "Bewerken",
+    "description": "Edit"
+  },
+  "min_digits": {
+    "message": "Minimum aantal cijfers",
+    "description": "Minimum amount of digits"
+  },
+  "enter_master_password_desc": {
+    "message": "Dit wachtwoord wordt gebruikt om alle instellingen in deze extensie te versleutelen. Je kunt het wachtwoord lokaal opslaan, maar dan wordt het in LEESBARE tekst opgeslagen.",
+    "description": "Enter master password"
+  },
+  "select_vault": {
+    "message": "Selecteer kluis",
+    "description": "Search"
+  },
+  "enable_autofill": {
+    "message": "Automatisch aanvullen inschakelen",
+    "description": "Disable auto fill of forms"
+  },
+  "add_account": {
+    "message": "Account toevoegen",
+    "description": "Add account"
+  },
+  "credential": {
+    "message": "Inloggegevens",
+    "description": "credential"
+  },
+  "delete": {
+    "message": "Verwijderen",
+    "description": "Delete"
+  },
+  "forgot_password": {
+    "message": "Wachtwoord vergeten?",
+    "description": "Search"
+  },
+  "invalid_server_settings": {
+    "message": "Ongeldige serverinstellingen",
+    "description": "Search"
+  },
+  "nextcloud_settings": {
+    "message": "Nextcloud / owncloud server instellingen",
+    "description": "Nextcloud / ownCloud server settings"
+  },
+  "use_generated_password": {
+    "message": "Gebruik wachtwoord",
+    "description": "Use password"
+  },
+  "one_time_password": {
+    "message": "OTP",
+    "description": "One time password"
+  },
+  "list": {
+    "message": "Lijst",
+    "description": "List"
+  },
+  "ignore_site": {
+    "message": "Site negeren",
+    "description": "Update"
+  },
+  "select_default_vault": {
+    "message": "Selecteer standaardkluis",
+    "description": "Select default vault"
+  },
+  "site_ignored": {
+    "message": "Site genegeerd",
+    "description": "Site ignored"
+  },
+  "value": {
+    "message": "Waarde",
+    "description": "Custom fields"
+  },
+  "ignore_path": {
+    "message": "Negeer pad voor bijpassende site",
+    "description": "Ignore path for site matching"
+  },
+  "custom_fields": {
+    "message": "Maatwerk velden",
+    "description": "Custom fields"
+  },
+  "show_adv": {
+    "message": "Toon geavanceerde opties",
+    "description": "Disable password picker"
+  },
+  "invalid_master_password": {
+    "message": "Ongeldig hoofdwachtwoord!",
+    "description": "When the master password is invalid"
+  },
+  "general": {
+    "message": "Algemeen",
+    "description": "Custom fields"
+  },
+  "no_password_match": {
+    "message": "Wachtwoorden komen niet overeen.",
+    "description": "When comparing passwords"
+  },
+  "close": {
+    "message": "Sluiten",
+    "description": "Close"
+  },
+  "prev": {
+    "message": "Vorig",
+    "description": "Previous"
+  },
+  "add_hint": {
+    "message": "Na het aanmaken kun je de inloggegevens bewerken in Passman",
+    "description": "After creating it, you can edit the credential in Passman"
+  },
+  "text": {
+    "message": "tekst",
+    "description": "To describe a textual input field"
+  },
+  "reset_extension": {
+    "message": "Herstel extensie",
+    "description": "Search"
+  },
+  "default_vault": {
+    "message": "Standaardkluis",
+    "description": "Default vault"
+  },
+  "ignore_port": {
+    "message": "Negeer poort voor bijpassende site",
+    "description": "Ignore port for site matching"
+  },
+  "master_password": {
+    "message": "Instellen hoofdwachtwoord",
+    "description": "Set a master password"
+  },
+  "disable_picker_text": {
+    "message": "Wil je Passman uitzeten voor de gehele pagina of voor de gehele website?",
+    "description": "Would you like to disable Passman for the current page, or for the entire website?"
+  },
+  "password": {
+    "message": "Wachtwoord",
+    "description": "Password"
+  },
+  "copy": {
+    "message": "Kopiëren",
+    "description": "Copy"
+  },
+  "begin": {
+    "message": "Laten we beginnen!",
+    "description": "Let's begin!"
+  },
+  "intro_text": {
+    "message": "Deze assistent begleidt je door de stappen voor het instellen van de extensie en het synchroniseren van je wachtwoorden.",
+    "description": "Cancel"
+  },
+  "credential_deleted": {
+    "message": "Referentie verwijderd",
+    "description": "Credential deleted"
+  },
+  "ignore_site_placeholder": {
+    "message": "Geef een te negeren domein of TLD op en druk op  ",
+    "description": "Disable auto fill of forms"
+  },
+  "ignored_sites": {
+    "message": "Genegeerde websites/hyperlinks.",
+    "description": "Ignored sites"
+  },
+  "toggle_visibility": {
+    "message": "Omschakelen zichtbaarheid",
+    "description": "Toggle visibility"
+  },
+  "master_pw_warning": {
+    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "description": "Remember master password"
+  },
+  "remember_master_password": {
+    "message": "Hoofdwachtwoord onthouden",
+    "description": "Remember master password"
+  },
+  "btn_save_site": {
+    "message": "Inloggegevens van deze site opslaan",
+    "description": "Save credentials for this site"
+  },
+  "browser_action_title_locked": {
+    "message": "Passman - Vergrendeld",
+    "description": "Browser extension title when the extension is locked"
+  },
+  "label_required": {
+    "message": "Voeg een label toe",
+    "description": "When comparing passwords"
+  },
+  "enter_master_password": {
+    "message": "Voer een hoofdwachtwoord in",
+    "description": "Enter master password"
+  },
+  "vault_password": {
+    "message": "Kluiswachtwoord",
+    "description": "Vault password"
+  },
+  "select_password_picker_default_tab": {
+    "message": "Als de Wachtwoordkiezer geen inloggegevens kan vinden, gaat die naar:",
+    "description": "Select password picker default tab"
+  },
+  "save_site": {
+    "message": "Site opslaan",
+    "description": "Save site"
+  },
+  "extra_accounts": {
+    "message": "Na het installeren kun je meer accounts toevoegen.",
+    "description": "Search"
+  },
+  "next": {
+    "message": "Volgende",
+    "description": "Next"
+  },
+  "avoid_ambiguous": {
+    "message": "Voorkomen gelijkende tekens",
+    "description": "Avoid ambiguous characters"
+  },
+  "disable_site": {
+    "message": "Uitschakelen site",
+    "description": "Disable site"
+  },
+  "url_ignored": {
+    "message": "URL genegeerd",
+    "description": "URL ignored"
+  },
+  "saving_to": {
+    "message": "Opgeslagen in $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "enable_password_picker": {
+    "message": "Wachtwoord kiezer uitschakelen",
+    "description": "Disable password picker"
+  },
+  "auto_login": {
+    "message": "Passman logt je in als $USERNAME$",
+    "description": "Amount of the credentials in the database",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "MyUsername"
+      }
+    }
+  },
+  "default_vault_desc": {
+    "message": "Selecteer de kluis die je wilt synchroniseren met je webbrowser.",
+    "description": "Select the vault that you want to keep in sync with the webbrowser."
+  },
+  "detected_new_login": {
+    "message": "Nieuwe inlog gedetecteerd",
+    "description": "Detected new login"
+  },
+  "detected_changed_login": {
+    "message": "Een veranderd wachtwoord voor de gebruiker gevonden",
+    "description": "Detected changed password for user"
+  },
+  "invalid_response_from_server": {
+    "message": "Foute reactie van de server: [$STATUS_CODE$] $STATUS_TEXT$",
+    "description": "No credentials found for the current site",
+    "placeholders": {
+      "status_code": {
+        "content": "$1",
+        "example": "404"
+      },
+      "status_text": {
+        "content": "$2",
+        "example": "Page not found"
+      }
+    }
+  },
+  "save": {
+    "message": "Opslaan",
+    "description": "Save"
+  },
+  "generate_password": {
+    "message": "Genereer wachtwoord",
+    "description": "Generate password"
+  },
+  "edit_insufficient_permissions": {
+    "message": "Je hebt niet de autorisatie om deze inloggegevens te wijzigen.",
+    "description": "You don't have permissions to edit this credential."
+  },
+  "server_url": {
+    "message": "Server URL",
+    "description": "Server URL"
+  },
+  "disable_page": {
+    "message": "Uitschakelen pagina",
+    "description": "Disable page"
+  },
+  "hide_adv": {
+    "message": "Verberg geavanceerde opties",
+    "description": "Disable password picker"
+  },
+  "cancel": {
+    "message": "Annuleren",
+    "description": "Cancel"
+  },
+  "add": {
+    "message": "Toevoegen",
+    "description": "Add"
+  },
+  "credential_updated": {
+    "message": "Inloggegevens bijgewerkt",
+    "description": "updated, lowercase"
+  },
+  "no_credentials_found": {
+    "message": "Geen inloggegevens gevonden",
+    "description": "No credentials found for the current site"
+  },
+  "extName": {
+    "message": "Passman",
+    "description": "Extension name"
+  },
+  "lock_extension": {
+    "message": "Uitbreiding vergrendelen",
+    "description": "Title on the PayPal button"
+  },
+  "search_for": {
+    "message": "Zoek naar",
+    "description": "No credentials found for the current site"
+  },
+  "password_repeat": {
+    "message": "Wachtwoord (herhaal)",
+    "description": "Password"
+  },
+  "credential_saved": {
+    "message": "Inloggegevens opgeslagen",
+    "description": "saved, lowercase"
+  },
+  "require_every_character_type": {
+    "message": "Vereis elk type teken",
+    "description": "Require every character type"
+  },
+  "enable_debug": {
+    "message": "Debugmodus inschakelen",
+    "description": "Enable debug mode"
+  },
+  "email": {
+    "message": "E-mailadres",
+    "description": "E-mail"
+  },
+  "welcome_to_passman": {
+    "message": "Welkom bij de Passman webextensie",
+    "description": "Intro at the setup"
+  },
+  "browser_action_title_login": {
+    "message": "Passman -$CREDENTIAL_AMOUNT$ $PLURAL$ gevonden voor deze pagina",
+    "description": "String for the browser action",
+    "placeholders": {
+      "credential_amount": {
+        "content": "$1",
+        "example": "4"
+      },
+      "plural": {
+        "content": "$2",
+        "example": "credentials"
+      }
+    }
+  },
+  "http_warning": {
+    "message": "Je gebruikt HTTP! Inloggegevens zullen worden verzonden in platte tekst. Je Passman inlog gegevens hebben nog encryptie.",
+    "description": "Warning for http connections"
+  },
+  "done": {
+    "message": "Gedaan",
+    "description": "Done"
+  },
+  "no_credentials_found_for_site": {
+    "message": "Geen inloggegevens gevonden voor deze site",
+    "description": "No credentials found for the current site"
+  },
+  "enable_autosubmit": {
+    "message": "Automatisch aanvullen na het kiezen van een account",
+    "description": "Enable form auto submit"
+  },
+  "saving": {
+    "message": "Opslaan",
+    "description": "Saving"
+  },
+  "url": {
+    "message": "URL",
+    "description": "URL"
+  },
+  "iam_sure": {
+    "message": "Ja, ik weet het zeker!",
+    "description": "Search"
+  },
+  "no_sites_ignored": {
+    "message": "Geen sites genegeerd",
+    "description": "No sites ignored"
+  },
+  "accounts": {
+    "message": "Accounts",
+    "description": "Accounts"
+  },
+  "password_generator": {
+    "message": "Wachtwoordgenerator",
+    "description": "Password generator"
+  },
+  "empty_master_key": {
+    "message": "Hoofdsleutel  leeg maken!",
+    "description": "Empty master key!"
+  },
+  "ignore_subdomain": {
+    "message": "Negeer subdomein voor bijpassende site",
+    "description": "Password"
+  },
+  "btn_search": {
+    "message": "Zoek inloggegevens",
+    "description": "Search credentials"
+  },
+  "credential_created": {
+    "message": "Inloggegevens aangemaakt",
+    "description": "Credential created"
+  },
+  "username": {
+    "message": "Gebruikersnaam",
+    "description": "Username"
+  },
+  "pw_length": {
+    "message": "Wachtwoordlengte",
+    "description": "Password length"
+  },
+  "refresh_timer": {
+    "message": "Ververs timer [s]",
+    "description": "Password"
+  }
+}

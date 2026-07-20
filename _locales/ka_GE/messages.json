@@ -1,0 +1,528 @@
+{
+  "refresh_credential_list": {
+    "message": "უფლებამოსილებების სიის განახლება",
+    "description": "Refresh the credential list"
+  },
+  "extDescription": {
+    "message": "Passman - პაროლების მენეჯერი Nextcloud / ownCloud-ისთვის",
+    "description": "Extension description"
+  },
+  "save_to": {
+    "message": "შევინახოთ $VAULT_NAME$-ში",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "vault": {
+    "message": "სეიფი",
+    "description": "Vault"
+  },
+  "ignore_site_tab": {
+    "message": "საიტის იგნორირება / გვერდი",
+    "description": "Invalid server URL"
+  },
+  "account_added": {
+    "message": "ანგარიში დაემატა.",
+    "description": "Search"
+  },
+  "label": {
+    "message": "ლეიბლი",
+    "description": "Label"
+  },
+  "ignore_protocol": {
+    "message": "არ მიექცეს საიტის დამთხვევებისას ყურადღება პროტოკოლებს",
+    "description": "Ignore protocol for site matching"
+  },
+  "settings": {
+    "message": "პარამეტრები",
+    "description": "Settings"
+  },
+  "finish": {
+    "message": "დასრულება",
+    "description": "Finish"
+  },
+  "detected_changed_url": {
+    "message": "აღმოჩენილია URL-ს ცვლილება საიტისთვის",
+    "description": "Detected changed URL for"
+  },
+  "add_custom_field": {
+    "message": "დაამატეთ პერსონალიზირებული ველი",
+    "description": "Add a custom field"
+  },
+  "enable_update_url": {
+    "message": "თუ URL არ ემთხვევა ამჟამინდელ URL-ს გამოჩნდეს უფლებამოსილებების განახლების შეკითხვა",
+    "description": "Enable form auto submit"
+  },
+  "credentials": {
+    "message": "უფლებამოსილებები",
+    "description": "credentials"
+  },
+  "password_picker_gotolist": {
+    "message": "პაროლის პოვნის შემთხვევაში, აქტიური ტაბულის ნაცვლად გადასვლა ჩამონათვალზე",
+    "description": "Disable password picker"
+  },
+  "search": {
+    "message": "ძიება",
+    "description": "Search"
+  },
+  "toggle_advanced": {
+    "message": "დამატებითი პარამეტრების გადართვა",
+    "description": "Toggle advanced options"
+  },
+  "extension_locked": {
+    "message": "Passman-ის გაფართოება ჩაკეტილია, მის გამოსაყენბლად ის უნდა გახსნათ",
+    "description": "When the extension is locked, and requires an unlock to use it"
+  },
+  "update": {
+    "message": "განახლება",
+    "description": "Update"
+  },
+  "unlock": {
+    "message": "გახსნა",
+    "description": "Unlock"
+  },
+  "invalid_vault_password": {
+    "message": "სეიფის არასწორი გასაღები!",
+    "description": "Vault password"
+  },
+  "msg_reset_extension": {
+    "message": "შეგიძლიათ აღადგინოთ პაროლი. ეს გაფართოებას მოაქცევს საწყის მდომარეობაში.",
+    "description": "Search"
+  },
+  "no_vaults": {
+    "message": "ბოდიში, სეიფები ვერ მოიძებნა. გთხოვთ სეიფი შექმნათ Nextcloud / ownCloud აპლიკაციით და სცადოთ ახლიდან.",
+    "description": "Search"
+  },
+  "edit": {
+    "message": "შეცვლა",
+    "description": "Edit"
+  },
+  "min_digits": {
+    "message": "ციფრების მინ. რაოდენობა",
+    "description": "Minimum amount of digits"
+  },
+  "enter_master_password_desc": {
+    "message": "ეს პაროლი გამოყენებულ იქნება, თქვენს გაფართოებაში არსებული ყველა პარაოლის დასაშიფრად. შესაძლებელია პაროლის ლოკალურად დამახსოვრება, მაგრამ ის შენახულ იქნება ჩვეულებრივი ტექსტის სახით.",
+    "description": "Enter master password"
+  },
+  "select_vault": {
+    "message": "სეიფის არჩევა",
+    "description": "Search"
+  },
+  "enable_autofill": {
+    "message": "ავტომატური ფორმის შევსების ამოქმედება",
+    "description": "Disable auto fill of forms"
+  },
+  "add_account": {
+    "message": "ანგარიშის დამატება",
+    "description": "Add account"
+  },
+  "credential": {
+    "message": "უფლებამოსილება",
+    "description": "credential"
+  },
+  "delete": {
+    "message": "გაუქმება",
+    "description": "Delete"
+  },
+  "forgot_password": {
+    "message": "დაგავიწყდათ პაროლი?",
+    "description": "Search"
+  },
+  "invalid_server_settings": {
+    "message": "არასწორი სერვერის პარამეტრები",
+    "description": "Search"
+  },
+  "nextcloud_settings": {
+    "message": "Nextcloud / ownCloud სერვერის პარამეტრები",
+    "description": "Nextcloud / ownCloud server settings"
+  },
+  "use_generated_password": {
+    "message": "პაროლის გამოყენება",
+    "description": "Use password"
+  },
+  "one_time_password": {
+    "message": "OTP",
+    "description": "One time password"
+  },
+  "list": {
+    "message": "ჩამონათვალი",
+    "description": "List"
+  },
+  "ignore_site": {
+    "message": "საიტის იგნორირება",
+    "description": "Update"
+  },
+  "select_default_vault": {
+    "message": "აირჩიეთ საწყისი ხედი",
+    "description": "Select default vault"
+  },
+  "site_ignored": {
+    "message": "საიტი დაიგნორდა",
+    "description": "Site ignored"
+  },
+  "value": {
+    "message": "მნიშვნელობა",
+    "description": "Custom fields"
+  },
+  "ignore_path": {
+    "message": "საიტის დამთხვევებისას არ მიექცეს ყურადღება მისამართს",
+    "description": "Ignore path for site matching"
+  },
+  "custom_fields": {
+    "message": "პერსონალიზირებული ველები",
+    "description": "Custom fields"
+  },
+  "show_adv": {
+    "message": "დამატებიტი პარამეტრების ჩვენება",
+    "description": "Disable password picker"
+  },
+  "invalid_master_password": {
+    "message": "მთავარი პაროლი არასწორია!",
+    "description": "When the master password is invalid"
+  },
+  "general": {
+    "message": "მთავარი",
+    "description": "Custom fields"
+  },
+  "no_password_match": {
+    "message": "პაროლები ერთმანეთს არ ემთხვევა",
+    "description": "When comparing passwords"
+  },
+  "close": {
+    "message": "დახურვა",
+    "description": "Close"
+  },
+  "prev": {
+    "message": "წინა",
+    "description": "Previous"
+  },
+  "add_hint": {
+    "message": "შექმნის შემდეგ, შეძლებთ უფლებამოსილებების შეცვლას Passman-ით",
+    "description": "After creating it, you can edit the credential in Passman"
+  },
+  "text": {
+    "message": "ტექსტი",
+    "description": "To describe a textual input field"
+  },
+  "reset_extension": {
+    "message": "გაფართოების საწყის მდგომარეობაში დაბრუნება",
+    "description": "Search"
+  },
+  "default_vault": {
+    "message": "საწყისი სეიფი",
+    "description": "Default vault"
+  },
+  "ignore_port": {
+    "message": "არ მიექცეს საიტის დამთხვევებისას ყურადღება პორტებს",
+    "description": "Ignore port for site matching"
+  },
+  "master_password": {
+    "message": "მთავარი პაროლის დაყენება",
+    "description": "Set a master password"
+  },
+  "disable_picker_text": {
+    "message": "მთელი საიტისთვის გსურთ Passman-ის გათიშვა, თუ მხოლოდ ამ გვერდისთვის?",
+    "description": "Would you like to disable Passman for the current page, or for the entire website?"
+  },
+  "password": {
+    "message": "პაროლი",
+    "description": "Password"
+  },
+  "copy": {
+    "message": "კოპირება",
+    "description": "Copy"
+  },
+  "begin": {
+    "message": "დავიწყოთ!",
+    "description": "Let's begin!"
+  },
+  "intro_text": {
+    "message": "ეს ოსტატი დაგეხმარებათ დააყენოთ გაფართოება და სინქრონიზირებულად იქონიოთ თქვენი პასკოდები.",
+    "description": "Cancel"
+  },
+  "credential_deleted": {
+    "message": "უფლებამოსილება გაუქმდა",
+    "description": "Credential deleted"
+  },
+  "ignore_site_placeholder": {
+    "message": "იგნორირებისთვის შეიყვანთ TLD ან დომენი და დააჭირეთ  -ს",
+    "description": "Disable auto fill of forms"
+  },
+  "ignored_sites": {
+    "message": "იგნორირებული საიტები / URL-ები",
+    "description": "Ignored sites"
+  },
+  "toggle_visibility": {
+    "message": "ხილვადობის გადართვა",
+    "description": "Toggle visibility"
+  },
+  "master_pw_warning": {
+    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "description": "Remember master password"
+  },
+  "remember_master_password": {
+    "message": "მთავრი პაროლის დამახსოვრება",
+    "description": "Remember master password"
+  },
+  "btn_save_site": {
+    "message": "შეინახეთ ამ საიტის უფლებამოსილებები",
+    "description": "Save credentials for this site"
+  },
+  "browser_action_title_locked": {
+    "message": "Passman - ჩაკეტილია",
+    "description": "Browser extension title when the extension is locked"
+  },
+  "label_required": {
+    "message": "გთოვთ შეავსოთ ლეიბლი",
+    "description": "When comparing passwords"
+  },
+  "enter_master_password": {
+    "message": "შეიყვანეთ მთავარი პაროლი",
+    "description": "Enter master password"
+  },
+  "vault_password": {
+    "message": "სეიფის პაროლი",
+    "description": "Vault password"
+  },
+  "select_password_picker_default_tab": {
+    "message": "როდესაც პაროლის ამომრჩევი ვერ პოულობს უფლებამოსილებებს, ის გადადის:",
+    "description": "Select password picker default tab"
+  },
+  "save_site": {
+    "message": "საიტის შენახვა",
+    "description": "Save site"
+  },
+  "extra_accounts": {
+    "message": "დაყენების პროცესის დასრულების შემდეგ, შეძლებთ სხვა ანგარიშების დამატებასაც.",
+    "description": "Search"
+  },
+  "next": {
+    "message": "შემდეგი",
+    "description": "Next"
+  },
+  "avoid_ambiguous": {
+    "message": "გაურკვეველი ნიშნების თავიდან არიდება",
+    "description": "Avoid ambiguous characters"
+  },
+  "disable_site": {
+    "message": "საიტის გათიშვა",
+    "description": "Disable site"
+  },
+  "url_ignored": {
+    "message": "URL დაიგნორდა",
+    "description": "URL ignored"
+  },
+  "saving_to": {
+    "message": "ვინახავთ $VAULT_NAME$-ში",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "enable_password_picker": {
+    "message": "პაროლის ამრჩევის ამოქმედება",
+    "description": "Disable password picker"
+  },
+  "auto_login": {
+    "message": "Passman-ს შეყავხართ როგორც $USERNAME$",
+    "description": "Amount of the credentials in the database",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "MyUsername"
+      }
+    }
+  },
+  "default_vault_desc": {
+    "message": "აირჩიეთ სეიფი, რომლის სინქრონიზირებლად შენარჩუნება გსურთ ვებ-ბრაუზერთან.",
+    "description": "Select the vault that you want to keep in sync with the webbrowser."
+  },
+  "detected_new_login": {
+    "message": "შემჩნეულია ახალი ლოგინი",
+    "description": "Detected new login"
+  },
+  "detected_changed_login": {
+    "message": "მომხმარებელზე დაფიქრსირდა პაროლის ცვლილება",
+    "description": "Detected changed password for user"
+  },
+  "invalid_response_from_server": {
+    "message": "სერვიდან მიღებულია არასწორი პასუხი [$STATUS_CODE$] $STATUS_TEXT$",
+    "description": "No credentials found for the current site",
+    "placeholders": {
+      "status_code": {
+        "content": "$1",
+        "example": "404"
+      },
+      "status_text": {
+        "content": "$2",
+        "example": "Page not found"
+      }
+    }
+  },
+  "save": {
+    "message": "შენახვა",
+    "description": "Save"
+  },
+  "generate_password": {
+    "message": "პაროლის გენერირება",
+    "description": "Generate password"
+  },
+  "edit_insufficient_permissions": {
+    "message": "ამ უფლებამოსილების გამოყენების უფლება არ გაქვთ.",
+    "description": "You don't have permissions to edit this credential."
+  },
+  "server_url": {
+    "message": "სერვერის URL",
+    "description": "Server URL"
+  },
+  "disable_page": {
+    "message": "გვერდის გათიშვა",
+    "description": "Disable page"
+  },
+  "hide_adv": {
+    "message": "დამატებითი პარამეტრების დამალვა",
+    "description": "Disable password picker"
+  },
+  "cancel": {
+    "message": "უარყოფა",
+    "description": "Cancel"
+  },
+  "add": {
+    "message": "დამატება",
+    "description": "Add"
+  },
+  "credential_updated": {
+    "message": "უფლებამოსილებები განახლდა",
+    "description": "updated, lowercase"
+  },
+  "no_credentials_found": {
+    "message": "უფლებამოსილებები ვერ მოიძებნა",
+    "description": "No credentials found for the current site"
+  },
+  "extName": {
+    "message": "Passman",
+    "description": "Extension name"
+  },
+  "lock_extension": {
+    "message": "გაფართოების ჩაკეტვა",
+    "description": "Title on the PayPal button"
+  },
+  "search_for": {
+    "message": "მოძებნეთ",
+    "description": "No credentials found for the current site"
+  },
+  "password_repeat": {
+    "message": "პაროლი (გაიმეორეთ)",
+    "description": "Password"
+  },
+  "credential_saved": {
+    "message": "უფლებამოსილებები შენახულია",
+    "description": "saved, lowercase"
+  },
+  "require_every_character_type": {
+    "message": "ყველა ნიშნის სახეობის მოთხოვნა",
+    "description": "Require every character type"
+  },
+  "enable_debug": {
+    "message": "დებაგ რეჟიმის ჩართვა",
+    "description": "Enable debug mode"
+  },
+  "email": {
+    "message": "ელ-ფოსტა",
+    "description": "E-mail"
+  },
+  "welcome_to_passman": {
+    "message": "კეთილი იყოს თქვენი მობრძანება Passman ვებ-გაფართოებაში",
+    "description": "Intro at the setup"
+  },
+  "browser_action_title_login": {
+    "message": "Passman - ამ გვერდისთვის ნაპოვნია $CREDENTIAL_AMOUNT$ $PLURAL$",
+    "description": "String for the browser action",
+    "placeholders": {
+      "credential_amount": {
+        "content": "$1",
+        "example": "4"
+      },
+      "plural": {
+        "content": "$2",
+        "example": "credentials"
+      }
+    }
+  },
+  "http_warning": {
+    "message": "თქვენ იყენებთ HTTP-ს! ლოგინის უფლებამოსილებები გაიგზავნება ჩვეულებრივი ტექსტური ფორმატით. თქვენი Passman-ის რწმუნებულებები ისევ დაშიფრულია.",
+    "description": "Warning for http connections"
+  },
+  "done": {
+    "message": "დასრულებულია",
+    "description": "Done"
+  },
+  "no_credentials_found_for_site": {
+    "message": "ამ საიტისთვის უფლებამოსილებები ვერ მოიძებნა.",
+    "description": "No credentials found for the current site"
+  },
+  "enable_autosubmit": {
+    "message": "დართეთ ფორმას ავტომატური გადაცემის უფლება",
+    "description": "Enable form auto submit"
+  },
+  "saving": {
+    "message": "მიმდინარეობს შენახვა",
+    "description": "Saving"
+  },
+  "url": {
+    "message": "URL",
+    "description": "URL"
+  },
+  "iam_sure": {
+    "message": "კი, დარწმუნებული ვარ!",
+    "description": "Search"
+  },
+  "no_sites_ignored": {
+    "message": "საიტებზე იგნორირება არ გაკეთებულა",
+    "description": "No sites ignored"
+  },
+  "accounts": {
+    "message": "ანგარიშები",
+    "description": "Accounts"
+  },
+  "password_generator": {
+    "message": "პაროლის გენერატორი",
+    "description": "Password generator"
+  },
+  "empty_master_key": {
+    "message": "მთავარი გასაღები ცარიელია!",
+    "description": "Empty master key!"
+  },
+  "ignore_subdomain": {
+    "message": "არ მიექცეს საიტის დამთხვევებისას ყურადღება ქვე-დომენებს",
+    "description": "Password"
+  },
+  "btn_search": {
+    "message": "უფლებამოსილებების ძიება",
+    "description": "Search credentials"
+  },
+  "credential_created": {
+    "message": "უფლებამოსილება შენახულია",
+    "description": "Credential created"
+  },
+  "username": {
+    "message": "მომხმარებლის სახელი",
+    "description": "Username"
+  },
+  "pw_length": {
+    "message": "პაროლის სიგრძე",
+    "description": "Password length"
+  },
+  "refresh_timer": {
+    "message": "განახლების ტაიმერი [წმ]",
+    "description": "Password"
+  }
+}

@@ -1,0 +1,13 @@
+/* Injected into host pages by the content script — positions the Passman
+   doorhanger iframe. inject.js sets height/width attributes and a
+   page-specific z-index inline; keep this rule minimal so it can't fight
+   host-page styles. */
+#password-toolbarIframe {
+	position: fixed;
+	z-index: 99999;
+	top: 0;
+	left: 0;
+	border: 0;
+	background: transparent;
+	color-scheme: normal;
+}

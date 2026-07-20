@@ -1,0 +1,528 @@
+{
+  "refresh_credential_list": {
+    "message": "Освежи листу акредитива",
+    "description": "Refresh the credential list"
+  },
+  "extDescription": {
+    "message": "Менаџер Лозинки - управљање лозинкама за Некстклауд / Оунклауд",
+    "description": "Extension description"
+  },
+  "save_to": {
+    "message": "Сними у сеф $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "vault": {
+    "message": "Сеф",
+    "description": "Vault"
+  },
+  "ignore_site_tab": {
+    "message": "Игнориши сајт / страну",
+    "description": "Invalid server URL"
+  },
+  "account_added": {
+    "message": "Налог додат.",
+    "description": "Search"
+  },
+  "label": {
+    "message": "Ознака",
+    "description": "Label"
+  },
+  "ignore_protocol": {
+    "message": "Игнориши тип протокола за поклапање са сајтом",
+    "description": "Ignore protocol for site matching"
+  },
+  "settings": {
+    "message": "Поставке",
+    "description": "Settings"
+  },
+  "finish": {
+    "message": "Заврши",
+    "description": "Finish"
+  },
+  "detected_changed_url": {
+    "message": "Примећена промена адресе за",
+    "description": "Detected changed URL for"
+  },
+  "add_custom_field": {
+    "message": "Додај произвољно поље",
+    "description": "Add a custom field"
+  },
+  "enable_update_url": {
+    "message": "Питај да отпремиш адресу акредитива ако се не слаже са тренутном адресом",
+    "description": "Enable form auto submit"
+  },
+  "credentials": {
+    "message": "акредитиви",
+    "description": "credentials"
+  },
+  "password_picker_gotolist": {
+    "message": "Када се лозинка нађе, иди пре на листу него на последњи активни језичак",
+    "description": "Disable password picker"
+  },
+  "search": {
+    "message": "Претражи",
+    "description": "Search"
+  },
+  "toggle_advanced": {
+    "message": "Укључи/искључи напредне опције",
+    "description": "Toggle advanced options"
+  },
+  "extension_locked": {
+    "message": "Екстензија Менаџера Лозинки је закључана, откључајте је да је користите",
+    "description": "When the extension is locked, and requires an unlock to use it"
+  },
+  "update": {
+    "message": "Ажурирај",
+    "description": "Update"
+  },
+  "unlock": {
+    "message": "Откључај",
+    "description": "Unlock"
+  },
+  "invalid_vault_password": {
+    "message": "Неисправан кључ сефа!",
+    "description": "Vault password"
+  },
+  "msg_reset_extension": {
+    "message": "Можете ресетовати лозинку. Ово ће ресетовати екстензију на почетно стање.",
+    "description": "Search"
+  },
+  "no_vaults": {
+    "message": "Извињавамо се, ниједан сеф није нађен. Направите сеф кроз Некстклауд / Оунклауд апликацију и покушајте поново.",
+    "description": "Search"
+  },
+  "edit": {
+    "message": "Измени",
+    "description": "Edit"
+  },
+  "min_digits": {
+    "message": "Минимални број цифара",
+    "description": "Minimum amount of digits"
+  },
+  "enter_master_password_desc": {
+    "message": "Лозинка ће се користити да шифрује све Ваше поставке у екстензији. Можете одабрати да сачувате ову лозинку локално, али ће онда бити сачувана као ОБИЧАН ТЕКСТ.",
+    "description": "Enter master password"
+  },
+  "select_vault": {
+    "message": "Одаберите сеф",
+    "description": "Search"
+  },
+  "enable_autofill": {
+    "message": "Укључи аутоматско попуњавање формулара",
+    "description": "Disable auto fill of forms"
+  },
+  "add_account": {
+    "message": "Додај налог",
+    "description": "Add account"
+  },
+  "credential": {
+    "message": "акредитив",
+    "description": "credential"
+  },
+  "delete": {
+    "message": "Обриши",
+    "description": "Delete"
+  },
+  "forgot_password": {
+    "message": "Заборавили сте лозинку?",
+    "description": "Search"
+  },
+  "invalid_server_settings": {
+    "message": "Неисправне поставке сервера",
+    "description": "Search"
+  },
+  "nextcloud_settings": {
+    "message": "Поставке Некстклауд/Оунклауд сервера",
+    "description": "Nextcloud / ownCloud server settings"
+  },
+  "use_generated_password": {
+    "message": "Користи лозинку",
+    "description": "Use password"
+  },
+  "one_time_password": {
+    "message": "OTP",
+    "description": "One time password"
+  },
+  "list": {
+    "message": "Излистај",
+    "description": "List"
+  },
+  "ignore_site": {
+    "message": "Игнориши сајт",
+    "description": "Update"
+  },
+  "select_default_vault": {
+    "message": "Одаберите подразумевани сеф",
+    "description": "Select default vault"
+  },
+  "site_ignored": {
+    "message": "Сајт се игнорише",
+    "description": "Site ignored"
+  },
+  "value": {
+    "message": "Вредност",
+    "description": "Custom fields"
+  },
+  "ignore_path": {
+    "message": "Игнориши путању за поклапање са сајтом",
+    "description": "Ignore path for site matching"
+  },
+  "custom_fields": {
+    "message": "Произвољна поља",
+    "description": "Custom fields"
+  },
+  "show_adv": {
+    "message": "Прикажи напредне опције",
+    "description": "Disable password picker"
+  },
+  "invalid_master_password": {
+    "message": "Неисправна главна лозинка!",
+    "description": "When the master password is invalid"
+  },
+  "general": {
+    "message": "Опште",
+    "description": "Custom fields"
+  },
+  "no_password_match": {
+    "message": "Лозинке се не поклапају",
+    "description": "When comparing passwords"
+  },
+  "close": {
+    "message": "Затвори",
+    "description": "Close"
+  },
+  "prev": {
+    "message": "Претходни",
+    "description": "Previous"
+  },
+  "add_hint": {
+    "message": "Пошто се налог направи, можете измени акредитиве у Менаџеру Лозинки",
+    "description": "After creating it, you can edit the credential in Passman"
+  },
+  "text": {
+    "message": "текст",
+    "description": "To describe a textual input field"
+  },
+  "reset_extension": {
+    "message": "Ресетуј екстензију",
+    "description": "Search"
+  },
+  "default_vault": {
+    "message": "Подразумевани сеф",
+    "description": "Default vault"
+  },
+  "ignore_port": {
+    "message": "Игнориши порт за поклапање са сајтом",
+    "description": "Ignore port for site matching"
+  },
+  "master_password": {
+    "message": "Поставите главну лозинку",
+    "description": "Set a master password"
+  },
+  "disable_picker_text": {
+    "message": "Да ли желите да искључите Менаџер Лозинки за тренутну страну, или за цео сајт?",
+    "description": "Would you like to disable Passman for the current page, or for the entire website?"
+  },
+  "password": {
+    "message": "Лозинка",
+    "description": "Password"
+  },
+  "copy": {
+    "message": "Копирај",
+    "description": "Copy"
+  },
+  "begin": {
+    "message": "Хајде да почнемо!",
+    "description": "Let's begin!"
+  },
+  "intro_text": {
+    "message": "Чаробњак ће Вас спровести кроз кораке да подесите екстензију и да држите све лозинке синхронизованим.",
+    "description": "Cancel"
+  },
+  "credential_deleted": {
+    "message": "Акредитив обрисан",
+    "description": "Credential deleted"
+  },
+  "ignore_site_placeholder": {
+    "message": "Унесите домен или TLD који треба игнорисати и притисните  ",
+    "description": "Disable auto fill of forms"
+  },
+  "ignored_sites": {
+    "message": "Игнорисани сајтови / УРЛ адресе",
+    "description": "Ignored sites"
+  },
+  "toggle_visibility": {
+    "message": "Укључи/искључи видљивост",
+    "description": "Toggle visibility"
+  },
+  "master_pw_warning": {
+    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "description": "Remember master password"
+  },
+  "remember_master_password": {
+    "message": "Запамти главну лозинку",
+    "description": "Remember master password"
+  },
+  "btn_save_site": {
+    "message": "Сними акредитиве за овај сајт",
+    "description": "Save credentials for this site"
+  },
+  "browser_action_title_locked": {
+    "message": "Менаџер Лозинки - откључан",
+    "description": "Browser extension title when the extension is locked"
+  },
+  "label_required": {
+    "message": "Унесите ознаку",
+    "description": "When comparing passwords"
+  },
+  "enter_master_password": {
+    "message": "Унеси главну лозинку",
+    "description": "Enter master password"
+  },
+  "vault_password": {
+    "message": "Лозинка за сеф",
+    "description": "Vault password"
+  },
+  "select_password_picker_default_tab": {
+    "message": "Када бирач лозинке не може да нађе ниједан акредитив, ићи ће на:",
+    "description": "Select password picker default tab"
+  },
+  "save_site": {
+    "message": "Сачувај сајт",
+    "description": "Save site"
+  },
+  "extra_accounts": {
+    "message": "Након што се заврши процес подешавања, моћи ћете додати још налога.",
+    "description": "Search"
+  },
+  "next": {
+    "message": "Следеће",
+    "description": "Next"
+  },
+  "avoid_ambiguous": {
+    "message": "Избегавај двосмислене карактере",
+    "description": "Avoid ambiguous characters"
+  },
+  "disable_site": {
+    "message": "Искључи за цео сајт",
+    "description": "Disable site"
+  },
+  "url_ignored": {
+    "message": "Адреса се игнорише",
+    "description": "URL ignored"
+  },
+  "saving_to": {
+    "message": "Снимам у $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "enable_password_picker": {
+    "message": "Укључи бирач лозинке",
+    "description": "Disable password picker"
+  },
+  "auto_login": {
+    "message": "Менаџер Лозинки ће Вас пријавити као $USERNAME$",
+    "description": "Amount of the credentials in the database",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "MyUsername"
+      }
+    }
+  },
+  "default_vault_desc": {
+    "message": "Одаберите сеф који желите да синхронизујете са веб читачом.",
+    "description": "Select the vault that you want to keep in sync with the webbrowser."
+  },
+  "detected_new_login": {
+    "message": "Примећена нова пријава",
+    "description": "Detected new login"
+  },
+  "detected_changed_login": {
+    "message": "Примећено да се лозинка за корисника променила",
+    "description": "Detected changed password for user"
+  },
+  "invalid_response_from_server": {
+    "message": "Неисправан одговор са сервера: [$STATUS_CODE$] $STATUS_TEXT$",
+    "description": "No credentials found for the current site",
+    "placeholders": {
+      "status_code": {
+        "content": "$1",
+        "example": "404"
+      },
+      "status_text": {
+        "content": "$2",
+        "example": "Page not found"
+      }
+    }
+  },
+  "save": {
+    "message": "Сачувај",
+    "description": "Save"
+  },
+  "generate_password": {
+    "message": "Генериши лозинку",
+    "description": "Generate password"
+  },
+  "edit_insufficient_permissions": {
+    "message": "Немате дозволе да измените овај акредитив.",
+    "description": "You don't have permissions to edit this credential."
+  },
+  "server_url": {
+    "message": "Адреса сервера",
+    "description": "Server URL"
+  },
+  "disable_page": {
+    "message": "Искључи страну",
+    "description": "Disable page"
+  },
+  "hide_adv": {
+    "message": "Сакриј напредне опције",
+    "description": "Disable password picker"
+  },
+  "cancel": {
+    "message": "Откажи",
+    "description": "Cancel"
+  },
+  "add": {
+    "message": "Додај",
+    "description": "Add"
+  },
+  "credential_updated": {
+    "message": "Акредитиви ажурирани",
+    "description": "updated, lowercase"
+  },
+  "no_credentials_found": {
+    "message": "Није пронађен ниједан акредитив",
+    "description": "No credentials found for the current site"
+  },
+  "extName": {
+    "message": "Менаџер Лозинки",
+    "description": "Extension name"
+  },
+  "lock_extension": {
+    "message": "Закључај екстензију",
+    "description": "Title on the PayPal button"
+  },
+  "search_for": {
+    "message": "Претрага за",
+    "description": "No credentials found for the current site"
+  },
+  "password_repeat": {
+    "message": "Лозинка (поново)",
+    "description": "Password"
+  },
+  "credential_saved": {
+    "message": "Акредитив снимљени",
+    "description": "saved, lowercase"
+  },
+  "require_every_character_type": {
+    "message": "Захтевај све типове карактера",
+    "description": "Require every character type"
+  },
+  "enable_debug": {
+    "message": "Омогући режим исправљања грешака",
+    "description": "Enable debug mode"
+  },
+  "email": {
+    "message": "Адреса е-поште",
+    "description": "E-mail"
+  },
+  "welcome_to_passman": {
+    "message": "Добродошли у екстензију Менаџер Лозинки",
+    "description": "Intro at the setup"
+  },
+  "browser_action_title_login": {
+    "message": "Менаџер Лозинки - $CREDENTIAL_AMOUNT$ $PLURAL$ нађено за ову страну",
+    "description": "String for the browser action",
+    "placeholders": {
+      "credential_amount": {
+        "content": "$1",
+        "example": "4"
+      },
+      "plural": {
+        "content": "$2",
+        "example": "credentials"
+      }
+    }
+  },
+  "http_warning": {
+    "message": "Користите HTTP  несигурну везу! Акредитиви за пријаву ће бити послати као обичан, нешифровани текст. Акредитиви Менаџера Лозинки су и даље шифровани.",
+    "description": "Warning for http connections"
+  },
+  "done": {
+    "message": "Готово",
+    "description": "Done"
+  },
+  "no_credentials_found_for_site": {
+    "message": "Нема пронађених акредитива за овај сајт.",
+    "description": "No credentials found for the current site"
+  },
+  "enable_autosubmit": {
+    "message": "Укључи аутоматско слање формулара после одабира налога",
+    "description": "Enable form auto submit"
+  },
+  "saving": {
+    "message": "Чувам",
+    "description": "Saving"
+  },
+  "url": {
+    "message": "УРЛ",
+    "description": "URL"
+  },
+  "iam_sure": {
+    "message": "Да, сигуран сам!",
+    "description": "Search"
+  },
+  "no_sites_ignored": {
+    "message": "Ниједан сајт се не игнорише",
+    "description": "No sites ignored"
+  },
+  "accounts": {
+    "message": "Налози",
+    "description": "Accounts"
+  },
+  "password_generator": {
+    "message": "Генератор лозинки",
+    "description": "Password generator"
+  },
+  "empty_master_key": {
+    "message": "Празна главна лозинка!",
+    "description": "Empty master key!"
+  },
+  "ignore_subdomain": {
+    "message": "Игнориши поддомене за поклапање са сајтом",
+    "description": "Password"
+  },
+  "btn_search": {
+    "message": "Претражи акредитиве",
+    "description": "Search credentials"
+  },
+  "credential_created": {
+    "message": "Направљени акредитив",
+    "description": "Credential created"
+  },
+  "username": {
+    "message": "Корисничко име",
+    "description": "Username"
+  },
+  "pw_length": {
+    "message": "Дужина лозинке",
+    "description": "Password length"
+  },
+  "refresh_timer": {
+    "message": "Период освежавања [s]",
+    "description": "Password"
+  }
+}

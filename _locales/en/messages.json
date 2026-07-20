@@ -1,0 +1,596 @@
+{
+  "extName": {
+    "message": "Passman Premium",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Passman Premium — the password manager for Nextcloud / ownCloud",
+    "description": "Extension description"
+  },
+  "search_for": {
+    "message": "Search credentials…",
+    "description": "No credentials found for the current site"
+  },
+  "no_credentials_found_for_site": {
+    "message": "No credentials found for this site.",
+    "description": "No credentials found for the current site"
+  },
+  "no_credentials_found": {
+    "message": "No credentials found.",
+    "description": "No credentials found for the current site"
+  },
+  "notes": {
+    "message": "Notes",
+    "description": "No credentials found for the current site"
+  },
+  "invalid_response_from_server": {
+    "message": "The server responded with an error: $STATUS_CODE$ $STATUS_TEXT$",
+    "description": "No credentials found for the current site",
+    "placeholders": {
+      "status_code": {
+        "content": "$1",
+        "example": "404"
+      },
+      "status_text": {
+        "content": "$2",
+        "example": "Page not found"
+      }
+    }
+  },
+  "save_site": {
+    "message": "Save credential",
+    "description": "Save site"
+  },
+  "password_generator": {
+    "message": "Password generator",
+    "description": "Password generator"
+  },
+  "generate_password": {
+    "message": "Generate password",
+    "description": "Generate password"
+  },
+  "toggle_visibility": {
+    "message": "Show or hide password",
+    "description": "Toggle visibility"
+  },
+  "toggle_advanced": {
+    "message": "Advanced options",
+    "description": "Toggle advanced options"
+  },
+  "use_generated_password": {
+    "message": "Use this password",
+    "description": "Use password"
+  },
+  "add_hint": {
+    "message": "After saving, you can edit this credential in Passman Premium.",
+    "description": "After creating it, you can edit the credential in Passman"
+  },
+  "pw_length": {
+    "message": "Password length",
+    "description": "Password length"
+  },
+  "min_digits": {
+    "message": "Minimum number of digits",
+    "description": "Minimum amount of digits"
+  },
+  "avoid_ambiguous": {
+    "message": "Avoid ambiguous characters",
+    "description": "Avoid ambiguous characters"
+  },
+  "require_every_character_type": {
+    "message": "Require every character type",
+    "description": "Require every character type"
+  },
+  "add_account": {
+    "message": "Add account",
+    "description": "Add account"
+  },
+  "accounts": {
+    "message": "Accounts",
+    "description": "Accounts"
+  },
+  "label": {
+    "message": "Label",
+    "description": "Label"
+  },
+  "username": {
+    "message": "Username",
+    "description": "Username"
+  },
+  "email": {
+    "message": "E-mail",
+    "description": "E-mail"
+  },
+  "add": {
+    "message": "Add",
+    "description": "Add"
+  },
+  "credential_created": {
+    "message": "Credential created",
+    "description": "Credential created"
+  },
+  "url": {
+    "message": "URL",
+    "description": "URL"
+  },
+  "password": {
+    "message": "Password",
+    "description": "Password"
+  },
+  "password_repeat": {
+    "message": "Password (repeat)",
+    "description": "Password"
+  },
+  "detected_new_login": {
+    "message": "New login detected",
+    "description": "Detected new login"
+  },
+  "detected_changed_login": {
+    "message": "Password change detected",
+    "description": "Detected changed password for user"
+  },
+  "browser_action_title_login": {
+    "message": "Passman Premium — $CREDENTIAL_AMOUNT$ $PLURAL$ for this page",
+    "description": "String for the browser action",
+    "placeholders": {
+      "credential_amount": {
+        "content": "$1",
+        "example": "4"
+      },
+      "plural": {
+        "content": "$2",
+        "example": "credentials"
+      }
+    }
+  },
+  "browser_action_title_locked": {
+    "message": "Passman Premium — locked",
+    "description": "Browser extension title when the extension is locked"
+  },
+  "detected_changed_url": {
+    "message": "New URL detected",
+    "description": "Detected changed URL for"
+  },
+  "credential": {
+    "message": "credential",
+    "description": "credential"
+  },
+  "credentials": {
+    "message": "credentials",
+    "description": "credentials"
+  },
+  "refresh_timer": {
+    "message": "Refresh interval (seconds)",
+    "description": "Password"
+  },
+  "ignore_protocol": {
+    "message": "Ignore protocol when matching sites",
+    "description": "Ignore protocol for site matching"
+  },
+  "ignore_subdomain": {
+    "message": "Ignore subdomain when matching sites",
+    "description": "Password"
+  },
+  "ignore_port": {
+    "message": "Ignore port when matching sites",
+    "description": "Ignore port for site matching"
+  },
+  "http_warning": {
+    "message": "This server uses HTTP — your login will be sent unencrypted. Your Passman credentials themselves stay encrypted.",
+    "description": "Warning for http connections"
+  },
+  "ignore_path": {
+    "message": "Ignore path when matching sites",
+    "description": "Ignore path for site matching"
+  },
+  "enable_autofill": {
+    "message": "Fill login forms automatically",
+    "description": "Disable auto fill of forms"
+  },
+  "enable_autosubmit": {
+    "message": "Submit the form after filling a credential",
+    "description": "Enable form auto submit"
+  },
+  "enable_update_url": {
+    "message": "Offer to update a credential's URL when it changes",
+    "description": "Enable form auto submit"
+  },
+  "ignore_site_placeholder": {
+    "message": "Type a domain to ignore and press Enter",
+    "description": "Disable auto fill of forms"
+  },
+  "enable_password_picker": {
+    "message": "Show the password picker in login fields",
+    "description": "Disable password picker"
+  },
+  "password_picker_gotolist": {
+    "message": "Open the picker on the list tab when credentials are found",
+    "description": "Disable password picker"
+  },
+  "hide_adv": {
+    "message": "Hide advanced options",
+    "description": "Disable password picker"
+  },
+  "show_adv": {
+    "message": "Show advanced options",
+    "description": "Disable password picker"
+  },
+  "enable_debug": {
+    "message": "Enable debug logging",
+    "description": "Enable debug mode"
+  },
+  "save": {
+    "message": "Save",
+    "description": "Save"
+  },
+  "saving": {
+    "message": "Saving…",
+    "description": "Saving"
+  },
+  "credential_saved": {
+    "message": "Credential saved",
+    "description": "saved, lowercase"
+  },
+  "credential_updated": {
+    "message": "Credential updated",
+    "description": "updated, lowercase"
+  },
+  "site_ignored": {
+    "message": "Site ignored",
+    "description": "Site ignored"
+  },
+  "url_ignored": {
+    "message": "URL ignored",
+    "description": "URL ignored"
+  },
+  "update": {
+    "message": "Update",
+    "description": "Update"
+  },
+  "ignore_site": {
+    "message": "Ignore site",
+    "description": "Update"
+  },
+  "btn_save_site": {
+    "message": "Save credentials for this site",
+    "description": "Save credentials for this site"
+  },
+  "btn_search": {
+    "message": "Search credentials",
+    "description": "Search credentials"
+  },
+  "welcome_to_passman": {
+    "message": "Welcome to Passman Premium",
+    "description": "Intro at the setup"
+  },
+  "server_url": {
+    "message": "Server URL",
+    "description": "Server URL"
+  },
+  "begin": {
+    "message": "Let's begin!",
+    "description": "Let's begin!"
+  },
+  "intro_text": {
+    "message": "This wizard will guide you through the steps to set up the extension and keep all your passwords synchronized.",
+    "description": "Cancel"
+  },
+  "cancel": {
+    "message": "Cancel",
+    "description": "Cancel"
+  },
+  "default_vault": {
+    "message": "Default vault",
+    "description": "Default vault"
+  },
+  "default_vault_desc": {
+    "message": "Select the vault to keep in sync with this browser.",
+    "description": "Select the vault that you want to keep in sync with the webbrowser."
+  },
+  "enter_master_password": {
+    "message": "Enter master password",
+    "description": "Enter master password"
+  },
+  "enter_master_password_desc": {
+    "message": "This password encrypts everything the extension stores on this device. If you choose to remember it, it is stored encrypted so the extension can unlock automatically.",
+    "description": "Enter master password"
+  },
+  "remember_master_password": {
+    "message": "Remember master password",
+    "description": "Remember master password"
+  },
+  "master_pw_warning": {
+    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "description": "Remember master password"
+  },
+  "done": {
+    "message": "Done",
+    "description": "Done"
+  },
+  "custom_fields": {
+    "message": "Custom fields",
+    "description": "Custom fields"
+  },
+  "general": {
+    "message": "General",
+    "description": "Custom fields"
+  },
+  "value": {
+    "message": "Value",
+    "description": "Custom fields"
+  },
+  "list": {
+    "message": "List",
+    "description": "List"
+  },
+  "edit": {
+    "message": "Edit",
+    "description": "Edit"
+  },
+  "master_password": {
+    "message": "Master password",
+    "description": "Set a master password"
+  },
+  "finish": {
+    "message": "Finish",
+    "description": "Finish"
+  },
+  "close": {
+    "message": "Close",
+    "description": "Close"
+  },
+  "prev": {
+    "message": "Back",
+    "description": "Previous"
+  },
+  "copy": {
+    "message": "Copy",
+    "description": "Copy"
+  },
+  "next": {
+    "message": "Next",
+    "description": "Next"
+  },
+  "nextcloud_settings": {
+    "message": "Connect to your Nextcloud server",
+    "description": "Nextcloud / ownCloud server settings"
+  },
+  "select_default_vault": {
+    "message": "Select default vault",
+    "description": "Select default vault"
+  },
+  "ignored_sites": {
+    "message": "Ignored sites",
+    "description": "Ignored sites"
+  },
+  "disable_page": {
+    "message": "Disable page",
+    "description": "Disable page"
+  },
+  "disable_site": {
+    "message": "Disable site",
+    "description": "Disable site"
+  },
+  "disable_picker_text": {
+    "message": "Disable Passman Premium on this page only, or on the entire site?",
+    "description": "Would you like to disable Passman for the current page, or for the entire website?"
+  },
+  "no_sites_ignored": {
+    "message": "No ignored sites yet.",
+    "description": "No sites ignored"
+  },
+  "vault_password": {
+    "message": "Vault password",
+    "description": "Vault password"
+  },
+  "label_required": {
+    "message": "Please enter a label.",
+    "description": "When comparing passwords"
+  },
+  "ignore_site_tab": {
+    "message": "Ignore site / page",
+    "description": "Invalid server URL"
+  },
+  "no_password_match": {
+    "message": "The passwords do not match.",
+    "description": "When comparing passwords"
+  },
+  "invalid_vault_password": {
+    "message": "Incorrect vault password.",
+    "description": "Vault password"
+  },
+  "empty_master_key": {
+    "message": "The master password cannot be empty.",
+    "description": "Empty master key!"
+  },
+  "one_time_password": {
+    "message": "OTP",
+    "description": "One time password"
+  },
+  "settings": {
+    "message": "Settings",
+    "description": "Settings"
+  },
+  "extra_accounts": {
+    "message": "After the setup process is complete, you can add more accounts.",
+    "description": "Search"
+  },
+  "account_added": {
+    "message": "Account added",
+    "description": "Search"
+  },
+  "select_vault": {
+    "message": "Select vault",
+    "description": "Search"
+  },
+  "delete": {
+    "message": "Delete",
+    "description": "Delete"
+  },
+  "search": {
+    "message": "Search",
+    "description": "Search"
+  },
+  "credential_deleted": {
+    "message": "Credential deleted",
+    "description": "Credential deleted"
+  },
+  "select_password_picker_default_tab": {
+    "message": "When the password picker finds no credentials, open this tab:",
+    "description": "Select password picker default tab"
+  },
+  "no_vaults": {
+    "message": "No vaults found. Create a vault in the Passman app on your Nextcloud server, then try again.",
+    "description": "Search"
+  },
+  "msg_reset_extension": {
+    "message": "Your master password cannot be reset. What you can do is reset the extension back to its default state and set it up again. Your vaults on the Nextcloud server are not affected.",
+    "description": "Search"
+  },
+  "forgot_password": {
+    "message": "Forgot password?",
+    "description": "Search"
+  },
+  "reset_extension": {
+    "message": "Reset extension",
+    "description": "Search"
+  },
+  "iam_sure": {
+    "message": "Yes, reset everything",
+    "description": "Search"
+  },
+  "edit_insufficient_permissions": {
+    "message": "You don't have permission to edit this credential.",
+    "description": "You don't have permissions to edit this credential."
+  },
+  "invalid_server_settings": {
+    "message": "Please fill in the server URL, username and password.",
+    "description": "Search"
+  },
+  "refresh_credential_list": {
+    "message": "Refresh credentials",
+    "description": "Refresh the credential list"
+  },
+  "lock_extension": {
+    "message": "Lock extension",
+    "description": "Title on the PayPal button"
+  },
+  "extension_locked": {
+    "message": "Enter your master password to unlock.",
+    "description": "When the extension is locked, and requires an unlock to use it"
+  },
+  "invalid_master_password": {
+    "message": "Incorrect master password.",
+    "description": "When the master password is invalid"
+  },
+  "unlock": {
+    "message": "Unlock",
+    "description": "Unlock"
+  },
+  "save_to": {
+    "message": "Save to $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "saving_to": {
+    "message": "Saving to $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "auto_login": {
+    "message": "Passman Premium is signing you in as $USERNAME$",
+    "description": "Amount of the credentials in the database",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "MyUsername"
+      }
+    }
+  },
+  "vault": {
+    "message": "Vault",
+    "description": "Vault"
+  },
+  "add_custom_field": {
+    "message": "Add a custom field",
+    "description": "Add a custom field"
+  },
+  "text": {
+    "message": "Text",
+    "description": "To describe a textual input field"
+  },
+  "theme": {
+    "message": "Theme",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "System",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Light",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Dark",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "About",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "No custom fields yet.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "$AMOUNT$ credentials loaded",
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "setup_complete": {
+    "message": "Everything is configured and ready to use. Open Passman Premium from the toolbar to browse your credentials — matching logins are suggested on every site, and new logins can be saved as you browse.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Generate",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Error",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Could not reach the server — the connection timed out.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Could not reach the server ($ERROR$).",
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
+  },
+  "credentials_refreshed": {
+    "message": "Credentials refreshed",
+    "description": "Header status flash after a manual refresh completes"
+  }
+}

@@ -1,0 +1,1068 @@
+/* Passman popup — design language shared with ff_ProxyManager.
+   Tokens (dark + light) come from /css/theme.css; js/lib/theme.js sets
+   data-theme on <html> before first paint.
+
+   Angular runs with ng-csp, so it cannot inject its usual .ng-hide rule —
+   the one below is load-bearing. Classes referenced from JS or directive
+   templates (otp radial-progress, copy-text .mdi-content-copy, angular-steps
+   .step) keep their names; everything else is free styling. */
+
+* { box-sizing: border-box; }
+
+html {
+	scrollbar-width: thin;
+	scrollbar-color: var(--scrollbar) transparent;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
+
+body {
+	width: 450px;
+	margin: 0;
+	font: 13px/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	background: var(--bg);
+	color: var(--text);
+	overflow-x: hidden;
+	position: relative;
+}
+
+/* setup runs in a full tab, not the 450px popup */
+body.setup {
+	width: 100%;
+	min-width: 350px;
+}
+
+/* ambient corner glows, clipped by overflow-x on body */
+body::before,
+body::after {
+	content: '';
+	position: fixed;
+	border-radius: 50%;
+	pointer-events: none;
+	z-index: 0;
+}
+body::before {
+	top: -90px; right: -70px;
+	width: 240px; height: 240px;
+	background: radial-gradient(circle, var(--accent-faint), transparent 65%);
+}
+body::after {
+	bottom: -110px; left: -80px;
+	width: 260px; height: 260px;
+	background: radial-gradient(circle, var(--accent-faint), transparent 65%);
+}
+
+a { color: var(--accent1); text-decoration: none; }
+a:hover { color: var(--accent-text); }
+
+::selection { background: var(--accent-soft); }
+
+/* Angular can't inject this under ng-csp */
+.ng-hide { display: none !important; }
+
+.invisible { visibility: hidden; }
+.pointer { cursor: pointer; }
+.clearfix { clear: both; }
+.text-danger { color: var(--danger); }
+
+#wrapper { position: relative; z-index: 1; }
+
+/* --- header ------------------------------------------------------------- */
+
+header.header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 14px;
+	background: color-mix(in srgb, var(--bg) 84%, transparent);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border-bottom: 1px solid var(--border);
+}
+
+/* 42px glyph in a 34px layout slot: negative margins keep the header
+   height unchanged; the overflow stays inside the header's 12px padding */
+.logo {
+	flex-shrink: 0;
+	display: block;
+	margin: -4px 0;
+	filter: drop-shadow(0 0 14px var(--accent-glow));
+}
+.logo-stop-1 { stop-color: var(--accent1); }
+.logo-stop-2 { stop-color: var(--accent2); }
+.logo-shield { fill: url(#logoGrad); }
+.logo-mark { fill: #ffffff; }
+
+/* slow spin of the asterisk star inside the shield, mirroring the
+   ProxyManager logo orbit */
+.logo-star {
+	transform-box: fill-box;
+	transform-origin: center;
+	animation: logo-star-spin 14s linear infinite;
+}
+@keyframes logo-star-spin { to { transform: rotate(360deg); } }
+
+.title-block { flex: 1; min-width: 0; }
+
+h1.brand-title {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0.2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background: var(--grad);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.subtitle {
+	margin: 2px 0 0;
+	font-size: 11px;
+	color: var(--muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.header-actions {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-shrink: 0;
+}
+
+.icon-btn {
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	display: grid;
+	place-items: center;
+	background: var(--hover-wash);
+	border: 1px solid var(--border);
+	border-radius: 7px;
+	color: var(--muted);
+	cursor: pointer;
+	transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+.icon-btn svg { display: block; }
+.icon-btn:hover {
+	color: var(--text);
+	background: var(--hover-wash-strong);
+}
+.icon-btn.lock-btn:hover {
+	color: var(--danger);
+	background: var(--danger-soft);
+	border-color: var(--danger-border);
+}
+.icon-btn.spinning svg { animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- view container ----------------------------------------------------- */
+
+#page-content-wrapper {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+}
+
+#page-content-wrapper > * { animation: viewIn 0.22s ease backwards; }
+@keyframes viewIn {
+	from { opacity: 0; transform: translateY(6px); }
+}
+
+.section-label {
+	margin: 4px 2px 10px;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 1.6px;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+
+/* --- credential / account lists ----------------------------------------- */
+
+.list {
+	width: 100%;
+	padding: 14px;
+}
+
+.list .list-item:last-child { margin-bottom: 0; }
+
+.list .list-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 8px;
+	padding: 11px 12px;
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	cursor: pointer;
+	transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+	animation: cardIn 0.3s ease backwards;
+}
+@keyframes cardIn { from { opacity: 0; } }
+
+.list .list-item:hover {
+	background: var(--card-hover);
+	border-color: var(--border-strong);
+	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+:root[data-theme="light"] .list .list-item:hover { box-shadow: 0 3px 12px rgba(18, 26, 38, 0.1); }
+
+.cred-avatar {
+	flex-shrink: 0;
+	width: 34px;
+	height: 34px;
+	display: grid;
+	place-items: center;
+	border-radius: 8px;
+	background: var(--accent-softer);
+	border: 1px solid var(--accent-border);
+	color: var(--accent-text);
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.cred-body { flex: 1; min-width: 0; }
+
+.list .list-item .title {
+	display: block;
+	font-weight: 600;
+	font-size: 13px;
+	color: var(--text);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.list .list-item a.title:hover { color: var(--accent1); }
+.list .list-item .info,
+.list .list-item .extra {
+	font-size: 11.5px;
+	color: var(--muted);
+	margin-top: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.list .list-item .edit {
+	flex-shrink: 0;
+	width: 28px;
+	height: 28px;
+	display: grid;
+	place-items: center;
+	font-size: 15px;
+	color: var(--muted);
+	background: var(--accent-softer);
+	border: 1px solid var(--accent-border);
+	border-radius: 7px;
+	transition: color 0.18s, background 0.18s, border-color 0.18s;
+}
+.list .list-item .edit:hover {
+	color: var(--accent1);
+	background: var(--accent-soft);
+	border-color: var(--accent1);
+}
+.list .list-item .edit.delete {
+	background: var(--hover-wash);
+	border-color: var(--border);
+}
+.list .list-item .edit.delete:hover {
+	color: var(--danger);
+	background: var(--danger-soft);
+	border-color: var(--danger-border);
+}
+.list .list-item .mdi { cursor: pointer; }
+
+/* lists inside settings tabs align with tab padding */
+.tab-content .list { padding: 0; }
+
+/* --- empty state --------------------------------------------------------- */
+
+.empty {
+	text-align: center;
+	padding: 30px 20px 22px;
+	color: var(--muted);
+	animation: cardIn 0.3s ease backwards;
+}
+.empty svg { opacity: 0.35; margin-bottom: 10px; }
+.empty p {
+	margin: 0;
+	font-size: 12.5px;
+	color: var(--text);
+	font-weight: 600;
+}
+
+/* --- forms ---------------------------------------------------------------
+   Label-above-input fields; icon actions (copy / show / generate / delete)
+   sit in the same .input-row as the control. The legacy .group wrapper is
+   kept as a plain spacing block for any straggler markup. */
+
+.field, .group { display: block; margin-bottom: 12px; position: relative; }
+
+.field-label {
+	display: block;
+	font-size: 11px;
+	color: var(--muted);
+	margin-bottom: 6px;
+}
+
+.input-row {
+	display: flex;
+	align-items: stretch;
+	gap: 6px;
+}
+.input-row > input,
+.input-row > textarea,
+.input-row > select { flex: 1; min-width: 0; }
+
+input[type="text"], input[type="password"], input[type="number"],
+select, textarea {
+	font-size: 13px;
+	font-family: inherit;
+	padding: 9px 11px;
+	display: block;
+	width: 100%;
+	border: 1px solid var(--border);
+	border-radius: 7px;
+	background: var(--input-bg);
+	color: var(--text);
+	outline: none;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea { resize: vertical; min-height: 64px; max-width: 100%; }
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus,
+select:focus, textarea:focus {
+	border-color: var(--accent1);
+	box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+input:disabled, select:disabled, textarea:disabled {
+	opacity: 0.55;
+	cursor: default;
+}
+
+input::placeholder, textarea::placeholder { color: var(--placeholder); }
+
+select {
+	cursor: pointer;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	padding-right: 30px;
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238d94a1' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 11px center;
+}
+select option { background: var(--card); color: var(--text); }
+
+/* icon buttons beside inputs — copy-text renders <i class="mdi mdi-content-copy"> */
+.input-row .mdi {
+	flex-shrink: 0;
+	width: 36px;
+	display: grid;
+	place-items: center;
+	font-size: 15px;
+	color: var(--muted);
+	background: var(--hover-wash);
+	border: 1px solid var(--border);
+	border-radius: 7px;
+	cursor: pointer;
+	transition: color 0.18s, background 0.18s, border-color 0.18s;
+}
+.input-row .mdi:hover {
+	color: var(--accent1);
+	background: var(--accent-soft);
+	border-color: var(--accent1);
+}
+.input-row .mdi-delete:hover {
+	color: var(--danger);
+	background: var(--danger-soft);
+	border-color: var(--danger-border);
+}
+
+/* legacy floating-label leftovers, neutralised */
+.bar, .highlight { display: none; }
+
+/* --- toggle switch rows -------------------------------------------------- */
+
+.switch-input { display: none; }
+
+.switch-row {
+	margin-bottom: 8px;
+	background: var(--input-bg);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	transition: border-color 0.2s;
+}
+.switch-row:hover { border-color: var(--border-strong); }
+
+.switch-label {
+	position: relative;
+	display: block;
+	min-width: 0;
+	width: 100%;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 12px;
+	color: var(--text);
+	text-align: left;
+	padding: 11px 58px 11px 12px;
+	margin: 0;
+}
+
+.switch-label::before, .switch-label::after {
+	content: "";
+	position: absolute;
+	margin: 0;
+	outline: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	transition: all 0.25s ease;
+}
+
+.switch-label::before {
+	right: 12px;
+	width: 36px;
+	height: 20px;
+	background-color: var(--scrollbar);
+	border-radius: 6px;
+}
+
+.switch-label::after {
+	right: 31px;
+	width: 14px;
+	height: 14px;
+	background-color: #fff;
+	border-radius: 3px;
+	transition: right 0.25s cubic-bezier(0.34, 1.4, 0.64, 1), transform 0.25s;
+}
+
+.switch-input:checked + .switch-label::before { background: var(--grad); }
+.switch-input:checked + .switch-label::after { right: 15px; }
+
+/* --- checkbox (remember master password) ---------------------------------
+   Flex row: 18px box + label vertically centered; the warning line (when
+   present) wraps to a full-width row below. Checkmark coordinates are
+   tuned to the 18px box. */
+
+.md-checkbox {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	color: var(--muted);
+	font-size: 13px;
+	letter-spacing: 0.2px;
+}
+.md-checkbox .input-checkbox {
+	position: relative;
+	display: block;
+	width: 18px;
+	height: 18px;
+	flex-shrink: 0;
+	margin: 0 9px 0 0;
+}
+.md-checkbox .input-checkbox input[type="checkbox"] {
+	visibility: hidden;
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	padding: 0;
+	outline: none;
+	cursor: pointer;
+	opacity: 0;
+}
+.md-checkbox label, .md-checkbox .label {
+	cursor: pointer;
+	color: var(--text);
+	font-weight: 600;
+	font-size: 12.5px;
+	margin: 0;
+}
+.md-checkbox .master_pw_warning { flex-basis: 100%; }
+
+.md-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"] + .checkbox { cursor: pointer; }
+.md-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"] + .checkbox::before {
+	content: "";
+	position: absolute;
+	box-sizing: border-box;
+	left: 0;
+	top: 0;
+	width: 18px;
+	height: 18px;
+	border: 2px solid var(--border-strong);
+	border-radius: 5px;
+	transition: all 0.2s ease;
+	z-index: 1;
+}
+.md-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"]:checked + .checkbox::before {
+	box-sizing: border-box;
+	left: 4px;
+	top: -3px;
+	width: 11px;
+	height: 19px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--accent1);
+	border-top: transparent;
+	border-left: transparent;
+	transform: rotate(40deg);
+	border-radius: 1px;
+}
+
+/* --- buttons ------------------------------------------------------------- */
+
+.md-btn {
+	position: relative;
+	margin: 0 10px 15px 0;
+	padding: 0;
+	overflow: hidden;
+	border: 1px solid var(--border);
+	outline: none;
+	border-radius: 8px;
+	color: var(--muted);
+	background: transparent;
+	cursor: pointer;
+	display: inline-block;
+	font-family: inherit;
+	font-size: 13px;
+	font-weight: 600;
+	transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s, filter 0.2s;
+}
+
+.md-btn:hover {
+	color: var(--text);
+	border-color: var(--border-strong);
+	background: var(--hover-wash);
+}
+
+.md-btn.default {
+	background: var(--grad);
+	border-color: transparent;
+	color: var(--on-accent);
+	font-weight: 700;
+	box-shadow: 0 3px 12px var(--accent-glow);
+}
+.md-btn.default:hover {
+	color: var(--on-accent);
+	background: var(--grad);
+	box-shadow: 0 5px 18px var(--accent-glow-strong);
+	filter: brightness(1.06);
+}
+
+.md-btn:disabled { opacity: 0.55; cursor: default; }
+.md-btn:disabled:hover { filter: none; }
+
+.md-btn > * { position: relative; }
+.md-btn span { display: inline-block; padding: 10px 22px; }
+
+.md-btn.orange {
+	background: var(--warning-soft);
+	border-color: var(--warning-border);
+	color: var(--warning);
+}
+.md-btn.orange:hover { background: var(--warning-soft); filter: brightness(1.1); color: var(--warning); }
+
+.md-btn.red {
+	background: var(--danger-soft);
+	border-color: var(--danger-border);
+	color: var(--danger);
+}
+.md-btn.red:hover { background: var(--danger-soft); filter: brightness(1.1); color: var(--danger); }
+
+.md-btn a { color: inherit; text-decoration: none; }
+
+button:focus-visible,
+.icon-btn:focus-visible,
+.tab-title:focus-visible {
+	outline: 2px solid var(--accent1);
+	outline-offset: 2px;
+}
+
+.form-actions {
+	display: flex;
+	gap: 10px;
+	margin: 20px 0 12px;
+}
+.form-actions .md-btn { flex: 1; margin: 0; text-align: center; }
+.form-actions .md-btn > span { display: block; padding: 11px 12px; }
+
+/* --- segmented control (theme switch) ------------------------------------ */
+
+.segmented { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.segmented.theme-seg { grid-template-columns: repeat(3, 1fr); }
+.segmented button {
+	padding: 8px 0;
+	background: var(--input-bg);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	color: var(--muted);
+	font-family: inherit;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.4px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+.segmented button:hover { color: var(--text); border-color: var(--border-strong); }
+.segmented button.active {
+	background: var(--accent-soft);
+	border-color: var(--accent1);
+	color: var(--accent-text);
+}
+
+/* --- tabs (settings / edit credential) -----------------------------------
+   Flex layout: tab titles form a row, the gradient slide sits beneath them,
+   and the active tab content flows in document order (via display:contents
+   on .tab-label-content), so popup height follows the visible content. */
+
+.tab-wrap {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.tab-wrap .tab-label-content { display: contents; }
+
+.tab-wrap .tab-title {
+	order: 1;
+	width: 50%;
+	cursor: pointer;
+	color: var(--muted);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1.2px;
+	text-transform: uppercase;
+	background: transparent;
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	height: 44px;
+	padding: 0 10px;
+	margin: 0;
+	border-bottom: 1px solid var(--border);
+	transition: color 0.2s ease;
+}
+.tab-wrap .tab-title:hover { color: var(--text); }
+.tab-wrap .tab-title.active { color: var(--accent-text); }
+
+.tab-wrap .slide {
+	order: 2;
+	background: var(--grad);
+	width: 50%;
+	height: 3px;
+	margin-top: -3px;
+	position: relative;
+	left: 0;
+	border-radius: 2px;
+	transition: left 0.3s ease-out;
+}
+.slide.right { left: 50%; }
+
+.tab-wrap .tab-content {
+	order: 3;
+	display: none;
+	width: 100%;
+	padding: 20px 16px 12px;
+	line-height: 1.45;
+}
+.tab-wrap .tab-content.active { display: block; }
+
+/* --- OTP radial progress -------------------------------------------------
+   Structure and inline transforms are owned by directives/otp.js — do not
+   set transform on .fill / .mask here. */
+
+.otp_generator { display: inline-flex; align-items: center; gap: 5px; }
+.otp_generator .code {
+	font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+	font-size: 11.5px;
+	font-weight: 600;
+	letter-spacing: 1px;
+	color: var(--accent-text);
+	background: var(--accent-softer);
+	border: 1px solid var(--accent-border);
+	border-radius: 5px;
+	padding: 1px 6px;
+}
+.radial-progress {
+	display: inline-block;
+	position: relative;
+	width: 10px;
+	height: 10px;
+	background-color: var(--scrollbar);
+	border-radius: 50%;
+}
+.radial-progress .circle .mask, .radial-progress .circle .fill {
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	border-radius: 50%;
+	transition: transform 0.5s;
+	backface-visibility: hidden;
+}
+.radial-progress .circle .mask { clip: rect(0px, 10px, 10px, 5px); }
+.radial-progress .circle .mask .fill {
+	clip: rect(0px, 5px, 10px, 0px);
+	background-color: var(--accent1);
+}
+
+/* --- ignored sites (settings) -------------------------------------------- */
+
+.ignored_sites { padding: 0; margin-bottom: 22px; }
+.ignored_sites > label {
+	display: block;
+	margin: 4px 2px 10px;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 1.6px;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+.ignored_sites ul.ignored_sites {
+	margin: 0 0 12px;
+	padding: 0;
+	background: var(--input-bg);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	overflow: hidden;
+}
+.ignored_sites li {
+	list-style-type: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 9px 12px;
+	font-size: 12px;
+	color: var(--text);
+	border-bottom: 1px solid var(--border);
+}
+.ignored_sites li:last-child { border-bottom: none; }
+.ignored_sites li .site {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: calc(100% - 24px);
+}
+.ignored_sites li .mdi {
+	cursor: pointer;
+	color: var(--muted);
+	font-size: 15px;
+	transition: color 0.2s;
+}
+.ignored_sites li .mdi:hover { color: var(--danger); }
+.ignored_sites .group, .ignored_sites .field { margin-bottom: 0; }
+
+/* --- alerts / inline messages -------------------------------------------- */
+
+.alert {
+	padding: 10px 14px;
+	margin: 10px 0;
+	border-radius: 8px;
+	font-size: 12px;
+	border: 1px solid transparent;
+}
+.alert-warning {
+	background: var(--warning-soft);
+	border-color: var(--warning-border);
+	color: var(--warning);
+}
+.alert-info {
+	background: var(--accent-softer);
+	border-color: var(--accent-border);
+	color: var(--accent-text);
+}
+
+.master_pw_warning {
+	padding: 6px 2px 0;
+	font-size: 10.5px;
+	color: var(--danger);
+	margin-bottom: 10px;
+}
+.master_pw_warning.big {
+	font-size: 13px;
+	font-weight: 600;
+	text-align: center;
+	padding: 0;
+	margin: 0 0 12px;
+}
+
+/* --- unlock / password prompt -------------------------------------------- */
+
+/* unlock lives on the page background, styled like a setup step */
+.password-prompt { padding: 26px 16px 22px; }
+
+.unlock {
+	width: 100%;
+	max-width: 440px;
+	margin: 0 auto;
+	text-align: left;
+}
+.unlock .brand-lockup {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 6px;
+}
+.unlock .brand-lockup img {
+	height: 56px;
+	display: block;
+	filter: drop-shadow(0 0 16px var(--accent-glow));
+}
+.unlock .brand-lockup .wordmark {
+	font-size: 18px;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	background: var(--grad);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+.unlock .locked-text {
+	margin-bottom: 18px;
+	text-align: center;
+	font-size: 12.5px;
+	color: var(--muted);
+}
+.unlock .field, .unlock .group { margin-bottom: 14px; }
+.unlock .remember-row { margin: 2px 0 6px; }
+.unlock .md-btn.default {
+	display: block;
+	width: 100%;
+	margin: 14px 0 0;
+}
+.unlock .md-btn.default > span { display: block; padding: 11px 12px; }
+.unlock .reset-actions {
+	display: flex;
+	justify-content: center;
+	margin-top: 16px;
+}
+.reset-actions .md-btn { margin: 0; }
+
+.forgot-link {
+	display: block;
+	margin-top: 14px;
+	text-align: center;
+	font-size: 11.5px;
+	color: var(--muted);
+	cursor: pointer;
+	transition: color 0.2s;
+}
+.forgot-link:hover { color: var(--danger); }
+
+/* --- search view --------------------------------------------------------- */
+
+.search-view { padding: 16px 14px 0; }
+
+.search-box { position: relative; }
+.search-box svg {
+	position: absolute;
+	left: 11px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--muted);
+	pointer-events: none;
+}
+.search-box input { padding-left: 34px; }
+
+.search-view ~ .list { padding-top: 10px; }
+
+/* --- setup wizard / add account ------------------------------------------ */
+
+.setup {
+	max-width: 440px;
+	margin: 0 auto;
+	padding: 22px 16px;
+}
+.setup h3 {
+	font-size: 16px;
+	font-weight: 700;
+	color: var(--text);
+	margin: 8px 0 14px;
+}
+.setup h3.centered { text-align: center; }
+
+/* welcome-step hero icon, matching the unlock screen */
+.setup-hero {
+	display: flex;
+	justify-content: center;
+	margin: 4px 0 16px;
+}
+.setup-hero img {
+	height: 64px;
+	filter: drop-shadow(0 0 16px var(--accent-glow));
+}
+.setup-desc {
+	margin: 0 0 20px;
+	font-size: 12.5px;
+	line-height: 1.55;
+	color: var(--muted);
+}
+.setup-desc b { color: var(--text); }
+.setup .field, .setup .group { margin-bottom: 14px; }
+.angular-steps .step { box-sizing: border-box; }
+
+/* --- settings ------------------------------------------------------------ */
+
+.settings-section { margin-bottom: 22px; }
+
+.adv-toggle {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 9px 12px;
+	margin: 14px 0 10px;
+	background: transparent;
+	border: 1px dashed var(--border-strong);
+	border-radius: 8px;
+	color: var(--muted);
+	font-size: 11.5px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.adv-toggle:hover {
+	color: var(--accent-text);
+	border-color: var(--accent1);
+	background: var(--accent-softer);
+}
+
+.about-version {
+	font-size: 11.5px;
+	letter-spacing: 0.4px;
+	color: var(--muted);
+	padding: 0 2px;
+}
+
+.about-credit {
+	margin: 6px 0 0;
+	padding: 0 2px;
+	font-size: 11.5px;
+	color: var(--muted);
+}
+.about-credit .heart {
+	color: #ff5d73;
+	vertical-align: -1px;
+	margin: 0 1px;
+}
+.about-attribution {
+	margin: 8px 0 0;
+	padding: 0 2px;
+	font-size: 11px;
+	line-height: 1.55;
+	color: var(--muted);
+}
+.about-credit a, .about-attribution a {
+	color: var(--accent-text);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	transition: border-color 0.2s, color 0.2s;
+}
+.about-credit a:hover, .about-attribution a:hover {
+	color: var(--accent1);
+	border-bottom-color: var(--accent1);
+}
+
+.add-account-btn { display: block; width: 100%; margin: 4px 0 12px; }
+.add-account-btn > span { display: block; padding: 11px 12px; }
+
+/* --- edit credential: custom fields -------------------------------------- */
+
+.section-empty {
+	padding: 12px;
+	margin-bottom: 8px;
+	border: 1px dashed var(--border-strong);
+	border-radius: 8px;
+	color: var(--muted);
+	font-size: 12px;
+	text-align: center;
+}
+
+.custom_field {
+	margin-bottom: 8px;
+	padding: 12px;
+	background: var(--input-bg);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+}
+.custom_field .cf-row { display: flex; gap: 8px; }
+.custom_field .cf-row .field, .custom_field .cf-row .group {
+	flex: 1;
+	min-width: 0;
+	margin-bottom: 0;
+}
+
+.add-field-row {
+	display: flex;
+	gap: 8px;
+	align-items: flex-end;
+}
+.add-field-row .field, .add-field-row .group {
+	flex: 1;
+	min-width: 0;
+	margin-bottom: 0;
+}
+.add-field-row .field-type { flex: 0 0 96px; }
+.add-field-row .icon-add {
+	flex-shrink: 0;
+	width: 38px;
+	height: 38px;
+	display: grid;
+	place-items: center;
+	font-size: 18px;
+	color: var(--accent-text);
+	background: var(--accent-softer);
+	border: 1px solid var(--accent-border);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+.add-field-row .icon-add:hover {
+	color: var(--accent1);
+	background: var(--accent-soft);
+	border-color: var(--accent1);
+}
+
+/* --- inline feedback (ProxyManager-style, no floating toasts) ------------
+   Success feedback flashes in the header subtitle (see 'status' broadcast
+   in MainCtrl); validation problems render as a .form-error line in the
+   normal flow above the action buttons. */
+
+.subtitle.status {
+	color: var(--success);
+	font-weight: 600;
+}
+
+.form-error {
+	min-height: 16px;
+	margin: 4px 0 10px;
+	font-size: 11.5px;
+	color: var(--danger);
+	animation: shake 0.3s ease;
+}
+@keyframes shake {
+	0%, 100% { transform: translateX(0); }
+	25% { transform: translateX(-4px); }
+	75% { transform: translateX(4px); }
+}
+
+/* --- motion sensitivity --------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+	.logo-star, .icon-btn.spinning svg { animation: none; }
+	#page-content-wrapper > *, .list .list-item, .empty { animation: none; }
+}

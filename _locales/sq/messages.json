@@ -1,0 +1,528 @@
+{
+  "refresh_credential_list": {
+    "message": "Rifresko listën e kredencialeve",
+    "description": "Refresh the credential list"
+  },
+  "extDescription": {
+    "message": "Passman - Manaxheri i fjalëkalimeve për NextCloud/ownCloud",
+    "description": "Extension description"
+  },
+  "save_to": {
+    "message": "Ruaje tek $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "vault": {
+    "message": "Kasafortë",
+    "description": "Vault"
+  },
+  "ignore_site_tab": {
+    "message": "Ignore site / page",
+    "description": "Invalid server URL"
+  },
+  "account_added": {
+    "message": "Account added.",
+    "description": "Search"
+  },
+  "label": {
+    "message": "Etiketa.",
+    "description": "Label"
+  },
+  "ignore_protocol": {
+    "message": "Injoro protokollin për koordinim të faqeve",
+    "description": "Ignore protocol for site matching"
+  },
+  "settings": {
+    "message": "Konfigurimet",
+    "description": "Settings"
+  },
+  "finish": {
+    "message": "Përfundo!",
+    "description": "Finish"
+  },
+  "detected_changed_url": {
+    "message": "URL e kapur e ndryshuar për",
+    "description": "Detected changed URL for"
+  },
+  "add_custom_field": {
+    "message": "Add a custom field",
+    "description": "Add a custom field"
+  },
+  "enable_update_url": {
+    "message": "Ask to update credential URL if it doesn't match the current URL",
+    "description": "Enable form auto submit"
+  },
+  "credentials": {
+    "message": "kredenciale",
+    "description": "credentials"
+  },
+  "password_picker_gotolist": {
+    "message": "When a password is found, go to list rather than last active tab",
+    "description": "Disable password picker"
+  },
+  "search": {
+    "message": "Kërko",
+    "description": "Search"
+  },
+  "toggle_advanced": {
+    "message": "Shfaq ose fshih opsionet e avancuara!",
+    "description": "Toggle advanced options"
+  },
+  "extension_locked": {
+    "message": "Zgjerimi i Passman është i kyçur, çkyç për ta përdorur atë",
+    "description": "When the extension is locked, and requires an unlock to use it"
+  },
+  "update": {
+    "message": "Përditëso",
+    "description": "Update"
+  },
+  "unlock": {
+    "message": "Çkyç",
+    "description": "Unlock"
+  },
+  "invalid_vault_password": {
+    "message": "Çelës kasaforte jo i vlefshëm!",
+    "description": "Vault password"
+  },
+  "msg_reset_extension": {
+    "message": "Ju mund të ndryshoni fjalëkalimin tuaj. Kjo do te rivendosë shtesën në gjendjen e saj fillestare.",
+    "description": "Search"
+  },
+  "no_vaults": {
+    "message": "Më vjen keq, nuk ka kasafortë të zgjedhur. Të lutem krijo një kasafortë me aplikacionin e Nextcloud/ownCloud dhe provo përsëri.",
+    "description": "Search"
+  },
+  "edit": {
+    "message": "Modifiko",
+    "description": "Edit"
+  },
+  "min_digits": {
+    "message": "Sasi minimale të shifrave",
+    "description": "Minimum amount of digits"
+  },
+  "enter_master_password_desc": {
+    "message": "This password will be used to encrypt all your settings in the extension. You can choose to save this password locally, but it will be saved in PLAINTEXT.",
+    "description": "Enter master password"
+  },
+  "select_vault": {
+    "message": "Selekto kasafortën",
+    "description": "Search"
+  },
+  "enable_autofill": {
+    "message": "Mundëso plotësimin automatik të formës",
+    "description": "Disable auto fill of forms"
+  },
+  "add_account": {
+    "message": "Shto llogari",
+    "description": "Add account"
+  },
+  "credential": {
+    "message": "kredencial",
+    "description": "credential"
+  },
+  "delete": {
+    "message": "Fshij",
+    "description": "Delete"
+  },
+  "forgot_password": {
+    "message": "Keni harruar fjalëkalimin?",
+    "description": "Search"
+  },
+  "invalid_server_settings": {
+    "message": "Konfigurime të serverit të papranueshme ",
+    "description": "Search"
+  },
+  "nextcloud_settings": {
+    "message": "Konfigurimet e serverit Nextcloud / ownCloud!",
+    "description": "Nextcloud / ownCloud server settings"
+  },
+  "use_generated_password": {
+    "message": "Përdor fjalëkalim",
+    "description": "Use password"
+  },
+  "one_time_password": {
+    "message": "OTP",
+    "description": "One time password"
+  },
+  "list": {
+    "message": "List",
+    "description": "List"
+  },
+  "ignore_site": {
+    "message": "Injoro faqen",
+    "description": "Update"
+  },
+  "select_default_vault": {
+    "message": "Selekto kasafortën e parazgjedhur",
+    "description": "Select default vault"
+  },
+  "site_ignored": {
+    "message": "Faqja u injorua",
+    "description": "Site ignored"
+  },
+  "value": {
+    "message": "Vlerë",
+    "description": "Custom fields"
+  },
+  "ignore_path": {
+    "message": "Injoro rrugën e lokazionit për përputhje të faqes",
+    "description": "Ignore path for site matching"
+  },
+  "custom_fields": {
+    "message": "Fusha të kastomizuara",
+    "description": "Custom fields"
+  },
+  "show_adv": {
+    "message": "Show advanced options",
+    "description": "Disable password picker"
+  },
+  "invalid_master_password": {
+    "message": "Fjalëkalim master i pavlefshëm!",
+    "description": "When the master password is invalid"
+  },
+  "general": {
+    "message": "I përgjithshëm",
+    "description": "Custom fields"
+  },
+  "no_password_match": {
+    "message": "Fjalëkalimet nuk përputhen",
+    "description": "When comparing passwords"
+  },
+  "close": {
+    "message": "Mbyll.",
+    "description": "Close"
+  },
+  "prev": {
+    "message": "I mëparshëm",
+    "description": "Previous"
+  },
+  "add_hint": {
+    "message": "Pas ta krijoni, ju mund të modifikoni kredencialin në Passman!",
+    "description": "After creating it, you can edit the credential in Passman"
+  },
+  "text": {
+    "message": "text",
+    "description": "To describe a textual input field"
+  },
+  "reset_extension": {
+    "message": "Rihapni shtesën",
+    "description": "Search"
+  },
+  "default_vault": {
+    "message": "Kasaforta fillestare.",
+    "description": "Default vault"
+  },
+  "ignore_port": {
+    "message": "Injoro portin për koordinim të faqeve",
+    "description": "Ignore port for site matching"
+  },
+  "master_password": {
+    "message": "Vendos fjalëkalimin Master",
+    "description": "Set a master password"
+  },
+  "disable_picker_text": {
+    "message": "Would you like to disable Passman for the current page, or for the entire website?",
+    "description": "Would you like to disable Passman for the current page, or for the entire website?"
+  },
+  "password": {
+    "message": "Fjalëkalim.",
+    "description": "Password"
+  },
+  "copy": {
+    "message": "Kopjo",
+    "description": "Copy"
+  },
+  "begin": {
+    "message": "Le të fillojmë!",
+    "description": "Let's begin!"
+  },
+  "intro_text": {
+    "message": "This wizard will guide you trough the steps to set up the extension and keep all your passwords synchronized.",
+    "description": "Cancel"
+  },
+  "credential_deleted": {
+    "message": "Kredencialet u fshinë",
+    "description": "Credential deleted"
+  },
+  "ignore_site_placeholder": {
+    "message": "Enter a domain or TLD to ignore and press ↵",
+    "description": "Disable auto fill of forms"
+  },
+  "ignored_sites": {
+    "message": "Ignored sites / URLs",
+    "description": "Ignored sites"
+  },
+  "toggle_visibility": {
+    "message": "Aktivizo dukshmërinë",
+    "description": "Toggle visibility"
+  },
+  "master_pw_warning": {
+    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "description": "Remember master password"
+  },
+  "remember_master_password": {
+    "message": "Mbaj mend fjalëkalimin master",
+    "description": "Remember master password"
+  },
+  "btn_save_site": {
+    "message": "Ruaj kredencialet për këtë faqe",
+    "description": "Save credentials for this site"
+  },
+  "browser_action_title_locked": {
+    "message": "Passman - I kyçur",
+    "description": "Browser extension title when the extension is locked"
+  },
+  "label_required": {
+    "message": "Ju lutemi plotësoni një etiketë",
+    "description": "When comparing passwords"
+  },
+  "enter_master_password": {
+    "message": "Vendos fjalëkalimin kryesor!",
+    "description": "Enter master password"
+  },
+  "vault_password": {
+    "message": "Fjalëkalim kasaforte.",
+    "description": "Vault password"
+  },
+  "select_password_picker_default_tab": {
+    "message": "When the Password picker is unable to find any credentials, it will go to:",
+    "description": "Select password picker default tab"
+  },
+  "save_site": {
+    "message": "Ruaj faqen",
+    "description": "Save site"
+  },
+  "extra_accounts": {
+    "message": "Kur proçesi i ndërtimit të mbarojë, ju mund të shtoni më shumë llogari.",
+    "description": "Search"
+  },
+  "next": {
+    "message": "I/E rradhës",
+    "description": "Next"
+  },
+  "avoid_ambiguous": {
+    "message": "Shmag karaktere të paqarta!",
+    "description": "Avoid ambiguous characters"
+  },
+  "disable_site": {
+    "message": "Disable site",
+    "description": "Disable site"
+  },
+  "url_ignored": {
+    "message": "URL ignored",
+    "description": "URL ignored"
+  },
+  "saving_to": {
+    "message": "Dua u ruajtur tek $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "enable_password_picker": {
+    "message": "Mundëso zgjedhësin e fjalëkalimit",
+    "description": "Disable password picker"
+  },
+  "auto_login": {
+    "message": "Passman po ju lidh brenda si $USERNAME$",
+    "description": "Amount of the credentials in the database",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "MyUsername"
+      }
+    }
+  },
+  "default_vault_desc": {
+    "message": "Select the vault that you want to keep in sync with the webbrowser.",
+    "description": "Select the vault that you want to keep in sync with the webbrowser."
+  },
+  "detected_new_login": {
+    "message": "Hyrje e re e spikatur",
+    "description": "Detected new login"
+  },
+  "detected_changed_login": {
+    "message": "Pikasje e fjalëkalimit të ndryshuar për përdoruesin",
+    "description": "Detected changed password for user"
+  },
+  "invalid_response_from_server": {
+    "message": "Përgjigja e pavlefshme nga serveri: [$STATUS_CODE$] $STATUS_TEXT$",
+    "description": "No credentials found for the current site",
+    "placeholders": {
+      "status_code": {
+        "content": "$1",
+        "example": "404"
+      },
+      "status_text": {
+        "content": "$2",
+        "example": "Page not found"
+      }
+    }
+  },
+  "save": {
+    "message": "Ruaj",
+    "description": "Save"
+  },
+  "generate_password": {
+    "message": "Gjenero fjalëkalim",
+    "description": "Generate password"
+  },
+  "edit_insufficient_permissions": {
+    "message": "You don't have the permission to edit this credential.",
+    "description": "You don't have permissions to edit this credential."
+  },
+  "server_url": {
+    "message": "URL e serverit",
+    "description": "Server URL"
+  },
+  "disable_page": {
+    "message": "Disable page",
+    "description": "Disable page"
+  },
+  "hide_adv": {
+    "message": "Hide advanced options",
+    "description": "Disable password picker"
+  },
+  "cancel": {
+    "message": "Anulo",
+    "description": "Cancel"
+  },
+  "add": {
+    "message": "Shto",
+    "description": "Add"
+  },
+  "credential_updated": {
+    "message": "Kredencialet u përditësuan!",
+    "description": "updated, lowercase"
+  },
+  "no_credentials_found": {
+    "message": "Jo kredenciale të gjetura",
+    "description": "No credentials found for the current site"
+  },
+  "extName": {
+    "message": "Passman",
+    "description": "Extension name"
+  },
+  "lock_extension": {
+    "message": "Kyç zgjerimin",
+    "description": "Title on the PayPal button"
+  },
+  "search_for": {
+    "message": "Kërko për",
+    "description": "No credentials found for the current site"
+  },
+  "password_repeat": {
+    "message": "Fjalëkalim (përsërit)",
+    "description": "Password"
+  },
+  "credential_saved": {
+    "message": "Kredencialet u ruajten!",
+    "description": "saved, lowercase"
+  },
+  "require_every_character_type": {
+    "message": "Kërkohet çdo tip karakteri",
+    "description": "Require every character type"
+  },
+  "enable_debug": {
+    "message": "Aktivizo gjendjen debug",
+    "description": "Enable debug mode"
+  },
+  "email": {
+    "message": "E-mail",
+    "description": "E-mail"
+  },
+  "welcome_to_passman": {
+    "message": "Welcome to the Passman webextension",
+    "description": "Intro at the setup"
+  },
+  "browser_action_title_login": {
+    "message": "Passman - $CREDENTIAL_AMOUNT$ $PLURAL$ të gjetur në këtë faqe",
+    "description": "String for the browser action",
+    "placeholders": {
+      "credential_amount": {
+        "content": "$1",
+        "example": "4"
+      },
+      "plural": {
+        "content": "$2",
+        "example": "credentials"
+      }
+    }
+  },
+  "http_warning": {
+    "message": "You are using HTTP! Login credentials will be send in plain text. Your Passman credentials are still encrypted.",
+    "description": "Warning for http connections"
+  },
+  "done": {
+    "message": "U krye",
+    "description": "Done"
+  },
+  "no_credentials_found_for_site": {
+    "message": "No credentials found for this site.",
+    "description": "No credentials found for the current site"
+  },
+  "enable_autosubmit": {
+    "message": "Mundëso dërgimin automatik të formës pas zgjedhjes së llogarisë",
+    "description": "Enable form auto submit"
+  },
+  "saving": {
+    "message": "Duke u ruajtur!",
+    "description": "Saving"
+  },
+  "url": {
+    "message": "URL",
+    "description": "URL"
+  },
+  "iam_sure": {
+    "message": "Yes, I'm sure!",
+    "description": "Search"
+  },
+  "no_sites_ignored": {
+    "message": "Asnjë faqe e injoruar",
+    "description": "No sites ignored"
+  },
+  "accounts": {
+    "message": "Llogaritë",
+    "description": "Accounts"
+  },
+  "password_generator": {
+    "message": "Krijues fjalëkalimesh!",
+    "description": "Password generator"
+  },
+  "empty_master_key": {
+    "message": "Çelësi kryesor është bosh!",
+    "description": "Empty master key!"
+  },
+  "ignore_subdomain": {
+    "message": "Injoro nëndomain-ët për koordinim të faqeve",
+    "description": "Password"
+  },
+  "btn_search": {
+    "message": "Kërko kredenciale",
+    "description": "Search credentials"
+  },
+  "credential_created": {
+    "message": "Kredencialet u krijuan",
+    "description": "Credential created"
+  },
+  "username": {
+    "message": "Emër përdoruesi",
+    "description": "Username"
+  },
+  "pw_length": {
+    "message": "Gjatësia e fjalëkalimit.",
+    "description": "Password length"
+  },
+  "refresh_timer": {
+    "message": "Kohëmatës i rifreskimit",
+    "description": "Password"
+  }
+}

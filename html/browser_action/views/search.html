@@ -1,0 +1,26 @@
+<div class="search-view">
+    <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" autofocus ng-keypress="search()" auto-focus ng-model="searchText"
+               placeholder="{{'search_for' | translate }}">
+    </div>
+</div>
+<div class="list">
+    <div class="empty" ng-show="found_credentials.length === 0">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <p>{{'no_credentials_found' | translate}}</p>
+    </div>
+    <div class="list-item" ng-repeat="credential in found_credentials" ng-click="openSite(credential)">
+        <div class="cred-avatar">{{credential.label.charAt(0) || '*'}}</div>
+        <div class="cred-body">
+            <div class="title">{{credential.label}}</div>
+            <div class="info">{{credential.username}}</div>
+            <div class="extra" ng-if="credential.otp.secret">
+                {{'one_time_password' | translate}}: <div otp-generator secret="credential.otp.secret"></div>
+            </div>
+        </div>
+        <div class="edit" title="{{'edit' | translate}}" ng-click="editCredential(credential); $event.stopPropagation()">
+            <div class="mdi mdi-pencil"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,528 @@
+{
+  "refresh_credential_list": {
+    "message": "Odśwież listę poświadczeń",
+    "description": "Refresh the credential list"
+  },
+  "extDescription": {
+    "message": "Passman - Menedżer haseł dla NextCloud / ownCloud",
+    "description": "Extension description"
+  },
+  "save_to": {
+    "message": "Zapisz do $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "vault": {
+    "message": "Sejf",
+    "description": "Vault"
+  },
+  "ignore_site_tab": {
+    "message": "Ignoruj stronę / witrynę",
+    "description": "Invalid server URL"
+  },
+  "account_added": {
+    "message": "Konto dodane.",
+    "description": "Search"
+  },
+  "label": {
+    "message": "Etykieta",
+    "description": "Label"
+  },
+  "ignore_protocol": {
+    "message": "Zignoruj protokół podczas przyporządkowywania stron",
+    "description": "Ignore protocol for site matching"
+  },
+  "settings": {
+    "message": "Ustawienia",
+    "description": "Settings"
+  },
+  "finish": {
+    "message": "Zakończ",
+    "description": "Finish"
+  },
+  "detected_changed_url": {
+    "message": "Wykryto zmianę URL dla",
+    "description": "Detected changed URL for"
+  },
+  "add_custom_field": {
+    "message": "Dodaj własne pole",
+    "description": "Add a custom field"
+  },
+  "enable_update_url": {
+    "message": "Pytaj o aktualizację URL poświadczeń jeśli nie zgadza się z bieżącym URL",
+    "description": "Enable form auto submit"
+  },
+  "credentials": {
+    "message": "poświadczenia",
+    "description": "credentials"
+  },
+  "password_picker_gotolist": {
+    "message": "Jeśli hasło zostanie znalezione, przejdź do listy zamiast ostatnio aktywnej zakładki",
+    "description": "Disable password picker"
+  },
+  "search": {
+    "message": "Wyszukaj",
+    "description": "Search"
+  },
+  "toggle_advanced": {
+    "message": "Przełącz zaawansowane opcje",
+    "description": "Toggle advanced options"
+  },
+  "extension_locked": {
+    "message": "Rozszerzenie Passman jest zablokowane. Odblokuj w celu użycia",
+    "description": "When the extension is locked, and requires an unlock to use it"
+  },
+  "update": {
+    "message": "Aktualizuj",
+    "description": "Update"
+  },
+  "unlock": {
+    "message": "Odblokuj",
+    "description": "Unlock"
+  },
+  "invalid_vault_password": {
+    "message": "Nieprawidłowy klucz do sejfu!",
+    "description": "Vault password"
+  },
+  "msg_reset_extension": {
+    "message": "Możesz zresetować swoje hasło. Operacja zresetuje również rozszerzenie do wartości domyślnych.",
+    "description": "Search"
+  },
+  "no_vaults": {
+    "message": "Przepraszamy, nie znaleziono sejfów. Utwórz sejf poprzez Nextcloud / ownCloud i spróbuj ponownie.",
+    "description": "Search"
+  },
+  "edit": {
+    "message": "Edytuj",
+    "description": "Edit"
+  },
+  "min_digits": {
+    "message": "Minimalna liczba cyfr",
+    "description": "Minimum amount of digits"
+  },
+  "enter_master_password_desc": {
+    "message": "To hasło będzie wykorzystane do zaszyfrowania Twoich ustawień w tym rozszerzeniu. Możesz je zapisać lokalnie, ale będzie ono przechowywane otwartym tekstem.",
+    "description": "Enter master password"
+  },
+  "select_vault": {
+    "message": "Wybierz sejf",
+    "description": "Search"
+  },
+  "enable_autofill": {
+    "message": "Włącz auto-uzupełnianie formularza",
+    "description": "Disable auto fill of forms"
+  },
+  "add_account": {
+    "message": "Dodaj konto",
+    "description": "Add account"
+  },
+  "credential": {
+    "message": "poświadczenie",
+    "description": "credential"
+  },
+  "delete": {
+    "message": "Skasuj",
+    "description": "Delete"
+  },
+  "forgot_password": {
+    "message": "Zapomniano hasła?",
+    "description": "Search"
+  },
+  "invalid_server_settings": {
+    "message": "Błędne ustawienia serwera",
+    "description": "Search"
+  },
+  "nextcloud_settings": {
+    "message": "Ustawienia serwera Nextcloud / ownCloud",
+    "description": "Nextcloud / ownCloud server settings"
+  },
+  "use_generated_password": {
+    "message": "Użyj hasła",
+    "description": "Use password"
+  },
+  "one_time_password": {
+    "message": "OTP",
+    "description": "One time password"
+  },
+  "list": {
+    "message": "Lista",
+    "description": "List"
+  },
+  "ignore_site": {
+    "message": "Zignoruj stronę",
+    "description": "Update"
+  },
+  "select_default_vault": {
+    "message": "Wybierz domyślny sejf",
+    "description": "Select default vault"
+  },
+  "site_ignored": {
+    "message": "Strona zignorowana",
+    "description": "Site ignored"
+  },
+  "value": {
+    "message": "Wartość",
+    "description": "Custom fields"
+  },
+  "ignore_path": {
+    "message": "Ignoruj ścieżkę dla przyporządkowania stron",
+    "description": "Ignore path for site matching"
+  },
+  "custom_fields": {
+    "message": "NIestandardowe pola",
+    "description": "Custom fields"
+  },
+  "show_adv": {
+    "message": "Pokaż opcje zaawansowane",
+    "description": "Disable password picker"
+  },
+  "invalid_master_password": {
+    "message": "Niepoprawne hasło główne!",
+    "description": "When the master password is invalid"
+  },
+  "general": {
+    "message": "Ogólne",
+    "description": "Custom fields"
+  },
+  "no_password_match": {
+    "message": "Hasła do siebie nie pasują",
+    "description": "When comparing passwords"
+  },
+  "close": {
+    "message": "Zamknij",
+    "description": "Close"
+  },
+  "prev": {
+    "message": "Poprzedni",
+    "description": "Previous"
+  },
+  "add_hint": {
+    "message": "Po utworzeniu możesz zmienić poświadczenia w Passmanie.",
+    "description": "After creating it, you can edit the credential in Passman"
+  },
+  "text": {
+    "message": "tekst",
+    "description": "To describe a textual input field"
+  },
+  "reset_extension": {
+    "message": "Zresetuj rozszerzenie",
+    "description": "Search"
+  },
+  "default_vault": {
+    "message": "Domyślny sejf",
+    "description": "Default vault"
+  },
+  "ignore_port": {
+    "message": "Zignoruj port podczas przyporządkowywania stron",
+    "description": "Ignore port for site matching"
+  },
+  "master_password": {
+    "message": "Ustaw hasło główne",
+    "description": "Set a master password"
+  },
+  "disable_picker_text": {
+    "message": "Czy chcesz wyłączyć Passman tylko dla aktualnej strony, czy dla całej witryny?",
+    "description": "Would you like to disable Passman for the current page, or for the entire website?"
+  },
+  "password": {
+    "message": "Hasło",
+    "description": "Password"
+  },
+  "copy": {
+    "message": "Skopiuj",
+    "description": "Copy"
+  },
+  "begin": {
+    "message": "Zaczynajmy!",
+    "description": "Let's begin!"
+  },
+  "intro_text": {
+    "message": "Ten kreator przeprowadzi Cię przez proces ustawiania rozszerzenia i pozwoli na synchronizację Twoich haseł.",
+    "description": "Cancel"
+  },
+  "credential_deleted": {
+    "message": "Poświadczenia usunięte",
+    "description": "Credential deleted"
+  },
+  "ignore_site_placeholder": {
+    "message": "Wpisz domenę lub domena najwyższego poziomu aby zignorować lub wciśnij enter",
+    "description": "Disable auto fill of forms"
+  },
+  "ignored_sites": {
+    "message": "Ignorowane łącza / URLe",
+    "description": "Ignored sites"
+  },
+  "toggle_visibility": {
+    "message": "Włącz widoczność",
+    "description": "Toggle visibility"
+  },
+  "master_pw_warning": {
+    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "description": "Remember master password"
+  },
+  "remember_master_password": {
+    "message": "Zapamiętaj główne hasło",
+    "description": "Remember master password"
+  },
+  "btn_save_site": {
+    "message": "Zapisz poświadczenia dla tej strony",
+    "description": "Save credentials for this site"
+  },
+  "browser_action_title_locked": {
+    "message": "Passman - Zablokowany",
+    "description": "Browser extension title when the extension is locked"
+  },
+  "label_required": {
+    "message": "Proszę wypełnić etykietę",
+    "description": "When comparing passwords"
+  },
+  "enter_master_password": {
+    "message": "Wprowadź hasło główne",
+    "description": "Enter master password"
+  },
+  "vault_password": {
+    "message": "Hasło do sejfu",
+    "description": "Vault password"
+  },
+  "select_password_picker_default_tab": {
+    "message": "Zbieranie haseł: Jeśli nie znaleziono żadnych poświadczeń przejdź do: ",
+    "description": "Select password picker default tab"
+  },
+  "save_site": {
+    "message": "Zapisz stronę",
+    "description": "Save site"
+  },
+  "extra_accounts": {
+    "message": "Po zakończeniu procesu instalacji będzie można dodawać więcej kont.",
+    "description": "Search"
+  },
+  "next": {
+    "message": "Następny",
+    "description": "Next"
+  },
+  "avoid_ambiguous": {
+    "message": "Unikaj wieloznacznych znaków",
+    "description": "Avoid ambiguous characters"
+  },
+  "disable_site": {
+    "message": "Wyłącz witrynę",
+    "description": "Disable site"
+  },
+  "url_ignored": {
+    "message": "Zignorowany URL",
+    "description": "URL ignored"
+  },
+  "saving_to": {
+    "message": "Zapisywanie do $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
+  },
+  "enable_password_picker": {
+    "message": "Włącz selektor haseł",
+    "description": "Disable password picker"
+  },
+  "auto_login": {
+    "message": "Passman loguje Cię jako $USERNAME$",
+    "description": "Amount of the credentials in the database",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "MyUsername"
+      }
+    }
+  },
+  "default_vault_desc": {
+    "message": "Wybierz sejf, który chcesz synchronizować z przeglądarką.",
+    "description": "Select the vault that you want to keep in sync with the webbrowser."
+  },
+  "detected_new_login": {
+    "message": "Wykryto nowe logowanie",
+    "description": "Detected new login"
+  },
+  "detected_changed_login": {
+    "message": "Wykryto zmienione hasło dla użytkownika",
+    "description": "Detected changed password for user"
+  },
+  "invalid_response_from_server": {
+    "message": "Nieprawidłowa odpowiedź serwera: [$STATUS_CODE$] $STATUS_TEXT$",
+    "description": "No credentials found for the current site",
+    "placeholders": {
+      "status_code": {
+        "content": "$1",
+        "example": "404"
+      },
+      "status_text": {
+        "content": "$2",
+        "example": "Page not found"
+      }
+    }
+  },
+  "save": {
+    "message": "Zapisz",
+    "description": "Save"
+  },
+  "generate_password": {
+    "message": "Wygeneruj hasło",
+    "description": "Generate password"
+  },
+  "edit_insufficient_permissions": {
+    "message": "Nie masz uprawnień do edycji tych poświadczeń.",
+    "description": "You don't have permissions to edit this credential."
+  },
+  "server_url": {
+    "message": "URL serwera",
+    "description": "Server URL"
+  },
+  "disable_page": {
+    "message": "Wyłącz stronę",
+    "description": "Disable page"
+  },
+  "hide_adv": {
+    "message": "Ukryj opcje zaawansowane",
+    "description": "Disable password picker"
+  },
+  "cancel": {
+    "message": "Anuluj",
+    "description": "Cancel"
+  },
+  "add": {
+    "message": "Dodaj",
+    "description": "Add"
+  },
+  "credential_updated": {
+    "message": "Poświadczenia zaktualizowano",
+    "description": "updated, lowercase"
+  },
+  "no_credentials_found": {
+    "message": "Nie zanleziono żadnych poświadczeń",
+    "description": "No credentials found for the current site"
+  },
+  "extName": {
+    "message": "Passman",
+    "description": "Extension name"
+  },
+  "lock_extension": {
+    "message": "Zablokuj rozszerzenie",
+    "description": "Title on the PayPal button"
+  },
+  "search_for": {
+    "message": "Wyszukaj",
+    "description": "No credentials found for the current site"
+  },
+  "password_repeat": {
+    "message": "Hasło (powtórz)",
+    "description": "Password"
+  },
+  "credential_saved": {
+    "message": "Poświadczenia zostały zapisane",
+    "description": "saved, lowercase"
+  },
+  "require_every_character_type": {
+    "message": "Wymagaj znaków każdego rodzaju",
+    "description": "Require every character type"
+  },
+  "enable_debug": {
+    "message": "Włącz tryb debugowania",
+    "description": "Enable debug mode"
+  },
+  "email": {
+    "message": "E-mail",
+    "description": "E-mail"
+  },
+  "welcome_to_passman": {
+    "message": "Witaj w rozszerzeniu Passman",
+    "description": "Intro at the setup"
+  },
+  "browser_action_title_login": {
+    "message": "Passman - znaleziono  $CREDENTIAL_AMOUNT$ $PLURAL$ dla tej strony",
+    "description": "String for the browser action",
+    "placeholders": {
+      "credential_amount": {
+        "content": "$1",
+        "example": "4"
+      },
+      "plural": {
+        "content": "$2",
+        "example": "credentials"
+      }
+    }
+  },
+  "http_warning": {
+    "message": "Używasz HTTP! Twoje poświadczenia wysyłane są zwykłym tekstem. Poświadczenia w Passman pozostają nadal zaszyfrowane.",
+    "description": "Warning for http connections"
+  },
+  "done": {
+    "message": "Zrobione",
+    "description": "Done"
+  },
+  "no_credentials_found_for_site": {
+    "message": "Brak poświadczeń dla tej strony!",
+    "description": "No credentials found for the current site"
+  },
+  "enable_autosubmit": {
+    "message": "Włącz automatyczne wysyłanie formularza po wybraniu konta",
+    "description": "Enable form auto submit"
+  },
+  "saving": {
+    "message": "Zapisuję",
+    "description": "Saving"
+  },
+  "url": {
+    "message": "URL",
+    "description": "URL"
+  },
+  "iam_sure": {
+    "message": "Tak, jestem pewien!",
+    "description": "Search"
+  },
+  "no_sites_ignored": {
+    "message": "Brak ignorowanych stron",
+    "description": "No sites ignored"
+  },
+  "accounts": {
+    "message": "Konta",
+    "description": "Accounts"
+  },
+  "password_generator": {
+    "message": "Generator haseł",
+    "description": "Password generator"
+  },
+  "empty_master_key": {
+    "message": "Puste hasło główne!",
+    "description": "Empty master key!"
+  },
+  "ignore_subdomain": {
+    "message": "Zignoruj subdomenę podczas przyporządkowywania stron",
+    "description": "Password"
+  },
+  "btn_search": {
+    "message": "Szukaj poświadczeń",
+    "description": "Search credentials"
+  },
+  "credential_created": {
+    "message": "Uprawnienia zostały stworzone",
+    "description": "Credential created"
+  },
+  "username": {
+    "message": "Nazwa użytkownika",
+    "description": "Username"
+  },
+  "pw_length": {
+    "message": "Długość hasła",
+    "description": "Password length"
+  },
+  "refresh_timer": {
+    "message": "Odświeżanie [s]",
+    "description": "Password"
+  }
+}

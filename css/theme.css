@@ -1,0 +1,85 @@
+/* Passman design tokens — shared by the popup and every injected frame.
+   Design language aligned with ff_ProxyManager: dark-first neutral
+   surfaces, one blue accent gradient (matching the shield icon), and a
+   light theme switched via data-theme on <html> (set by js/lib/theme.js
+   before first paint). */
+
+:root {
+	--bg: #0d1015;
+	--card: #14181f;
+	--card-hover: #1a1f29;
+	--input-bg: #0f1218;
+	--border: rgba(255, 255, 255, 0.08);
+	--border-strong: rgba(255, 255, 255, 0.14);
+	--hover-wash: rgba(255, 255, 255, 0.05);
+	--hover-wash-strong: rgba(255, 255, 255, 0.1);
+	--text: #eceff3;
+	--muted: #8d94a1;
+	--placeholder: #4c5262;
+
+	--accent1: #5b9df6;
+	--accent2: #2f6fd0;
+	--grad: linear-gradient(135deg, var(--accent1), var(--accent2));
+	--accent-glow: rgba(72, 138, 235, 0.25);
+	--accent-glow-strong: rgba(72, 138, 235, 0.38);
+	--accent-faint: rgba(72, 138, 235, 0.14);
+	--accent-soft: rgba(72, 138, 235, 0.13);
+	--accent-softer: rgba(72, 138, 235, 0.07);
+	--accent-border: rgba(72, 138, 235, 0.32);
+	--accent-ring: rgba(72, 138, 235, 0.16);
+	--accent-text: #c3d6f2;
+	--on-accent: #ffffff;
+
+	--danger: #ff5d73;
+	--danger-soft: rgba(255, 93, 115, 0.12);
+	--danger-border: rgba(255, 93, 115, 0.4);
+	--success: #34d399;
+	--warning: #fbbf24;
+	--warning-soft: rgba(251, 191, 36, 0.12);
+	--warning-border: rgba(251, 191, 36, 0.4);
+
+	--radius: 9px;
+	--scrollbar: #2a3145;
+	--shadow-pop: 0 10px 30px rgba(0, 0, 0, 0.5);
+	color-scheme: dark;
+}
+
+/* --- light theme ---------------------------------------------------------
+   Neutral surfaces flip; the accent deepens a step so gradient text and
+   accent-tinted controls keep their contrast on white. */
+:root[data-theme="light"] {
+	--bg: #eef1f6;
+	--card: #ffffff;
+	--card-hover: #f0f3f9;
+	--input-bg: #f4f6fa;
+	--border: rgba(18, 26, 38, 0.1);
+	--border-strong: rgba(18, 26, 38, 0.2);
+	--hover-wash: rgba(18, 26, 38, 0.05);
+	--hover-wash-strong: rgba(18, 26, 38, 0.09);
+	--text: #1d2634;
+	--muted: #68727f;
+	--placeholder: #9aa4b3;
+
+	--accent1: #3878dd;
+	--accent2: #2058b8;
+	--accent-glow: rgba(47, 111, 208, 0.2);
+	--accent-glow-strong: rgba(47, 111, 208, 0.3);
+	--accent-faint: rgba(47, 111, 208, 0.1);
+	--accent-soft: rgba(47, 111, 208, 0.12);
+	--accent-softer: rgba(47, 111, 208, 0.06);
+	--accent-border: rgba(47, 111, 208, 0.3);
+	--accent-ring: rgba(47, 111, 208, 0.18);
+	--accent-text: #2361c4;
+
+	--danger: #dd3450;
+	--danger-soft: rgba(221, 52, 80, 0.1);
+	--danger-border: rgba(221, 52, 80, 0.35);
+	--success: #0f9f6e;
+	--warning: #b45309;
+	--warning-soft: rgba(180, 83, 9, 0.1);
+	--warning-border: rgba(180, 83, 9, 0.35);
+
+	--scrollbar: #c2cad7;
+	--shadow-pop: 0 10px 30px rgba(18, 26, 38, 0.18);
+	color-scheme: light;
+}
