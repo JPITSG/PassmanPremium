@@ -462,14 +462,24 @@ var background = (function () {
     _self.minedForm = minedForm;
 
     function getMinedData(args, sender) {
-        //console.log('Fecthing  mined data for tab id', sender.tab.id)
         var senderUrl = sender.tab.url;
         var site = processURL(senderUrl, _self.settings.ignoreProtocol, _self.settings.ignoreSubdomain, _self.settings.ignorePath, _self.settings.ignorePort);
         if (!_self.settings) {
             return null;
         }
+        var mined = mined_data[sender.tab.id];
+        if (!mined) {
+            return mined;
+        }
+        // the tab may have navigated elsewhere since the login was
+        // submitted — only offer the save prompt while it is still on the
+        // mined site (the entry is kept, so navigating back re-offers it)
+        var minedSite = processURL(mined.url, _self.settings.ignoreProtocol, _self.settings.ignoreSubdomain, _self.settings.ignorePath, _self.settings.ignorePort);
+        if (minedSite !== site) {
+            return null;
+        }
         if (!_self.settings.hasOwnProperty('ignored_sites')) {
-            return mined_data[sender.tab.id];
+            return mined;
         }
         var matches = _self.settings.ignored_sites.filter(function (item) {
             // an empty entry must never match every site (parity with findUrl)
@@ -479,7 +489,7 @@ var background = (function () {
         if (matches.length !== 0) {
             return null;
         }
-        return mined_data[sender.tab.id];
+        return mined;
     }
 
     _self.getMinedData = getMinedData;
@@ -868,6 +878,14 @@ var background = (function () {
                 displayLogoutIcons();
             }
         });
+    });
+
+    // a closed tab can never show its doorhanger again — don't keep its
+    // plaintext mined login (or pending doorhanger payload) for the rest
+    // of the session
+    API.tabs.onRemoved.addListener(function (tabId) {
+        delete mined_data[tabId];
+        delete doorhangerData[tabId];
     });
 
     displayLogoutIcons();
