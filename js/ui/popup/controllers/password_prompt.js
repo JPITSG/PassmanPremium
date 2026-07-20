@@ -71,6 +71,12 @@
                         $scope.inValidPassword = true;
                     }
                     $scope.$apply();
+                }).catch(function () {
+                    // a background failure is not a wrong password — just
+                    // unblock the form and show a generic error
+                    $scope.saving = false;
+                    $scope.genericError = true;
+                    $scope.$apply();
                 });
 
             };
@@ -87,6 +93,11 @@
                     setTimeout(function () {
                         window.close();
                     }, 500);
+                }).catch(function () {
+                    // reset failed — re-arm the confirm button instead of
+                    // leaving the prompt dead
+                    $scope.confirmReset = false;
+                    $scope.$apply();
                 });
             };
 

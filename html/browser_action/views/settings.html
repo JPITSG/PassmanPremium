@@ -113,6 +113,9 @@
                     <label for="enable_debug" class="switch-label">{{'enable_debug' | translate}}</label>
                 </div>
             </div>
+            <div class="form-error" ng-show="errors.length > 0">
+                <div ng-repeat="error in errors">{{error}}</div>
+            </div>
             <div class="form-actions">
                 <button class="md-btn" ng-click="cancel()">
                     <span>{{'cancel' | translate}}</span>

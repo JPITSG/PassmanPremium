@@ -69,7 +69,13 @@
                             window.location = '#!/';
                         }
                         $scope.saving = false;
+                        $scope.$apply();
                     }, 750);
+                }).catch(function () {
+                    // a background failure must never leave the button dead
+                    $scope.saving = false;
+                    $scope.errors.push(API.i18n.getMessage('error'));
+                    $scope.$apply();
                 });
             };
 

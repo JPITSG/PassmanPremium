@@ -38,6 +38,12 @@
                 method: "getCredentialByGuid",
                 args: $routeParams.guid
             }).then(function (credential) {
+                if (!credential) {
+                    // the credential is gone (deleted elsewhere, vault
+                    // re-locked, or a hand-edited route) — nothing to edit
+                    window.location = '#!/';
+                    return;
+                }
                 $scope.canEdit = true;
                 if(credential.hasOwnProperty('acl')) {
                     var permissions = new SharingACL(credential.acl.permissions.permission);
@@ -166,6 +172,12 @@
                         $rootScope.$broadcast('status', API.i18n.getMessage('credential_updated'));
                     }
                     window.location = '#!/';
+                }).catch(function () {
+                    // a background failure must never leave the spinner on
+                    $scope.saving = false;
+                    $scope.credential.password_repeat = $scope.credential.password;
+                    $scope.formError = API.i18n.getMessage('error');
+                    $scope.$apply();
                 });
 
             };
@@ -184,6 +196,10 @@
                         }, 1900);
                     });
 
+                }).catch(function () {
+                    $scope.saving = false;
+                    $scope.formError = API.i18n.getMessage('error');
+                    $scope.$apply();
                 });
             };
 

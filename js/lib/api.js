@@ -21,9 +21,9 @@ window.PAPI = (function () {
             api_request(account, '/api/v2/vaults/' + account.vault.guid, 'GET', null, callback);
         },
         credentialsSet: function () {
-            var hostSet = (typeof this.host !== 'undefined');
-            var usernameSet = (this.username !== 'undefined');
-            var passwordSet = (typeof this.password !== 'undefined');
+            var hostSet = (typeof this.host !== 'undefined' && this.host !== '');
+            var usernameSet = (typeof this.username !== 'undefined' && this.username !== '');
+            var passwordSet = (typeof this.password !== 'undefined' && this.password !== '');
             return (hostSet && usernameSet && passwordSet);
         },
         decryptString: function (ciphertext, _key) {

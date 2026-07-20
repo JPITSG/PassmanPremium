@@ -51,7 +51,6 @@ var background = (function () {
             // the master password is entered again. getSettings() re-reads
             // storage and only restores the locked-state flags.
             local_credentials = [];
-            local_vault = [];
             mined_data = [];
             doorhangerData = {};
             _self.settings = {isInstalled: 1};
@@ -87,7 +86,6 @@ var background = (function () {
 
 
     var local_credentials = [];
-    var local_vault = [];
     // bumped on every getCredentials run; callbacks from superseded runs
     // must not touch the live credential list (the newest full load wins)
     var credentialLoadCycle = 0;
@@ -218,7 +216,6 @@ var background = (function () {
         MasterPasswordStore.clear();
         _self.settings = {};
         local_credentials = [];
-        local_vault = [];
         doorhangerData = {};
         mined_data = [];
         testMasterPasswordAgainst = undefined;
@@ -236,7 +233,6 @@ var background = (function () {
         // leave no credentials behind (the loop below would never reassign)
         if (!_self.settings.accounts || _self.settings.accounts.length === 0) {
             local_credentials = [];
-            local_vault = [];
             return;
         }
         //console.log('Loading vault with the following settings: ', settings);
@@ -281,7 +277,6 @@ var background = (function () {
 
                     }
                     delete vault.credentials;
-                    local_vault = vault;
                     local_credentials = tmpList;
 
                     getSharedCredentials(inner_account, cycle);
@@ -671,12 +666,6 @@ var background = (function () {
 
     self.injectCreateCredential = injectCreateCredential;
 
-    function isVaultKeySet() {
-        return (_self.settings.vault_password !== null);
-    }
-
-    _self.isVaultKeySet = isVaultKeySet;
-
     function isAutoFillEnabled() {
         if (!_self.settings.hasOwnProperty('enableAutoFill')) {
             return true;
@@ -749,7 +738,7 @@ var background = (function () {
         getRuntimeSettings: true, getSetting: true, getSettings: true,
         ignoreSite: true, ignoreURL: true, injectCreateCredential: true,
         isAutoFillEnabled: true, isAutoSubmitEnabled: true, isMasterPasswordValid: true,
-        isVaultKeySet: true, minedForm: true, passToParent: true, resetSettings: true,
+        minedForm: true, passToParent: true, resetSettings: true,
         saveCredential: true, saveMined: true, saveSettings: true, searchCredential: true,
         setDoorhangerData: true, setMasterPassword: true, updateCredentialUrl: true,
         updateCredentialUrlDoorhanger: true
