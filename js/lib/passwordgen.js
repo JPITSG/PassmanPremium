@@ -46,9 +46,11 @@ function generatePassword (r, t, n, e, o, i, p, g) {
     if (e && i > 0)for (d = 0; i > d; d++)f[f.length] = "D"
     if (o && s > 0)for (d = 0; s > d; d++)f[f.length] = "S"
     for (; f.length < r;)f[f.length] = "A"
+    // with every character class disabled the combined pool stays empty —
+    // fall back to lowercase rather than returning an empty password
     for (f.sort(function () {
         return 2 * get_random(0, 1) - 1
-    }), h = "", u = "abcdefghjkmnpqrstuvwxyz", p || (u += "ilo"), n && (h += u), l = "ABCDEFGHJKMNPQRSTUVWXYZ", p || (l += "ILO"), t && (h += l), c = "23456789", p || (c += "10"), e && (h += c), v = "!@#$%^&*", o && (h += v), w = "", y = 0; r > y; y++) {
+    }), h = "", u = "abcdefghjkmnpqrstuvwxyz", p || (u += "ilo"), n && (h += u), l = "ABCDEFGHJKMNPQRSTUVWXYZ", p || (l += "ILO"), t && (h += l), c = "23456789", p || (c += "10"), e && (h += c), v = "!@#$%^&*", o && (h += v), h || (h = u), w = "", y = 0; r > y; y++) {
         switch (f[y]) {
             case"L":
                 m = u;
