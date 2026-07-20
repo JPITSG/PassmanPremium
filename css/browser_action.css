@@ -328,6 +328,13 @@ h1.brand-title {
 	margin-bottom: 6px;
 }
 
+/* small helper line under a field label (e.g. "0 disables refresh") */
+.field-hint {
+	font-size: 11px;
+	color: var(--muted);
+	margin: -2px 0 6px;
+}
+
 .input-row {
 	display: flex;
 	align-items: stretch;

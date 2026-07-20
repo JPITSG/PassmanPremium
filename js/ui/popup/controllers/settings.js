@@ -47,6 +47,14 @@
             };
             $scope.errors = [];
 
+            // digits only — anything else typed or pasted into the
+            // refresh interval is stripped on the fly
+            $scope.$watch('settings.refreshTime', function (val) {
+                if (typeof val === 'string' && /[^0-9]/.test(val)) {
+                    $scope.settings.refreshTime = val.replace(/[^0-9]/g, '');
+                }
+            });
+
             $scope.tabActive =  ($routeParams.tab) ? parseInt($routeParams.tab) : 1;
             $scope.extension = API.runtime.getManifest().name + ' ' + API.runtime.getManifest().version;
 
@@ -62,6 +70,12 @@
             $scope.saveSettings = function (redirect) {
                 $scope.errors = [];
                 var settings = angular.copy($scope.settings);
+                // the refresh interval is stored as a non-negative integer
+                // — 0 disables the background refresh ticker
+                settings.refreshTime = parseInt(settings.refreshTime, 10);
+                if (isNaN(settings.refreshTime) || settings.refreshTime < 0) {
+                    settings.refreshTime = 0;
+                }
                 $scope.saving = true;
                 API.runtime.sendMessage(API.runtime.id, {method: "saveSettings", args: settings}).then(function () {
                     setTimeout(function () {

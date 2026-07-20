@@ -163,6 +163,10 @@
     "message": "Refresh interval (seconds)",
     "description": "Password"
   },
+  "refresh_timer_hint": {
+    "message": "How often the vault syncs in the background. Set to 0 to disable automatic refresh.",
+    "description": "Hint shown above the refresh interval field"
+  },
   "ignore_protocol": {
     "message": "Ignore protocol when matching sites",
     "description": "Ignore protocol for site matching"
