@@ -44,9 +44,9 @@ $j(document).ready(function () {
 
         fillPassword(username, login.password);
 
-        if (activeForm) {
+        if (allowSubmit) {
             API.runtime.sendMessage(API.runtime.id, {method: 'isAutoSubmitEnabled'}).then(function (isEnabled) {
-                if (isEnabled && allowSubmit) {
+                if (isEnabled) {
                     submitLoginForm(username);
                 }
             });
@@ -104,14 +104,25 @@ $j(document).ready(function () {
     }
 
     function submitLoginForm(username) {
-        if (!activeForm) {
-            // @TODO detect login form on the current page
+        // activeForm is only set once the picker was used; on the automatic
+        // autofill path fall back to the form of the first detected login
+        // field, or the setting would never be able to fire there
+        var form = activeForm;
+        if (!form) {
+            var loginFields = getLoginFields();
+            if (loginFields.length > 0) {
+                form = getFormFromElement(loginFields[0][1]);
+            }
+        }
+        if (!form) {
             return;
         }
 
-        var formEl = $j(activeForm).closest('form');
+        var formEl = $j(form).closest('form');
         var iframeUrl = API.extension.getURL('/html/inject/auto_login.html');
-        $j('#loginPopupIframe').remove();
+        // the overlay carries the class loginPopupIframe (no id) — the old
+        // id selector could never match and stacked overlays
+        $j('.loginPopupIframe').remove();
         var loginPopup = $j('<iframe class="loginPopupIframe" scrolling="no" frameborder="0" src="' + iframeUrl + '"></iframe>');
         var padding = parseInt($j(formEl).css('padding').replace('px', ''));
         var margin = parseInt($j(formEl).css('margin').replace('px', ''));
@@ -126,11 +137,15 @@ $j(document).ready(function () {
         loginPopup.css('top', Math.floor($j(formEl).offset().top - padding - margin));
         removePasswordPicker();
         $j(document.body).prepend(loginPopup);
-        API.runtime.sendMessage(API.runtime.id, {'setIframeUsername': username}).then(function () {
-            $j(formEl).submit();
-            setTimeout(function () {
-                loginPopup.remove();
-            }, 2000);
+        // the overlay can only receive its username after it has loaded and
+        // registered its listener — sending it right after prepend lost it
+        loginPopup.on('load', function () {
+            API.runtime.sendMessage(API.runtime.id, {'setIframeUsername': username}).then(function () {
+                $j(formEl).trigger('submit');
+                setTimeout(function () {
+                    loginPopup.remove();
+                }, 2000);
+            });
         });
     }
 
@@ -349,7 +364,10 @@ $j(document).ready(function () {
                     if (logins.length === 1) {
                         API.runtime.sendMessage(API.runtime.id, {method: 'isAutoFillEnabled'}).then(function (isEnabled) {
                             if (isEnabled && !flagFilledForm) {
-                                enterLoginDetails(logins[0], false);
+                                // automatic fill of a single match — the
+                                // only path allowed to auto-submit (and
+                                // only when the user enabled it)
+                                enterLoginDetails(logins[0], true);
                                 flagFilledForm = true;
                             }
                         });
