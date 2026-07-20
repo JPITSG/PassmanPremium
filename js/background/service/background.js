@@ -87,6 +87,9 @@ var background = (function () {
 
     var local_credentials = [];
     var local_vault = [];
+    // bumped on every getCredentials run; callbacks from superseded runs
+    // must not touch the live credential list (the newest full load wins)
+    var credentialLoadCycle = 0;
     var encryptedFieldSettings = ['accounts'];
     _self.settings = {};
     _self.ticker = null;
@@ -222,6 +225,7 @@ var background = (function () {
             return;
         }
         //console.log('Loading vault with the following settings: ', settings);
+        var cycle = ++credentialLoadCycle;
         var tmpList = [];
 
         for (var i = 0; i < _self.settings.accounts.length; i++) {
@@ -229,6 +233,10 @@ var background = (function () {
             /* jshint ignore:start */
             (function (inner_account) {
                 PAPI.getVault(inner_account, function (vault) {
+                    if (cycle !== credentialLoadCycle) {
+                        // a newer load superseded this one — drop its results
+                        return;
+                    }
                     if (vault.hasOwnProperty('error')) {
                         return;
                     }
@@ -242,8 +250,13 @@ var background = (function () {
                         var usedKey = key;
                         //Shared credentials are not implemented yet
                         if (credential.hasOwnProperty('shared_key') && credential.shared_key) {
-                            usedKey = PAPI.decryptString(credential.shared_key, key);
-
+                            try {
+                                usedKey = PAPI.decryptString(credential.shared_key, key);
+                            } catch (e) {
+                                // one corrupt shared_key must not abort the
+                                // whole account load — skip that credential
+                                continue;
+                            }
                         }
                         credential = PAPI.decryptCredential(credential, usedKey);
                         credential.account = inner_account;
@@ -256,7 +269,7 @@ var background = (function () {
                     local_vault = vault;
                     local_credentials = tmpList;
 
-                    getSharedCredentials(inner_account);
+                    getSharedCredentials(inner_account, cycle);
 
 
                 });
@@ -267,18 +280,38 @@ var background = (function () {
 
     _self.getCredentials = getCredentials;
 
-    function getSharedCredentials(account) {
+    function getSharedCredentials(account, cycle) {
         PAPI.getCredendialsSharedWithUs(account, account.vault.guid, function (credentials) {
+            if (cycle !== credentialLoadCycle) {
+                // superseded by a newer load — it rebuilds the list itself
+                return;
+            }
             for (var i = 0; i < credentials.length; i++) {
                 var _shared_credential = credentials[i];
                 var _shared_credential_data;
-                var sharedKey = PAPI.decryptString(_shared_credential.shared_key, account.vault_password);
+                var sharedKey;
                 try {
+                    sharedKey = PAPI.decryptString(_shared_credential.shared_key, account.vault_password);
                     _shared_credential_data = PAPI.decryptSharedCredential(_shared_credential.credential_data, sharedKey);
                 } catch (e) {
-
+                    // skip the single broken entry, keep the rest of the batch
+                    continue;
                 }
                 if (_shared_credential_data) {
+                    // the same credential shared to several of the user's
+                    // vaults (or delivered twice) must not appear twice
+                    if (_shared_credential_data.guid) {
+                        var isDupe = false;
+                        for (var d = 0; d < local_credentials.length; d++) {
+                            if (local_credentials[d].guid === _shared_credential_data.guid) {
+                                isDupe = true;
+                                break;
+                            }
+                        }
+                        if (isDupe) {
+                            continue;
+                        }
+                    }
                     delete _shared_credential.credential_data;
                     _shared_credential_data.acl = _shared_credential;
                     _shared_credential_data.acl.permissions = new SharingACL(_shared_credential_data.acl.permissions);
