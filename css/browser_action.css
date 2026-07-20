@@ -879,7 +879,11 @@ button:focus-visible,
 }
 .search-box input { padding-left: 34px; }
 
-.search-view ~ .list { padding-top: 10px; }
+/* uniform 16px rhythm on the search view: above the box, below the box,
+   between results, and below the last result all match */
+.search-view ~ .list { padding-top: 16px; padding-bottom: 16px; }
+.search-view ~ .list .list-item { margin-bottom: 16px; }
+.search-view ~ .list .list-item:last-child { margin-bottom: 0; }
 
 /* --- setup wizard / add account ------------------------------------------ */
 
