@@ -211,16 +211,24 @@ $j(document).ready(function () {
             left = passwordFieldPos.left;
         }
 
+        // the iframe body keeps 8px of transparent padding around the card
+        // as room for its shadow, so the frame must start 8px left of the
+        // anchor field and run 16px wider than it for the visible card to
+        // line up exactly with the field's edges (276 floor: below that the
+        // tab bar no longer fits)
+        var anchorField = (loginFieldPos && loginFieldVisible) ? loginField : passwordField;
+        var frameWidth = Math.max(276, Math.round(anchorField.outerWidth()) + 16);
+
         var pickerUrl = API.extension.getURL('/html/inject/password_picker.html');
 
-        var picker = $j('<iframe class="passwordPickerIframe" scrolling="no" height="385" width="350" frameborder="0" src="' + pickerUrl + '"></iframe>');
+        var picker = $j('<iframe class="passwordPickerIframe" scrolling="no" height="385" frameborder="0" src="' + pickerUrl + '"></iframe>');
         picker.css('position', 'absolute');
-        picker.css('left', left);
+        picker.css('width', frameWidth);
+        picker.css('left', left - 8);
         picker.css('z-index', maxZ + 10);
         picker.css('top', top);
         $j('body').prepend($j(picker));
         activeForm = form;
-        // picker.css('width', $j(form).width());
         $j('.passwordPickerIframe:not(:last)').remove();
     }
 
