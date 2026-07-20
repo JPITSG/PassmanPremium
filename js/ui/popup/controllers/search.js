@@ -37,6 +37,12 @@
             $scope.found_credentials = false;
             $scope.searchText = '';
             $scope.search = function () {
+                // empty query must not dump the whole vault — reset to the
+                // initial state instead (ng-change keeps the model current)
+                if (!$scope.searchText) {
+                    $scope.found_credentials = false;
+                    return;
+                }
                 API.runtime.sendMessage(API.runtime.id, {
                     'method': 'searchCredential',
                     args: $scope.searchText

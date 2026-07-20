@@ -570,6 +570,11 @@ var background = (function () {
     _self.saveMined = saveMined;
 
     function searchCredential(searchText) {
+        // an empty (or non-string) query would match every credential via
+        // indexOf('') — never serve the whole vault on a blank search
+        if (!searchText || typeof searchText !== 'string') {
+            return [];
+        }
         searchText = searchText.toLowerCase();
         var searchFields = ['label', 'username', 'email', 'url', 'description'];
         var results = [];
