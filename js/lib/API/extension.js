@@ -23,11 +23,11 @@ API.extension = {
     },
     isAllowedIncognitoAccess: function() {
         if (API.promise) {
-            return API.extension.isAllowedIncognitoAccess();
+            return API.api.extension.isAllowedIncognitoAccess();
         }
         else {
             return new C_Promise(function(){
-                API.extension.isAllowedIncognitoAccess((function(data){
+                API.api.extension.isAllowedIncognitoAccess((function(data){
                     this.call_then(data);
                 }).bind(this));
             });
@@ -46,7 +46,7 @@ API.extension = {
         }
     },
     setUpdateUrlData: function(data) {
-        API.extension.setUpdateUrlData(data);
+        API.api.extension.setUpdateUrlData(data);
     },
     
     

@@ -19,7 +19,7 @@ API.Storage = function() {
                 if (API.promise) {
                     localStorage.get(key).then((function(item){
                         /* jshint ignore:start */
-                        if (typeof key === "[object Array]") {
+                        if (Array.isArray(key)) {
                             this.call_then(item);
                         }
 
@@ -39,7 +39,7 @@ API.Storage = function() {
                 else{
                     localStorage.get(key, (function(item){
                         /* jshint ignore:start */
-                        if (typeof key === "[object Array]") {
+                        if (Array.isArray(key)) {
                             this.call_then(item);
                         }
 
@@ -56,8 +56,21 @@ API.Storage = function() {
                 }
             });
         },
-        
+
         set: function(key, value) {
+            // setting null means "remove this key" — storage backends
+            // persist a literal null otherwise, so cleared values never
+            // actually went away
+            if (value === null) {
+                if (API.promise) {
+                    return localStorage.remove(key);
+                }
+                return new C_Promise(function() {
+                    localStorage.remove(key, (function(){
+                        this.call_then();
+                    }).bind(this));
+                });
+            }
             var o = {};
             o[key] = value;
             

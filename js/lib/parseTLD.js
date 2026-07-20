@@ -4,6 +4,10 @@ var parse_host = function(host){
         throw new Error('No TLDs!');
     }
 
+    // a trailing dot (FQDN form, e.g. "example.com.") shifts every label
+    // and broke the TLD lookup — strip it before splitting
+    host = host.replace(/\.+$/, '');
+
     var parts = host.split(".");
     var stack = "";
     var tld_level = 1; //unknown tld are 1st level

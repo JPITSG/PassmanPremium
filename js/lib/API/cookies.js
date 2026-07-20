@@ -56,14 +56,15 @@ API.cookies = {
             });
         }
     },
-    getAllCookieStores: function (details) {
+    getAllCookieStores: function () {
         if (API.promise) {
-            return API.api.cookies.getAllCookieStores(details);
+            // takes no details argument — passing one throws on Firefox
+            return API.api.cookies.getAllCookieStores();
         }
         else {
             return new C_Promise(function () {
-                API.api.cookies.getAllCookieStores(details, (function (cookie) {
-                    this.call_then(cookie);
+                API.api.cookies.getAllCookieStores((function (cookieStores) {
+                    this.call_then(cookieStores);
                 }).bind(this));
             });
         }

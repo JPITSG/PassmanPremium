@@ -19,13 +19,15 @@ API.i18n = {
             });
         }
     },
-    detectLanguage: function() {
+    detectLanguage: function(text) {
         if (API.promise) {
-            return API.api.i18n.detectLanguage();
+            // text is a required schema parameter on Firefox — calling
+            // this without it throws "Incorrect argument types"
+            return API.api.i18n.detectLanguage(text);
         }
         else {
             return new C_Promise(function(){
-                API.api.i18n.detectLanguage((function(isReliable, languages){
+                API.api.i18n.detectLanguage(text, (function(isReliable, languages){
                     this.call_then(isReliable, languages);
                 }).bind(this));
             });
