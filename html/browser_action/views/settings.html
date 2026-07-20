@@ -26,13 +26,13 @@
 
             <div class="ignored_sites">
                 <label>{{'ignored_sites' | translate}}</label>
-                <ul class="ignored_sites">
+                <ul class="ignored_sites" ng-show="settings.ignored_sites.length > 0">
                     <li ng-repeat="site in settings.ignored_sites">
                         <span class="site">{{site}}</span>
                         <i class="mdi mdi-delete" ng-click="removeSite(site)"></i>
                     </li>
-                    <li ng-show="settings.ignored_sites.length === 0">{{'no_sites_ignored' | translate}}</li>
                 </ul>
+                <div class="section-empty" ng-show="settings.ignored_sites.length === 0">{{'no_sites_ignored' | translate}}</div>
                 <div class="field" ng-show="settings.default_vault != ''">
                     <input type="text"
                            ng-model="ignoreSite" ng-enter="addSite(ignoreSite)"
