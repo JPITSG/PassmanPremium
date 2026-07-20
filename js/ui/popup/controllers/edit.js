@@ -66,26 +66,24 @@
                 return password;
             }
 
-            $scope.pw_settings = null;
-            function getPasswordGenerationSettings(cb) {
-                var default_settings = {
-                    'length': 12,
-                    'useUppercase': true,
-                    'useLowercase': true,
-                    'useDigits': true,
-                    'useSpecialChars': true,
-                    'minimumDigitCount': 3,
-                    'avoidAmbiguousCharacters': false,
-                    'requireEveryCharType': true
-                };
+            var default_pw_settings = {
+                'length': 12,
+                'useUppercase': true,
+                'useLowercase': true,
+                'useDigits': true,
+                'useSpecialChars': true,
+                'minimumDigitCount': 3,
+                'avoidAmbiguousCharacters': false,
+                'requireEveryCharType': true
+            };
+            // start from the defaults — generating before the stored
+            // settings finish loading must never read a null object
+            $scope.pw_settings = angular.copy(default_pw_settings);
+            function getPasswordGenerationSettings() {
                 storage.get('password_generator_settings').then(function (_settings) {
-                    if (!_settings) {
-                        _settings = default_settings;
+                    if (_settings) {
+                        $scope.pw_settings = _settings;
                     }
-
-                    $scope.pw_settings = _settings;
-                }).error(function () {
-                    $scope.pw_settings = default_settings;
                 });
             }
 

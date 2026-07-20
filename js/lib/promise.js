@@ -23,36 +23,69 @@
 function C_Promise(workload, context) {
     this.parent = context;
 
-    this.update = null;
-    this.finally = null;
-    this.error_function = null;
+    var thenCallbacks = [];
+    var progressCallbacks = [];
+    var errorCallbacks = [];
+    // the settled result is retained so a handler attached after the
+    // workload finished still fires — the old single-slot design silently
+    // dropped results (and earlier .then handlers) in that case
+    var settled = null;
+
+    function forEach(callbacks, args) {
+        for (var i = 0; i < callbacks.length; i++) {
+            try {
+                callbacks[i].apply(null, args);
+            } catch (e) {
+                if (callbacks === thenCallbacks && errorCallbacks.length) {
+                    // a throwing .then callback fails the promise like a
+                    // native one, instead of escaping as an unhandled
+                    // rejection inside the caller's own callback
+                    forEach(errorCallbacks, [e]);
+                } else {
+                    throw e;
+                }
+            }
+        }
+    }
+
+    function dispatch() {
+        if (!settled) {
+            return;
+        }
+        if (settled.type === 'then') {
+            forEach(thenCallbacks, settled.args);
+        } else {
+            forEach(errorCallbacks, settled.args);
+        }
+    }
+
     this.then = function (callback) {
-        this.finally = callback;
+        thenCallbacks.push(callback);
+        dispatch();
         return this;
     };
     this.progress = function (callback) {
-        this.update = callback;
+        progressCallbacks.push(callback);
         return this;
     };
     this.error = function (callback) {
-        this.error_function = callback;
+        errorCallbacks.push(callback);
+        dispatch();
         return this;
     };
-    this.call_then = function (data) {
-        if (this.finally !== null) {
-            this.finally(data);
-        }
+    this.call_then = function () {
+        settled = {type: 'then', args: Array.prototype.slice.call(arguments)};
+        dispatch();
     };
-    this.call_progress = function (data) {
-        if (this.update !== null) {
-            this.update(data);
-        }
+    this.call_progress = function () {
+        forEach(progressCallbacks, Array.prototype.slice.call(arguments));
     };
-    this.call_error = function (data) {
-        if (this.error_function !== null) {
-            this.error_function(data);
-        }
+    this.call_error = function () {
+        settled = {type: 'error', args: Array.prototype.slice.call(arguments)};
+        dispatch();
     };
 
-    setTimeout(workload.bind(this), 100);
+    // still async, but without the old arbitrary 100 ms penalty — handler
+    // registration can no longer be missed, so the delay has no purpose
+    setTimeout(workload.bind(this), 0);
 }

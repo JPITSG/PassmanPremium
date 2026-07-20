@@ -107,9 +107,20 @@ var background = (function () {
                 return;
             }
 
-            for (var i = 0; i < encryptedFieldSettings.length; i++) {
-                var field = encryptedFieldSettings[i];
-                _settings[field] = JSON.parse(PAPI.decryptString(_settings[field], master_password));
+            try {
+                for (var i = 0; i < encryptedFieldSettings.length; i++) {
+                    var field = encryptedFieldSettings[i];
+                    _settings[field] = JSON.parse(PAPI.decryptString(_settings[field], master_password));
+                }
+            } catch (e) {
+                // the active master password no longer matches the stored
+                // settings (stale auto-unlock, or settings re-encrypted
+                // under another password) — running on would leave the
+                // extension half-initialized with no signal, so lock and
+                // let the user unlock with the right password
+                console.error('Could not decrypt the stored settings, locking the extension', e);
+                setMasterPassword({password: null});
+                return;
             }
 
             _self.settings = _settings;
@@ -209,6 +220,8 @@ var background = (function () {
         local_credentials = [];
         local_vault = [];
         doorhangerData = {};
+        mined_data = [];
+        testMasterPasswordAgainst = undefined;
         master_password = null;
     }
 
