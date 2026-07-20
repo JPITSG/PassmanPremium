@@ -296,11 +296,30 @@ $j(document).ready(function () {
     _this.closeDoorhanger = closeDoorhanger;
 
     var flagFilledForm = false;
+    var initRanOnce = false;
     function initForms() {
+        var loginFields = getLoginFields();
+        // Mark newly appeared login fields: DOM mutations fire for every
+        // unrelated node insertion on dynamic pages, so the full round
+        // (settings + credential lookups, icons, bindings, fills) runs only
+        // on the first pass and when the login fields themselves change.
+        var fieldsChanged = false;
+        for (var m = 0; m < loginFields.length; m++) {
+            for (var f = 0; f < loginFields[m].length; f++) {
+                var fieldEl = loginFields[m][f];
+                if (fieldEl && !fieldEl.hasAttribute('data-passman-field')) {
+                    fieldEl.setAttribute('data-passman-field', '1');
+                    fieldsChanged = true;
+                }
+            }
+        }
+        if (initRanOnce && !fieldsChanged) {
+            return;
+        }
+        initRanOnce = true;
         API.runtime.sendMessage(API.runtime.id, {method: 'getRuntimeSettings'}).then(function (settings) {
             var enablePasswordPicker = settings.enablePasswordPicker;
             var url = window.location.href;
-            var loginFields = getLoginFields();
             if (!settings.hasOwnProperty('ignored_sites') || settings.ignored_sites.findUrl(url).length !== 0) {
                 return;
             }
@@ -312,9 +331,10 @@ $j(document).ready(function () {
                         createPasswordPicker(loginFields[i], form);
                     }
 
-                    //Password miner
+                    //Password miner — namespaced binding: re-runs replace the
+                    //handler instead of stacking a duplicate on every pass
                     /* jshint ignore:start */
-                    $j(form).submit((function (loginFields) {
+                    $j(form).off('submit.passman').on('submit.passman', (function (loginFields) {
                         return function () {
                             formSubmitted(loginFields);
                         };
