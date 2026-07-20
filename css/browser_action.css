@@ -1006,7 +1006,13 @@ button:focus-visible,
 /* --- edit credential: custom fields -------------------------------------- */
 
 .section-empty {
-	padding: 12px;
+	/* match the text inputs' height (9px padding + 13px text + borders
+	   ≈ 39px); flex keeps the note centered inside */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 39px;
+	padding: 4px 12px;
 	margin-bottom: 8px;
 	border: 1px dashed var(--border-strong);
 	border-radius: 8px;
