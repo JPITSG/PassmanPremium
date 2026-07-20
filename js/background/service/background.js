@@ -658,15 +658,38 @@ var background = (function () {
 
     _self.closeSetupTab = closeSetupTab;
 
+    // Explicit allowlist of the methods that may be invoked over runtime
+    // messages. This IIFE runs sloppy-mode, so _self resolves to the
+    // background window (background.js:5) — without this allowlist the
+    // dispatcher would reach ANY own function property of that window: every
+    // global declared by any background script (processURL, PAPI, $, …) and
+    // built-ins such as eval. Keep this list in sync when adding a public
+    // message handler.
+    var messageHandlers = {
+        clearMined: true, closeSetupTab: true, getActiveTab: true,
+        getCredentialByGuid: true, getCredentials: true, getCredentialsByUrl: true,
+        getDoorhangerData: true, getMasterPasswordSet: true, getMinedData: true,
+        getRuntimeSettings: true, getSetting: true, getSettings: true,
+        ignoreSite: true, ignoreURL: true, injectCreateCredential: true,
+        isAutoFillEnabled: true, isAutoSubmitEnabled: true, isMasterPasswordValid: true,
+        isVaultKeySet: true, minedForm: true, passToParent: true, resetSettings: true,
+        saveCredential: true, saveMined: true, saveSettings: true, searchCredential: true,
+        setDoorhangerData: true, setMasterPassword: true, updateCredentialUrl: true,
+        updateCredentialUrlDoorhanger: true
+    };
+
     API.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
         if (!msg || !msg.hasOwnProperty('method')) {
             return;
         }
+        // only accept messages from this extension's own contexts
+        if (sender && sender.id && sender.id !== API.runtime.id) {
+            return;
+        }
         var result = false;
-        // _self is the background window; only dispatch to methods this
-        // script registered itself (never inherited window members)
-        if (Object.prototype.hasOwnProperty.call(_self, msg.method) && typeof _self[msg.method] === 'function') {
+        if (Object.prototype.hasOwnProperty.call(messageHandlers, msg.method) &&
+            typeof _self[msg.method] === 'function') {
             result = _self[msg.method](msg.args, sender);
         }
 
