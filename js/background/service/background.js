@@ -171,20 +171,26 @@ var background = (function () {
     _self.getSetting = getSetting;
 
     function saveSettings(settings, cb) {
-        for (var i = 0; i < encryptedFieldSettings.length; i++) {
-            var field = encryptedFieldSettings[i];
-            settings[field] = PAPI.encryptString(JSON.stringify(settings[field]), master_password);
-        }
-
         if (!settings.hasOwnProperty('ignored_sites')) {
             settings.ignored_sites = [];
+        }
+
+        // encrypt a copy, never the live object: the runtime (and callers
+        // re-saving _self.settings) keeps plaintext, so the old in-place
+        // encryption left encrypted accounts behind until the storage
+        // round-trip restored them — a second save in that window
+        // double-encrypted accounts and silently emptied the vault
+        var storedSettings = Object.assign({}, settings);
+        for (var i = 0; i < encryptedFieldSettings.length; i++) {
+            var field = encryptedFieldSettings[i];
+            storedSettings[field] = PAPI.encryptString(JSON.stringify(settings[field]), master_password);
         }
 
         //window.settings contains the run-time settings
         _self.settings = settings;
 
 
-        storage.set('settings', settings).then(function () {
+        storage.set('settings', storedSettings).then(function () {
             getSettings();
         });
 
