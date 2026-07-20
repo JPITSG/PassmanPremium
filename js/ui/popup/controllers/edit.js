@@ -128,7 +128,12 @@
             $scope.generatePassword = function () {
                 var new_password = genPwd($scope.pw_settings);
                 $scope.credential.password = new_password;
-                $scope.credential.password_repeat = new_password;
+                // a freshly generated password must be confirmed
+                // consciously — clear the repeat box instead of silently
+                // mirroring the new value into it
+                if ($scope.credential.password_repeat) {
+                    $scope.credential.password_repeat = '';
+                }
                 $timeout(function () {
                     if (round < 10) {
                         $scope.generatePassword();
