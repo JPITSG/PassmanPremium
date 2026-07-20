@@ -13,9 +13,14 @@ $(document).ready(function () {
         storage.get('activeTab').then(function (name) {
             if (name && name !== '') {
                 // makeTabActive(name);
-                API.runtime.sendMessage(API.runtime.id, {method: "getActiveTab", args: {returnFn: "returnActiveTab"}});
             }
+        }).error(function () {
+            // fresh install — no stored tab; nothing to restore
         });
+        // load the current tab's credentials unconditionally: a missing
+        // (fresh install) or poisoned activeTab key must not leave the
+        // picker empty and the ignore buttons dead
+        API.runtime.sendMessage(API.runtime.id, {method: "getActiveTab", args: {returnFn: "returnActiveTab"}});
 
     });
 
@@ -241,6 +246,11 @@ $(document).ready(function () {
 
     picker.find('.tab').click(function () {
         var name = $(this).attr('data-name');
+        // the close button carries the .tab class but no data-name — let its
+        // own handler close the picker instead of poisoning activeTab
+        if (!name) {
+            return;
+        }
         storage.set('activeTab', name).then(function (r) {
             makeTabActive(name);
             if(name === 'search'){

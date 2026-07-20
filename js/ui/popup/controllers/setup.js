@@ -94,11 +94,20 @@
                     });
                 },
                 vault: function (callback) {
+                    var decrypted = '';
                     try {
-                        PAPI.decryptString($scope.settings.default_vault.challenge_password, $scope.settings.vault_password);
-                        callback(true);
+                        decrypted = PAPI.decryptString($scope.settings.default_vault.challenge_password, $scope.settings.vault_password);
                     }
                     catch (e) {
+                        // handled below — anything that yields no plaintext fails
+                    }
+                    // decryptString returns '' without throwing when the key or
+                    // the ciphertext is empty (empty password, or no vault
+                    // selected because the server has none) — only a non-empty
+                    // result proves the password actually matched
+                    if (decrypted) {
+                        callback(true);
+                    } else {
                         $scope.errors.push(API.i18n.getMessage('invalid_vault_password'));
                         callback(false);
                     }
