@@ -880,10 +880,12 @@ button:focus-visible,
 .search-box input { padding-left: 34px; }
 
 /* uniform 16px rhythm on the search view: above the box, below the box,
-   between results, and below the last result all match */
-.search-view ~ .list { padding-top: 16px; padding-bottom: 16px; }
+   between results, and below the last result all match. The bottom gap
+   lives on the last item's margin (not the container's padding), so the
+   empty view — just the input — keeps the same 16px below it */
+.search-view ~ .list { padding: 16px 14px 0; }
 .search-view ~ .list .list-item { margin-bottom: 16px; }
-.search-view ~ .list .list-item:last-child { margin-bottom: 0; }
+.search-view ~ .list .list-item:last-child { margin-bottom: 16px; }
 
 /* --- setup wizard / add account ------------------------------------------ */
 
