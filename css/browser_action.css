@@ -351,6 +351,7 @@ h1.brand-title {
 input[type="text"], input[type="password"], input[type="number"],
 select, textarea {
 	font-size: 13px;
+	line-height: 19px;
 	font-family: inherit;
 	padding: 9px 11px;
 	display: block;
@@ -1010,8 +1011,8 @@ button:focus-visible,
 /* --- edit credential: custom fields -------------------------------------- */
 
 .section-empty {
-	/* match the text inputs' height (9px padding + 13px text + borders
-	   ≈ 39px); flex keeps the note centered inside */
+	/* exactly the text inputs' height: 9px padding + 19px line-height
+	   + 9px padding + 2px border = 39px; flex keeps the note centered inside */
 	display: flex;
 	align-items: center;
 	justify-content: center;
