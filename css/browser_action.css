@@ -235,10 +235,8 @@ h1.brand-title {
 	   the glyph and knocks the letter off optical center — line-height 1
 	   keeps it dead center in the 34px box */
 	line-height: 1;
-	/* the 20px metric box centers, but the cap glyph's ink sits ~0.5px
-	   above its middle in this font — nudge it down half a pixel
-	   (measured: dy goes from -0.44px to +0.06px) */
-	padding-top: 0.5px;
+	padding-bottom: 2px;
+	padding-left: 1px;
 	text-transform: uppercase;
 }
 
