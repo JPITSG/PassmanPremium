@@ -229,8 +229,12 @@ h1.brand-title {
 	background: var(--accent-softer);
 	border: 1px solid var(--accent-border);
 	color: var(--accent-text);
-	font-size: 14px;
+	font-size: 17px;
 	font-weight: 700;
+	/* the inherited 1.45 line-height adds half-leading above and below
+	   the glyph and knocks the letter off optical center — line-height 1
+	   keeps it dead center in the 34px box */
+	line-height: 1;
 	text-transform: uppercase;
 }
 
