@@ -245,11 +245,6 @@ $(document).ready(function () {
         picker.find('.tab-content').children().hide();
         picker.find('.tab-' + name + '-content').show();
         picker.find('.tab.' + name).addClass('active');
-        // the search and list panels drop the container's bottom padding so
-        // the gap below the search box / last entry matches the gap above
-        picker.find('.tab-content')
-            .toggleClass('search-active', name === 'search')
-            .toggleClass('list-active', name === 'list');
     };
 
     // re-clicking the active search tab must not blur the search input —
