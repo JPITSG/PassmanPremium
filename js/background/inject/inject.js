@@ -234,6 +234,14 @@ $j(document).ready(function () {
         }
     }
 
+    // the picker icon is a background image on the field, so there is no
+    // element to hover — hit-test the same right-side region the click
+    // handler uses and swap in a pointer cursor while over the icon
+    function onFormIconHover(e) {
+        var overIcon = (e.data.width - e.offsetX) < e.data.height;
+        $j(this).css('cursor', overIcon ? 'pointer' : '');
+    }
+
     function createFormIcon(el, form) {
         var offset = el.offset();
         var width = el.width();
@@ -249,6 +257,8 @@ $j(document).ready(function () {
 
         $j(el).unbind('click', onFormIconClick);
         $j(el).click({width: width, height: height, form: form}, onFormIconClick);
+        $j(el).unbind('mousemove', onFormIconHover);
+        $j(el).mousemove({width: width, height: height}, onFormIconHover);
     }
 
     function createPasswordPicker(form) {
