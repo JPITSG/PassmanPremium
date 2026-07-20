@@ -155,16 +155,34 @@
                 }, 10);
             };
 
-            var handleCheck = function (resultUrl) {
-                $scope.settings.nextcloud_host = resultUrl;
-            };
-
             $scope.isHTTP = function (url) {
                 return HttpsTest.isHTTP(url);
             };
 
             $scope.checkHost = function () {
-                HttpsTest.test($scope.settings.nextcloud_host).then(handleCheck, handleCheck);
+                var probed = $scope.settings.nextcloud_host;
+                $scope.httpsUnreachable = false;
+                HttpsTest.test(probed).then(function (resultUrl) {
+                    // the user may have kept typing while the probe ran —
+                    // only write back when the field is unchanged
+                    if ($scope.settings.nextcloud_host === probed) {
+                        $scope.settings.nextcloud_host = resultUrl;
+                    }
+                }, function () {
+                    // HTTPS unreachable — never downgrade silently; falling
+                    // back to cleartext http is the user's explicit choice
+                    if ($scope.settings.nextcloud_host === probed) {
+                        $scope.httpsUnreachable = true;
+                    }
+                });
+            };
+
+            $scope.usePlainHttp = function () {
+                if ($scope.settings.nextcloud_host.match(/^https?:\/\//)) {
+                    return;
+                }
+                $scope.settings.nextcloud_host = 'http://' + $scope.settings.nextcloud_host;
+                $scope.httpsUnreachable = false;
             };
 
             $scope.finished = function () {

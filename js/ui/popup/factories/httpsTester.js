@@ -16,13 +16,15 @@
                 deferred.resolve(url);
                 return deferred.promise;
             }
-            // first test with https
+            // first test with https — give slow servers a fair chance;
+            // 500 ms used to misdetect healthy HTTPS hosts and downgrade
+            // them to cleartext http
             var protocol = 'https://';
 
             var req = {
                 method: 'GET',
                 url: protocol+url,
-                timeout: 500
+                timeout: 5000
             };
 
             $http(req).then(function () {
@@ -30,9 +32,9 @@
                     deferred.resolve(protocol + url);
                 },
                 function () {
-                    protocol = 'http://';
-                    // we don't have https
-                    deferred.reject(protocol + url);
+                    // no https — the caller must not downgrade on its own;
+                    // continuing over http is the user's explicit choice
+                    deferred.reject();
                 });
             return deferred.promise;
         };

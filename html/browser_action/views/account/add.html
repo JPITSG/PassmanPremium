@@ -5,6 +5,10 @@
             <span class="field-label">{{'server_url' | translate}}</span>
             <input type="text" ng-model="settings.nextcloud_host" ng-blur="checkHost()" required>
             <div class="text-danger" ng-if="isHTTP(settings.nextcloud_host)" style="margin-top: 5px;">{{ 'http_warning' | translate}}</div>
+            <div class="text-danger" ng-if="httpsUnreachable" style="margin-top: 5px;">
+                {{ 'https_unreachable' | translate }}
+                <a ng-click="usePlainHttp()" style="cursor: pointer; text-decoration: underline;">{{ 'use_http_anyway' | translate }}</a>
+            </div>
         </div>
         <div class="field">
             <span class="field-label">{{'username' | translate}}</span>
