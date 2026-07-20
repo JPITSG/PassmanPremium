@@ -423,7 +423,8 @@ var background = (function () {
             return mined_data[sender.tab.id];
         }
         var matches = _self.settings.ignored_sites.filter(function (item) {
-            return typeof item === 'string' && site.indexOf(item) > -1;
+            // an empty entry must never match every site (parity with findUrl)
+            return typeof item === 'string' && item !== '' && site.indexOf(item) > -1;
         });
 
         if (matches.length !== 0) {
@@ -435,7 +436,10 @@ var background = (function () {
     _self.getMinedData = getMinedData;
 
     function clearMined(args, sender) {
-        delete mined_data[sender.tab.id];
+        // ignoreSite calls this without a sender — guard so it can't throw
+        if (sender && sender.tab) {
+            delete mined_data[sender.tab.id];
+        }
     }
 
     _self.clearMined = clearMined;
@@ -448,7 +452,7 @@ var background = (function () {
         });
     }
 
-    function ignoreSite(_url) {
+    function ignoreSite(_url, sender) {
         if (!_self.settings.hasOwnProperty('ignored_sites')) {
             _self.settings.ignored_sites = [];
         }
@@ -457,7 +461,9 @@ var background = (function () {
             _self.settings.ignored_sites.push(site);
             saveSettings(_self.settings);
         }
-        clearMined();
+        // pass the sender through so the mined data for the right tab is
+        // cleared (and clearMined no longer throws on a missing sender)
+        clearMined(null, sender);
     }
 
     _self.ignoreSite = ignoreSite;

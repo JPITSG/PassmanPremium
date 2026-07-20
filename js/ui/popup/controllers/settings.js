@@ -80,7 +80,12 @@
 
             $scope.ignoreSite = '';
             $scope.addSite = function (site) {
-                $scope.settings.ignored_sites.push(site);
+                site = (site || '').trim();
+                // don't store blank entries — an empty entry matches every
+                // site and would suppress Passman everywhere
+                if (site && $scope.settings.ignored_sites.indexOf(site) === -1) {
+                    $scope.settings.ignored_sites.push(site);
+                }
                 $scope.ignoreSite = '';
             };
 
