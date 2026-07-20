@@ -578,6 +578,17 @@ var background = (function () {
             if (!tab) {
                 return;
             }
+            // only offer the update when the tab's URL is genuinely new for
+            // this credential: if it already matches the tab under the same
+            // rules getCredentialsByUrl serves the picker and autofill with,
+            // there is nothing to update and the doorhanger would pop up
+            // after every fill on the credential's own site
+            var matching = getCredentialsByUrl(tab.url);
+            for (var i = 0; i < matching.length; i++) {
+                if (login.guid && matching[i].guid === login.guid) {
+                    return;
+                }
+            }
             var data = login;
             data.url = tab.url;
             data.title = API.i18n.getMessage('detected_changed_url') + ':';
