@@ -149,41 +149,56 @@ window.contextMenu = (function () {
     }
 
     function initMenus() {
+        // single root item: Firefox groups multiple top-level items into a
+        // submenu labeled with the full extension name — one root keeps the
+        // page context menu showing just "Passman"
+        API.contextMenus.create({
+            id: 'passman',
+            title: 'Passman',
+            contexts: ['page']
+        });
+
         API.contextMenus.create({
             id: 'autoFill:',
             title: 'Auto fill',
-            contexts: ['page']
+            contexts: ['page'],
+            parentId: 'passman'
         });
 
         API.contextMenus.create({
             id: 'generatePassword',
             title: 'Generate password',
-            contexts: ['page']
+            contexts: ['page'],
+            parentId: 'passman'
         });
 
         API.contextMenus.create({
             id: 'copy:User',
             title: 'Copy username',
-            contexts: ['page']
+            contexts: ['page'],
+            parentId: 'passman'
         });
 
         API.contextMenus.create({
             id: 'copy:Pass',
             title: 'Copy password',
-            contexts: ['page']
+            contexts: ['page'],
+            parentId: 'passman'
         });
 
 
         API.contextMenus.create({
             id: 'copy:Url',
             title: 'Copy URL',
-            contexts: ['page']
+            contexts: ['page'],
+            parentId: 'passman'
         });
 
         API.contextMenus.create({
             id: 'copy:OTP',
             title: 'Copy OTP',
-            contexts: ['page']
+            contexts: ['page'],
+            parentId: 'passman'
         });
         exportContextMenu.addPasswordGenerator();
     }
