@@ -292,10 +292,16 @@ h1.brand-title {
 
 .empty {
 	text-align: center;
-	padding: 30px 20px 22px;
+	/* symmetric padding: the icon+text block sits optically centered —
+	   14px container padding on each side makes it 40px/40px in the list
+	   view */
+	padding: 26px 20px;
 	color: var(--muted);
 	animation: cardIn 0.3s ease backwards;
 }
+/* the search view's list has no bottom padding, so the empty state there
+   needs the extra 16px itself to stay centered (42px above, 42px below) */
+.search-view ~ .list .empty { padding-bottom: 42px; }
 .empty svg { opacity: 0.35; margin-bottom: 10px; }
 .empty p {
 	margin: 0;
