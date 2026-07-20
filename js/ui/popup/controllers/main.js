@@ -111,11 +111,20 @@
 
             $scope.credential_amount = '0';
             $scope.refreshing_credentials = false;
+            var refreshTimer = null;
             $scope.refresh = function () {
                 $scope.refreshing_credentials = true;
                 manualRefresh = true;
+                // a refresh while one is in flight supersedes it: the
+                // background drops the older load via its load-cycle guard,
+                // and the stale feedback timer must not report (and stop the
+                // spinner) while the new refresh is still running
+                if (refreshTimer) {
+                    clearTimeout(refreshTimer);
+                    refreshTimer = null;
+                }
                 API.runtime.sendMessage(API.runtime.id, {method: "getCredentials"}).then(function () {
-                    setTimeout(postCredentialCountRequest, 1900);
+                    refreshTimer = setTimeout(postCredentialCountRequest, 1900);
                 });
             };
 
