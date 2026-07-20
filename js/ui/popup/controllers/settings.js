@@ -139,6 +139,22 @@
             $scope.addAccount = function () {
                 window.location = '#!/accounts/add';
             };
+
+            $scope.openAccount = function (account) {
+                if (!account.nextcloud_host) {
+                    return;
+                }
+                var url = account.nextcloud_host;
+                if (!/^[a-z][a-z0-9+.\-]*:/i.test(url)) {
+                    url = 'https://' + url;
+                }
+                API.tabs.create({url: url}).then(function () {
+                    window.close();
+                }).catch(function () {
+                    // Firefox refuses non-web schemes (javascript:, data:)
+                    // — nothing to open, and no reason to die noisily
+                });
+            };
         }]);
 }());
 

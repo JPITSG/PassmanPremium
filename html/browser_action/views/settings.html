@@ -136,7 +136,7 @@
         <label ng-click="tabActive = 2;" class="tab-title" ng-class="{'active': tabActive === 2}">{{ 'accounts' | translate }}</label>
         <div class="tab-content" ng-class="{'active': tabActive === 2}">
             <div class="list">
-                <div class="list-item" ng-repeat="account in settings.accounts">
+                <div class="list-item" ng-repeat="account in settings.accounts" ng-click="openAccount(account)">
                     <div class="cred-avatar">{{account.nextcloud_username.charAt(0) || '*'}}</div>
                     <div class="cred-body">
                         <div class="title">
@@ -146,7 +146,7 @@
                             {{ account.vault.name}}
                         </div>
                     </div>
-                    <div class="edit delete" ng-click="removeAccount(account)" title="{{'delete' | translate}}">
+                    <div class="edit delete" ng-click="removeAccount(account); $event.stopPropagation()" title="{{'delete' | translate}}">
                         <div class="mdi mdi-delete"></div>
                     </div>
                 </div>
