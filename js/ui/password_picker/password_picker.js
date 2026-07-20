@@ -247,12 +247,21 @@ $(document).ready(function () {
         picker.find('.tab.' + name).addClass('active');
     };
 
+    // re-clicking the active search tab must not blur the search input —
+    // swallow the mousedown so the browser never moves focus away
+    picker.find('.tab.search').on('mousedown', function (e) {
+        e.preventDefault();
+    });
+
     picker.find('.tab').click(function () {
         var name = $(this).attr('data-name');
         // the close button carries the .tab class but no data-name — let its
         // own handler close the picker instead of poisoning activeTab
         if (!name) {
             return;
+        }
+        if (name === 'search') {
+            $('#password_search').focus();
         }
         storage.set('activeTab', name).then(function (r) {
             makeTabActive(name);

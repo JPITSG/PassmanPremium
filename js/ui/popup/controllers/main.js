@@ -172,7 +172,10 @@
 
 
             $scope.goto = function (page) {
-                window.location = '#!/' + page;
+                // the list view lives at the root route — navigating to
+                // '#!/list' would bounce through the otherwise-redirect and
+                // needlessly reload the view (and its empty state)
+                window.location = '#!/' + (page === 'list' ? '' : page);
                 $scope.menuIsOpen = false;
             };
 
