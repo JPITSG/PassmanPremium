@@ -53,6 +53,7 @@ var background = (function () {
             local_credentials = [];
             local_vault = [];
             mined_data = [];
+            doorhangerData = {};
             _self.settings = {isInstalled: 1};
             if (window.contextMenu) {
                 window.contextMenu.setContextItems([]);
@@ -207,6 +208,7 @@ var background = (function () {
         _self.settings = {};
         local_credentials = [];
         local_vault = [];
+        doorhangerData = {};
         master_password = null;
     }
 
@@ -680,16 +682,28 @@ var background = (function () {
 
     _self.isAutoSubmitEnabled = isAutoSubmitEnabled;
 
-    var doorhangerData = null;
+    // doorhanger payloads are per-tab: two tabs showing doorhangers must
+    // never read each other's data (the mined flow carries the plaintext
+    // password), and an entry is dropped as soon as its doorhanger read
+    // it so stale secrets don't linger
+    var doorhangerData = {};
 
-    function setDoorhangerData(data) {
-        doorhangerData = data;
+    function setDoorhangerData(data, sender) {
+        if (!sender.tab) {
+            return;
+        }
+        doorhangerData[sender.tab.id] = data;
     }
 
     _self.setDoorhangerData = setDoorhangerData;
 
-    function getDoorhangerData() {
-        return doorhangerData;
+    function getDoorhangerData(args, sender) {
+        if (!sender.tab) {
+            return null;
+        }
+        var data = doorhangerData[sender.tab.id];
+        delete doorhangerData[sender.tab.id];
+        return data || null;
     }
 
     _self.getDoorhangerData = getDoorhangerData;
