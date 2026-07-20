@@ -646,8 +646,10 @@ var background = (function () {
 
     function closeSetupTab() {
         // resolve through the runtime so the scheme is right on both
-        // Firefox (moz-extension:) and Chromium (chrome-extension:)
-        API.tabs.query({url: API.extension.getURL('/html/browser_action/browser_action.html')}).then(function (tabs) {
+        // Firefox (moz-extension:) and Chromium (chrome-extension:).
+        // The background page does not load API/extension.js, so this must
+        // use API.runtime.getURL — API.extension would be undefined here.
+        API.tabs.query({url: API.runtime.getURL('/html/browser_action/browser_action.html')}).then(function (tabs) {
             if (tabs && tabs[0]) {
                 API.tabs.remove(tabs[0].id);
             }

@@ -40,20 +40,30 @@ window.contextMenu = (function () {
 
             for (i = 0; i < logins.length; i++) {
                 var login = logins[i];
-                login.autoFill = (!login.hasOwnProperty('autoFill')) ? true : login.autoFill;
+                // Work on a shallow copy: the menu needs derived fields
+                // (autoFill default, totp = otp.secret) but writing them onto
+                // the cached credential would later PATCH them to the server
+                // in plaintext — the totp field is the raw base32 OTP secret.
+                var menuLogin = {};
+                for (var key in login) {
+                    if (login.hasOwnProperty(key)) {
+                        menuLogin[key] = login[key];
+                    }
+                }
+                menuLogin.autoFill = (!login.hasOwnProperty('autoFill')) ? true : login.autoFill;
                 for (f = 0; f < fields.length; f++) {
                     field = fields[f];
                     if (field.field === 'totp' && login.otp) {
-                        login.totp = login.otp.secret;
+                        menuLogin.totp = login.otp.secret;
                     }
-                    if (login[field.field]) {
+                    if (menuLogin[field.field]) {
                         fields[f].found = true;
                         /* jshint ignore:start */
                         createMenuItem(field.menu, field.menu + ':' + login.guid, login.label, (function (field, login) {
                             return function () {
                                 itemClickCallback(field, login);
                             };
-                        })(field, login));
+                        })(field, menuLogin));
                         /* jshint ignore:end */
                     }
                 }

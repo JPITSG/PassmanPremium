@@ -190,7 +190,11 @@ window.PAPI = (function () {
         var username = (account.hasOwnProperty('nextcloud_username')) ? account.nextcloud_username : _API.username;
         var password = (account.hasOwnProperty('nextcloud_password')) ? account.nextcloud_password : _API.password;
 
-        var encodedLogin = btoa(username + ":" + password);
+        // UTF-8-encode before base64: btoa throws on characters outside
+        // Latin-1, so any accented / CJK / emoji character in the Nextcloud
+        // username or password would otherwise break auth. For pure-ASCII
+        // credentials this is byte-for-byte identical to btoa alone.
+        var encodedLogin = btoa(unescape(encodeURIComponent(username + ":" + password)));
 
         var headers = new Headers();
         headers.append('Authorization', 'Basic ' + encodedLogin);
