@@ -66,6 +66,9 @@
                 }
                 API.tabs.create({url: url}).then(function () {
                     window.close();
+                }).catch(function () {
+                    // Firefox refuses non-web schemes (javascript:, data:)
+                    // — nothing to open, and no reason to die noisily
                 });
             };
 

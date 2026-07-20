@@ -63,12 +63,18 @@
              * right after unlock/setup the vaults are still being fetched
              * from the server, so a single early request would report 0.
              */
+            var postCredentialCountRequest = function () {
+                try {
+                    port.postMessage("credential_amount");
+                } catch (e) {
+                    // the popup (and with it the port) is already gone —
+                    // a late timer has nowhere to report to
+                }
+            };
             var requestCredentialCount = function () {
                 $scope.refreshing_credentials = true;
                 [500, 2000, 5000].forEach(function (delay) {
-                    setTimeout(function () {
-                        port.postMessage("credential_amount");
-                    }, delay);
+                    setTimeout(postCredentialCountRequest, delay);
                 });
             };
 
@@ -109,9 +115,7 @@
                 $scope.refreshing_credentials = true;
                 manualRefresh = true;
                 API.runtime.sendMessage(API.runtime.id, {method: "getCredentials"}).then(function () {
-                    setTimeout(function () {
-                        port.postMessage("credential_amount");
-                    }, 1900);
+                    setTimeout(postCredentialCountRequest, 1900);
                 });
             };
 
@@ -155,7 +159,8 @@
             });
 
             API.runtime.sendMessage(API.runtime.id, {'method': 'getRuntimeSettings'}).then(function (settings) {
-                $rootScope.app_settings = settings;
+                // nothing reads these settings off $rootScope — don't park
+                // the decrypted account secrets there in the first place
                 if (!settings || Object.keys(settings).length === 0) {
                     window.location = '#!/setup';
                 } else if (settings.hasOwnProperty('isInstalled')) {

@@ -33,7 +33,7 @@
      * Controller of the passmanApp
      */
     angular.module('passmanExtension')
-        .controller('PasswordPromptCtrl', ['$scope', 'Settings', '$location', '$rootScope', function ($scope, Settings, $window, $rootScope) {
+        .controller('PasswordPromptCtrl', ['$scope', 'Settings', '$location', '$rootScope', function ($scope, Settings, $location, $rootScope) {
             $scope.settings = {};
 
             API.runtime.sendMessage(API.runtime.id, {method: "getMasterPasswordSet"}).then(function (isSet) {

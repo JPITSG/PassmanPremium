@@ -221,6 +221,21 @@ function getFormFromElement(elem) {
     }
 }
 
+function setNativeValue(element, value) {
+    // React/Vue controlled inputs track the value through the prototype's
+    // own setter — a plain .value assignment is ignored or reverted, so
+    // the autofill never registers. Go through the native setter instead.
+    var ownProto = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), 'value');
+    var nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value');
+    if (ownProto && ownProto.set && nativeSetter && ownProto.set !== nativeSetter.set) {
+        ownProto.set.call(element, value);
+    } else if (nativeSetter && nativeSetter.set) {
+        nativeSetter.set.call(element, value);
+    } else {
+        element.value = value;
+    }
+}
+
 function dispatchEvents(element){
     var eventNames = [ 'click', 'focus', 'keypress', 'keydown', 'keyup', 'input', 'blur', 'change' ];
     eventNames.forEach(function(eventName) {
@@ -232,19 +247,19 @@ function fillPassword(user, password) {
     var loginFields = getLoginFields();
     for (var i = 0; i < loginFields.length; i++) {
         if(user && loginFields[i][0]){
-            loginFields[i][0].value = user;
+            setNativeValue(loginFields[i][0], user);
             if(loginFields[i][0].offsetParent) {
                 dispatchEvents(loginFields[i][0]);
             }
         }
         if(password && loginFields[i][1]) {
-            loginFields[i][1].value = password;
+            setNativeValue(loginFields[i][1], password);
             if(loginFields[i][1].offsetParent) {
                 dispatchEvents(loginFields[i][1]);
             }
         }
         if(password && loginFields[i][2]) {
-            loginFields[i][2].value = password;
+            setNativeValue(loginFields[i][2], password);
             if(loginFields[i][2].offsetParent) {
                 dispatchEvents(loginFields[i][2]);
             }

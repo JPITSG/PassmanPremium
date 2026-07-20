@@ -87,6 +87,9 @@
                             }
                             window.OTP.secret = scope.secret;
                             scope.otp =  window.OTP.getOTP();
+                            // don't leave the secret sitting in a window
+                            // global between computations
+                            window.OTP.secret = '';
                         };
 
                         var transform_styles = ['-webkit-transform', '-ms-transform', 'transform'];
