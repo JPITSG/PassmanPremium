@@ -217,17 +217,38 @@ window.PAPI = (function () {
             opts.body = JSON.stringify(data);
         }
 
+        // Abort the request when the timeout fires, and guarantee the
+        // callback runs exactly once: without this a response arriving after
+        // the 10s timeout would invoke callback a second time (advancing the
+        // setup wizard past a reported error, or pushing a credential twice).
+        var controller = new AbortController();
+        opts.signal = controller.signal;
+
         var request = new Request(host + '/index.php/apps/passman' + endpoint, opts);
 
-        var timeoutTimer = setTimeout(function () {
+        var settled = false;
+        var timeoutTimer;
+        function finish(arg) {
+            if (settled) {
+                return;
+            }
+            settled = true;
+            clearTimeout(timeoutTimer);
+            callback(arg);
+        }
+
+        timeoutTimer = setTimeout(function () {
+            if (settled) {
+                return;
+            }
+            controller.abort();
             API.notifications.create(API.i18n.getMessage('error'), API.i18n.getMessage('connection_timeout_error'));
-            callback({error: true, result: {statusText: 'Connection timeout', status: 0}});
+            finish({error: true, result: {statusText: 'Connection timeout', status: 0}});
         }, 10000);
 
         fetch(request).then(function(response){
-            clearTimeout(timeoutTimer);
             if(response.status !== 200){
-                callback({error: true, result: {statusText: response.statusText, status: response.status}});
+                finish({error: true, result: {statusText: response.statusText, status: response.status}});
                 return;
             }
 
@@ -235,20 +256,23 @@ window.PAPI = (function () {
             if(contentType && contentType.indexOf("application/json") !== -1) {
                 return response.json().then(function(json) {
                     if(json){
-                        callback(json);
+                        finish(json);
                     } else {
-                        callback({error: true, result: {statusText: 'Empty reply from server', status: 0}});
+                        finish({error: true, result: {statusText: 'Empty reply from server', status: 0}});
                     }
 
                 });
             } else {
-                callback({error: true, result: {statusText: 'Invalid reply from server', status: 0}});
+                finish({error: true, result: {statusText: 'Invalid reply from server', status: 0}});
             }
 
         }).catch(function (e) {
-            clearTimeout(timeoutTimer);
+            // the timeout already reported and settled its own abort
+            if (settled) {
+                return;
+            }
             API.notifications.create(API.i18n.getMessage('error'), API.i18n.getMessage('connection_error', [String(e)]));
-            callback({error: true, result: {statusText: e, status: 0}});
+            finish({error: true, result: {statusText: e, status: 0}});
         });
     };
 
