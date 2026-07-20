@@ -57,45 +57,57 @@ $j(document).ready(function () {
 
     function enterCustomFields(login, settings) {
         var customFieldPattern = /^\#(.*)$/;
-        var elementId;
-        var element = false;
 
-        /* parhaps wise to try / catch this as this is non essential and no reason to abort previous processing */
-        try {
-            /* do we have custom_fields for this entry */
-            if (login.hasOwnProperty('custom_fields') && login.custom_fields.length) {
-                /* yes we do, iterate over all the custom_fields values */
-                for (var i = 0, len = login.custom_fields.length; i < len; i++) {
-                    /* does this custom field label begin with a hash? */
-                    if (customFieldPattern.test(login.custom_fields[i].label)) {
-                        /* set variable elementid to whatever element we are trying to auto fill */
-                        elementId = customFieldPattern.exec(login.custom_fields[i].label)[1];
-                        enterCustomFieldElement(elementId, login.custom_fields[i].value);
-                    }
-                    else if ($j('label[for]:contains(' + login.custom_fields[i].label + ')').length) {
-                        elementId = $j('label[for]:contains(' + login.custom_fields[i].label + ')').attr('for');
-                        enterCustomFieldElement(elementId, login.custom_fields[i].value);
+        /* do we have custom_fields for this entry */
+        if (!login.hasOwnProperty('custom_fields') || !login.custom_fields.length) {
+            return;
+        }
+        /* yes we do, iterate over all the custom_fields values */
+        for (var i = 0, len = login.custom_fields.length; i < len; i++) {
+            /* try / catch per field: one broken field must not abort the rest */
+            try {
+                var label = login.custom_fields[i].label;
+                /* does this custom field label begin with a hash? */
+                if (customFieldPattern.test(label)) {
+                    /* set variable elementid to whatever element we are trying to auto fill */
+                    var elementId = customFieldPattern.exec(label)[1];
+                    enterCustomFieldElement(elementId, login.custom_fields[i].value);
+                }
+                else {
+                    /* match the label text literally — interpolating the raw
+                       label into a :contains() selector threw on ) or quotes */
+                    var $label = $j('label[for]').filter(function () {
+                        return $j(this).text().indexOf(label) !== -1;
+                    }).first();
+                    if ($label.length) {
+                        enterCustomFieldElement($label.attr('for'), login.custom_fields[i].value);
                     }
                 }
             }
-        }
-        catch (e) {
-            if (settings.debug) {
-                console.log('While attempting to auto fill custom fields the following exception was thrown: ' + e);
+            catch (e) {
+                if (settings.debug) {
+                    console.log('While attempting to auto fill custom fields the following exception was thrown: ' + e);
+                }
             }
         }
     }
 
     function enterCustomFieldElement(elementId, value) {
-        /* check to see if element id exist */
-        if ($j('#' + elementId).length) {
-            element = $j('#' + elementId);
+        /* check to see if element id exist — getElementById, so ids with
+           selector metacharacters can't break the lookup */
+        var byId = document.getElementById(elementId);
+        var element = false;
+        if (byId) {
+            element = $j(byId);
         }
-        else if ($j('input[name$="' + elementId + '"]').length) { /* maybe element name exist */
-            element = $j('input[name$="' + elementId + '"]');
-        }
-        else { /* neither element id or name exist */
-            element = false;
+        else { /* maybe element name exist (suffix match, as name$= did) */
+            var byName = $j('input').filter(function () {
+                var name = $j(this).attr('name');
+                return typeof name === 'string' && name !== '' && name.slice(-elementId.length) === elementId;
+            });
+            if (byName.length) {
+                element = byName;
+            }
         }
         /* if we have an element and it is type text, number or password, lets auto fill it */
         if (element && (element[0].type === 'text' || element[0].type === 'number' || element[0].type === 'password')) {

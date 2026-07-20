@@ -2,6 +2,9 @@ $(document).ready(function () {
     var _this = this;
     var storage = new API.Storage();
     var runtimeSettings = {};
+    // the picker's own document has no title — the add-credential label
+    // defaults to the host page's title, delivered via returnActiveTab
+    var pageTitle = '';
 
     API.runtime.sendMessage(API.runtime.id, {'method': 'getRuntimeSettings'}).then(function (settings) {
         var accounts = settings.accounts;
@@ -78,7 +81,7 @@ $(document).ready(function () {
 
     function setupAddCredentialFields() {
         var labelfield = $('#savepw-label');
-        labelfield.val(document.title);
+        labelfield.val(pageTitle);
         var userfield = $('#savepw-username');
         var pwfield = $('#savepw-password');
         var vaultfield = $('#savepw-vault');
@@ -119,7 +122,7 @@ $(document).ready(function () {
         });
 
         $('#savepw-cancel').click(function () {
-            labelfield.val(document.title);
+            labelfield.val(pageTitle);
             userfield.val('');
             pwfield.val('');
             removePasswordPicker();
@@ -283,6 +286,13 @@ $(document).ready(function () {
 
 
     function returnActiveTab(tab) {
+        // default the add-credential label to the host page's title —
+        // without clobbering anything the user already typed
+        pageTitle = tab.title || '';
+        var labelfield = $('#savepw-label');
+        if (!labelfield.val()) {
+            labelfield.val(pageTitle);
+        }
 
         $('.disable-site').on('click', function () {
             disablePassman('site', tab.url);
