@@ -81,8 +81,11 @@ window.contextMenu = (function () {
             createMenuItem('generatePassword', 'copyGen', 'And copy to clipboard', function(){
                 generatePass(function (generated_password) {
                     API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
-                        API.tabs.sendMessage(tabs[0].id, {method: "copyText", args: generated_password});
-                    });
+                        if (!tabs[0]) {
+                            return;
+                        }
+                        return API.tabs.sendMessage(tabs[0].id, {method: "copyText", args: generated_password});
+                    }).catch(ignoreSendError);
                 });
             });
 
@@ -92,9 +95,11 @@ window.contextMenu = (function () {
                         password: generated_password
                     };
                     API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
-                        API.tabs.sendMessage(tabs[0].id, {method: "enterLoginDetails", args: login}).then(function (response) {
-                        });
-                    });
+                        if (!tabs[0]) {
+                            return;
+                        }
+                        return API.tabs.sendMessage(tabs[0].id, {method: "enterLoginDetails", args: login});
+                    }).catch(ignoreSendError);
                 });
 
             });
@@ -193,26 +198,37 @@ window.contextMenu = (function () {
         });
     }
 
+    // tabs without a live content script (about:, the add-ons site, or a
+    // tab that closed mid-flight) reject sendMessage — expected there,
+    // and not worth an unhandled rejection in the console
+    function ignoreSendError() {}
+
     function itemClickCallback(menu_action, login) {
         var action = menu_action.menu.split(':', 1)[0];
 
         if (action === 'copy') {
 
             API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
+                if (!tabs[0]) {
+                    return;
+                }
                 var text = login[menu_action.field];
                 if(menu_action.menu.indexOf('OTP') !== -1){
                     window.OTP.secret = login.totp;
                     text =  window.OTP.getOTP();
                 }
-                API.tabs.sendMessage(tabs[0].id, {method: "copyText", args: text});
-            });
+                return API.tabs.sendMessage(tabs[0].id, {method: "copyText", args: text});
+            }).catch(ignoreSendError);
             return;
         }
 
         if (action === 'autoFill') {
             API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
-                API.tabs.sendMessage(tabs[0].id, {method: "enterLoginDetails", args: login});
-            });
+                if (!tabs[0]) {
+                    return;
+                }
+                return API.tabs.sendMessage(tabs[0].id, {method: "enterLoginDetails", args: login});
+            }).catch(ignoreSendError);
         }
     }
 

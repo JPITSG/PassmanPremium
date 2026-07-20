@@ -26,7 +26,6 @@
     'use strict';
     var pendingRequests = [];
 
-    API.runtime.connect();
     // A request has completed.
     // We can stop worrying about it.
     function completed(requestDetails) {
@@ -36,11 +35,7 @@
         }
     }
 
-    var auth_tries = [];
     var provideCredentialsSync = function (requestDetails) {
-        if (!auth_tries[requestDetails.requestId]) {
-            auth_tries[requestDetails.requestId] = 0;
-        }
         /** global: background */
         var login = background.getCredentialForHTTPAuth(requestDetails);
 

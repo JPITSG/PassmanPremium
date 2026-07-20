@@ -233,6 +233,9 @@ var background = (function () {
         // leave no credentials behind (the loop below would never reassign)
         if (!_self.settings.accounts || _self.settings.accounts.length === 0) {
             local_credentials = [];
+            // still unlocked — restore the normal icon with a zero count,
+            // otherwise the startup locked icon sticks forever
+            updateTabsIcon();
             return;
         }
         //console.log('Loading vault with the following settings: ', settings);
@@ -249,6 +252,10 @@ var background = (function () {
                         return;
                     }
                     if (vault.hasOwnProperty('error')) {
+                        // when every vault fetch fails, getSharedCredentials
+                        // never runs and the locked icon would stick despite
+                        // being unlocked — refresh what we can show
+                        updateTabsIcon();
                         return;
                     }
                     var _credentials = vault.credentials;
@@ -503,12 +510,16 @@ var background = (function () {
 
     _self.clearMined = clearMined;
 
+    // tabs without a live content script (about:, the add-ons site, or a
+    // tab that closed mid-flight) reject sendMessage — expected there,
+    // and not worth an unhandled rejection in the console
+    function ignoreSendError() {}
+
     function saveMinedCallback(args) {
         createIconForTab(args.sender.tab);
         API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
-            API.tabs.sendMessage(args.sender.tab.id, {method: "minedLoginSaved", args: args}).then(function (response) {
-            });
-        });
+            return API.tabs.sendMessage(args.sender.tab.id, {method: "minedLoginSaved", args: args});
+        }).catch(ignoreSendError);
     }
 
     function ignoreSite(_url, sender) {
@@ -540,8 +551,7 @@ var background = (function () {
     _self.ignoreURL = ignoreURL;
 
     function passToParent(args, sender) {
-        API.tabs.sendMessage(sender.tab.id, {method: args.injectMethod, args: args.args}).then(function (response) {
-        });
+        API.tabs.sendMessage(sender.tab.id, {method: args.injectMethod, args: args.args}).catch(ignoreSendError);
     }
 
     _self.passToParent = passToParent;
@@ -549,9 +559,11 @@ var background = (function () {
     function getActiveTab(opt) {
         API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
             var tab = tabs[0];
-            API.tabs.sendMessage(tab.id, {method: opt.returnFn, args: tab}).then(function (response) {
-            });
-        });
+            if (!tab) {
+                return;
+            }
+            return API.tabs.sendMessage(tab.id, {method: opt.returnFn, args: tab});
+        }).catch(ignoreSendError);
     }
 
     _self.getActiveTab = getActiveTab;
@@ -563,14 +575,17 @@ var background = (function () {
 
         API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
             var tab = tabs[0];
+            if (!tab) {
+                return;
+            }
             var data = login;
             data.url = tab.url;
             data.title = API.i18n.getMessage('detected_changed_url') + ':';
-            API.tabs.sendMessage(tab.id, {
+            return API.tabs.sendMessage(tab.id, {
                 method: 'showUrlUpdateDoorhanger',
                 args: {data: data}
             });
-        });
+        }).catch(ignoreSendError);
     }
 
     _self.updateCredentialUrlDoorhanger = updateCredentialUrlDoorhanger;
@@ -872,6 +887,10 @@ var background = (function () {
 
     API.tabs.onActivated.addListener(function () {
         API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
+            // the query can resolve empty while a window is closing
+            if (!tabs || !tabs[0]) {
+                return;
+            }
             if (master_password) {
                 createIconForTab(tabs[0]);
             } else {
