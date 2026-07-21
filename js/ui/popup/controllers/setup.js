@@ -124,12 +124,21 @@
                         return;
                     }
 
-                    if ($scope.settings.master_password.trim() !== '') {
-                        callback(true);
-                    } else {
+                    if ($scope.settings.master_password.trim() === '') {
                         $scope.errors.push(API.i18n.getMessage('empty_master_key'));
                         callback(false);
+                        return;
                     }
+                    // the master password keys every locally stored account
+                    // secret — a minimum length is the least offline-guessing
+                    // resistance demands (existing installs and the unlock
+                    // prompt are unaffected)
+                    if ($scope.settings.master_password.length < 8) {
+                        $scope.errors.push(API.i18n.getMessage('master_key_too_short'));
+                        callback(false);
+                        return;
+                    }
+                    callback(true);
                 }
             };
             $scope.saving = false;

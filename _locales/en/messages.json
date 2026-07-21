@@ -411,6 +411,10 @@
     "message": "The master password cannot be empty.",
     "description": "Empty master key!"
   },
+  "master_key_too_short": {
+    "message": "The master password must be at least 8 characters long.",
+    "description": "Master password below the minimum length"
+  },
   "one_time_password": {
     "message": "OTP",
     "description": "One time password"

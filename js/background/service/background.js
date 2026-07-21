@@ -196,7 +196,7 @@ var background = (function () {
         var storedSettings = Object.assign({}, settings);
         for (var i = 0; i < encryptedFieldSettings.length; i++) {
             var field = encryptedFieldSettings[i];
-            storedSettings[field] = PAPI.encryptString(JSON.stringify(settings[field]), master_password);
+            storedSettings[field] = PAPI.encryptProfileString(JSON.stringify(settings[field]), master_password);
         }
 
         //window.settings contains the run-time settings

@@ -9,6 +9,20 @@ window.PAPI = (function () {
         mode: 'ccm',
         ts: 64
     };
+    // settings.accounts (the Nextcloud credentials and vault passwords,
+    // encrypted under the master password) is only ever read back by THIS
+    // extension — unlike credential encryption, whose parameters must stay
+    // byte-identical to what every other Passman client ships (their sjcl
+    // decrypt rejects mismatched embedded params). Its key derivation can
+    // therefore be hardened 100x; decryption honors the parameters embedded
+    // in each ciphertext, so blobs written before this change keep working.
+    var profile_encryption_config = {
+        adata: "",
+        iter: 100000,
+        ks: 256,
+        mode: 'ccm',
+        ts: 64
+    };
     var _API = {
         username: '',
         password: '',
@@ -34,7 +48,14 @@ window.PAPI = (function () {
             var rp = {};
             try {
                 /** global: sjcl */
-                return sjcl.decrypt(_key, ciphertext, encryption_config, rp);
+                // no fixed config: sjcl folds a passed config into the
+                // ciphertext's embedded parameters with required=true and
+                // throws on any mismatch. Passing none honors whatever the
+                // writer used — identical for everything this client ever
+                // wrote, and the only way hardened or other clients' blobs
+                // (e.g. shared keys from a differently configured Passman
+                // app) can be read at all
+                return sjcl.decrypt(_key, ciphertext, {}, rp);
             } catch (e) {
                 throw e;
             }
@@ -64,6 +85,14 @@ window.PAPI = (function () {
             var rp = {};
             /** global: sjcl */
             var ct = sjcl.encrypt(_key, string, encryption_config, rp);
+            return window.btoa(ct);
+        },
+        // for the local settings blob only — never for credentials, whose
+        // parameters must stay compatible with every Passman client
+        encryptProfileString: function (string, _key) {
+            var rp = {};
+            /** global: sjcl */
+            var ct = sjcl.encrypt(_key, string, profile_encryption_config, rp);
             return window.btoa(ct);
         },
         newCredential: function () {
