@@ -316,8 +316,18 @@ window.PAPI = (function () {
         }, 10000);
 
         fetch(request).then(function(response){
-            if(response.status !== 200){
+            // success is any 2xx, not exactly 200: the Passman API answers
+            // 200 on every route in use today (verified against its
+            // controllers), but writes may legitimately come back 201/204 —
+            // and non-2xx stays an error either way
+            if (response.status < 200 || response.status >= 300) {
                 finish({error: true, result: {statusText: response.statusText, status: response.status}});
+                return;
+            }
+
+            // 204/205 carry no body to parse — the write succeeded
+            if (response.status === 204 || response.status === 205) {
+                finish({});
                 return;
             }
 
