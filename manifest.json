@@ -106,7 +106,14 @@
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "passman-premium@local.dev"
+      "id": "passman-premium@local.dev",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "authenticationInfo",
+          "browsingActivity"
+        ]
+      }
     }
   }
 }
