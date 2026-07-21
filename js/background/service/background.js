@@ -568,6 +568,22 @@ var background = (function () {
 
     _self.getActiveTab = getActiveTab;
 
+    function themeChanged(pref) {
+        // relay the popup's theme switch into every tab: extension frames
+        // embedded in content pages (picker / doorhanger / auto-login)
+        // receive tabs.sendMessage like any frame in the tab, but the
+        // popup's runtime broadcast never reaches them — without this hop
+        // an open picker keeps its old theme until reopened. Receivers in
+        // theme.js never re-broadcast, so this cannot loop.
+        API.tabs.query({}).then(function (tabs) {
+            for (var i = 0; i < tabs.length; i++) {
+                API.tabs.sendMessage(tabs[i].id, {method: 'themeChanged', args: pref}).catch(ignoreSendError);
+            }
+        });
+    }
+
+    _self.themeChanged = themeChanged;
+
     function updateCredentialUrlDoorhanger(login) {
         if(!_self.settings.enableUpdateUrl){
             return;
@@ -776,8 +792,8 @@ var background = (function () {
         isAutoFillEnabled: true, isAutoSubmitEnabled: true, isMasterPasswordValid: true,
         minedForm: true, passToParent: true, resetSettings: true,
         saveCredential: true, saveMined: true, saveSettings: true, searchCredential: true,
-        setDoorhangerData: true, setMasterPassword: true, updateCredentialUrl: true,
-        updateCredentialUrlDoorhanger: true
+        setDoorhangerData: true, setMasterPassword: true, themeChanged: true,
+        updateCredentialUrl: true, updateCredentialUrlDoorhanger: true
     };
 
     API.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
