@@ -375,17 +375,26 @@ var background = (function () {
         var url = processURL(_url, _self.settings.ignoreProtocol, _self.settings.ignoreSubdomain, _self.settings.ignorePath, _self.settings.ignorePort);
         var found_list = [];
         for (var i = 0; i < local_credentials.length; i++) {
-            var credential_url = local_credentials[i].url;
-            if (!/^(ht)tps?:\/\//i.test(credential_url) && credential_url !== '' && _url) {
-                // a scheme-less stored URL is assumed to be https: borrowing
-                // the current page's scheme would let a plain-http page
-                // satisfy the credential even when protocol matching is on
-                credential_url = 'https://' + credential_url;
-            }
-            credential_url = processURL(credential_url, _self.settings.ignoreProtocol, _self.settings.ignoreSubdomain, _self.settings.ignorePath, _self.settings.ignorePort);
-            if (credential_url) {
-                if (credential_url.split("\n").indexOf(url) !== -1) {
+            // a credential may carry several newline-separated URLs —
+            // split BEFORE normalizing: the URL parser strips newlines,
+            // so processing the whole string folded every later entry
+            // into the first one's host or path and matched nothing
+            var stored_urls = String(local_credentials[i].url || '').split('\n');
+            for (var j = 0; j < stored_urls.length; j++) {
+                var credential_url = stored_urls[j].trim();
+                if (credential_url === '') {
+                    continue;
+                }
+                if (!/^(ht)tps?:\/\//i.test(credential_url)) {
+                    // a scheme-less stored URL is assumed to be https:
+                    // borrowing the page's scheme would let a plain-http
+                    // page satisfy the credential with protocol matching on
+                    credential_url = 'https://' + credential_url;
+                }
+                credential_url = processURL(credential_url, _self.settings.ignoreProtocol, _self.settings.ignoreSubdomain, _self.settings.ignorePath, _self.settings.ignorePort);
+                if (credential_url && credential_url === url) {
                     found_list.push(local_credentials[i]);
+                    break;
                 }
             }
 
