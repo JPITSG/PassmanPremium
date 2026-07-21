@@ -106,9 +106,11 @@ window.PAPI = (function () {
 
             api_request(account, '/api/v2/credentials', 'POST', credential, function (r) {
                 // On a failed POST, r is the api_request error object (no
-                // credential_id/guid). Don't invoke the success callback —
-                // otherwise the caller would push a phantom credential.
+                // credential_id/guid). Report it as a null result — staying
+                // silent left every caller's completion hanging and the UI
+                // reporting success on a rejected write
                 if (!r || r.error) {
+                    callback(null);
                     return;
                 }
                 credential.credential_id = r.credential_id;
@@ -186,9 +188,10 @@ window.PAPI = (function () {
 
             api_request(account, '/api/v2/credentials/' + credential.guid, 'PATCH', _credential, function (r) {
                 // Only report success when the server actually accepted the
-                // PATCH; otherwise the caller would update its cache, delete
-                // the mined data and show "credential updated" on a failure.
-                if (r && r.error) {
+                // PATCH, and report failure as a null result — staying
+                // silent left the caller's completion hanging
+                if (!r || r.error) {
+                    callback(null);
                     return;
                 }
                 callback(credential);

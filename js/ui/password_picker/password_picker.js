@@ -125,7 +125,14 @@ $(document).ready(function () {
                     // refill must land in the frame owning this picker
                     frameToken: window.location.hash.slice(1)
                 }
-            }).then(removePasswordPicker);
+            }).then(removePasswordPicker).catch(function () {
+                // the server rejected the new credential — keep the picker
+                // open with everything entered and re-arm the save button
+                // instead of closing and losing it
+                var btn = $('#savepw-save');
+                btn.text(API.i18n.getMessage('save'));
+                btn.attr('disabled', false);
+            });
         });
 
         $('#savepw-cancel').click(function () {

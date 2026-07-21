@@ -203,7 +203,9 @@ var background = (function () {
         _self.settings = settings;
 
 
-        storage.set('settings', storedSettings).then(function () {
+        // persist first, then refresh the runtime from storage — and hand
+        // the caller the real outcome instead of an instant ack
+        return storage.set('settings', storedSettings).then(function () {
             getSettings();
         });
 
@@ -212,7 +214,7 @@ var background = (function () {
     _self.saveSettings = saveSettings;
 
     function resetSettings() {
-        storage.set('settings', {});
+        var persisted = storage.set('settings', {});
         MasterPasswordStore.clear();
         _self.settings = {};
         local_credentials = [];
@@ -220,6 +222,7 @@ var background = (function () {
         mined_data = [];
         testMasterPasswordAgainst = undefined;
         master_password = null;
+        return persisted;
     }
 
     _self.resetSettings = resetSettings;
@@ -227,7 +230,7 @@ var background = (function () {
 
     function getCredentials() {
         if (!master_password) {
-            return;
+            return Promise.resolve();
         }
         // no accounts configured — drop anything stale so removed accounts
         // leave no credentials behind (the loop below would never reassign)
@@ -236,17 +239,27 @@ var background = (function () {
             // still unlocked — restore the normal icon with a zero count,
             // otherwise the startup locked icon sticks forever
             updateTabsIcon();
-            return;
+            return Promise.resolve();
         }
         //console.log('Loading vault with the following settings: ', settings);
         var cycle = ++credentialLoadCycle;
         var tmpList = [];
-
-        for (var i = 0; i < _self.settings.accounts.length; i++) {
-            var account = _self.settings.accounts[i];
+        // settles once every account's vault fetch has reported back:
+        // callers refreshing the list (or reloading it after a delete)
+        // must not run before the data they show has actually arrived
+        var pending = _self.settings.accounts.length;
+        return new Promise(function (resolve) {
+            for (var i = 0; i < _self.settings.accounts.length; i++) {
+                var account = _self.settings.accounts[i];
             /* jshint ignore:start */
             (function (inner_account) {
                 PAPI.getVault(inner_account, function (vault) {
+                    // settle this account no matter the outcome — even a
+                    // superseded run must release whoever waits on it
+                    pending--;
+                    if (pending === 0) {
+                        resolve();
+                    }
                     if (cycle !== credentialLoadCycle) {
                         // a newer load superseded this one — drop its results
                         return;
@@ -292,7 +305,8 @@ var background = (function () {
                 });
             }(account));
             /* jshint ignore:end */
-        }
+            }
+        });
     }
 
     _self.getCredentials = getCredentials;
@@ -385,31 +399,44 @@ var background = (function () {
     function saveCredential(credential) {
         //@TODO save shared password
         if (!credential.credential_id) {
-            PAPI.createCredential(credential.account, credential, credential.account.vault_password, function (createdCredential) {
-                local_credentials.push(createdCredential);
+            return new Promise(function (resolve, reject) {
+                PAPI.createCredential(credential.account, credential, credential.account.vault_password, function (createdCredential) {
+                    if (!createdCredential) {
+                        reject(new Error('Credential creation failed'));
+                        return;
+                    }
+                    local_credentials.push(createdCredential);
+                    resolve();
+                });
             });
-        } else {
-            var credential_index;
-            for (var i = 0; i < local_credentials.length; i++) {
-                if (local_credentials[i].guid === credential.guid) {
-                    credential_index = i;
-                    break;
-                }
+        }
+        var credential_index;
+        for (var i = 0; i < local_credentials.length; i++) {
+            if (local_credentials[i].guid === credential.guid) {
+                credential_index = i;
+                break;
             }
+        }
 
-            if (credential.hasOwnProperty('acl')) {
-                var permissons = new SharingACL(credential.acl.permissions.permission);
-                if (!permissons.hasPermission(0x02)) {
+        if (credential.hasOwnProperty('acl')) {
+            var permissons = new SharingACL(credential.acl.permissions.permission);
+            if (!permissons.hasPermission(0x02)) {
+                return Promise.reject(new Error('No write permission on this credential'));
+            }
+        }
+
+        return new Promise(function (resolve, reject) {
+            PAPI.updateCredential(credential.account, credential, credential.account.vault_password, function (updatedCredential) {
+                if (!updatedCredential) {
+                    reject(new Error('Credential update failed'));
                     return;
                 }
-            }
-
-            PAPI.updateCredential(credential.account, credential, credential.account.vault_password, function (updatedCredential) {
                 if (credential_index !== undefined) {
                     local_credentials[credential_index] = updatedCredential;
                 }
+                resolve();
             });
-        }
+        });
     }
 
     _self.saveCredential = saveCredential;
@@ -543,13 +570,15 @@ var background = (function () {
             _self.settings.ignored_sites = [];
         }
         var site = processURL(_url, false, false, true, false);
+        var persisted = Promise.resolve();
         if (_self.settings.ignored_sites.indexOf(site) === -1) {
             _self.settings.ignored_sites.push(site);
-            saveSettings(_self.settings);
+            persisted = saveSettings(_self.settings);
         }
         // pass the sender through so the mined data for the right tab is
         // cleared (and clearMined no longer throws on a missing sender)
         clearMined(null, sender);
+        return persisted;
     }
 
     _self.ignoreSite = ignoreSite;
@@ -560,8 +589,9 @@ var background = (function () {
         }
         if (_self.settings.ignored_sites.indexOf(url) === -1) {
             _self.settings.ignored_sites.push(url);
-            saveSettings(_self.settings);
+            return saveSettings(_self.settings);
         }
+        return Promise.resolve();
     }
 
     _self.ignoreURL = ignoreURL;
@@ -641,7 +671,7 @@ var background = (function () {
 
     function updateCredentialUrl(data, sender) {
         mined_data[sender.tab.id] = data;
-        saveMined({}, sender);
+        return saveMined({}, sender);
 
     }
 
@@ -670,24 +700,37 @@ var background = (function () {
         credential.password = data.password;
         credential.url = sender.tab.url;
         if (credential.guid !== null) {
-            PAPI.updateCredential(credential.account, credential, credential.account.vault_password, function (updatedCredential) {
-                updatedCredential.account = credential.account;
-                if (credential_index !== undefined) {
-                    local_credentials[credential_index] = updatedCredential;
-                }
-                saveMinedCallback({credential: credential, updated: true, sender: sender});
-                delete mined_data[sender.tab.id];
+            return new Promise(function (resolve, reject) {
+                PAPI.updateCredential(credential.account, credential, credential.account.vault_password, function (updatedCredential) {
+                    if (!updatedCredential) {
+                        reject(new Error('Credential update failed'));
+                        return;
+                    }
+                    updatedCredential.account = credential.account;
+                    if (credential_index !== undefined) {
+                        local_credentials[credential_index] = updatedCredential;
+                    }
+                    saveMinedCallback({credential: credential, updated: true, sender: sender});
+                    delete mined_data[sender.tab.id];
+                    resolve();
+                });
             });
-        } else {
-            credential.label = sender.tab.title;
-            credential.vault_id = credential.account.vault.vault_id;
+        }
+        credential.label = sender.tab.title;
+        credential.vault_id = credential.account.vault.vault_id;
+        return new Promise(function (resolve, reject) {
             PAPI.createCredential(credential.account, credential, credential.account.vault_password, function (createdCredential) {
+                if (!createdCredential) {
+                    reject(new Error('Credential creation failed'));
+                    return;
+                }
                 createdCredential.account = args.account;
                 saveMinedCallback({credential: credential, updated: false, sender: sender});
                 local_credentials.push(createdCredential);
                 delete mined_data[sender.tab.id];
+                resolve();
             });
-        }
+        });
     }
 
     _self.saveMined = saveMined;
@@ -730,11 +773,17 @@ var background = (function () {
         credential.password = args.password;
         credential.url = sender.tab.url;
         credential.vault_id = account.vault.vault_id;
-        PAPI.createCredential(account, credential, account.vault_password, function (createdCredential) {
-            credential.account = account;
-            saveMinedCallback({credential: credential, updated: false, sender: sender, selfAdded: true, frameToken: args.frameToken});
-            local_credentials.push(createdCredential);
-
+        return new Promise(function (resolve, reject) {
+            PAPI.createCredential(account, credential, account.vault_password, function (createdCredential) {
+                if (!createdCredential) {
+                    reject(new Error('Credential creation failed'));
+                    return;
+                }
+                credential.account = account;
+                saveMinedCallback({credential: credential, updated: false, sender: sender, selfAdded: true, frameToken: args.frameToken});
+                local_credentials.push(createdCredential);
+                resolve();
+            });
         });
     }
 
@@ -833,6 +882,14 @@ var background = (function () {
             result = _self[msg.method](msg.args, sender);
         }
 
+        // mutating handlers hand back a native promise for their async
+        // work — return it so the sender settles with the REAL outcome
+        // (resolving only once the write finished, rejecting on failure)
+        // instead of an instant ack that masked every error. Sync handlers
+        // keep the plain sendResponse path.
+        if (result && typeof result.then === 'function' && typeof result.catch === 'function') {
+            return result;
+        }
         sendResponse(result);
     });
 

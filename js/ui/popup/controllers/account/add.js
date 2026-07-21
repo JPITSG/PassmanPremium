@@ -172,7 +172,7 @@
                 $scope.saving = true;
                 API.runtime.sendMessage(API.runtime.id, {'method': 'getRuntimeSettings'}).then(function (settings) {
                     settings.accounts.push(account);
-                    API.runtime.sendMessage(API.runtime.id, {
+                    return API.runtime.sendMessage(API.runtime.id, {
                         method: "saveSettings",
                         args: settings
                     }).then(function () {
@@ -183,6 +183,13 @@
                         }, 750);
                     });
 
+                }).catch(function () {
+                    // the account was not persisted — re-arm the button and
+                    // say so instead of reporting it added
+                    $scope.saving = false;
+                    $scope.errors = $scope.errors || [];
+                    $scope.errors.push(API.i18n.getMessage('error'));
+                    $scope.$apply();
                 });
             };
         }]);

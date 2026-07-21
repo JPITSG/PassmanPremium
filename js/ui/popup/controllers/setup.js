@@ -218,7 +218,7 @@
                     args: {password: master_password, savePassword: master_password_remember}
                 })
                     .then(function () {
-                        API.runtime.sendMessage(API.runtime.id, {
+                        return API.runtime.sendMessage(API.runtime.id, {
                             method: "saveSettings",
                             args: settings
                         }).then(function () {
@@ -237,6 +237,13 @@
                                 $scope.$apply();
                             }, 750);
                         });
+                    })
+                    .catch(function () {
+                        // persisting the settings failed — stay on the
+                        // wizard and say so instead of completing setup
+                        $scope.saving = false;
+                        $scope.errors.push(API.i18n.getMessage('error'));
+                        $scope.$apply();
                     });
 
 

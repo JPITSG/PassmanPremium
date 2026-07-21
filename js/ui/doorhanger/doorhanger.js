@@ -34,7 +34,12 @@ $(document).ready(function () {
             return {
                 text: btnText,
                 onClickFn: function (account) {
-                    API.runtime.sendMessage(API.runtime.id, {method: "saveMined", args: {account: account}});
+                    API.runtime.sendMessage(API.runtime.id, {method: "saveMined", args: {account: account}}).catch(function () {
+                        // the write failed — restore the buttons and say so
+                        // instead of hanging on "Saving to …" forever
+                        dh.find('.toolbar-text').text(API.i18n.getMessage('error'));
+                        dh.find('.passman-btn').show();
+                    });
                     dh.find('.toolbar-text').text(API.i18n.getMessage('saving_to', [account.vault.name]) + '...');
                     dh.find('.passman-btn').hide();
                 },
@@ -45,7 +50,11 @@ $(document).ready(function () {
             return {
                 text: API.i18n.getMessage('update'),
                 onClickFn: function () {
-                    API.runtime.sendMessage(API.runtime.id, {method: "updateCredentialUrl", args: data});
+                    API.runtime.sendMessage(API.runtime.id, {method: "updateCredentialUrl", args: data}).catch(function () {
+                        // the write failed — restore the buttons and say so
+                        dh.find('.toolbar-text').text(API.i18n.getMessage('error'));
+                        dh.find('.passman-btn').show();
+                    });
                     dh.find('.toolbar-text').text(API.i18n.getMessage('saving'));
                     dh.find('.passman-btn').hide();
                 }
