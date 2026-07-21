@@ -238,18 +238,26 @@ $j(document).ready(function () {
         $j('.passwordPickerIframe:not(:last)').remove();
     }
 
-    function iconZoneHit(e) {
-        // the icon may have been shifted left past a covering page
-        // element (see createFormIcon) — the hit zone follows it
+    function iconZoneHit(el, e) {
+        // measured against the live rect (fields move and resize): the
+        // icon sits padRight px off the field's right edge in a zone one
+        // field-height wide. clientX keeps the units honest — offsetX and
+        // jQuery's width() disagree once the field has real padding, which
+        // pushed the zone off the visual icon on padded fields
         var padRight = e.data.padRight || 0;
-        var offsetRight = (e.data.width - e.offsetX);
-        return offsetRight >= padRight && offsetRight < padRight + e.data.height;
+        var clientX = (typeof e.clientX === 'number') ? e.clientX : (e.originalEvent && e.originalEvent.clientX);
+        if (typeof clientX !== 'number') {
+            return false;
+        }
+        var rect = el.getBoundingClientRect();
+        var clickRight = rect.right - clientX;
+        return clickRight >= padRight && clickRight < padRight + rect.height;
     }
 
     function onFormIconClick(e) {
         e.preventDefault();
         e.stopPropagation();
-        if (iconZoneHit(e)) {
+        if (iconZoneHit(this, e)) {
             // the icon toggles: a click while this frame's picker is open
             // closes it instead of rebuilding it on the spot
             if ($j('.passwordPickerIframe').length) {
@@ -264,7 +272,7 @@ $j(document).ready(function () {
     // element to hover — hit-test the same right-side region the click
     // handler uses and swap in a pointer cursor while over the icon
     function onFormIconHover(e) {
-        $j(this).css('cursor', iconZoneHit(e) ? 'pointer' : '');
+        $j(this).css('cursor', iconZoneHit(this, e) ? 'pointer' : '');
     }
 
     function createFormIcon(el, form) {
