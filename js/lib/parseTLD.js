@@ -14,10 +14,24 @@ var parse_host = function(host){
     for(var i=parts.length-1, part;i>=0;i--){
         part = parts[i];
         stack = stack ? part + "." + stack : part;
-        if(!tlds[stack]){
+        // exception rule ("!city.kobe.jp"): the stack itself is no suffix —
+        // the suffix is the stack minus its leftmost label
+        if(tlds["!"+stack]){
+            tld_level = tlds["!"+stack];
             break;
         }
-        tld_level = tlds[stack];
+        if(tlds[stack]){
+            tld_level = tlds[stack];
+            continue;
+        }
+        // wildcard rule ("*.ck"): any single label under the parent is a
+        // suffix. No break on a miss — deeper stacks may still match (the
+        // list carries rules like s3.amazonaws.com under a rule-less
+        // amazonaws.com); the deepest matching rule wins
+        var cut = stack.indexOf(".");
+        if(cut !== -1 && tlds["*."+stack.slice(cut+1)]){
+            tld_level = tlds["*."+stack.slice(cut+1)];
+        }
     }
     if(parts.length <= tld_level ) {
         return {
