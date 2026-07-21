@@ -1098,3 +1098,10 @@ button:focus-visible,
 	.logo-star, .icon-btn.spinning svg { animation: none; }
 	#page-content-wrapper > *, .list .list-item, .empty { animation: none; }
 }
+
+/* visible keyboard focus for the div/span controls given button/tab roles */
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible {
+    outline: 2px solid #0082c9;
+    outline-offset: 2px;
+}

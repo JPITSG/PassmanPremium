@@ -20,3 +20,9 @@
 .loginPopupIframe {
 	color-scheme: light;
 }
+
+/* visible keyboard focus for the in-field picker buttons on content pages */
+.passman-field-icon:focus-visible {
+    outline: 2px solid #0082c9;
+    outline-offset: 1px;
+}

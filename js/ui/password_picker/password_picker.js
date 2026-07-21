@@ -16,6 +16,33 @@ $(document).ready(function () {
         }
     });
 
+    // keep Tab cycling inside the dialog while it is open: past the last
+    // focusable wraps to the first, shift+Tab past the first wraps back
+    $(document).on('keydown', function (e) {
+        if (e.which !== 9) {
+            return;
+        }
+        var focusable = $(document).find('button, input, select, textarea, a[href], [tabindex]').filter(function () {
+            var ti = $(this).attr('tabindex');
+            return (ti === undefined || parseInt(ti, 10) >= 0) && $(this).is(':visible') && !$(this).is(':disabled');
+        });
+        if (!focusable.length) {
+            return;
+        }
+        var first = focusable.first()[0];
+        var last = focusable.last()[0];
+        var active = document.activeElement;
+        if (e.shiftKey) {
+            if (active === first || !$.contains(document.body, active)) {
+                e.preventDefault();
+                last.focus();
+            }
+        } else if (active === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    });
+
     API.runtime.sendMessage(API.runtime.id, {'method': 'getRuntimeSettings'}).then(function (settings) {
         var accounts = settings.accounts;
         runtimeSettings = settings;
@@ -265,10 +292,16 @@ $(document).ready(function () {
 
     var picker = $('#password_picker');
     var makeTabActive = function (name) {
-        picker.find('.tab').removeClass('active');
+        picker.find('.tab').removeClass('active').attr('aria-selected', 'false');
         picker.find('.tab-content').children().hide();
         picker.find('.tab-' + name + '-content').show();
-        picker.find('.tab.' + name).addClass('active');
+        var activeTab = picker.find('.tab.' + name).addClass('active').attr('aria-selected', 'true');
+        // keep focus on the newly active tab — unless it already lives
+        // inside the tab's content (e.g. the search input focuses itself)
+        var ae = document.activeElement;
+        if (ae === document.body || picker.find('.tab').is(ae)) {
+            activeTab.focus();
+        }
     };
 
     // re-clicking the active search tab must not blur the search input —
@@ -389,6 +422,10 @@ $(document).ready(function () {
     });
     setupAddCredentialFields();
     setupPasswordGenerator();
+
+    // move keyboard focus into the dialog on open — keyboard and screen
+    // reader users land on the active tab, mouse flows are unaffected
+    picker.find('.tab.active').focus();
 
 
     API.runtime.onMessage.addListener(function (msg, sender, sendResponse) {

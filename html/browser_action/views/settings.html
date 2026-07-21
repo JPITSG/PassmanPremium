@@ -1,6 +1,6 @@
 <div class="tab-wrap">
     <div class="tab-label-content" id="tab1-content">
-        <label ng-click="tabActive = 1;" class="tab-title" ng-class="{'active': tabActive === 1}" tabindex="0" role="tab">{{ 'general' | translate }}</label>
+        <label ng-click="tabActive = 1;" class="tab-title" ng-class="{'active': tabActive === 1}" tabindex="0" role="tab" aria-selected="{{tabActive === 1}}">{{ 'general' | translate }}</label>
         <div class="tab-content" ng-class="{'active': tabActive === 1}">
             <div class="settings-section">
                 <div class="section-label">{{ 'theme' | translate }}</div>

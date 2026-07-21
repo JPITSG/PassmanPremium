@@ -25,9 +25,17 @@ $j(document).ready(function () {
         });
     };
 
+    var lastIconTrigger;
+
     function removePasswordPicker() {
         activeForm = undefined;
         $j('.passwordPickerIframe').remove();
+        // return focus to the icon that opened the dialog — keyboard and
+        // screen-reader users must not be stranded when it disappears
+        if (lastIconTrigger && document.contains(lastIconTrigger)) {
+            lastIconTrigger.focus();
+        }
+        lastIconTrigger = undefined;
     }
 
     _this.removePasswordPicker = removePasswordPicker;
@@ -323,6 +331,8 @@ $j(document).ready(function () {
             if ($j('.passwordPickerIframe').length) {
                 removePasswordPicker();
             } else {
+                // remember who invoked the dialog so focus returns here
+                lastIconTrigger = btn;
                 showPasswordPicker(form);
             }
         });
