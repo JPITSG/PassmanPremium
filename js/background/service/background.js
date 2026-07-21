@@ -151,6 +151,17 @@ var background = (function () {
                 _self.settings.ignorePort = true;
             }
 
+            // pages loaded while the extension was locked never ran their
+            // content scripts — the readyState gate fires once and finds
+            // no master password. Every unlock funnels through this point
+            // with real settings applied, so tell each tab it may start;
+            // already-started scripts ignore the message
+            API.tabs.query({}).then(function (tabs) {
+                for (var i = 0; i < tabs.length; i++) {
+                    API.tabs.sendMessage(tabs[i].id, {method: 'extensionUnlocked'}).catch(ignoreSendError);
+                }
+            });
+
             getCredentials();
 
             if (_self.running) {

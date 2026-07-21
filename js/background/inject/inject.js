@@ -488,18 +488,36 @@ $j(document).ready(function () {
         initForms();
     }
 
+    // pages loaded while the extension is locked find no master password
+    // here and must wait for the background's extensionUnlocked broadcast
+    // to start; the started guard makes every trigger idempotent
+    var started = false;
+    function startIfUnlocked() {
+        if (started) {
+            return;
+        }
+        API.runtime.sendMessage(API.runtime.id, {method: 'getMasterPasswordSet'}).then(function (result) {
+            if (result && !started) {
+                started = true;
+                init();
+                var body = document.getElementsByTagName('body')[0];
+                if (body) {
+                    observeDOM(body, initForms);
+                }
+            }
+        });
+    }
+
+    function extensionUnlocked() {
+        startIfUnlocked();
+    }
+
+    _this.extensionUnlocked = extensionUnlocked;
+
     var readyStateCheckInterval = setInterval(function () {
         if (document.readyState === "complete") {
             clearInterval(readyStateCheckInterval);
-            API.runtime.sendMessage(API.runtime.id, {method: 'getMasterPasswordSet'}).then(function (result) {
-                if (result) {
-                    init();
-                    var body = document.getElementsByTagName('body')[0];
-                    if (body) {
-                        observeDOM(body, initForms);
-                    }
-                }
-            });
+            startIfUnlocked();
         }
     }, 10);
 
