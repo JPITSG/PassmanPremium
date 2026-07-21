@@ -363,12 +363,10 @@ var background = (function () {
         for (var i = 0; i < local_credentials.length; i++) {
             var credential_url = local_credentials[i].url;
             if (!/^(ht)tps?:\/\//i.test(credential_url) && credential_url !== '' && _url) {
-                try {
-                    var protocol = _url.split('://').shift();
-                    credential_url = protocol + "://" + credential_url;
-                } catch (e) {
-                    //ignore
-                }
+                // a scheme-less stored URL is assumed to be https: borrowing
+                // the current page's scheme would let a plain-http page
+                // satisfy the credential even when protocol matching is on
+                credential_url = 'https://' + credential_url;
             }
             credential_url = processURL(credential_url, _self.settings.ignoreProtocol, _self.settings.ignoreSubdomain, _self.settings.ignorePath, _self.settings.ignorePort);
             if (credential_url) {

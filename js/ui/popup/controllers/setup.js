@@ -39,10 +39,15 @@
                 nextcloud_host: 'https://',
                 nextcloud_username: '',
                 nextcloud_password: '',
-                ignoreProtocol: true,
-                ignoreSubdomain: true,
+                // secure-by-default matching: credentials fill only on the
+                // scheme and full host they were saved for (http pages and
+                // sibling subdomains must not satisfy a match). Path is not
+                // an origin boundary, so it stays ignored; every option
+                // remains user-configurable in the settings view
+                ignoreProtocol: false,
+                ignoreSubdomain: false,
                 ignorePath: true,
-                ignorePort: true,
+                ignorePort: false,
                 generatedPasswordLength: 12,
                 remember_password: true,
                 vault_password: '',

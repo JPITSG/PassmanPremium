@@ -36,9 +36,11 @@
         .controller('SettingsCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
             $scope.settings = {
                 accounts: [],
-                ignoreProtocol: true,
-                ignoreSubdomain: true,
-                ignorePort: true,
+                // placeholder until getRuntimeSettings resolves — mirrors
+                // the secure-by-default matching used for new setups
+                ignoreProtocol: false,
+                ignoreSubdomain: false,
+                ignorePort: false,
                 ignorePath: true,
                 generatedPasswordLength: 12,
                 remember_password: true,
