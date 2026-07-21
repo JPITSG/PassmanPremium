@@ -6,6 +6,11 @@
    Layout stays float-based on purpose: doorhanger.js appends buttons in
    primary-first order and relies on float:right to put Save rightmost. */
 
+/* a color-scheme differing from the iframe element's turns the frame's
+   transparent backdrop into an opaque canvas — pin to light on both
+   sides (element side lives in doorhanger-iframe.css) */
+:root, :root[data-theme] { color-scheme: light; }
+
 body {
 	padding: 0;
 	margin: 0;

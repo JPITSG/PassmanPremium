@@ -1,7 +1,12 @@
 /* Injected into host pages by the content script — positions the Passman
-   doorhanger iframe. inject.js sets height/width attributes and a
-   page-specific z-index inline; keep this rule minimal so it can't fight
-   host-page styles. */
+   doorhanger iframe and pins the color-scheme of every Passman frame
+   element: when an iframe element's scheme differs from its framed
+   document's, the browser trades the transparent backdrop for an opaque
+   canvas (a big dark square in dark mode). The framed documents pin
+   themselves to light in their own stylesheets, so both sides always
+   match no matter what the host page or the browser theme uses.
+   inject.js sets height/width attributes and a page-specific z-index
+   inline; keep these rules minimal so they can't fight host styles. */
 #password-toolbarIframe {
 	position: fixed;
 	z-index: 99999;
@@ -9,5 +14,9 @@
 	left: 0;
 	border: 0;
 	background: transparent;
-	color-scheme: normal;
+}
+#password-toolbarIframe,
+.passwordPickerIframe,
+.loginPopupIframe {
+	color-scheme: light;
 }

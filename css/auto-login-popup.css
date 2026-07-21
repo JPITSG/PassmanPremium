@@ -3,6 +3,11 @@
    behind it; this card floats centered with a CSS-only spinner (the JS
    replaces the .container text nodes, pseudo-elements survive that). */
 
+/* a color-scheme differing from the iframe element's turns the frame's
+   transparent backdrop into an opaque canvas — pin to light on both
+   sides (element side lives in doorhanger-iframe.css) */
+:root, :root[data-theme] { color-scheme: light; }
+
 body {
 	font: 14px/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	background-color: transparent;
