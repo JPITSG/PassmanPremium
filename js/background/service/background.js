@@ -96,7 +96,13 @@ var background = (function () {
     function getSettings() {
 
         storage.get('settings').then(function (_settings) {
-            if ((!_settings || Object.keys(_settings).length === 0 || !_settings.hasOwnProperty('accounts')) && !master_password) {
+            // nothing to apply yet: a fresh profile has no settings key at
+            // all, and a just-reset one has an empty object — either way
+            // there are no accounts to decrypt. Decrypting the absent
+            // field would throw, and the catch below would lock the
+            // extension and wipe a just-remembered master password;
+            // saveSettings re-runs this once real settings are stored
+            if (!_settings || Object.keys(_settings).length === 0 || !_settings.hasOwnProperty('accounts')) {
                 return;
             }
             if (!master_password && _settings.hasOwnProperty('accounts') && _settings.accounts.length > 0) {
