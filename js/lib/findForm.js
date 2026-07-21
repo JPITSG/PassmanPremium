@@ -237,7 +237,12 @@ function setNativeValue(element, value) {
 }
 
 function dispatchEvents(element){
-    var eventNames = [ 'click', 'focus', 'keypress', 'keydown', 'keyup', 'input', 'blur', 'change' ];
+    // input/change FIRST: they register the freshly set value into the
+    // page's framework state (React/Vue controlled inputs). focus/blur
+    // re-render controlled inputs from that state — fired before the
+    // value is registered (as the old click,focus,…,input order did)
+    // they revert the field to its previous state and the fill vanishes
+    var eventNames = [ 'input', 'change', 'click', 'focus', 'keypress', 'keydown', 'keyup', 'blur' ];
     eventNames.forEach(function(eventName) {
         element.dispatchEvent(new Event(eventName, {"bubbles":true}));
     });
