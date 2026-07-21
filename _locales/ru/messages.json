@@ -596,5 +596,9 @@
   "credentials_refreshed": {
     "message": "Учётные данные обновлены",
     "description": "Header status flash after a manual refresh completes"
+  },
+  "open_password_picker": {
+    "message": "Открыть выбор пароля",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }

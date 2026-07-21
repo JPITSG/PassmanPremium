@@ -596,5 +596,9 @@
   "credentials_refreshed": {
     "message": "Credenziali aggiornate",
     "description": "Header status flash after a manual refresh completes"
+  },
+  "open_password_picker": {
+    "message": "Apri selettore password",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }

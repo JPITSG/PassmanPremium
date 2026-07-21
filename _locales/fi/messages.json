@@ -596,5 +596,9 @@
   "credentials_refreshed": {
     "message": "Tunnisteet päivitetty",
     "description": "Header status flash after a manual refresh completes"
+  },
+  "open_password_picker": {
+    "message": "Avaa salasanavalitsin",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }

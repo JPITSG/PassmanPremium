@@ -6,6 +6,16 @@ $(document).ready(function () {
     // defaults to the host page's title, delivered via returnActiveTab
     var pageTitle = '';
 
+    // keyboard activation for role-annotated controls: Enter or Space on a
+    // focused tab/button acts like a click (they are divs and spans, so the
+    // browser gives them no keyboard semantics of their own)
+    $(document).on('keydown', '[role="button"], [role="tab"]', function (e) {
+        if (e.which === 13 || e.which === 32) {
+            e.preventDefault();
+            this.click();
+        }
+    });
+
     API.runtime.sendMessage(API.runtime.id, {'method': 'getRuntimeSettings'}).then(function (settings) {
         var accounts = settings.accounts;
         runtimeSettings = settings;
@@ -346,7 +356,7 @@ $(document).ready(function () {
             }
             for (var i = 0; i < logins.length; i++) {
                 var login = logins[i];
-                var div = $('<div>', {class: 'account', text: login.label});
+                var div = $('<div>', {class: 'account', text: login.label, role: 'button', tabindex: '0'});
                 $('<br>').appendTo(div);
                 var username = (login.username !== '' ) ? login.username : login.email;
                 $('<small>').text(username).appendTo(div);
@@ -421,7 +431,7 @@ $(document).ready(function () {
             }
             for (var i = 0; i < result.length; i++) {
                 var login = result[i];
-                var div = $('<div>', {class: 'account', text: login.label});
+                var div = $('<div>', {class: 'account', text: login.label, role: 'button', tabindex: '0'});
                 $('<br>').appendTo(div);
 
                 var username = (login.username !== '' ) ? login.username : login.email;

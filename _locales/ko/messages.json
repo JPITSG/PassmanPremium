@@ -596,5 +596,9 @@
   "credentials_refreshed": {
     "message": "자격 증명을 새로 고쳤습니다",
     "description": "Header status flash after a manual refresh completes"
+  },
+  "open_password_picker": {
+    "message": "비밀번호 선택기 열기",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }

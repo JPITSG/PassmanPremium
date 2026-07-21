@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    // keyboard activation for role-annotated controls: Enter or Space on a
+    // focused button acts like a click (the vault selector is built from
+    // spans and divs with no native keyboard semantics)
+    $(document).on('keydown', '[role="button"]', function (e) {
+        if (e.which === 13 || e.which === 32) {
+            e.preventDefault();
+            this.click();
+        }
+    });
+
     function closeDoorhanger() {
         $('#password-doorhanger').slideUp(function () {
             API.runtime.sendMessage(API.runtime.id, {
@@ -109,7 +119,7 @@ $(document).ready(function () {
                     });
 
                     if (button.isCreate && accounts.length > 1) {
-                        var caret_container =  $('<span class="passman-btn caret-container"></span>').append('<span class="caret-container-txt"></span>');
+                        var caret_container =  $('<span class="passman-btn caret-container" role="button" tabindex="0"></span>').append('<span class="caret-container-txt"></span>');
                         caret_container.find('.caret-container-txt').text(default_account.vault.name);
                         var caret = $('<span class="fa fa-caret-down" style="margin-left: 5px; cursor: pointer;"></span>');
                         var menu = $('<div class="select_account" style="display: none;"></div>');
@@ -117,7 +127,7 @@ $(document).ready(function () {
                         doorhanger_div.append(caret_container);
                         for (var i = 1; i < accounts.length; i++) {
                             var a = accounts[i];
-                            var item = $('<div class="account"></div>').text(API.i18n.getMessage('save_to', [a.vault.name]));
+                            var item = $('<div class="account" role="button" tabindex="0"></div>').text(API.i18n.getMessage('save_to', [a.vault.name]));
                             /* jshint ignore:start */
                             (function (account, item) {
                                 item.click(function (e) {

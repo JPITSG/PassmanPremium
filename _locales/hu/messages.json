@@ -596,5 +596,9 @@
   "credentials_refreshed": {
     "message": "Hitelesítő adatok frissítve",
     "description": "Header status flash after a manual refresh completes"
+  },
+  "open_password_picker": {
+    "message": "Jelszóválasztó megnyitása",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }

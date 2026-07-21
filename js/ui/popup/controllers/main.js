@@ -34,6 +34,18 @@
      */
     angular.module('passmanExtension')
         .controller('MainCtrl', ['$scope', 'Settings', '$rootScope', '$timeout', function ($scope, Settings, $rootScope, $timeout) {
+            // keyboard activation for role-annotated div/span controls:
+            // Enter or Space acts like a click, once, app-wide
+            document.addEventListener('keydown', function (e) {
+                if ((e.which === 13 || e.which === 32) && e.target.closest) {
+                    var control = e.target.closest('[role="button"], [role="tab"]');
+                    if (control) {
+                        e.preventDefault();
+                        control.click();
+                    }
+                }
+            });
+
             var port = API.runtime.connect(null, {
                 name: "PassmanCommunication"
             });

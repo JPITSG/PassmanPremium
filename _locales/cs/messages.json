@@ -596,5 +596,9 @@
   "credentials_refreshed": {
     "message": "Pověření byla obnovena",
     "description": "Header status flash after a manual refresh completes"
+  },
+  "open_password_picker": {
+    "message": "Otevřít výběr hesla",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }

@@ -596,5 +596,9 @@
   "credentials_refreshed": {
     "message": "凭据已刷新",
     "description": "Header status flash after a manual refresh completes"
+  },
+  "open_password_picker": {
+    "message": "打开密码选择器",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }

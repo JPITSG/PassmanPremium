@@ -578,5 +578,9 @@
   "text": {
     "message": "Texto",
     "description": "To describe a textual input field"
+  },
+  "open_password_picker": {
+    "message": "Abrir o seleccionador de contrasinais",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }

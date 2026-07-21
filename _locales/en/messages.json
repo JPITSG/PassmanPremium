@@ -608,5 +608,9 @@
   "credentials_refreshed": {
     "message": "Credentials refreshed",
     "description": "Header status flash after a manual refresh completes"
+  },
+  "open_password_picker": {
+    "message": "Open password picker",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }

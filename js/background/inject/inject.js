@@ -238,42 +238,31 @@ $j(document).ready(function () {
         $j('.passwordPickerIframe:not(:last)').remove();
     }
 
-    function iconZoneHit(el, e) {
-        // measured against the live rect (fields move and resize): the
-        // icon sits padRight px off the field's right edge in a zone one
-        // field-height wide. clientX keeps the units honest — offsetX and
-        // jQuery's width() disagree once the field has real padding, which
-        // pushed the zone off the visual icon on padded fields
-        var padRight = e.data.padRight || 0;
-        var clientX = (typeof e.clientX === 'number') ? e.clientX : (e.originalEvent && e.originalEvent.clientX);
-        if (typeof clientX !== 'number') {
-            return false;
-        }
-        var rect = el.getBoundingClientRect();
-        var clickRight = rect.right - clientX;
-        return clickRight >= padRight && clickRight < padRight + rect.height;
+    // the field icon is a real button: keyboard-focusable and ARIA-labeled
+    // (the old background-image hit target was mouse-only), and able to
+    // stack above page controls. Buttons are tracked so they follow their
+    // field through reflows and disappear when the field does
+    var iconRegistry = [];
+
+    function positionIcon(entry) {
+        var r = entry.field.getBoundingClientRect();
+        entry.btn.style.left = (r.right + window.scrollX - entry.padRight - 3 - entry.size) + 'px';
+        entry.btn.style.top = (r.top + window.scrollY + ((r.height - entry.size) / 2)) + 'px';
     }
 
-    function onFormIconClick(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (iconZoneHit(this, e)) {
-            // the icon toggles: a click while this frame's picker is open
-            // closes it instead of rebuilding it on the spot
-            if ($j('.passwordPickerIframe').length) {
-                removePasswordPicker();
+    function refreshIcons() {
+        for (var i = iconRegistry.length - 1; i >= 0; i--) {
+            var entry = iconRegistry[i];
+            if (!document.contains(entry.field) || !entry.field.hasAttribute('data-passman-field')) {
+                entry.btn.parentNode.removeChild(entry.btn);
+                iconRegistry.splice(i, 1);
             } else {
-                showPasswordPicker(e.data.form);
+                positionIcon(entry);
             }
         }
     }
 
-    // the picker icon is a background image on the field, so there is no
-    // element to hover — hit-test the same right-side region the click
-    // handler uses and swap in a pointer cursor while over the icon
-    function onFormIconHover(e) {
-        $j(this).css('cursor', iconZoneHit(this, e) ? 'pointer' : '');
-    }
+    window.addEventListener('resize', refreshIcons);
 
     function createFormIcon(el, form) {
         // loginFields entries may carry a null third field — an empty
@@ -281,44 +270,62 @@ $j(document).ready(function () {
         if (!el[0]) {
             return;
         }
-        var offset = el.offset();
-        var width = el.width();
-        var height = el.height() * 1;
-        var margin = (el.css('margin')) ? parseInt(el.css('margin').replace('px', '')) : 0;
-        var padding = (el.css('padding')) ? parseInt(el.css('padding').replace('px', '')) : 0;
+        var elRect = el[0].getBoundingClientRect();
+        if (!elRect.height) {
+            return;
+        }
 
-        var pickerIcon = API.extension.getURL('/icons/icon.svg');
-
-        // a background image can never out-z-index a real element — when a
-        // page control (a password-visibility "eye", a site button) sits on
-        // top of the icon zone, shift the icon left past it so neither
+        // when a page control (a password-visibility "eye", a site button)
+        // sits on top of the icon zone, park the icon left of it so neither
         // covers the other and both stay clickable
         var padRight = 0;
-        var elRect = el[0].getBoundingClientRect();
-        if (elRect.height > 0) {
-            var probeX = elRect.right - 4 - ((elRect.height * 0.75) / 2);
-            if (probeX > elRect.left) {
-                var topEl = document.elementFromPoint(probeX, elRect.top + (elRect.height / 2));
-                if (topEl && topEl !== el[0] && !el[0].contains(topEl)) {
-                    var cover = topEl.getBoundingClientRect();
-                    padRight = Math.max(0, Math.ceil(elRect.right - cover.left));
-                    // anything wider than ~2 icons is not an adornment —
-                    // don't let a stray overlay push the icon away entirely
-                    if (padRight > Math.ceil(elRect.height * 2)) {
-                        padRight = 0;
-                    }
+        var probeX = elRect.right - 4 - ((elRect.height * 0.75) / 2);
+        if (probeX > elRect.left) {
+            var topEl = document.elementFromPoint(probeX, elRect.top + (elRect.height / 2));
+            if (topEl && topEl !== el[0] && !el[0].contains(topEl)) {
+                var cover = topEl.getBoundingClientRect();
+                padRight = Math.max(0, Math.ceil(elRect.right - cover.left));
+                // anything wider than ~2 icons is not an adornment — don't
+                // let a stray overlay push the icon away entirely
+                if (padRight > Math.ceil(elRect.height * 2)) {
+                    padRight = 0;
                 }
             }
         }
 
-        $j(el).css('background-image', 'url("' + pickerIcon + '")');
-        $j(el).css('background-repeat', 'no-repeat');
-        $j(el).css('cssText', el.attr('style') + ' background-position: right ' + (padRight + 3) + 'px center !important; background-size: auto 75% !important;');
+        var size = Math.round(elRect.height * 0.75);
+        var label = API.i18n.getMessage('open_password_picker');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'passman-field-icon';
+        btn.setAttribute('aria-label', label);
+        btn.setAttribute('title', label);
+        var s = btn.style;
+        s.position = 'absolute';
+        s.width = size + 'px';
+        s.height = size + 'px';
+        s.padding = '0';
+        s.margin = '0';
+        s.border = 'none';
+        s.background = 'transparent url("' + API.extension.getURL('/icons/icon.svg') + '") no-repeat center / contain';
+        s.cursor = 'pointer';
+        s.zIndex = '9999';
+        var entry = {btn: btn, field: el[0], padRight: padRight, size: size};
+        positionIcon(entry);
+        document.body.appendChild(btn);
+        iconRegistry.push(entry);
 
-        $j(el).unbind('click', onFormIconClick);
-        $j(el).click({width: width, height: height, form: form, padRight: padRight}, onFormIconClick);
-        $j(el).unbind('mousemove', onFormIconHover);
-        $j(el).mousemove({width: width, height: height, padRight: padRight}, onFormIconHover);
+        $j(btn).on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // the icon toggles: a click while this frame's picker is open
+            // closes it instead of rebuilding it on the spot
+            if ($j('.passwordPickerIframe').length) {
+                removePasswordPicker();
+            } else {
+                showPasswordPicker(form);
+            }
+        });
     }
 
     function createPasswordPicker(form) {
@@ -417,6 +424,9 @@ $j(document).ready(function () {
     var flagFilledForm = false;
     var initRanOnce = false;
     function initForms() {
+        // icons track their fields through every pass — including the ones
+        // the field-change gate below would otherwise skip entirely
+        refreshIcons();
         var loginFields = getLoginFields();
         // Mark newly appeared login fields: DOM mutations fire for every
         // unrelated node insertion on dynamic pages, so the full round

@@ -596,5 +596,9 @@
   "credentials_refreshed": {
     "message": "Kredencialet u rifreskuan",
     "description": "Header status flash after a manual refresh completes"
+  },
+  "open_password_picker": {
+    "message": "Hap përzgjedhësin e fjalëkalimit",
+    "description": "Aria label for the in-field button that opens the password picker"
   }
 }
