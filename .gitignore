@@ -9,3 +9,8 @@ Thumbs.db
 
 # Tooling / dependency directories (if introduced later)
 node_modules/
+
+# Signing workflow — credentials, signed artifacts, local runbook
+.amo-credentials
+web-ext-artifacts/
+AGENTS.md
