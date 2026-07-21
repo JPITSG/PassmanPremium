@@ -60,8 +60,8 @@ window.contextMenu = (function () {
                         fields[f].found = true;
                         /* jshint ignore:start */
                         createMenuItem(field.menu, field.menu + ':' + login.guid, login.label, (function (field, login) {
-                            return function () {
-                                itemClickCallback(field, login);
+                            return function (info) {
+                                itemClickCallback(field, login, info);
                             };
                         })(field, menuLogin));
                         /* jshint ignore:end */
@@ -78,18 +78,18 @@ window.contextMenu = (function () {
 
         },
         addPasswordGenerator: function(){
-            createMenuItem('generatePassword', 'copyGen', 'And copy to clipboard', function(){
+            createMenuItem('generatePassword', 'copyGen', 'And copy to clipboard', function(info){
                 generatePass(function (generated_password) {
                     API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
                         if (!tabs[0]) {
                             return;
                         }
-                        return API.tabs.sendMessage(tabs[0].id, {method: "copyText", args: generated_password});
+                        return API.tabs.sendMessage(tabs[0].id, {method: "copyText", args: generated_password}, frameOptions(info));
                     }).catch(ignoreSendError);
                 });
             });
 
-            createMenuItem('generatePassword', 'fill', 'And fill fields', function(){
+            createMenuItem('generatePassword', 'fill', 'And fill fields', function(info){
                 generatePass(function (generated_password) {
                     var login = {
                         password: generated_password
@@ -98,7 +98,7 @@ window.contextMenu = (function () {
                         if (!tabs[0]) {
                             return;
                         }
-                        return API.tabs.sendMessage(tabs[0].id, {method: "enterLoginDetails", args: login});
+                        return API.tabs.sendMessage(tabs[0].id, {method: "enterLoginDetails", args: login}, frameOptions(info));
                     }).catch(ignoreSendError);
                 });
 
@@ -218,7 +218,19 @@ window.contextMenu = (function () {
     // and not worth an unhandled rejection in the console
     function ignoreSendError() {}
 
-    function itemClickCallback(menu_action, login) {
+    // secret-bearing messages must reach only the frame that was
+    // right-clicked: without a frameId Firefox delivers a tab message to
+    // every frame, filling/copying credentials into hostile iframes too.
+    // Fall back to tab-wide delivery only when the click data carries no
+    // frame id (older API), which is the pre-existing behavior
+    function frameOptions(info) {
+        if (info && typeof info.frameId === 'number') {
+            return {frameId: info.frameId};
+        }
+        return undefined;
+    }
+
+    function itemClickCallback(menu_action, login, info) {
         var action = menu_action.menu.split(':', 1)[0];
 
         if (action === 'copy') {
@@ -232,7 +244,7 @@ window.contextMenu = (function () {
                     window.OTP.secret = login.totp;
                     text =  window.OTP.getOTP();
                 }
-                return API.tabs.sendMessage(tabs[0].id, {method: "copyText", args: text});
+                return API.tabs.sendMessage(tabs[0].id, {method: "copyText", args: text}, frameOptions(info));
             }).catch(ignoreSendError);
             return;
         }
@@ -242,7 +254,7 @@ window.contextMenu = (function () {
                 if (!tabs[0]) {
                     return;
                 }
-                return API.tabs.sendMessage(tabs[0].id, {method: "enterLoginDetails", args: login});
+                return API.tabs.sendMessage(tabs[0].id, {method: "enterLoginDetails", args: login}, frameOptions(info));
             }).catch(ignoreSendError);
         }
     }

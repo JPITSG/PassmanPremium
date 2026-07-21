@@ -517,8 +517,26 @@ var background = (function () {
 
     function saveMinedCallback(args) {
         createIconForTab(args.sender.tab);
-        API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
-            return API.tabs.sendMessage(args.sender.tab.id, {method: "minedLoginSaved", args: args});
+        var tabId = args.sender.tab.id;
+        if (args.selfAdded) {
+            // credential added from the in-page picker: the top frame
+            // renders the confirmation doorhanger (and refills top-level
+            // forms)...
+            API.tabs.sendMessage(tabId, {method: "minedLoginSaved", args: args}, {frameId: 0}).catch(ignoreSendError);
+            // ...and the frame that owns the picker refills its own form,
+            // routed by the picker's frame token so no other frame ever
+            // receives — let alone enters — the plaintext credential
+            if (args.frameToken) {
+                API.tabs.sendMessage(tabId, {method: "minedLoginSaved", args: args, frameToken: args.frameToken}).catch(ignoreSendError);
+            }
+            return;
+        }
+        // the open doorhanger only needs the outcome to update its label
+        // and close itself — broadcast a scrubbed payload so the saved
+        // credential never leaves the background page at all
+        API.tabs.sendMessage(tabId, {
+            method: "minedLoginSaved",
+            args: {updated: !!args.updated}
         }).catch(ignoreSendError);
     }
 
@@ -551,7 +569,11 @@ var background = (function () {
     _self.ignoreURL = ignoreURL;
 
     function passToParent(args, sender) {
-        API.tabs.sendMessage(sender.tab.id, {method: args.injectMethod, args: args.args}).catch(ignoreSendError);
+        API.tabs.sendMessage(sender.tab.id, {
+            method: args.injectMethod,
+            args: args.args,
+            frameToken: args.frameToken
+        }).catch(ignoreSendError);
     }
 
     _self.passToParent = passToParent;
@@ -608,10 +630,12 @@ var background = (function () {
             var data = login;
             data.url = tab.url;
             data.title = API.i18n.getMessage('detected_changed_url') + ':';
+            // doorhangers render in the top frame only — deliver there
+            // directly instead of broadcasting the credential tab-wide
             return API.tabs.sendMessage(tab.id, {
                 method: 'showUrlUpdateDoorhanger',
                 args: {data: data}
-            });
+            }, {frameId: 0});
         }).catch(ignoreSendError);
     }
 
@@ -710,7 +734,7 @@ var background = (function () {
         credential.vault_id = account.vault.vault_id;
         PAPI.createCredential(account, credential, account.vault_password, function (createdCredential) {
             credential.account = account;
-            saveMinedCallback({credential: credential, updated: false, sender: sender, selfAdded: true});
+            saveMinedCallback({credential: credential, updated: false, sender: sender, selfAdded: true, frameToken: args.frameToken});
             local_credentials.push(createdCredential);
 
         });

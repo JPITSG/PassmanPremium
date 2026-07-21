@@ -178,6 +178,11 @@ $j(document).ready(function () {
     }
 
     var activeForm;
+    // token of this frame's open password picker: secret-bearing relays
+    // from the background carry it and are acted on only by the frame
+    // whose picker requested them — a credential chosen in one frame's
+    // picker must never be entered into another frame's forms
+    var activePickerToken;
 
     function showPasswordPicker(form) {
         var jPasswordPicker = $j('.passwordPickerIframe');
@@ -219,7 +224,8 @@ $j(document).ready(function () {
         var anchorField = (loginFieldPos && loginFieldVisible) ? loginField : passwordField;
         var frameWidth = Math.max(276, Math.round(anchorField.outerWidth()) + 16);
 
-        var pickerUrl = API.extension.getURL('/html/inject/password_picker.html');
+        activePickerToken = Math.random().toString(36).slice(2) + Date.now().toString(36);
+        var pickerUrl = API.extension.getURL('/html/inject/password_picker.html') + '#' + activePickerToken;
 
         var picker = $j('<iframe class="passwordPickerIframe" scrolling="no" height="385" frameborder="0" src="' + pickerUrl + '"></iframe>');
         picker.css('position', 'absolute');
@@ -483,6 +489,13 @@ $j(document).ready(function () {
 
     API.runtime.onMessage.addListener(function (msg, sender) {
         //console.log('Method call', msg.method);
+        // relays meant for one frame's picker carry its token — Firefox
+        // delivers tab messages to every frame, so without this check an
+        // enterLoginDetails/minedLoginSaved relay would fill the plaintext
+        // credential into every frame's forms, hostile iframes included
+        if (msg.frameToken && msg.frameToken !== activePickerToken) {
+            return;
+        }
         if (_this[msg.method]) {
             _this[msg.method](msg.args, sender);
         }

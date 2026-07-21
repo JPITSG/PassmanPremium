@@ -50,7 +50,11 @@ $(document).ready(function () {
             method: 'passToParent',
             args: {
                 injectMethod: 'enterLoginDetails',
-                args: login
+                args: login,
+                // ties this fill to the frame that opened this picker (its
+                // token is in our URL hash) — the background relays it and
+                // only that frame enters the credential
+                frameToken: window.location.hash.slice(1)
             }
         }).then(function () {
             removePasswordPicker();
@@ -116,7 +120,10 @@ $(document).ready(function () {
                     label: labelfield.val(),
                     username: userfield.val(),
                     password: pwfield.val(),
-                    vaultIndex: vaultfield.val()
+                    vaultIndex: vaultfield.val(),
+                    // same routing token as fillLogin: the post-save
+                    // refill must land in the frame owning this picker
+                    frameToken: window.location.hash.slice(1)
                 }
             }).then(removePasswordPicker);
         });
