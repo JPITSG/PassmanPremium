@@ -1,0 +1,11 @@
+# Built package — rebuild from source (see README.md)
+passman-premium.xpi
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Tooling / dependency directories (if introduced later)
+node_modules/
