@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Odświeżanie [s]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Notatki",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Nie można połączyć się z tym serwerem przez HTTPS. Sprawdź adres lub kontynuuj przez nieszyfrowane HTTP:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Użyj mimo to http:// (niezalecane)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "Hasło główne musi mieć co najmniej 8 znaków.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Tych danych logowania nie udało się w pełni odszyfrować — zapisane dane są uszkodzone. Aby chronić rekord, nie można go edytować; usuń go i utwórz nowy.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Motyw",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "System",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Jasny",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Ciemny",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "O programie",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Brak pól niestandardowych.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "Załadowano $AMOUNT$ danych logowania",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Wszystko jest skonfigurowane i gotowe do użycia. Otwórz Passman Premium na pasku narzędzi, aby przeglądać swoje dane logowania — pasujące loginy są proponowane na każdej stronie, a nowe można zapisywać podczas przeglądania.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Generuj",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Błąd",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Nie można połączyć się z serwerem — upłynął limit czasu połączenia.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Nie można połączyć się z serwerem ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Dane logowania odświeżone",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

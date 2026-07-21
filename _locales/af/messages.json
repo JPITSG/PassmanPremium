@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Verfris tydhouer [s]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Notas",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Kon hierdie bediener nie oor HTTPS bereik nie. Gaan die adres na, of gaan voort oor ongekodeerde HTTP:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Gebruik http:// in elk geval (nie aanbeveel nie)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "Die hoofwagwoord moet minstens 8 karakters lank wees.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Hierdie geloofsbrief kon nie volledig ontsleutel word nie — die gestoorde data is beskadig. Om die rekord te beskerm kan dit nie gewysig word nie; skrap dit en skep ’n nuwe een.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Tema",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "Stelsel",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Lig",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Donker",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "Oor",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Nog geen pasgemaakte velde nie.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "$AMOUNT$ geloofsbriewe gelaai",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Alles is opgestel en gereed vir gebruik. Maak Passman Premium vanaf die nutsbalk oop om jou geloofsbriewe te blaai — passende aanmeldings word op elke werf voorgestel, en nuwe aanmeldings kan gestoor word soos jy blaai.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Genereer",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Fout",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Kon die bediener nie bereik nie — die verbinding het uitgetel.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Kon die bediener nie bereik nie ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Geloofsbriewe is verfris",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

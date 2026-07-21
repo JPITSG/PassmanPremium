@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "刷新計時器",
     "description": "Password"
+  },
+  "notes": {
+    "message": "備註",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "無法透過 HTTPS 連線此伺服器。請檢查網址，或改用未加密的 HTTP 繼續：",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "仍使用 http://（不建議）",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "主密碼長度至少為 8 個字元。",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "此憑據無法完全解密——儲存的資料已損毀。為保護該記錄，無法編輯；請刪除後重新建立。",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "主題",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "系統",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "淺色",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "深色",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "關於",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "尚無自訂欄位。",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "已載入 $AMOUNT$ 筆憑據",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "一切已設定完畢，可以開始使用。從工具列開啟 Passman Premium 即可瀏覽您的憑據——每個網站都會建議相符的登入資訊，瀏覽時還可以儲存新的登入資訊。",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "產生",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "錯誤",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "無法連線伺服器——連線逾時。",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "無法連線伺服器（$ERROR$）。",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "憑據已重新整理",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

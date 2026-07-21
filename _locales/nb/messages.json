@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Gjenoppfriskningstidtaker [s]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Notater",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Kunne ikke nå denne serveren over HTTPS. Sjekk adressen, eller fortsett over ukryptert HTTP:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Bruk http:// likevel (ikke anbefalt)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "Hovedpassordet må være minst 8 tegn langt.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Disse legitimationsopplysningene kunne ikke dekrypteres fullstendig — de lagrede dataene er skadet. For å beskytte oppføringen kan den ikke redigeres; slett den og opprett en ny.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Tema",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "System",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Lys",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Mørk",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "Om",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Ingen egendefinerte felt ennå.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "$AMOUNT$ legitimationsopplysninger lastet",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Alt er konfigurert og klart til bruk. Åpne Passman Premium fra verktøylinjen for å bla gjennom legitimationsopplysningene dine — passende pålogginger foreslås på hvert nettsted, og nye kan lagres mens du surfer.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Generer",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Feil",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Kunne ikke nå serveren — tilkoblingen tok slutt.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Kunne ikke nå serveren ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Legitimationsopplysninger oppdatert",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Obnovit časovač [s]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Poznámky",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Server se nepodařilo kontaktovat přes HTTPS. Zkontrolujte adresu, nebo pokračujte přes nešifrované HTTP:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Přesto použít http:// (nedoporučujeme)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "Hlavní heslo musí mít alespoň 8 znaků.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Toto pověření se nepodařilo plně dešifrovat — uložená data jsou poškozená. Aby byl záznam chráněn, nelze jej upravit; odstraňte jej a vytvořte nový.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Motiv",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "Systém",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Světlý",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Tmavý",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "O aplikaci",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Zatím žádná vlastní pole.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "Načteno $AMOUNT$ pověření",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Vše je nakonfigurované a připravené k použití. Otevřete Passman Premium z panelu nástrojů a procházejte svá pověření — na každém webu se nabídnou odpovídající přihlašovací údaje a nové lze při prohlížení ukládat.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Generovat",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Chyba",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Server se nepodařilo kontaktovat — vypršel časový limit připojení.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Server se nepodařilo kontaktovat ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Pověření byla obnovena",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

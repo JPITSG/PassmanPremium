@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "განახლების ტაიმერი [წმ]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "შენიშვნები",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "ამ სერვერთან HTTPS-ით დაკავშირება ვერ მოხერხდა. შეამოწმეთ მისამართი ან განაგრძეთ დაუშიფრავი HTTP-ით:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "მაინც გამოიყენეთ http:// (არ არის რეკომენდებული)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "მთავარი პაროლი უნდა შედგებოდეს მინიმუმ 8 სიმბოლოსგან.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "ეს რწმუნებათა სიგელი ვერ გაიშიფრა სრულად — შენახული მონაცემები დაზიანებულია. ჩანაწერის დასაცავად მისი რედაქტირება შეუძლებელია; წაშალეთ იგი და შექმენით ახალი.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "თემა",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "სისტემა",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "ღია",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "მუქი",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "შესახებ",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "ჯერ არ არის მორგებული ველები.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "ჩაიტვირთა $AMOUNT$ რწმუნებათა სიგელი",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "ყველაფერი კონფიგურირებულია და მზადაა გამოსაყენებლად. გახსენით Passman Premium ინსტრუმენტების ზოლიდან თქვენი რწმუნებათა სიგელების სანახავად — შესაბამისი შესვლები შემოგთავაზდებათ ყველა საიტზე, ახლის შენახვა კი შეგიძლიათ დათვალიერებისას.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "გენერაცია",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "შეცდომა",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "სერვერთან დაკავშირება ვერ მოხერხდა — კავშირის დრო ამოიწურა.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "სერვერთან დაკავშირება ვერ მოხერხდა ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "რწმუნებათა სიგელები განახლდა",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

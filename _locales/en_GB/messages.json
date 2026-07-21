@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Refresh timer [s]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Notes",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Could not reach this server over HTTPS. Check the address, or continue over unencrypted HTTP:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Use http:// anyway (not recommended)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "The master password must be at least 8 characters long.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "This credential could not be fully decrypted — the stored data is damaged. To protect the record it cannot be edited; delete it and create a new one.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Theme",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "System",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Light",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Dark",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "About",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "No custom fields yet.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "$AMOUNT$ credentials loaded",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Everything is configured and ready to use. Open Passman Premium from the toolbar to browse your credentials — matching logins are suggested on every site, and new logins can be saved as you browse.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Generate",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Error",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Could not reach the server — the connection timed out.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Could not reach the server ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Credentials refreshed",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Aktualisierungstimer",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Notizen",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Dieser Server ist über HTTPS nicht erreichbar. Prüfen Sie die Adresse oder fahren Sie über unverschlüsseltes HTTP fort:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Trotzdem http:// verwenden (nicht empfohlen)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "Das Master-Passwort muss mindestens 8 Zeichen lang sein.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Diese Zugangsdaten konnten nicht vollständig entschlüsselt werden — die gespeicherten Daten sind beschädigt. Zum Schutz des Datensatzes kann er nicht bearbeitet werden; löschen Sie ihn und erstellen Sie einen neuen.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Design",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "System",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Hell",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Dunkel",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "Über",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Noch keine benutzerdefinierten Felder.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "$AMOUNT$ Zugangsdaten geladen",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Alles ist eingerichtet und einsatzbereit. Öffnen Sie Passman Premium über die Symbolleiste, um Ihre Zugangsdaten zu durchsuchen — passende Anmeldedaten werden auf jeder Website vorgeschlagen, und neue können beim Surfen gespeichert werden.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Generieren",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Fehler",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Der Server ist nicht erreichbar — die Verbindung ist abgelaufen.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Der Server ist nicht erreichbar ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Zugangsdaten aktualisiert",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

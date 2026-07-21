@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Ververs timer [s]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Notities",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Deze server is niet bereikbaar via HTTPS. Controleer het adres of ga verder via onversleutelde HTTP:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Toch http:// gebruiken (niet aanbevolen)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "Het hoofdwachtwoord moet minimaal 8 tekens lang zijn.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Deze inloggegevens konden niet volledig worden ontsleuteld — de opgeslagen gegevens zijn beschadigd. Ter bescherming van het record kan het niet worden bewerkt; verwijder het en maak een nieuw record.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Thema",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "Systeem",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Licht",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Donker",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "Over",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Nog geen aangepaste velden.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "$AMOUNT$ inloggegevens geladen",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Alles is geconfigureerd en klaar voor gebruik. Open Passman Premium vanuit de werkbalk om uw inloggegevens te bekijken — op elke site worden passende logins voorgesteld, en nieuwe logins kunnen tijdens het surfen worden opgeslagen.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Genereren",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Fout",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "De server is niet bereikbaar — de verbinding is verlopen.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "De server is niet bereikbaar ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Inloggegevens vernieuwd",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Actualitza el temporitzador [s]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Notes",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "No s’ha pogut contactar amb aquest servidor mitjançant HTTPS. Comproveu l’adreça o continueu per HTTP sense xifratge:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Fes servir http:// igualment (no recomanat)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "La contrasenya mestra ha de tenir com a mínim 8 caràcters.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Aquesta credencial no s’ha pogut desxifrar completament: les dades emmagatzemades estan danyades. Per protegir el registre no es pot editar; suprimiu-lo i creeu-ne un de nou.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Tema",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "Sistema",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Clar",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Fosc",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "Quant a",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Encara no hi ha camps personalitzats.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "S’han carregat $AMOUNT$ credencials",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Tot està configurat i llest per fer-se servir. Obriu Passman Premium des de la barra d’eines per veure les vostres credencials: se us suggeriran inicis de sessió coincidents a cada lloc i podreu desar-hi nous inicis de sessió mentre navegueu.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Genera",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Error",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "No s’ha pogut contactar amb el servidor: la connexió ha esgotat el temps d’espera.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "No s’ha pogut contactar amb el servidor ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "S’han actualitzat les credencials",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

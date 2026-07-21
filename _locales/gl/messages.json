@@ -339,10 +339,6 @@
     "message": "Gardando",
     "description": "Saving"
   },
-  "disable_password_picker": {
-    "message": "Desactivar o seleccionador de contrasinais",
-    "description": "Disable password picker"
-  },
   "url": {
     "message": "URL",
     "description": "URL"
@@ -371,10 +367,6 @@
     "message": "Buscar credenciais",
     "description": "Search credentials"
   },
-  "disable_autofill": {
-    "message": "Desactivar o enchido automático de formularios",
-    "description": "Disable auto fill of forms"
-  },
   "credential_created": {
     "message": "Creouse a credencial",
     "description": "Credential created"
@@ -390,5 +382,201 @@
   "refresh_timer": {
     "message": "Restabelecer o(s) temporizador(es)",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Notas",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Non foi posible contactar co servidor por HTTPS. Comprobe o enderezo ou continúe por HTTP sen cifrar:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Usar http:// de todos os xeitos (non recomendado)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "O contrasinal mestre debe ter polo menos 8 caracteres.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Non foi posible descifrar por completo esta credencial: os datos gardados están danados. Para protexer o rexistro non se pode editar; elimíneo e cree un novo.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Tema",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "Sistema",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Claro",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Escuro",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "Sobre",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Aínda non hai campos personalizados.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "Cargáronse $AMOUNT$ credenciais",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Todo está configurado e listo para usar. Abre Passman Premium desde a barra de ferramentas para ver as túas credenciais: suxeriranse inicios de sesión coincidentes en cada sitio e poderás gardar novos mentres navegas.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Xerar",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Erro",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Non foi posible contactar co servidor: a conexión esgotou o tempo de espera.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Non foi posible contactar co servidor ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Credenciais actualizadas",
+    "description": "Header status flash after a manual refresh completes"
+  },
+  "http_warning": {
+    "message": "Este servidor usa HTTP: o teu inicio de sesión enviarase sen cifrar. As túas credenciais de Passman permanecen cifradas.",
+    "description": "Warning for http connections"
+  },
+  "enable_autofill": {
+    "message": "Encher os formularios de inicio de sesión automaticamente",
+    "description": "Disable auto fill of forms"
+  },
+  "enable_autosubmit": {
+    "message": "Enviar o formulario despois de encher unha credencial",
+    "description": "Enable form auto submit"
+  },
+  "enable_update_url": {
+    "message": "Ofrecer actualizar o URL dunha credencial cando cambie",
+    "description": "Enable form auto submit"
+  },
+  "enable_password_picker": {
+    "message": "Mostrar o seleccionador de contrasinais nos campos de inicio de sesión",
+    "description": "Disable password picker"
+  },
+  "password_picker_gotolist": {
+    "message": "Abrir o seleccionador na lapela de lista cando se atopan credenciais",
+    "description": "Disable password picker"
+  },
+  "hide_adv": {
+    "message": "Agochar as opcións avanzadas",
+    "description": "Disable password picker"
+  },
+  "show_adv": {
+    "message": "Mostrar as opcións avanzadas",
+    "description": "Disable password picker"
+  },
+  "url_ignored": {
+    "message": "URL ignorado",
+    "description": "URL ignored"
+  },
+  "disable_page": {
+    "message": "Desactivar a páxina",
+    "description": "Disable page"
+  },
+  "disable_site": {
+    "message": "Desactivar o sitio",
+    "description": "Disable site"
+  },
+  "disable_picker_text": {
+    "message": "Queres desactivar Passman Premium só nesta páxina ou en todo o sitio?",
+    "description": "Would you like to disable Passman for the current page, or for the entire website?"
+  },
+  "ignore_site_tab": {
+    "message": "Ignorar sitio / páxina",
+    "description": "Invalid server URL"
+  },
+  "extra_accounts": {
+    "message": "Despois de completar a configuración, podes engadir máis contas.",
+    "description": "Search"
+  },
+  "account_added": {
+    "message": "Conta engadida",
+    "description": "Search"
+  },
+  "select_vault": {
+    "message": "Seleccionar a bóveda",
+    "description": "Search"
+  },
+  "credential_deleted": {
+    "message": "Credencial eliminada",
+    "description": "Credential deleted"
+  },
+  "select_password_picker_default_tab": {
+    "message": "Cando o seleccionador de contrasinais non atope credenciais, abrir esta lapela:",
+    "description": "Select password picker default tab"
+  },
+  "no_vaults": {
+    "message": "Non se atoparon bóvedas. Crea unha bóveda na aplicación Passman do teu servidor Nextcloud e téntao de novo.",
+    "description": "Search"
+  },
+  "msg_reset_extension": {
+    "message": "O teu contrasinal mestre non se pode restablecer. O que podes facer é restablecer a extensión ao seu estado predeterminado e configurala de novo. As túas bóvedas no servidor Nextcloud non se ven afectadas.",
+    "description": "Search"
+  },
+  "forgot_password": {
+    "message": "Esqueciches o contrasinal?",
+    "description": "Search"
+  },
+  "reset_extension": {
+    "message": "Restablecer a extensión",
+    "description": "Search"
+  },
+  "iam_sure": {
+    "message": "Si, restablecer todo",
+    "description": "Search"
+  },
+  "edit_insufficient_permissions": {
+    "message": "Non tes permiso para editar esta credencial.",
+    "description": "You don't have permissions to edit this credential."
+  },
+  "invalid_server_settings": {
+    "message": "Enche o URL do servidor, o nome de usuario e o contrasinal.",
+    "description": "Search"
+  },
+  "save_to": {
+    "message": "Gardar en $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site"
+  },
+  "saving_to": {
+    "message": "Gardando en $VAULT_NAME$",
+    "description": "Amount of the credentials found for the current site"
+  },
+  "auto_login": {
+    "message": "Passman Premium está a iniciar a túa sesión como $USERNAME$",
+    "description": "Amount of the credentials in the database"
+  },
+  "vault": {
+    "message": "Bóveda",
+    "description": "Vault"
+  },
+  "add_custom_field": {
+    "message": "Engadir un campo personalizado",
+    "description": "Add a custom field"
+  },
+  "text": {
+    "message": "Texto",
+    "description": "To describe a textual input field"
   }
 }

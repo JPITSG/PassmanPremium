@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "새로 고침 타이머 [초]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "메모",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "HTTPS로 이 서버에 연결할 수 없습니다. 주소를 확인하거나 암호화되지 않은 HTTP로 계속하세요:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "그래도 http:// 사용 (권장하지 않음)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "마스터 비밀번호는 최소 8자 이상이어야 합니다.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "이 자격 증명을 완전히 복호화할 수 없습니다. 저장된 데이터가 손상되었습니다. 기록을 보호하기 위해 편집할 수 없습니다. 삭제하고 새로 만드세요.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "테마",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "시스템",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "밝게",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "어둡게",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "정보",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "아직 사용자 지정 필드가 없습니다.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "자격 증명 $AMOUNT$개를 불러왔습니다",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "모든 설정이 완료되어 바로 사용할 수 있습니다. 도구 모음에서 Passman Premium을 열어 자격 증명을 확인하세요. 모든 사이트에서 일치하는 로그인이 제안되며, 탐색 중에 새 로그인을 저장할 수 있습니다.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "생성",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "오류",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "서버에 연결할 수 없습니다 — 연결 시간이 초과되었습니다.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "서버에 연결할 수 없습니다 ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "자격 증명을 새로 고쳤습니다",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

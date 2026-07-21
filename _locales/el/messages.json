@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Refresh timer [s]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Σημειώσεις",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Δεν ήταν δυνατή η επικοινωνία με αυτόν τον διακομιστή μέσω HTTPS. Ελέγξτε τη διεύθυνση ή συνεχίστε μέσω μη κρυπτογραφημένου HTTP:",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Χρήση http:// ούτως ή άλλως (δεν συνιστάται)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "Ο κύριος κωδικός πρέπει να έχει μήκος τουλάχιστον 8 χαρακτήρων.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Αυτό το διαπιστευτήριο δεν ήταν δυνατό να αποκρυπτογραφηθεί πλήρως — τα αποθηκευμένα δεδομένα είναι κατεστραμμένα. Για την προστασία της εγγραφής δεν μπορεί να επεξεργαστεί· διαγράψτε την και δημιουργήστε μια νέα.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Θέμα",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "Σύστημα",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Ανοιχτό",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Σκούρο",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "Σχετικά",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Δεν υπάρχουν ακόμη προσαρμοσμένα πεδία.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "Φορτώθηκαν $AMOUNT$ διαπιστευτήρια",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Όλα έχουν διαμορφωθεί και είναι έτοιμα προς χρήση. Ανοίξτε το Passman Premium από τη γραμμή εργαλείων για να περιηγηθείτε στα διαπιστευτήριά σας — προτείνονται αντίστοιχες συνδέσεις σε κάθε ιστότοπο και μπορείτε να αποθηκεύετε νέες καθώς περιηγείστε.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Δημιουργία",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Σφάλμα",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Δεν ήταν δυνατή η επικοινωνία με τον διακομιστή — η σύνδεση έληξε.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Δεν ήταν δυνατή η επικοινωνία με τον διακομιστή ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Τα διαπιστευτήρια ανανεώθηκαν",
+    "description": "Header status flash after a manual refresh completes"
   }
 }

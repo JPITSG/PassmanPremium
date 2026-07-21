@@ -524,5 +524,77 @@
   "refresh_timer": {
     "message": "Minuterie de rafraîchissement [s]",
     "description": "Password"
+  },
+  "notes": {
+    "message": "Notes",
+    "description": "No credentials found for the current site"
+  },
+  "https_unreachable": {
+    "message": "Impossible de joindre ce serveur en HTTPS. Vérifiez l’adresse ou continuez en HTTP non chiffré :",
+    "description": "Shown when the HTTPS reachability check fails during setup"
+  },
+  "use_http_anyway": {
+    "message": "Utiliser quand même http:// (déconseillé)",
+    "description": "Action to explicitly continue with an unencrypted server URL"
+  },
+  "master_key_too_short": {
+    "message": "Le mot de passe maître doit contenir au moins 8 caractères.",
+    "description": "Master password below the minimum length"
+  },
+  "credential_damaged": {
+    "message": "Ces identifiants n’ont pas pu être entièrement déchiffrés — les données stockées sont endommagées. Pour protéger l’enregistrement, il ne peut pas être modifié ; supprimez-le et créez-en un nouveau.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
+  "theme": {
+    "message": "Thème",
+    "description": "Label for the theme preference section"
+  },
+  "theme_system": {
+    "message": "Système",
+    "description": "Follow the operating system color scheme"
+  },
+  "theme_light": {
+    "message": "Clair",
+    "description": "Light color scheme"
+  },
+  "theme_dark": {
+    "message": "Sombre",
+    "description": "Dark color scheme"
+  },
+  "about": {
+    "message": "À propos",
+    "description": "Label for the About section in settings"
+  },
+  "no_custom_fields": {
+    "message": "Aucun champ personnalisé pour le moment.",
+    "description": "Shown in the credential editor when a credential has no custom fields"
+  },
+  "credentials_loaded": {
+    "message": "$AMOUNT$ identifiants chargés",
+    "description": "Popup header subtitle showing how many credentials are loaded"
+  },
+  "setup_complete": {
+    "message": "Tout est configuré et prêt à l’emploi. Ouvrez Passman Premium depuis la barre d’outils pour parcourir vos identifiants — les connexions correspondantes sont suggérées sur chaque site, et de nouvelles peuvent être enregistrées au fil de votre navigation.",
+    "description": "Shown under the Done! heading on the last setup step"
+  },
+  "generate": {
+    "message": "Générer",
+    "description": "Password picker tab name in the default-tab select"
+  },
+  "error": {
+    "message": "Erreur",
+    "description": "Title of error notifications"
+  },
+  "connection_timeout_error": {
+    "message": "Impossible de joindre le serveur — la connexion a expiré.",
+    "description": "Notification when the Nextcloud server does not answer in time"
+  },
+  "connection_error": {
+    "message": "Impossible de joindre le serveur ($ERROR$).",
+    "description": "Notification for a failed server connection"
+  },
+  "credentials_refreshed": {
+    "message": "Identifiants actualisés",
+    "description": "Header status flash after a manual refresh completes"
   }
 }
