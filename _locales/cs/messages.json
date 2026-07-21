@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "Používáte HTTP! Přihlašovací údaje budou poslány v čistém textu. Přihlašovací údaje do Passmanu jsou stále chráněnay",
-    "description": "Warning for http connections"
+    "message": "Podporovány jsou pouze servery HTTPS — adresy http:// nejsou přijímány.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Hotovo",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Server se nepodařilo kontaktovat přes HTTPS. Zkontrolujte adresu, nebo pokračujte přes nešifrované HTTP:",
+    "message": "Server se nepodařilo kontaktovat přes HTTPS. Zkontrolujte adresu a zkuste to znovu.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Přesto použít http:// (nedoporučujeme)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "Hlavní heslo musí mít alespoň 8 znaků.",

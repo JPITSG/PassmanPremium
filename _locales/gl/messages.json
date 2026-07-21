@@ -388,12 +388,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Non foi posible contactar co servidor por HTTPS. Comprobe o enderezo ou continúe por HTTP sen cifrar:",
+    "message": "Non foi posible contactar co servidor por HTTPS. Comprobe o enderezo e ténteo de novo.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Usar http:// de todos os xeitos (non recomendado)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "O contrasinal mestre debe ter polo menos 8 caracteres.",
@@ -456,8 +452,8 @@
     "description": "Header status flash after a manual refresh completes"
   },
   "http_warning": {
-    "message": "Este servidor usa HTTP: o teu inicio de sesión enviarase sen cifrar. As túas credenciais de Passman permanecen cifradas.",
-    "description": "Warning for http connections"
+    "message": "Só se admiten servidores HTTPS — os enderezos http:// non se aceptan.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "enable_autofill": {
     "message": "Encher os formularios de inicio de sesión automaticamente",

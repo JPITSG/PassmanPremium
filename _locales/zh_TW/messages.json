@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "You are using HTTP! Login credentials will be send in plain text. Your Passman credentials are still encrypted.",
-    "description": "Warning for http connections"
+    "message": "僅支援 HTTPS 伺服器——不接受 http:// 網址。",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "完成",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "無法透過 HTTPS 連線此伺服器。請檢查網址，或改用未加密的 HTTP 繼續：",
+    "message": "無法透過 HTTPS 連線此伺服器。請檢查網址後重試。",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "仍使用 http://（不建議）",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "主密碼長度至少為 8 個字元。",

@@ -176,16 +176,12 @@
     "description": "Ignore port for site matching"
   },
   "http_warning": {
-    "message": "This server uses HTTP — your login will be sent unencrypted. Your Passman credentials themselves stay encrypted.",
-    "description": "Warning for http connections"
+    "message": "Only HTTPS servers are supported — http:// addresses are not accepted.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "https_unreachable": {
-    "message": "Could not reach this server over HTTPS. Check the address, or continue over unencrypted HTTP:",
+    "message": "Could not reach this server over HTTPS. Check the address and try again.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Use http:// anyway (not recommended)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "ignore_path": {
     "message": "Ignore path when matching sites",

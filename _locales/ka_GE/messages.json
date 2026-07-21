@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "თქვენ იყენებთ HTTP-ს! ლოგინის უფლებამოსილებები გაიგზავნება ჩვეულებრივი ტექსტური ფორმატით. თქვენი Passman-ის რწმუნებულებები ისევ დაშიფრულია.",
-    "description": "Warning for http connections"
+    "message": "მხარდაჭერილია მხოლოდ HTTPS სერვერები — http:// მისამართები არ მიიღება.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "დასრულებულია",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "ამ სერვერთან HTTPS-ით დაკავშირება ვერ მოხერხდა. შეამოწმეთ მისამართი ან განაგრძეთ დაუშიფრავი HTTP-ით:",
+    "message": "ამ სერვერთან HTTPS-ით დაკავშირება ვერ მოხერხდა. შეამოწმეთ მისამართი და სცადეთ თავიდან.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "მაინც გამოიყენეთ http:// (არ არის რეკომენდებული)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "მთავარი პაროლი უნდა შედგებოდეს მინიმუმ 8 სიმბოლოსგან.",

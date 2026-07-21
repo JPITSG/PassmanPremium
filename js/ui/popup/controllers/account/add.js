@@ -55,6 +55,13 @@
                         callback(false);
                         return;
                     }
+                    // HTTPS is mandatory — an http:// server is never let
+                    // through, no matter what the probe said
+                    if (!/^https:\/\//i.test($scope.settings.nextcloud_host)) {
+                        $scope.errors.push(API.i18n.getMessage('http_warning'));
+                        callback(false);
+                        return;
+                    }
                     $scope.settings.nextcloud_host = $scope.settings.nextcloud_host.replace(/\/$/, "");
                     PAPI.host = $scope.settings.nextcloud_host;
                     PAPI.username = $scope.settings.nextcloud_username;
@@ -145,14 +152,6 @@
                         $scope.httpsUnreachable = true;
                     }
                 });
-            };
-
-            $scope.usePlainHttp = function () {
-                if ($scope.settings.nextcloud_host.match(/^https?:\/\//)) {
-                    return;
-                }
-                $scope.settings.nextcloud_host = 'http://' + $scope.settings.nextcloud_host;
-                $scope.httpsUnreachable = false;
             };
 
             $scope.cancelAdd = function () {

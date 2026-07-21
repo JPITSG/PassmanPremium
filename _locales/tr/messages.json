@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "HTTP kullanıyorsunuz! Oturum açma kimlik doğrulama bilgileriniz düz metin olarak gönderilecek. Passman kimlik doğrulama bilgileriniz şifrelenmiş durumda.",
-    "description": "Warning for http connections"
+    "message": "Yalnızca HTTPS sunucuları desteklenir — http:// adresleri kabul edilmez.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Tamam",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Bu sunucuya HTTPS üzerinden ulaşılamadı. Adresi kontrol edin veya şifrelenmemiş HTTP ile devam edin:",
+    "message": "Bu sunucuya HTTPS üzerinden ulaşılamadı. Adresi kontrol edip tekrar deneyin.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Yine de http:// kullan (önerilmez)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "Ana parola en az 8 karakter uzunluğunda olmalıdır.",

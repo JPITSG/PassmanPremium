@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "Sie nutzen HTTP! Ihre Anmeldedaten werden als Klartext übertragen. Ihre Passmann-Zugangsdaten sind verschlüsselt.",
-    "description": "Warning for http connections"
+    "message": "Es werden nur HTTPS-Server unterstützt — http://-Adressen werden nicht akzeptiert.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Erledigt",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Dieser Server ist über HTTPS nicht erreichbar. Prüfen Sie die Adresse oder fahren Sie über unverschlüsseltes HTTP fort:",
+    "message": "Dieser Server ist über HTTPS nicht erreichbar. Prüfen Sie die Adresse und versuchen Sie es erneut.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Trotzdem http:// verwenden (nicht empfohlen)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "Das Master-Passwort muss mindestens 8 Zeichen lang sein.",

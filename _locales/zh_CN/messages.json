@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "你正在使用HTTP！ 登录凭证将以纯文本形式发送。 您的Passman凭证仍然加密。",
-    "description": "Warning for http connections"
+    "message": "仅支持 HTTPS 服务器——不接受 http:// 地址。",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "已完成",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "无法通过 HTTPS 连接此服务器。请检查地址，或改用未加密的 HTTP 继续：",
+    "message": "无法通过 HTTPS 连接此服务器。请检查地址后重试。",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "仍然使用 http://（不推荐）",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "主密码长度至少为 8 个字符。",

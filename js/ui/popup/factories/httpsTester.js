@@ -12,8 +12,13 @@
         var tester = {};
         tester.test = function (url) {
             var deferred = $q.defer();
-            if(url.match(/^https?:\/\//)){
+            if(url.match(/^https:\/\//)){
                 deferred.resolve(url);
+                return deferred.promise;
+            }
+            // http is not supported — never accept it, never downgrade
+            if(url.match(/^http:\/\//)){
+                deferred.reject();
                 return deferred.promise;
             }
             // first test with https — give slow servers a fair chance;

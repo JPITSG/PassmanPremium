@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "Du bruker HTTP! Innloggingsdetaljer vil bli sendt i klartekst. Dine Passman-identitetsdetaljer er fremdeles krypterte.",
-    "description": "Warning for http connections"
+    "message": "Kun HTTPS-servere støttes — http://-adresser godtas ikke.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Ferdig",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Kunne ikke nå denne serveren over HTTPS. Sjekk adressen, eller fortsett over ukryptert HTTP:",
+    "message": "Kunne ikke nå denne serveren over HTTPS. Sjekk adressen og prøv igjen.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Bruk http:// likevel (ikke anbefalt)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "Hovedpassordet må være minst 8 tegn langt.",

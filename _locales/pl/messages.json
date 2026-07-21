@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "Używasz HTTP! Twoje poświadczenia wysyłane są zwykłym tekstem. Poświadczenia w Passman pozostają nadal zaszyfrowane.",
-    "description": "Warning for http connections"
+    "message": "Obsługiwane są tylko serwery HTTPS — adresy http:// nie są akceptowane.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Zrobione",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Nie można połączyć się z tym serwerem przez HTTPS. Sprawdź adres lub kontynuuj przez nieszyfrowane HTTP:",
+    "message": "Nie można połączyć się z tym serwerem przez HTTPS. Sprawdź adres i spróbuj ponownie.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Użyj mimo to http:// (niezalecane)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "Hasło główne musi mieć co najmniej 8 znaków.",

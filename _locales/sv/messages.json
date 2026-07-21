@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "Du använder HTTP! Inloggningsuppgifter kommer sändas som ren text. Dina Passman-uppgifter är fortfarande krypterade.",
-    "description": "Warning for http connections"
+    "message": "Endast HTTPS-servrar stöds — http://-adresser accepteras inte.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Färdig",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Det gick inte att nå den här servern via HTTPS. Kontrollera adressen eller fortsätt via okrypterad HTTP:",
+    "message": "Det gick inte att nå den här servern via HTTPS. Kontrollera adressen och försök igen.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Använd http:// ändå (rekommenderas inte)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "Huvudlösenordet måste vara minst 8 tecken långt.",

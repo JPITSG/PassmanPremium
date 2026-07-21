@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "Je gebruikt HTTP! Inloggegevens zullen worden verzonden in platte tekst. Je Passman inlog gegevens hebben nog encryptie.",
-    "description": "Warning for http connections"
+    "message": "Alleen HTTPS-servers worden ondersteund — http://-adressen worden niet geaccepteerd.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Gedaan",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Deze server is niet bereikbaar via HTTPS. Controleer het adres of ga verder via onversleutelde HTTP:",
+    "message": "Deze server is niet bereikbaar via HTTPS. Controleer het adres en probeer het opnieuw.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Toch http:// gebruiken (niet aanbevolen)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "Het hoofdwachtwoord moet minimaal 8 tekens lang zijn.",

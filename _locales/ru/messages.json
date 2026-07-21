@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "Вы используете протокол HTTP! Учётные данные будут отправлены простым текстом. Данные для входа, сохранённые в Passman, остаются зашифрованными.",
-    "description": "Warning for http connections"
+    "message": "Поддерживаются только серверы HTTPS — адреса http:// не принимаются.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Готово",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Не удалось подключиться к этому серверу по HTTPS. Проверьте адрес или продолжите по незашифрованному HTTP:",
+    "message": "Не удалось подключиться к этому серверу по HTTPS. Проверьте адрес и попробуйте снова.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Всё равно использовать http:// (не рекомендуется)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "Мастер-пароль должен содержать не менее 8 символов.",

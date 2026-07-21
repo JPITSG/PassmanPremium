@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "Þú ert að nota HTTP! Innskráningarauðkenni verða send sem hreinn texti. Passman auðkennin þín eru samt dulrituð.",
-    "description": "Warning for http connections"
+    "message": "Aðeins HTTPS-netþjónar eru studdir — http:// vistföng eru ekki samþykkt.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Lokið",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "Ekki náðist í þennan netþjón með HTTPS. Athugaðu vistfangið eða haltu áfram með ódulkóðuðu HTTP:",
+    "message": "Ekki náðist í þennan netþjón með HTTPS. Athugaðu vistfangið og reyndu aftur.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Nota http:// samt sem ekki (ekki mælt með)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "Aðallykilorðið verður að vera að minnsta kosti 8 stafir.",

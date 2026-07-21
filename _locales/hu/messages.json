@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "HTTP-t használsz! A hitelesítőadataid sima szövegként lesznek továbbítva. A Passman adatok továbbra is titkosítva maradnak.",
-    "description": "Warning for http connections"
+    "message": "Csak HTTPS-kiszolgálók támogatottak — a http:// címek nem elfogadottak.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Kész",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "A kiszolgáló HTTPS-en nem érhető el. Ellenőrizze a címet, vagy folytassa titkosítatlan HTTP-n:",
+    "message": "A kiszolgáló HTTPS-en nem érhető el. Ellenőrizze a címet, és próbálja újra.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Mégis http:// használata (nem javasolt)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "A mesterjelszónak legalább 8 karakter hosszúnak kell lennie.",

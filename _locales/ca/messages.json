@@ -458,8 +458,8 @@
     }
   },
   "http_warning": {
-    "message": "Esteu utilitzant HTTP! Les credencials d'inici de sessió es publicaran en text sense format. Les vostres credencials de Passman segueixen xifrades.",
-    "description": "Warning for http connections"
+    "message": "Només s’admeten servidors HTTPS — les adreces http:// no s’accepten.",
+    "description": "Shown when the server address uses http:// — only HTTPS is supported"
   },
   "done": {
     "message": "Fet",
@@ -530,12 +530,8 @@
     "description": "No credentials found for the current site"
   },
   "https_unreachable": {
-    "message": "No s’ha pogut contactar amb aquest servidor mitjançant HTTPS. Comproveu l’adreça o continueu per HTTP sense xifratge:",
+    "message": "No s’ha pogut contactar amb aquest servidor mitjançant HTTPS. Comproveu l’adreça i torneu-ho a provar.",
     "description": "Shown when the HTTPS reachability check fails during setup"
-  },
-  "use_http_anyway": {
-    "message": "Fes servir http:// igualment (no recomanat)",
-    "description": "Action to explicitly continue with an unencrypted server URL"
   },
   "master_key_too_short": {
     "message": "La contrasenya mestra ha de tenir com a mínim 8 caràcters.",
