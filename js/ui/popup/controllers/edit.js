@@ -150,6 +150,13 @@
                     return;
                 }
                 $scope.formError = null;
+                if ($scope.credential.__decryptError) {
+                    // fail closed: this record arrived with fields that
+                    // would not decrypt — saving it would overwrite the
+                    // stored data with the emptied placeholders
+                    $scope.formError = API.i18n.getMessage('credential_damaged');
+                    return;
+                }
                 if (!$scope.credential.label) {
                     $scope.formError = API.i18n.getMessage('label_required');
                     return;

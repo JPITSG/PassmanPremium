@@ -398,6 +398,13 @@ var background = (function () {
 
     function saveCredential(credential) {
         //@TODO save shared password
+        // a record whose fields failed authenticated decryption had them
+        // emptied defensively — re-saving would overwrite the stored data
+        // with blanks. Only deletion is allowed through; repair is
+        // delete-and-recreate.
+        if (credential.__decryptError && !(credential.delete_time > 0)) {
+            return Promise.reject(new Error('Refusing to overwrite a damaged credential'));
+        }
         if (!credential.credential_id) {
             return new Promise(function (resolve, reject) {
                 PAPI.createCredential(credential.account, credential, credential.account.vault_password, function (createdCredential) {

@@ -415,6 +415,10 @@
     "message": "The master password must be at least 8 characters long.",
     "description": "Master password below the minimum length"
   },
+  "credential_damaged": {
+    "message": "This credential could not be fully decrypted — the stored data is damaged. To protect the record it cannot be edited; delete it and create a new one.",
+    "description": "Shown when saving a credential whose fields failed to decrypt"
+  },
   "one_time_password": {
     "message": "OTP",
     "description": "One time password"

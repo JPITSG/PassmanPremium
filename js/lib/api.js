@@ -61,25 +61,48 @@ window.PAPI = (function () {
             }
         },
         decryptCredential: function (credential, key) {
+            // A field that fails AUTHENTICATED decryption is damage (wrong
+            // key, corruption, tampering) and must fail closed: never leave
+            // the ciphertext where UI or fill paths can surface it, and flag
+            // the record so it can't be silently re-saved over itself.
+            function emptyValueFor(f) {
+                if (f === 'otp') { return {}; }
+                if (f === 'files' || f === 'custom_fields' || f === 'tags') { return []; }
+                return '';
+            }
+            var damaged = false;
             for (var i = 0; i < _encryptedFields.length; i++) {
                 var field = _encryptedFields[i];
                 var fieldValue = credential[field];
+                // nothing stored — keep the empty value as it is
+                if (!fieldValue) {
+                    continue;
+                }
                 var field_decrypted_value;
                 try {
                     field_decrypted_value = this.decryptString(fieldValue, key);
                 } catch (e) {
-                    console.warn('Field ' + field + ' in ' + credential.label + ' could not be parsed');
-                    //throw e;
+                    console.warn('Field ' + field + ' in ' + credential.label + ' could not be decrypted');
+                    credential[field] = emptyValueFor(field);
+                    damaged = true;
+                    continue;
                 }
                 try {
                     credential[field] = JSON.parse(field_decrypted_value);
                 } catch (e) {
-                    console.warn('Field ' + field + ' in ' + credential.label + ' could not be parsed');
+                    // decrypted fine but isn't JSON — a non-conforming
+                    // writer stored raw text; show the plaintext on scalar
+                    // fields instead of the ciphertext
+                    credential[field] = emptyValueFor(field);
+                    if (credential[field] === '') {
+                        credential[field] = field_decrypted_value;
+                    }
                 }
-
+            }
+            if (damaged) {
+                credential.__decryptError = true;
             }
             return credential;
-
         },
         encryptString: function (string, _key) {
             var rp = {};
@@ -211,6 +234,8 @@ window.PAPI = (function () {
                 _credential = this.encryptCredential(JSON.parse(JSON.stringify(credential)), key);
             }
             delete _credential.shared_key;
+            // local fail-closed marker — never write it to the server
+            delete _credential.__decryptError;
 
 
             credential.expire_time = new Date(credential.expire_time).getTime() / 1000;
