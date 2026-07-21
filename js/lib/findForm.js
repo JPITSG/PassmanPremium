@@ -258,12 +258,10 @@ function fillPassword(user, password) {
                 dispatchEvents(loginFields[i][1]);
             }
         }
-        if(password && loginFields[i][2]) {
-            setNativeValue(loginFields[i][2], password);
-            if(loginFields[i][2].offsetParent) {
-                dispatchEvents(loginFields[i][2]);
-            }
-        }
+        // deliberately not loginFields[i][2]: that second password field
+        // has no distinct meaning at fill time — on old/new/confirm forms
+        // it is the NEW password box, and writing the stored (current)
+        // password into it pre-fills the change form with the old password
     }
 
 }

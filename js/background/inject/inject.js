@@ -282,15 +282,29 @@ $j(document).ready(function () {
         }
     }
 
-    function formSubmitted(fields) {
-        var user = fields[0].value;
-        var pass = fields[1].value;
+    function formSubmitted(form) {
+        // analyze the fields at submit time, with their values: on
+        // old/new/confirm forms the FIRST password field holds the old
+        // password, and saving it would offer to "update" the credential
+        // back to the previous one. getFormFields' submission mode picks
+        // the new-password field (identical new/confirm pair, or the
+        // second of two differing fields) — use it instead of the stale
+        // page-load field list
+        var result = formManager.getFormFields(form, true);
+        var usernameField = result[0];
+        var newPasswordField = result[1];
+        // forms without a username field were never bound (no submit
+        // handler) before — keep not mining those either
+        if (!usernameField || !newPasswordField) {
+            return;
+        }
         var params = {
-            username: user,
-            password: pass
+            username: usernameField.value,
+            password: newPasswordField.value
         };
-        //Disable password mining
-        //$j(fields[1]).attr('type', 'hidden');
+        if (!params.password) {
+            return;
+        }
         API.runtime.sendMessage(API.runtime.id, {method: "minedForm", args: params});
 
     }
@@ -391,13 +405,15 @@ $j(document).ready(function () {
                     }
 
                     //Password miner — namespaced binding: re-runs replace the
-                    //handler instead of stacking a duplicate on every pass
+                    //handler instead of stacking a duplicate on every pass.
+                    //The form is re-analyzed at submit time (values in hand),
+                    //not from this page-load field list
                     /* jshint ignore:start */
-                    $j(form).off('submit.passman').on('submit.passman', (function (loginFields) {
+                    $j(form).off('submit.passman').on('submit.passman', (function (form) {
                         return function () {
-                            formSubmitted(loginFields);
+                            formSubmitted(form);
                         };
-                    })(loginFields[i]));
+                    })(form));
                     /* jshint ignore:end */
                 }
 
