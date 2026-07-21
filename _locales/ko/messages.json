@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "자격 증명 $AMOUNT$개를 불러왔습니다",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "모든 설정이 완료되어 바로 사용할 수 있습니다. 도구 모음에서 Passman Premium을 열어 자격 증명을 확인하세요. 모든 사이트에서 일치하는 로그인이 제안되며, 탐색 중에 새 로그인을 저장할 수 있습니다.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "서버에 연결할 수 없습니다 ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "자격 증명을 새로 고쳤습니다",

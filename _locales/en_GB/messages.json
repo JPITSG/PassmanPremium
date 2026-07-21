@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ credentials loaded",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Everything is configured and ready to use. Open Passman Premium from the toolbar to browse your credentials — matching logins are suggested on every site, and new logins can be saved as you browse.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Could not reach the server ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Credentials refreshed",

@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "Učitano $AMOUNT$ akreditiva",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Sve je podešeno i spremno za korišćenje. Otvorite Passman Premium sa trake alata da pregledate svoje akreditive — odgovarajuće prijave se predlažu na svakom sajtu, a nove možete čuvati dok pregledate.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Server nije dostupan ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Akreditivi su osveženi",

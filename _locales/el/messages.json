@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "Φορτώθηκαν $AMOUNT$ διαπιστευτήρια",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Όλα έχουν διαμορφωθεί και είναι έτοιμα προς χρήση. Ανοίξτε το Passman Premium από τη γραμμή εργαλείων για να περιηγηθείτε στα διαπιστευτήριά σας — προτείνονται αντίστοιχες συνδέσεις σε κάθε ιστότοπο και μπορείτε να αποθηκεύετε νέες καθώς περιηγείστε.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Δεν ήταν δυνατή η επικοινωνία με τον διακομιστή ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Τα διαπιστευτήρια ανανεώθηκαν",

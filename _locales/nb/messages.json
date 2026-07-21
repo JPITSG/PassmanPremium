@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ legitimationsopplysninger lastet",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Alt er konfigurert og klart til bruk. Åpne Passman Premium fra verktøylinjen for å bla gjennom legitimationsopplysningene dine — passende pålogginger foreslås på hvert nettsted, og nye kan lagres mens du surfer.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Kunne ikke nå serveren ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Legitimationsopplysninger oppdatert",

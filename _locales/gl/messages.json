@@ -425,7 +425,13 @@
   },
   "credentials_loaded": {
     "message": "Cargáronse $AMOUNT$ credenciais",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Todo está configurado e listo para usar. Abre Passman Premium desde a barra de ferramentas para ver as túas credenciais: suxeriranse inicios de sesión coincidentes en cada sitio e poderás gardar novos mentres navegas.",
@@ -445,7 +451,13 @@
   },
   "connection_error": {
     "message": "Non foi posible contactar co servidor ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Credenciais actualizadas",
@@ -553,15 +565,33 @@
   },
   "save_to": {
     "message": "Gardar en $VAULT_NAME$",
-    "description": "Amount of the credentials found for the current site"
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
   },
   "saving_to": {
     "message": "Gardando en $VAULT_NAME$",
-    "description": "Amount of the credentials found for the current site"
+    "description": "Amount of the credentials found for the current site",
+    "placeholders": {
+      "vault_name": {
+        "content": "$1",
+        "example": "Main vault"
+      }
+    }
   },
   "auto_login": {
     "message": "Passman Premium está a iniciar a túa sesión como $USERNAME$",
-    "description": "Amount of the credentials in the database"
+    "description": "Amount of the credentials in the database",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "MyUsername"
+      }
+    }
   },
   "vault": {
     "message": "Bóveda",

@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "已載入 $AMOUNT$ 筆憑據",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "一切已設定完畢，可以開始使用。從工具列開啟 Passman Premium 即可瀏覽您的憑據——每個網站都會建議相符的登入資訊，瀏覽時還可以儲存新的登入資訊。",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "無法連線伺服器（$ERROR$）。",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "憑據已重新整理",

@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ credenziali caricate",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Tutto è configurato e pronto all’uso. Apri Passman Premium dalla barra degli strumenti per sfogliare le tue credenziali: gli accessi corrispondenti vengono suggeriti su ogni sito e puoi salvarne di nuovi mentre navighi.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Impossibile raggiungere il server ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Credenziali aggiornate",

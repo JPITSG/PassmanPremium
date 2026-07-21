@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ hitelesítő adat betöltve",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Minden be van állítva és készen áll a használatra. Nyissa meg a Passman Premiumot az eszköztárról a hitelesítő adatai böngészéséhez — minden webhelyen a megfelelő bejelentkezések jelennek meg, és újak menthetők böngészés közben.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "A kiszolgáló nem érhető el ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Hitelesítő adatok frissítve",

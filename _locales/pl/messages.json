@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "Załadowano $AMOUNT$ danych logowania",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Wszystko jest skonfigurowane i gotowe do użycia. Otwórz Passman Premium na pasku narzędzi, aby przeglądać swoje dane logowania — pasujące loginy są proponowane na każdej stronie, a nowe można zapisywać podczas przeglądania.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Nie można połączyć się z serwerem ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Dane logowania odświeżone",

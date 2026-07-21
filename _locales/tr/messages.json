@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ kimlik bilgisi yüklendi",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Her şey yapılandırıldı ve kullanıma hazır. Kimlik bilgilerinize göz atmak için araç çubuğundan Passman Premium’u açın — her sitede eşleşen girişler önerilir ve gezinirken yeni girişler kaydedilebilir.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Sunucuya ulaşılamadı ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Kimlik bilgileri yenilendi",

@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "Načítaných $AMOUNT$ poverení",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Všetko je nakonfigurované a pripravené na použitie. Otvorte Passman Premium z panela nástrojov a prechádzajte svoje poverenia — na každom webe sa ponúknu zodpovedajúce prihlásenia a nové môžete počas prehliadania ukladať.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Server sa nepodarilo kontaktovať ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Poverenia boli obnovené",

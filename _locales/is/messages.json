@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ skilríki hlaðin",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Allt er stillt og tilbúið til notkunar. Opnaðu Passman Premium úr verkfærastikunni til að skoða skilríkin þín — samsvarandi innskráningar eru lagðar til á hverjum vef og hægt er að vista nýjar meðan þú vafrar.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Ekki náðist í netþjóninn ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Skilríki endurhlaðin",

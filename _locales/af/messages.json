@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ geloofsbriewe gelaai",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Alles is opgestel en gereed vir gebruik. Maak Passman Premium vanaf die nutsbalk oop om jou geloofsbriewe te blaai — passende aanmeldings word op elke werf voorgestel, en nuwe aanmeldings kan gestoor word soos jy blaai.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Kon die bediener nie bereik nie ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Geloofsbriewe is verfris",

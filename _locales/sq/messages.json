@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "U ngarkuan $AMOUNT$ kredenciale",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Gjithçka është konfiguruar dhe gati për përdorim. Hapni Passman Premium nga shiriti i veglave për të parë kredencialet tuaja — hyrjet përkatëse sugjerrohen në çdo faqe dhe të rejat mund të ruhen ndërsa shfletoni.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Serveri nuk u kontaktua ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Kredencialet u rifreskuan",

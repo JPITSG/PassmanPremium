@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "已加载 $AMOUNT$ 条凭据",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "一切已配置完毕，可以开始使用。从工具栏打开 Passman Premium 即可浏览您的凭据——每个网站都会推荐匹配的登录信息，浏览时还可以保存新的登录信息。",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "无法连接服务器（$ERROR$）。",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "凭据已刷新",

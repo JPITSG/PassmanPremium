@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ uppgifter har lästs in",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Allt är konfigurerat och klart att användas. Öppna Passman Premium från verktygsfältet för att bläddra bland dina uppgifter — matchande inloggningar föreslås på varje webbplats, och nya kan sparas medan du surfar.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Det gick inte att nå servern ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Uppgifterna har uppdaterats",

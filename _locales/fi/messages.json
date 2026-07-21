@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ tunnistetta ladattu",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Kaikki on määritetty ja valmis käyttöön. Avaa Passman Premium työkalupalkista selataksesi tunnisteitasi — jokaisella sivustolla ehdotetaan täsmääviä kirjautumistietoja, ja uusia voi tallentaa selatessa.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Palvelimeen ei saatu yhteyttä ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Tunnisteet päivitetty",

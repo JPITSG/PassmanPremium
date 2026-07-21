@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ Zugangsdaten geladen",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Alles ist eingerichtet und einsatzbereit. Öffnen Sie Passman Premium über die Symbolleiste, um Ihre Zugangsdaten zu durchsuchen — passende Anmeldedaten werden auf jeder Website vorgeschlagen, und neue können beim Surfen gespeichert werden.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "Der Server ist nicht erreichbar ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Zugangsdaten aktualisiert",

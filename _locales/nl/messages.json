@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "$AMOUNT$ inloggegevens geladen",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Alles is geconfigureerd en klaar voor gebruik. Open Passman Premium vanuit de werkbalk om uw inloggegevens te bekijken — op elke site worden passende logins voorgesteld, en nieuwe logins kunnen tijdens het surfen worden opgeslagen.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "De server is niet bereikbaar ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "Inloggegevens vernieuwd",

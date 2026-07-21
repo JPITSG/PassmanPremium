@@ -567,7 +567,13 @@
   },
   "credentials_loaded": {
     "message": "S’han carregat $AMOUNT$ credencials",
-    "description": "Popup header subtitle showing how many credentials are loaded"
+    "description": "Popup header subtitle showing how many credentials are loaded",
+    "placeholders": {
+      "amount": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
   },
   "setup_complete": {
     "message": "Tot està configurat i llest per fer-se servir. Obriu Passman Premium des de la barra d’eines per veure les vostres credencials: se us suggeriran inicis de sessió coincidents a cada lloc i podreu desar-hi nous inicis de sessió mentre navegueu.",
@@ -587,7 +593,13 @@
   },
   "connection_error": {
     "message": "No s’ha pogut contactar amb el servidor ($ERROR$).",
-    "description": "Notification for a failed server connection"
+    "description": "Notification for a failed server connection",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "NetworkError"
+      }
+    }
   },
   "credentials_refreshed": {
     "message": "S’han actualitzat les credencials",
