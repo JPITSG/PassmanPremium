@@ -244,7 +244,13 @@ $j(document).ready(function () {
         var offsetX = e.offsetX;
         var offsetRight = (e.data.width - offsetX);
         if (offsetRight < e.data.height) {
-            showPasswordPicker(e.data.form);
+            // the icon toggles: a click while this frame's picker is open
+            // closes it instead of rebuilding it on the spot
+            if ($j('.passwordPickerIframe').length) {
+                removePasswordPicker();
+            } else {
+                showPasswordPicker(e.data.form);
+            }
         }
     }
 
