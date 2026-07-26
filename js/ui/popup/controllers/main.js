@@ -33,7 +33,7 @@
      * Controller of the passmanApp
      */
     angular.module('passmanExtension')
-        .controller('MainCtrl', ['$scope', 'Settings', '$rootScope', '$timeout', function ($scope, Settings, $rootScope, $timeout) {
+        .controller('MainCtrl', ['$scope', 'Settings', '$rootScope', '$timeout', '$location', function ($scope, Settings, $rootScope, $timeout, $location) {
             // keyboard activation for role-annotated div/span controls:
             // Enter or Space acts like a click, once, app-wide
             document.addEventListener('keydown', function (e) {
@@ -199,6 +199,15 @@
             });
 
 
+            $scope.isActiveSection = function (section) {
+                var path = $location.path();
+                if (section === 'list') {
+                    return path === '/';
+                }
+                return path === '/' + section ||
+                    path.indexOf('/' + section + '/') === 0;
+            };
+
             $scope.goto = function (page) {
                 // the list view lives at the root route — navigating to
                 // '#!/list' would bounce through the otherwise-redirect and
@@ -218,4 +227,3 @@
             };
         }]);
 }());
-

@@ -150,12 +150,21 @@ h1.brand-title {
 	border-radius: 7px;
 	color: var(--muted);
 	cursor: pointer;
-	transition: color 0.2s, background 0.2s, border-color 0.2s;
+	transition: color 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 .icon-btn svg { display: block; }
 .icon-btn:hover {
 	color: var(--text);
 	background: var(--hover-wash-strong);
+}
+.icon-btn.section-active,
+.icon-btn.section-active:hover {
+	color: var(--on-accent);
+	background: var(--grad);
+	border-color: transparent;
+	box-shadow:
+		0 0 0 1px var(--accent-border),
+		0 4px 12px var(--accent-glow);
 }
 .icon-btn.lock-btn:hover {
 	color: var(--danger);

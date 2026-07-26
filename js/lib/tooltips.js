@@ -17,6 +17,8 @@
     var attachedTargets = new WeakSet();
     var closeListenersInstalled = false;
     var delegatedListenersInstalled = false;
+    var viewportWidth = window.innerWidth;
+    var viewportHeight = window.innerHeight;
 
     function tipTriggerAt(node) {
         while (node && node.nodeType === 1) {
@@ -88,7 +90,9 @@
         tipTarget = null;
         if (tipEl) {
             tipEl.classList.remove(TIP_VISIBLE_CLASS);
-            tipEl.setAttribute('aria-hidden', 'true');
+            if (tipEl.getAttribute('aria-hidden') !== 'true') {
+                tipEl.setAttribute('aria-hidden', 'true');
+            }
         }
     }
 
@@ -167,6 +171,23 @@
         }
     }
 
+    function handleViewportResize() {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+
+        // Firefox's browser-action panel emits same-size resize events while
+        // auto-sizing. Mutating tooltip state for each event feeds that loop
+        // and continually cancels every tooltip before its delay ends.
+        if (width === viewportWidth && height === viewportHeight) {
+            return;
+        }
+        viewportWidth = width;
+        viewportHeight = height;
+        if (tipIsVisible()) {
+            drawTip();
+        }
+    }
+
     function installCloseListeners() {
         if (closeListenersInstalled) {
             return;
@@ -181,7 +202,7 @@
         });
         document.documentElement.addEventListener('mouseleave', closeTip);
         window.addEventListener('blur', closeTip);
-        window.addEventListener('resize', closeTip);
+        window.addEventListener('resize', handleViewportResize);
         window.addEventListener('hashchange', closeTip);
     }
 
