@@ -302,7 +302,12 @@ h1.brand-title {
 	background: var(--danger-soft);
 	border-color: var(--danger-border);
 }
-.list .list-item .mdi { cursor: pointer; }
+.list .list-item .mdi,
+.list .list-item .fa { cursor: pointer; }
+.list .list-item .account-delete-icon {
+	font-size: 16px;
+	line-height: 1;
+}
 
 /* lists inside settings tabs align with tab padding */
 .tab-content .list { padding: 0; }
