@@ -778,6 +778,50 @@ var background = (function () {
 
     _self.getCredentialByGuid = getCredentialByGuid;
 
+    // The in-page picker can open the browser-action popup only from the
+    // edit button's user gesture. Keep the requested route in the persistent
+    // background page so the newly created popup can consume it before
+    // Angular starts, without writing a credential identifier to storage.
+    var queuedCredentialEditGuid = null;
+
+    function queueCredentialEdit(guid) {
+        if (guid === null || guid === undefined || guid === '' ||
+                !getCredentialByGuid(guid)) {
+            return false;
+        }
+        queuedCredentialEditGuid = guid;
+        return true;
+    }
+
+    function consumeCredentialEdit() {
+        var guid = queuedCredentialEditGuid;
+        queuedCredentialEditGuid = null;
+        return guid;
+    }
+
+    function cancelCredentialEdit(guid) {
+        if (queuedCredentialEditGuid === guid) {
+            queuedCredentialEditGuid = null;
+        }
+    }
+
+    function openCredentialEditor(guid) {
+        if (!queueCredentialEdit(guid) ||
+                !API.api.browserAction ||
+                typeof API.api.browserAction.openPopup !== 'function') {
+            return Promise.resolve(false);
+        }
+        return API.api.browserAction.openPopup().then(function () {
+            return true;
+        }).catch(function () {
+            cancelCredentialEdit(guid);
+            return false;
+        });
+    }
+
+    _self.consumeCredentialEdit = consumeCredentialEdit;
+    _self.openCredentialEditor = openCredentialEditor;
+
     function getCredentialForHTTPAuth(req) {
         return getCredentialsByUrl(req.url)[0];
     }
@@ -1181,14 +1225,17 @@ var background = (function () {
     // built-ins such as eval. Keep this list in sync when adding a public
     // message handler.
     var messageHandlers = {
-        clearMined: true, closeSetupTab: true, getActiveTab: true,
+        clearMined: true, closeSetupTab: true, consumeCredentialEdit: true,
+        getActiveTab: true,
         getCredentialByGuid: true, getCredentials: true, getCredentialsByUrl: true,
         getDoorhangerData: true, getMasterPasswordSet: true, getMinedData: true,
         getRuntimeSettings: true, getSetting: true, getSettings: true,
         ignoreSite: true, ignoreURL: true, injectCreateCredential: true,
         isAutoFillEnabled: true, isAutoSubmitEnabled: true, isMasterPasswordValid: true,
-        minedForm: true, passToParent: true, resetSettings: true,
-        saveCredential: true, saveMined: true, saveSettings: true, searchCredential: true,
+        minedForm: true, openCredentialEditor: true, passToParent: true,
+        resetSettings: true,
+        saveCredential: true, saveMined: true, saveSettings: true,
+        searchCredential: true,
         setDoorhangerData: true, setMasterPassword: true, themeChanged: true,
         updateCredentialUrl: true, updateCredentialUrlDoorhanger: true
     };

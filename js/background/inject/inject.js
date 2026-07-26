@@ -27,12 +27,15 @@ $j(document).ready(function () {
 
     var lastIconTrigger;
 
-    function removePasswordPicker() {
+    function removePasswordPicker(options) {
         activeForm = undefined;
         $j('.passwordPickerIframe').remove();
         // return focus to the icon that opened the dialog — keyboard and
-        // screen-reader users must not be stranded when it disappears
-        if (lastIconTrigger && document.contains(lastIconTrigger)) {
+        // screen-reader users must not be stranded when it disappears.
+        // Opening the toolbar popup is the exception: moving focus back into
+        // the page would immediately dismiss the popup we just opened.
+        if ((!options || options.restoreFocus !== false) &&
+                lastIconTrigger && document.contains(lastIconTrigger)) {
             lastIconTrigger.focus();
         }
         lastIconTrigger = undefined;
@@ -192,7 +195,7 @@ $j(document).ready(function () {
     // picker must never be entered into another frame's forms
     var activePickerToken;
 
-    function showPasswordPicker(form) {
+    function showPasswordPicker(form, keyboardInvoked) {
         var jPasswordPicker = $j('.passwordPickerIframe');
         if (jPasswordPicker.length > 1) {
             return;
@@ -233,7 +236,8 @@ $j(document).ready(function () {
         var frameWidth = Math.max(276, Math.round(anchorField.outerWidth()) + 16);
 
         activePickerToken = Math.random().toString(36).slice(2) + Date.now().toString(36);
-        var pickerUrl = API.extension.getURL('/html/inject/password_picker.html') + '#' + activePickerToken;
+        var pickerUrl = API.extension.getURL('/html/inject/password_picker.html') +
+            (keyboardInvoked ? '?focus=keyboard' : '') + '#' + activePickerToken;
 
         var picker = $j('<iframe class="passwordPickerIframe" scrolling="no" height="385" frameborder="0" src="' + pickerUrl + '"></iframe>');
         picker.css('position', 'absolute');
@@ -398,7 +402,13 @@ $j(document).ready(function () {
             } else {
                 // remember who invoked the dialog so focus returns here
                 lastIconTrigger = btn;
-                showPasswordPicker(form);
+                // Keyboard-triggered clicks have detail 0. Pass that
+                // modality into the iframe so it can place and show focus
+                // for keyboard users without painting a focus ring after an
+                // ordinary mouse/touch click.
+                var keyboardInvoked = e.originalEvent &&
+                    e.originalEvent.detail === 0;
+                showPasswordPicker(form, keyboardInvoked);
             }
         });
     }

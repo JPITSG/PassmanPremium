@@ -5,6 +5,11 @@ $(document).ready(function () {
     // the picker's own document has no title — the add-credential label
     // defaults to the host page's title, delivered via returnActiveTab
     var pageTitle = '';
+    var keyboardNavigation = /(?:^|[?&])focus=keyboard(?:&|$)/.test(window.location.search);
+
+    function credentialEditorAvailable() {
+        return API.runtime && typeof API.runtime.sendMessage === 'function';
+    }
 
     // keyboard activation for role-annotated controls: Enter or Space on a
     // focused tab/button acts like a click (they are divs and spans, so the
@@ -22,6 +27,7 @@ $(document).ready(function () {
         if (e.which !== 9) {
             return;
         }
+        keyboardNavigation = true;
         var focusable = $(document).find('button, input, select, textarea, a[href], [tabindex]').filter(function () {
             var ti = $(this).attr('tabindex');
             return (ti === undefined || parseInt(ti, 10) >= 0) && $(this).is(':visible') && !$(this).is(':disabled');
@@ -41,6 +47,10 @@ $(document).ready(function () {
             e.preventDefault();
             first.focus();
         }
+    });
+
+    $(document).on('mousedown', function () {
+        keyboardNavigation = false;
     });
 
     API.runtime.sendMessage(API.runtime.id, {'method': 'getRuntimeSettings'}).then(function (settings) {
@@ -98,13 +108,74 @@ $(document).ready(function () {
         });
     }
 
-    function removePasswordPicker(login) {
+    function removePasswordPicker(options) {
         API.runtime.sendMessage(API.runtime.id, {
             method: 'passToParent',
             args: {
-                injectMethod: 'removePasswordPicker'
+                injectMethod: 'removePasswordPicker',
+                args: options
             }
         });
+    }
+
+    function editCredential(login) {
+        if (!credentialEditorAvailable()) {
+            return;
+        }
+
+        // The web-accessible picker frame receives only a restricted subset
+        // of extension APIs, so the persistent background performs the
+        // browser-action call while handling this edit-button user gesture.
+        API.runtime.sendMessage(API.runtime.id, {
+            method: 'openCredentialEditor',
+            args: login.guid
+        }).then(function (opened) {
+            if (opened) {
+                removePasswordPicker({restoreFocus: false});
+            }
+        });
+    }
+
+    function credentialRow(login, includeUrl, selected) {
+        var row = $('<div>', {class: 'account'});
+        var account = $('<div>', {
+            class: 'account-select',
+            role: 'button',
+            tabindex: '0'
+        });
+        $('<span>', {class: 'account-label'}).text(login.label).appendTo(account);
+        $('<br>').appendTo(account);
+        var username = (login.username !== '') ? login.username : login.email;
+        $('<small>').text(username).appendTo(account);
+        if (includeUrl) {
+            $('<br>').appendTo(account);
+            $('<small>').text(url_domain(login.url)).appendTo(account);
+        }
+        account.on('click', function () {
+            selected(login);
+        });
+        row.append(account);
+
+        if (credentialEditorAvailable()) {
+            var editLabel = API.i18n.getMessage('edit');
+            var edit = $('<button>', {
+                type: 'button',
+                class: 'account-edit',
+                'aria-label': editLabel,
+                'data-tip': editLabel
+            });
+            $('<span>', {
+                class: 'fa fa-pencil',
+                'aria-hidden': 'true'
+            }).appendTo(edit);
+            edit.on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                editCredential(login);
+            });
+            row.append(edit);
+        }
+        return row;
     }
 
     function copyTextToClipboard(text) {
@@ -299,7 +370,8 @@ $(document).ready(function () {
         // keep focus on the newly active tab — unless it already lives
         // inside the tab's content (e.g. the search input focuses itself)
         var ae = document.activeElement;
-        if (ae === document.body || picker.find('.tab').is(ae)) {
+        if (keyboardNavigation &&
+                (ae === document.body || picker.find('.tab').is(ae))) {
             activeTab.focus();
         }
     };
@@ -389,21 +461,17 @@ $(document).ready(function () {
             }
             for (var i = 0; i < logins.length; i++) {
                 var login = logins[i];
-                var div = $('<div>', {class: 'account', text: login.label, role: 'button', tabindex: '0'});
-                $('<br>').appendTo(div);
-                var username = (login.username !== '' ) ? login.username : login.email;
-                $('<small>').text(username).appendTo(div);
                 /* jshint ignore:start */
-                div.click((function (login) {
-                    return function () {
+                var row = credentialRow(login, false, (function () {
+                    return function (selectedLogin) {
                         //enterLoginDetails(login);
                         //API.runtime.sendMessage(API.runtime.id, {method: 'getMasterPasswordSet'})
-                        fillLogin(login)
+                        fillLogin(selectedLogin);
                     };
-                })(login));
+                })());
                 /* jshint ignore:end*/
 
-                picker.find('.tab-list-content').append(div);
+                picker.find('.tab-list-content').append(row);
             }
         });
     }
@@ -423,9 +491,16 @@ $(document).ready(function () {
     setupAddCredentialFields();
     setupPasswordGenerator();
 
-    // move keyboard focus into the dialog on open — keyboard and screen
-    // reader users land on the active tab, mouse flows are unaffected
-    picker.find('.tab.active').focus();
+    // A keyboard open lands on Accounts with its normal focus indicator. A
+    // mouse/touch open focuses the dialog body instead: this keeps subsequent
+    // Tab navigation inside the iframe, but does not falsely paint a tab as
+    // though the user had keyboard-selected it.
+    if (keyboardNavigation) {
+        picker.find('.tab.active').focus();
+    } else {
+        document.body.setAttribute('tabindex', '-1');
+        document.body.focus();
+    }
 
 
     API.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
@@ -468,26 +543,19 @@ $(document).ready(function () {
             }
             for (var i = 0; i < result.length; i++) {
                 var login = result[i];
-                var div = $('<div>', {class: 'account', text: login.label, role: 'button', tabindex: '0'});
-                $('<br>').appendTo(div);
-
-                var username = (login.username !== '' ) ? login.username : login.email;
-                $('<small>').text(username).appendTo(div);
-                $('<br>').appendTo(div);
-                $('<small>').text(url_domain(login.url)).appendTo(div);
                 /* jshint ignore:start */
-                div.click((function (login) {
-                    return function () {
-                        fillLogin(login);
+                var row = credentialRow(login, true, (function () {
+                    return function (selectedLogin) {
+                        fillLogin(selectedLogin);
                         //@TODO Ask to update the url of the login
                         API.runtime.sendMessage(API.runtime.id, {
                             'method': 'updateCredentialUrlDoorhanger',
-                            args: login
-                        })
+                            args: selectedLogin
+                        });
                     };
-                })(login));
+                })());
                 /* jshint ignore:end*/
-                searchResults.append(div);
+                searchResults.append(row);
             }
         });
     }

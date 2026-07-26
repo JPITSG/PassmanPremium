@@ -23,6 +23,14 @@
 (function () {
     'use strict';
 
+    // A credential edit requested from the in-page picker is queued in the
+    // background immediately before browserAction.openPopup. Hold Angular's
+    // manual bootstrap until that one-shot route is consumed, so the popup
+    // starts on the editor and never flashes the credential list first.
+    var queuedEdit = API.runtime.sendMessage(API.runtime.id, {
+        method: 'consumeCredentialEdit'
+    });
+
     /**
      * @ngdoc overview
      * @name passmanApp
@@ -88,5 +96,24 @@
             // Angular before v1.2 uses $compileProvider.urlSanitizationWhitelist(...)
         }
     ]);
+
+    var popupStarted = false;
+    function startPopup(editGuid) {
+        if (popupStarted) {
+            return;
+        }
+        popupStarted = true;
+        if (editGuid !== null && editGuid !== undefined && editGuid !== '') {
+            window.location.hash = '!/edit/' + encodeURIComponent(editGuid);
+        }
+        angular.element(document).ready(function () {
+            angular.bootstrap(document, ['passmanExtension']);
+            document.documentElement.classList.remove('popup-pending');
+        });
+    }
+
+    queuedEdit.then(startPopup).catch(function () {
+        startPopup(null);
+    });
 
 }());

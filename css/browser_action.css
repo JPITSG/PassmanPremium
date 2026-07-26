@@ -1,3 +1,7 @@
+/* app.js consumes any picker-requested route before manually bootstrapping
+   Angular; keep the uncompiled template invisible during that short handoff */
+.popup-pending body { visibility: hidden; }
+
 /* Passman popup — design language shared with ff_ProxyManager.
    Tokens (dark + light) come from /css/theme.css; js/lib/theme.js sets
    data-theme on <html> before first paint.
