@@ -262,6 +262,9 @@ $j(document).ready(function () {
         for (var i = iconRegistry.length - 1; i >= 0; i--) {
             var entry = iconRegistry[i];
             if (!document.contains(entry.field) || !entry.field.hasAttribute('data-passman-field')) {
+                if (window.PassmanTooltips) {
+                    window.PassmanTooltips.close();
+                }
                 entry.btn.parentNode.removeChild(entry.btn);
                 iconRegistry.splice(i, 1);
             } else {
@@ -307,7 +310,7 @@ $j(document).ready(function () {
         btn.type = 'button';
         btn.className = 'passman-field-icon';
         btn.setAttribute('aria-label', label);
-        btn.setAttribute('title', label);
+        btn.setAttribute('data-tip', label);
         var s = btn.style;
         s.position = 'absolute';
         s.width = size + 'px';
@@ -321,6 +324,9 @@ $j(document).ready(function () {
         var entry = {btn: btn, field: el[0], padRight: padRight, size: size};
         positionIcon(entry);
         document.body.appendChild(btn);
+        if (window.PassmanTooltips) {
+            window.PassmanTooltips.attach(btn);
+        }
         iconRegistry.push(entry);
 
         $j(btn).on('click', function (e) {

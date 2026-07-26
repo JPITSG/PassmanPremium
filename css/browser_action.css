@@ -496,14 +496,24 @@ select option { background: var(--card); color: var(--text); }
 	margin: 0 9px 0 0;
 }
 .md-checkbox .input-checkbox input[type="checkbox"] {
-	visibility: hidden;
 	position: absolute;
 	inset: 0;
+	z-index: 2;
 	margin: 0;
 	padding: 0;
 	outline: none;
 	cursor: pointer;
 	opacity: 0;
+}
+.md-checkbox .input-checkbox .checkbox {
+	display: block;
+	width: 18px;
+	height: 18px;
+	border-radius: 5px;
+}
+.md-checkbox .input-checkbox input[type="checkbox"]:focus-visible + .checkbox {
+	outline: 2px solid var(--accent1);
+	outline-offset: 3px;
 }
 .md-checkbox label, .md-checkbox .label {
 	cursor: pointer;

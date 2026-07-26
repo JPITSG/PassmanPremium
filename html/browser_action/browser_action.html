@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>Passman</title>
         <script src="/js/lib/theme.js"></script>
+        <script src="/js/lib/tooltips.js"></script>
 
         <script src="/js/vendor/jquery/jquery.js"></script>
         <script src="/js/vendor/angular/framework.js"></script>
@@ -53,6 +54,7 @@
         <script src="/js/ui/popup/filters/translate.js"></script>
 
         <link href="/css/theme.css" media="all" rel="stylesheet" />
+        <link href="/css/tooltips.css" media="all" rel="stylesheet" />
         <link href="/css/vendor/font-awesome.css" media="all" rel="stylesheet" />
         <link href="/css/vendor/materialdesignicons.min.css" media="all" rel="stylesheet" />
         <link href="/css/browser_action.css" media="all" rel="stylesheet" />
@@ -88,26 +90,26 @@
                 <p class="subtitle" ng-class="{'status': status_message}">{{ status_message ? status_message : (credential_amount === null ? '&#160;' : ('credentials_loaded' | translate:credential_amount)) }}</p>
             </div>
             <nav class="header-actions">
-                <button type="button" class="icon-btn" ng-click="goto('list')" title="{{'list' | translate}}">
+                <button type="button" class="icon-btn" ng-click="goto('list')" data-tip="{{'list' | translate}}">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
                 </button>
-                <button type="button" class="icon-btn" ng-click="goto('search')" ng-mousedown="$event.preventDefault()" title="{{'search' | translate}}">
+                <button type="button" class="icon-btn" ng-click="goto('search')" ng-mousedown="$event.preventDefault()" data-tip="{{'search' | translate}}">
                     <!-- swallowing mousedown keeps the search input focused
                          when the button is clicked while search is open -->
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 </button>
-                <button type="button" class="icon-btn" ng-click="refresh()" ng-class="{'spinning': refreshing_credentials}" title="{{'refresh_credential_list' | translate}}">
+                <button type="button" class="icon-btn" ng-click="refresh()" ng-class="{'spinning': refreshing_credentials}" data-tip="{{'refresh_credential_list' | translate}}">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
                 </button>
-                <button type="button" class="icon-btn" ng-click="goto('settings')" title="{{'settings' | translate}}">
+                <button type="button" class="icon-btn" ng-click="goto('settings')" data-tip="{{'settings' | translate}}">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                 </button>
-                <button type="button" class="icon-btn" ng-click="cycleTheme()" title="{{'theme' | translate}}: {{'theme_' + theme | translate}}">
+                <button type="button" class="icon-btn" ng-click="cycleTheme()" data-tip="{{'theme' | translate}}: {{'theme_' + theme | translate}}">
                     <svg ng-if="theme === 'system'" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                     <svg ng-if="theme === 'light'" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                     <svg ng-if="theme === 'dark'" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
-                <button type="button" class="icon-btn lock-btn" ng-click="lockExtension()" title="{{'lock_extension' | translate}}">
+                <button type="button" class="icon-btn lock-btn" ng-click="lockExtension()" data-tip="{{'lock_extension' | translate}}">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 </button>
             </nav>

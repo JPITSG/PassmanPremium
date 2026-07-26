@@ -41,6 +41,15 @@
 	--radius: 9px;
 	--scrollbar: #2a3145;
 	--shadow-pop: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+	/* Floating tooltip chip. Kept dark in both themes so it reads as an
+	   overlay rather than another card in the interface. */
+	--passman-tip-bg: #1e2531;
+	--passman-tip-border: rgba(255, 255, 255, 0.13);
+	--passman-tip-text: #e8ecf3;
+	--passman-tip-muted: rgba(232, 236, 243, 0.6);
+	--passman-tip-shadow: rgba(0, 0, 0, 0.5);
+
 	color-scheme: dark;
 }
 
@@ -81,5 +90,8 @@
 
 	--scrollbar: #c2cad7;
 	--shadow-pop: 0 10px 30px rgba(18, 26, 38, 0.18);
+	--passman-tip-bg: #212a38;
+	--passman-tip-border: rgba(255, 255, 255, 0.16);
+	--passman-tip-shadow: rgba(18, 26, 38, 0.3);
 	color-scheme: light;
 }

@@ -29,7 +29,7 @@
                 <ul class="ignored_sites" ng-show="settings.ignored_sites.length > 0">
                     <li ng-repeat="site in settings.ignored_sites">
                         <span class="site">{{site}}</span>
-                        <i class="mdi mdi-delete" ng-click="removeSite(site)" tabindex="0" role="button"></i>
+                        <i class="mdi mdi-delete" ng-click="removeSite(site)" data-tip="{{'delete' | translate}}" tabindex="0" role="button"></i>
                     </li>
                 </ul>
                 <div class="section-empty" ng-show="settings.ignored_sites.length === 0">{{'no_sites_ignored' | translate}}</div>
@@ -146,7 +146,7 @@
                             {{ account.vault.name}}
                         </div>
                     </div>
-                    <div class="edit delete" ng-click="removeAccount(account); $event.stopPropagation()" title="{{'delete' | translate}}" tabindex="0" role="button">
+                    <div class="edit delete" ng-click="removeAccount(account); $event.stopPropagation()" data-tip="{{'delete' | translate}}" tabindex="0" role="button">
                         <div class="mdi mdi-delete"></div>
                     </div>
                 </div>

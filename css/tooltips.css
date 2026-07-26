@@ -1,0 +1,75 @@
+/* One floating tooltip chip shared by every Passman surface. The class names
+   are deliberately namespaced because this stylesheet also runs in host
+   pages beside arbitrary site CSS. */
+
+.passman-tooltip {
+	all: initial;
+	box-sizing: border-box;
+	display: block;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 2147483647;
+	max-width: min(250px, calc(100vw - 16px));
+	padding: 7px 10px;
+	background: var(--passman-tip-bg, #1e2531);
+	border: 1px solid var(--passman-tip-border, rgba(255, 255, 255, 0.13));
+	border-radius: 8px;
+	box-shadow:
+		0 8px 20px var(--passman-tip-shadow, rgba(0, 0, 0, 0.5)),
+		inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	color: var(--passman-tip-text, #e8ecf3);
+	font: 500 11.5px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	overflow-wrap: anywhere;
+	pointer-events: none;
+	opacity: 0;
+	visibility: hidden;
+	transform-origin: var(--passman-tip-arrow, 50%) 100%;
+	transform: translateY(3px) scale(0.98);
+	transition: opacity 0.14s ease, transform 0.14s ease, visibility 0.14s;
+}
+
+.passman-tooltip.below {
+	transform-origin: var(--passman-tip-arrow, 50%) 0;
+	transform: translateY(-3px) scale(0.98);
+}
+
+.passman-tooltip.show {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+}
+
+.passman-tooltip::after {
+	content: "";
+	position: absolute;
+	left: var(--passman-tip-arrow, 50%);
+	bottom: -4px;
+	box-sizing: border-box;
+	width: 8px;
+	height: 8px;
+	margin-left: -4px;
+	background: var(--passman-tip-bg, #1e2531);
+	border-right: 1px solid var(--passman-tip-border, rgba(255, 255, 255, 0.13));
+	border-bottom: 1px solid var(--passman-tip-border, rgba(255, 255, 255, 0.13));
+	border-bottom-right-radius: 3px;
+	transform: rotate(45deg);
+}
+
+.passman-tooltip.below::after {
+	top: -4px;
+	bottom: auto;
+	border: 1px solid var(--passman-tip-border, rgba(255, 255, 255, 0.13));
+	border-right: 0;
+	border-bottom: 0;
+	border-radius: 0;
+	border-top-left-radius: 3px;
+}
+
+.passman-tooltip-note {
+	all: initial;
+	display: block;
+	margin-top: 4px;
+	color: var(--passman-tip-muted, rgba(232, 236, 243, 0.6));
+	font: 400 10.5px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
