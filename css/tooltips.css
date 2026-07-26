@@ -29,12 +29,12 @@
 	transition: opacity 0.14s ease, transform 0.14s ease, visibility 0.14s;
 }
 
-.passman-tooltip.below {
+.passman-tooltip.passman-tooltip-below {
 	transform-origin: var(--passman-tip-arrow, 50%) 0;
 	transform: translateY(-3px) scale(0.98);
 }
 
-.passman-tooltip.show {
+.passman-tooltip.passman-tooltip-visible {
 	opacity: 1;
 	visibility: visible;
 	transform: none;
@@ -56,7 +56,7 @@
 	transform: rotate(45deg);
 }
 
-.passman-tooltip.below::after {
+.passman-tooltip.passman-tooltip-below::after {
 	top: -4px;
 	bottom: auto;
 	border: 1px solid var(--passman-tip-border, rgba(255, 255, 255, 0.13));

@@ -7,6 +7,8 @@
     var TIP_GAP = 8;
     var TIP_EDGE = 8;
     var TIP_ARROW_INSET = 14;
+    var TIP_VISIBLE_CLASS = 'passman-tooltip-visible';
+    var TIP_BELOW_CLASS = 'passman-tooltip-below';
 
     var tipEl = null;
     var tipTarget = null;
@@ -76,12 +78,16 @@
         return tipEl;
     }
 
+    function tipIsVisible() {
+        return tipEl && tipEl.classList.contains(TIP_VISIBLE_CLASS);
+    }
+
     function closeTip() {
         clearTimeout(tipTimer);
         tipTimer = 0;
         tipTarget = null;
         if (tipEl) {
-            tipEl.classList.remove('show');
+            tipEl.classList.remove(TIP_VISIBLE_CLASS);
             tipEl.setAttribute('aria-hidden', 'true');
         }
     }
@@ -132,11 +138,11 @@
             width - TIP_ARROW_INSET
         );
 
-        tipEl.classList.toggle('below', !above);
+        tipEl.classList.toggle(TIP_BELOW_CLASS, !above);
         tipEl.style.left = Math.round(left) + 'px';
         tipEl.style.top = Math.round(Math.max(TIP_EDGE, top)) + 'px';
         tipEl.style.setProperty('--passman-tip-arrow', Math.round(arrow) + 'px');
-        tipEl.classList.add('show');
+        tipEl.classList.add(TIP_VISIBLE_CLASS);
         // The trigger's aria-label is the accessible equivalent; hiding this
         // visual duplicate prevents a screen reader announcing it twice.
         tipEl.setAttribute('aria-hidden', 'true');
@@ -151,7 +157,7 @@
         if (target === tipTarget) {
             return;
         }
-        var wasOpen = tipEl && tipEl.classList.contains('show');
+        var wasOpen = tipIsVisible();
         closeTip();
         tipTarget = target;
         if (instant || wasOpen) {
@@ -188,16 +194,17 @@
         delegatedListenersInstalled = true;
         installCloseListeners();
         syncTree(document.documentElement);
+        ensureTipElement();
 
         document.addEventListener('mouseover', function (event) {
             openTip(tipTriggerAt(event.target), false);
-        });
+        }, true);
         document.addEventListener('focusin', function (event) {
             var target = tipTriggerAt(event.target);
             if (target && (!target.matches || target.matches(':focus-visible'))) {
                 openTip(target, true);
             }
-        });
+        }, true);
         document.addEventListener('focusout', closeTip);
 
         if (typeof MutationObserver !== 'undefined') {
@@ -207,8 +214,15 @@
                     if (mutation.type === 'attributes') {
                         syncTipName(mutation.target);
                         if (mutation.target === tipTarget &&
-                                tipEl && tipEl.classList.contains('show')) {
+                                tipIsVisible()) {
                             drawTip();
+                        } else if (mutation.target.matches &&
+                                mutation.target.matches(':hover') &&
+                                mutation.target.getAttribute('data-tip')) {
+                            // Angular may finish translating data-tip after
+                            // the pointer arrived. Re-arm it without asking
+                            // the user to leave and hover a second time.
+                            openTip(mutation.target, false);
                         }
                     } else {
                         for (var j = 0; j < mutation.addedNodes.length; j++) {
@@ -235,6 +249,7 @@
         attachedTargets.add(target);
         installCloseListeners();
         syncTipName(target);
+        ensureTipElement();
         target.addEventListener('mouseenter', function () {
             openTip(target, false);
         });
@@ -250,7 +265,12 @@
     window.PassmanTooltips = {
         init: initDelegated,
         attach: attach,
-        close: closeTip
+        close: closeTip,
+        refresh: function (target) {
+            if (tipIsVisible() && (!target || target === tipTarget)) {
+                drawTip();
+            }
+        }
     };
 
     var extensionPage = window.location.protocol === 'moz-extension:' ||

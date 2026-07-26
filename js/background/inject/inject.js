@@ -251,11 +251,43 @@ $j(document).ready(function () {
     // stack above page controls. Buttons are tracked so they follow their
     // field through reflows and disappear when the field does
     var iconRegistry = [];
+    var iconWatchTimer = 0;
+    var ICON_WATCH_INTERVAL = 100;
 
     function positionIcon(entry) {
         var r = entry.field.getBoundingClientRect();
-        entry.btn.style.left = (r.right + window.scrollX - entry.padRight - 3 - entry.size) + 'px';
-        entry.btn.style.top = (r.top + window.scrollY + ((r.height - entry.size) / 2)) + 'px';
+        if (!r.width || !r.height) {
+            entry.btn.style.display = 'none';
+            entry.left = null;
+            entry.top = null;
+            return;
+        }
+
+        var size = Math.round(r.height * 0.75);
+        var left = r.right + window.scrollX - entry.padRight - 3 - size;
+        var top = r.top + window.scrollY + ((r.height - size) / 2);
+        var changed = entry.left !== left || entry.top !== top || entry.size !== size;
+
+        if (entry.btn.style.display === 'none') {
+            entry.btn.style.display = 'block';
+            changed = true;
+        }
+        if (entry.size !== size) {
+            entry.size = size;
+            entry.btn.style.width = size + 'px';
+            entry.btn.style.height = size + 'px';
+        }
+        if (entry.left !== left) {
+            entry.left = left;
+            entry.btn.style.left = left + 'px';
+        }
+        if (entry.top !== top) {
+            entry.top = top;
+            entry.btn.style.top = top + 'px';
+        }
+        if (changed && window.PassmanTooltips) {
+            window.PassmanTooltips.refresh(entry.btn);
+        }
     }
 
     function refreshIcons() {
@@ -265,12 +297,31 @@ $j(document).ready(function () {
                 if (window.PassmanTooltips) {
                     window.PassmanTooltips.close();
                 }
-                entry.btn.parentNode.removeChild(entry.btn);
+                if (entry.btn.parentNode) {
+                    entry.btn.parentNode.removeChild(entry.btn);
+                }
                 iconRegistry.splice(i, 1);
             } else {
                 positionIcon(entry);
             }
         }
+    }
+
+    // ResizeObserver does not report a position-only change. Login layouts
+    // often move after a font, image or late component finishes loading, so
+    // sample the handful of registered fields at a low rate while the page
+    // is visible. Writes happen only when a measured rectangle changed.
+    function scheduleIconWatch() {
+        if (iconWatchTimer || !iconRegistry.length) {
+            return;
+        }
+        iconWatchTimer = window.setTimeout(function () {
+            iconWatchTimer = 0;
+            window.requestAnimationFrame(function () {
+                refreshIcons();
+                scheduleIconWatch();
+            });
+        }, ICON_WATCH_INTERVAL);
     }
 
     window.addEventListener('resize', refreshIcons);
@@ -321,13 +372,21 @@ $j(document).ready(function () {
         s.background = 'transparent url("' + API.extension.getURL('/icons/icon.svg') + '") no-repeat center / contain';
         s.cursor = 'pointer';
         s.zIndex = '9999';
-        var entry = {btn: btn, field: el[0], padRight: padRight, size: size};
+        var entry = {
+            btn: btn,
+            field: el[0],
+            padRight: padRight,
+            size: size,
+            left: null,
+            top: null
+        };
         positionIcon(entry);
         document.body.appendChild(btn);
         if (window.PassmanTooltips) {
             window.PassmanTooltips.attach(btn);
         }
         iconRegistry.push(entry);
+        scheduleIconWatch();
 
         $j(btn).on('click', function (e) {
             e.preventDefault();
