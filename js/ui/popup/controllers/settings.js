@@ -44,7 +44,7 @@
                 ignorePath: true,
                 generatedPasswordLength: 12,
                 remember_password: true,
-                refreshTime: 60,
+                refreshTime: 300,
                 debug: false
             };
             $scope.errors = [];

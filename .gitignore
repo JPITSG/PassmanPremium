@@ -1,5 +1,9 @@
-# Built package — rebuild from source (see README.md)
+# Build artifacts — produced by ./build.sh (see README.md)
 passman-premium.xpi
+passman-premium-unsigned.xpi
+
+# AMO listing assets (generated from icons/icon.svg)
+assets/
 
 # OS / editor noise
 .DS_Store

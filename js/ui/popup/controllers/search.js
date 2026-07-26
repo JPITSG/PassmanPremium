@@ -52,6 +52,14 @@
                 });
             };
 
+            // a background refresh finishing while the popup is open must be
+            // reflected in the results already on screen
+            $scope.$on('credentialsUpdated', function () {
+                if ($scope.searchText) {
+                    $scope.search();
+                }
+            });
+
             $scope.editCredential = function (credential) {
                 window.location = '#!/edit/' + credential.guid;
             };

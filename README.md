@@ -28,21 +28,53 @@ privacy, localization and accessibility work.
 
 ## Install
 
-- **From the package:** download `passman-premium.xpi`, then
-  `about:addons` → gear icon → *Install Add-on From File…*
+- **From addons.mozilla.org** (recommended): install
+  [Passman Premium][amo] directly. Reviewed and signed by Mozilla, with
+  automatic updates.
+- **From the signed package:** run `./build.sh` to fetch the same
+  Mozilla-signed build, then `about:addons` → gear icon →
+  *Install Add-on From File…* → `passman-premium.xpi`.
 - **For development:** `about:debugging` → *This Firefox* →
   *Load Temporary Add-on…* → select `manifest.json` from this directory.
 
-## Build from source
+## Build
 
-The package is a plain zip of the extension directory (also what CI/release
-tooling should produce):
+Passman Premium is [listed on addons.mozilla.org][amo]; every release is
+reviewed and cryptographically signed by Mozilla. Signing happens on
+Mozilla's side and cannot be reproduced locally, so the installable package
+is the signed build AMO produced from the submitted source. `build.sh`
+fetches it:
 
 ```sh
-zip -q -r -X passman-premium.xpi css fonts html icons js _locales LICENSE PRIVACY.md manifest.json
+./build.sh                # same as ./build.sh signed
 ```
 
-The built xpi is intentionally not tracked in git (see `.gitignore`).
+That downloads the signed xpi for the version in `manifest.json`, checks the
+bytes against the sha256 AMO published, confirms Mozilla's signature is in
+the archive, and writes `passman-premium.xpi`.
+
+The other commands:
+
+- `./build.sh package` — build the unsigned zip from source
+  (`passman-premium-unsigned.xpi`). This is what gets submitted for review,
+  and what you would side-load in a Firefox with signature enforcement off.
+  It is a plain zip of the extension directory:
+
+  ```sh
+  zip -q -r -X passman-premium-unsigned.xpi css fonts html icons js _locales LICENSE PRIVACY.md manifest.json
+  ```
+
+- `./build.sh verify` — compare the signed package against this working
+  tree, file by file, and fail if they differ. Because the package is a
+  plain zip of tracked files, anyone can use this to confirm that the
+  add-on Mozilla signed is built from exactly this source and nothing else.
+
+- `./build.sh submit` — upload a new version to the AMO listed channel.
+  Requires AMO API credentials; maintainers only.
+
+Built xpi files are not tracked in git (see `.gitignore`).
+
+[amo]: https://addons.mozilla.org/firefox/addon/passman-premium-jpitsg/
 
 ## Project layout
 

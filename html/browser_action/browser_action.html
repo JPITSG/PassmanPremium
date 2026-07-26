@@ -82,7 +82,10 @@
             </svg>
             <div class="title-block">
                 <h1 class="brand-title">Passman Premium</h1>
-                <p class="subtitle" ng-class="{'status': status_message}">{{ status_message ? status_message : ('credentials_loaded' | translate:credential_amount) }}</p>
+                <!-- credential_amount is null until the background reports;
+                     the non-breaking space holds the line's height without
+                     claiming a count the extension does not have yet -->
+                <p class="subtitle" ng-class="{'status': status_message}">{{ status_message ? status_message : (credential_amount === null ? '&#160;' : ('credentials_loaded' | translate:credential_amount)) }}</p>
             </div>
             <nav class="header-actions">
                 <button type="button" class="icon-btn" ng-click="goto('list')" title="{{'list' | translate}}">

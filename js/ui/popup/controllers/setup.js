@@ -51,7 +51,9 @@
                 generatedPasswordLength: 12,
                 remember_password: true,
                 vault_password: '',
-                refreshTime: 60,
+                // The periodic refresh is the primary way credentials stay
+                // current now that ordinary actions no longer trigger one.
+                refreshTime: 300,
                 default_vault: {},
                 master_password: '',
                 master_password_repeat: '',

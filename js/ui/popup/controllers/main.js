@@ -52,42 +52,51 @@
 
 
             var manualRefresh = false;
+            var wasLoading = false;
             var messageParser = function (message) {
-                var e = message.split(':');
-
-                switch (e[0]) {
-                    case "credential_amount":
-                        $scope.credential_amount = e[1];
-                        $scope.refreshing_credentials = false;
-                        if (manualRefresh) {
-                            // green flash in the subtitle, same channel as
-                            // the credential saved/updated feedback
-                            manualRefresh = false;
-                            $rootScope.$broadcast('status', API.i18n.getMessage('credentials_refreshed'));
-                        }
+                if (!message || message.type !== 'credential_state') {
+                    return;
                 }
-
-                $scope.$apply();
+                // Port messages arrive outside Angular's digest, and the
+                // background pushes one the instant the port connects — which
+                // can land while the very first digest is still running.
+                // $timeout schedules one instead of asserting there is none.
+                $timeout(function () {
+                    var loadFinished = wasLoading && !message.loading;
+                    wasLoading = message.loading;
+                    $scope.credential_amount = message.count;
+                    $scope.refreshing_credentials = message.loading;
+                    if (loadFinished) {
+                        // A load can now finish while the popup is open (the
+                        // staleness top-up), so the view showing credentials
+                        // has to re-read them — otherwise the header count
+                        // and the list below it disagree.
+                        $rootScope.$broadcast('credentialsUpdated');
+                    }
+                    if (manualRefresh && !message.loading) {
+                        manualRefresh = false;
+                        // green flash in the subtitle, same channel as the
+                        // credential saved/updated feedback — but a refresh
+                        // that never reached the server is not a success
+                        $rootScope.$broadcast('status', API.i18n.getMessage(
+                            message.lastLoadFailed ? 'error' : 'credentials_refreshed'
+                        ));
+                    }
+                });
             };
 
             /**
-             * Ask the background for the credential count a few times —
-             * right after unlock/setup the vaults are still being fetched
-             * from the server, so a single early request would report 0.
+             * The background pushes its state as soon as the port connects,
+             * and again whenever a load starts or settles, so there is
+             * nothing to poll for. This only re-asks for the current value
+             * at the moments the popup changes what it is showing.
              */
-            var postCredentialCountRequest = function () {
+            var requestCredentialCount = function () {
                 try {
                     port.postMessage("credential_amount");
                 } catch (e) {
-                    // the popup (and with it the port) is already gone —
-                    // a late timer has nowhere to report to
+                    // the popup (and with it the port) is already gone
                 }
-            };
-            var requestCredentialCount = function () {
-                $scope.refreshing_credentials = true;
-                [500, 2000, 5000].forEach(function (delay) {
-                    setTimeout(postCredentialCountRequest, delay);
-                });
             };
 
             /**
@@ -121,23 +130,20 @@
                 });
             }
 
-            $scope.credential_amount = '0';
+            // null until the background reports, so the subtitle shows a
+            // placeholder rather than a "0 credentials loaded" that was never
+            // true. The background answers from memory the moment the port
+            // connects, so this lasts a frame or two.
+            $scope.credential_amount = null;
             $scope.refreshing_credentials = false;
-            var refreshTimer = null;
             $scope.refresh = function () {
-                $scope.refreshing_credentials = true;
                 manualRefresh = true;
-                // a refresh while one is in flight supersedes it: the
-                // background drops the older load via its load-cycle guard,
-                // and the stale feedback timer must not report (and stop the
-                // spinner) while the new refresh is still running
-                if (refreshTimer) {
-                    clearTimeout(refreshTimer);
-                    refreshTimer = null;
-                }
-                API.runtime.sendMessage(API.runtime.id, {method: "getCredentials"}).then(function () {
-                    refreshTimer = setTimeout(postCredentialCountRequest, 1900);
-                });
+                $scope.refreshing_credentials = true;
+                // A refresh while one is already running joins it rather than
+                // starting a second. Either way the background broadcasts the
+                // new count and clears the loading flag when it settles, so
+                // there is nothing to time here.
+                API.runtime.sendMessage(API.runtime.id, {method: "getCredentials"});
             };
 
             $scope.menuIsOpen = false;
@@ -157,8 +163,9 @@
             });
 
             $rootScope.$on('showHeader', function () {
-                // fired after unlock and after finishing setup — the count
-                // was still 0 from before, so fetch it again
+                // fired after unlock and after finishing setup — the header
+                // is appearing for the first time, so ask for the state it
+                // should be showing
                 $scope.showHeader = true;
                 requestCredentialCount();
             });

@@ -6,23 +6,58 @@ var background = (function () {
     var _window = {};
 
 
-    API.runtime.onConnect.addListener(function (port) {
+    // Popup ports. Opening the popup never triggers a server load: the
+    // background already holds the credentials, so its state is pushed the
+    // moment the popup connects, and again whenever a load starts or
+    // settles. The popup therefore never has to guess with timers.
+    var popupPorts = [];
 
+    function credentialState() {
+        return {
+            type: 'credential_state',
+            count: local_credentials.length,
+            loading: !!loadInFlight,
+            lastSuccessfulLoad: lastSuccessfulLoad,
+            lastLoadFailed: lastLoadFailed
+        };
+    }
+
+    function postCredentialState(port) {
+        try {
+            port.postMessage(credentialState());
+        } catch (e) {
+            // the popup closed between the lookup and the post
+        }
+    }
+
+    function broadcastCredentialState() {
+        for (var i = 0; i < popupPorts.length; i++) {
+            postCredentialState(popupPorts[i]);
+        }
+    }
+
+    API.runtime.onConnect.addListener(function (port) {
+        if (port.name !== 'PassmanCommunication') {
+            return;
+        }
+        popupPorts.push(port);
+        port.onDisconnect.addListener(function () {
+            var idx = popupPorts.indexOf(port);
+            if (idx > -1) {
+                popupPorts.splice(idx, 1);
+            }
+        });
         port.onMessage.addListener(function (msg) {
             if (msg === 'credential_amount') {
-                port.postMessage('credential_amount:' + local_credentials.length);
+                postCredentialState(port);
             }
-
         });
-
-    });
-
-    API.runtime.onInstalled.addListener(function () {
-        storage.get('settings').error(function () {
-            var prot = (typeof browser !== 'undefined') ? 'moz-extension' : 'chrome-extension';
-            var url = prot + '://' + API.runtime.id + '/html/browser_action/browser_action.html';
-            API.tabs.create({url: url});
-        });
+        // Opening the popup is not itself a reason to hit the server. But if
+        // the refresh ticker has demonstrably missed a beat — machine asleep,
+        // offline, server down — catch up in the background while the popup
+        // immediately shows what is already loaded.
+        refreshIfStale();
+        postCredentialState(port);
     });
 
     var master_password = null;
@@ -44,7 +79,11 @@ var background = (function () {
         }
 
         if (opts.password) {
-            getSettings();
+            // Unlocking always starts from an empty list, so this is one of
+            // the few moments a load is genuinely required.
+            getSettings().then(function () {
+                getCredentials();
+            });
         } else {
             // Locking: purge every decrypted secret from memory so nothing
             // (search, autofill, context menu) can serve credentials until
@@ -54,10 +93,20 @@ var background = (function () {
             mined_data = [];
             doorhangerData = {};
             _self.settings = {isInstalled: 1};
+            // Invalidate any load still in flight. Without this its response
+            // arrives after the purge and repopulates the credential list
+            // behind the lock, leaving decrypted secrets in memory.
+            credentialLoadCycle++;
+            loadInFlight = null;
+            lastSuccessfulLoad = 0;
+            lastLoadFailed = false;
+            // no point polling a server for a vault we cannot decrypt
+            stopRefreshTicker();
             if (window.contextMenu) {
                 window.contextMenu.setContextItems([]);
             }
             displayLogoutIcons();
+            broadcastCredentialState();
             getSettings();
         }
 
@@ -86,14 +135,41 @@ var background = (function () {
 
 
     var local_credentials = [];
-    // bumped on every getCredentials run; callbacks from superseded runs
-    // must not touch the live credential list (the newest full load wins)
+    // Bumped on every getCredentials run, and on lock: callbacks from a
+    // superseded run must not touch the live credential list (the newest
+    // full load wins), and a load still in flight when the vault is locked
+    // must never repopulate it behind the lock.
     var credentialLoadCycle = 0;
+    // ms epoch of the last load in which every account answered without an
+    // error; 0 = never loaded successfully. This is what makes a silently
+    // failing refresh distinguishable from a healthy one, and what the
+    // staleness check measures against.
+    var lastSuccessfulLoad = 0;
+    var lastLoadFailed = false;
+    // The load currently running, or null. A second request joins it rather
+    // than issuing a duplicate round of requests.
+    var loadInFlight = null;
+    // Seconds the ticker is currently armed for. Kept so an unrelated
+    // settings save no longer tears the interval down and restarts it,
+    // which used to push the next refresh back every time anything saved.
+    var currentRefreshSeconds = null;
     var encryptedFieldSettings = ['accounts'];
     _self.settings = {};
     _self.ticker = null;
     _self.running = false;
+    // Loads and decrypts the stored settings into the runtime. It no longer
+    // fetches credentials as a side effect — every caller that genuinely
+    // needs fresh data asks for it explicitly, so saving a setting (or
+    // ignoring a site) stopped dragging a full vault download behind it.
+    // Returns a native promise so those callers can sequence off it.
     function getSettings() {
+        // A deferred rather than a wrapper, so the body below keeps its own
+        // indentation. The executor runs synchronously, and storage.get is
+        // async, so resolveSettings always exists by the time it is called.
+        var resolveSettings;
+        var ready = new Promise(function (resolve) {
+            resolveSettings = resolve;
+        });
 
         storage.get('settings').then(function (_settings) {
             // nothing to apply yet: a fresh profile has no settings key at
@@ -103,11 +179,13 @@ var background = (function () {
             // extension and wipe a just-remembered master password;
             // saveSettings re-runs this once real settings are stored
             if (!_settings || Object.keys(_settings).length === 0 || !_settings.hasOwnProperty('accounts')) {
+                resolveSettings();
                 return;
             }
             if (!master_password && _settings.hasOwnProperty('accounts') && _settings.accounts.length > 0) {
                 _self.settings.isInstalled = 1;
                 testMasterPasswordAgainst = _settings.accounts;
+                resolveSettings();
                 return;
             }
 
@@ -124,6 +202,7 @@ var background = (function () {
                 // let the user unlock with the right password
                 console.error('Could not decrypt the stored settings, locking the extension', e);
                 setMasterPassword({password: null});
+                resolveSettings();
                 return;
             }
 
@@ -168,25 +247,77 @@ var background = (function () {
                 }
             });
 
-            getCredentials();
+            armRefreshTicker();
+            resolveSettings();
 
-            if (_self.running) {
-                clearInterval(_self.ticker);
-            }
-            _self.running = true;
-            // periodically re-fetch the vaults so changes made elsewhere show
-            // up; refreshTime is user-supplied, so guard NaN and floor at 30s
-            var refreshSeconds = parseInt(_self.settings.refreshTime, 10);
-            if (refreshSeconds > 0) {
-                _self.ticker = setInterval(function () {
-                    getCredentials();
-                }, Math.max(refreshSeconds, 30) * 1000);
-            }
-
+        }).error(function () {
+            // no settings stored yet — nothing to apply, but callers still
+            // have to be released or they would wait forever
+            resolveSettings();
         });
+
+        return ready;
     }
 
     _self.getSettings = getSettings;
+
+    // The periodic refresh is the primary way credentials stay current, so
+    // it is left alone unless the interval itself changed — restarting it on
+    // every settings write kept pushing the next refresh further away.
+    // refreshTime is user-supplied: guard NaN and floor a live ticker at 30s.
+    // 0 means "do not poll", and is honoured literally.
+    function armRefreshTicker() {
+        var seconds = parseInt(_self.settings.refreshTime, 10);
+        if (isNaN(seconds) || seconds <= 0) {
+            seconds = 0;
+        } else {
+            seconds = Math.max(seconds, 30);
+        }
+        if (seconds === currentRefreshSeconds) {
+            return;
+        }
+        currentRefreshSeconds = seconds;
+        if (_self.ticker) {
+            clearInterval(_self.ticker);
+            _self.ticker = null;
+        }
+        _self.running = seconds > 0;
+        if (seconds > 0) {
+            _self.ticker = setInterval(function () {
+                getCredentials();
+            }, seconds * 1000);
+        }
+    }
+
+    function stopRefreshTicker() {
+        if (_self.ticker) {
+            clearInterval(_self.ticker);
+            _self.ticker = null;
+        }
+        _self.running = false;
+        currentRefreshSeconds = null;
+    }
+
+    // Popup-open safety net. The ticker is the intended refresh path, but it
+    // cannot run while the machine is suspended and it silently achieves
+    // nothing while the server is unreachable. If the last SUCCESSFUL load is
+    // older than two full intervals the ticker has measurably missed a beat,
+    // so top up in the background. While the ticker is healthy this never
+    // fires, and with polling switched off (refreshTime 0) it stays out of
+    // the way entirely — that setting means "do not talk to the server".
+    function refreshIfStale() {
+        if (!master_password) {
+            return;
+        }
+        if (!currentRefreshSeconds || currentRefreshSeconds <= 0) {
+            return;
+        }
+        var thresholdMs = currentRefreshSeconds * 2 * 1000;
+        if (lastSuccessfulLoad && (Date.now() - lastSuccessfulLoad) < thresholdMs) {
+            return;
+        }
+        getCredentials();
+    }
 
     function getRuntimeSettings() {
         return _self.settings;
@@ -205,6 +336,13 @@ var background = (function () {
             settings.ignored_sites = [];
         }
 
+        // Captured before the runtime settings are replaced below. Comparing
+        // the account list before and after is what lets a save load only a
+        // newly added account — and load nothing at all for the saves that
+        // leave the accounts alone, which is nearly all of them.
+        var previousAccounts = (_self.settings && _self.settings.accounts) ?
+            _self.settings.accounts.slice() : [];
+
         // encrypt a copy, never the live object: the runtime (and callers
         // re-saving _self.settings) keeps plaintext, so the old in-place
         // encryption left encrypted accounts behind until the storage
@@ -222,8 +360,17 @@ var background = (function () {
 
         // persist first, then refresh the runtime from storage — and hand
         // the caller the real outcome instead of an instant ack
-        return storage.set('settings', storedSettings).then(function () {
-            getSettings();
+        return Promise.resolve(storage.set('settings', storedSettings)).then(function () {
+            return getSettings();
+        }).then(function () {
+            // The only credential work a settings save may cause: pull in an
+            // account that was just added, forget one that was just removed.
+            // The settings are already persisted here, so a credential load
+            // that fails afterwards must not be reported as a failed save —
+            // the setup and add-account wizards would tell the user their
+            // account was not stored when it was.
+            return reconcileAccounts(previousAccounts, _self.settings.accounts || [])
+                .catch(function () {});
         });
 
     }
@@ -239,12 +386,135 @@ var background = (function () {
         mined_data = [];
         testMasterPasswordAgainst = undefined;
         master_password = null;
+        // back to first-run state: discard any load in flight and stop
+        // polling a server this profile is no longer configured for
+        credentialLoadCycle++;
+        loadInFlight = null;
+        lastSuccessfulLoad = 0;
+        lastLoadFailed = false;
+        stopRefreshTicker();
+        broadcastCredentialState();
         return persisted;
     }
 
     _self.resetSettings = resetSettings;
 
 
+    // Identity of an account for credential bookkeeping. Editing an
+    // account's host, user or vault yields a different key, so it is
+    // correctly treated as the old one going away and a new one arriving.
+    function accountKey(account) {
+        if (!account) {
+            return '';
+        }
+        return [
+            account.nextcloud_host,
+            account.nextcloud_username,
+            (account.vault && account.vault.guid) ? account.vault.guid : ''
+        ].join('|');
+    }
+
+    // Decrypts one vault payload into `target`. Returns false when the
+    // request itself failed, so the caller can keep what it already had.
+    function collectVaultCredentials(account, vault, target) {
+        if (!vault || vault.hasOwnProperty('error')) {
+            return false;
+        }
+        var _credentials = vault.credentials || [];
+        for (var i = 0; i < _credentials.length; i++) {
+            var key = account.vault_password;
+            var credential = _credentials[i];
+            if (credential.hidden === 1) {
+                continue;
+            }
+            var usedKey = key;
+            //Shared credentials are not implemented yet
+            if (credential.hasOwnProperty('shared_key') && credential.shared_key) {
+                try {
+                    usedKey = PAPI.decryptString(credential.shared_key, key);
+                } catch (e) {
+                    // one corrupt shared_key must not abort the whole
+                    // account load — skip that credential
+                    continue;
+                }
+            }
+            credential = PAPI.decryptCredential(credential, usedKey);
+            credential.account = account;
+            if (credential.delete_time === 0) {
+                target.push(credential);
+            }
+        }
+        delete vault.credentials;
+        return true;
+    }
+
+    function collectSharedCredentials(account, credentials, target) {
+        for (var i = 0; i < credentials.length; i++) {
+            var _shared_credential = credentials[i];
+            var _shared_credential_data;
+            var sharedKey;
+            try {
+                sharedKey = PAPI.decryptString(_shared_credential.shared_key, account.vault_password);
+                _shared_credential_data = PAPI.decryptSharedCredential(_shared_credential.credential_data, sharedKey);
+            } catch (e) {
+                // skip the single broken entry, keep the rest of the batch
+                continue;
+            }
+            if (!_shared_credential_data) {
+                continue;
+            }
+            // the same credential shared to several of the user's vaults
+            // (or delivered twice) must not appear twice
+            if (_shared_credential_data.guid) {
+                var isDupe = false;
+                for (var d = 0; d < target.length; d++) {
+                    if (target[d].guid === _shared_credential_data.guid) {
+                        isDupe = true;
+                        break;
+                    }
+                }
+                if (isDupe) {
+                    continue;
+                }
+            }
+            delete _shared_credential.credential_data;
+            _shared_credential_data.acl = _shared_credential;
+            _shared_credential_data.acl.permissions = new SharingACL(_shared_credential_data.acl.permissions);
+            _shared_credential_data.tags_raw = _shared_credential_data.tags;
+            _shared_credential_data.account = account;
+            target.push(_shared_credential_data);
+        }
+    }
+
+    // Loads one account — its own vault, then anything shared with it — into
+    // `target`. Resolves false only when the vault request failed: shared
+    // credentials are best effort, because a server with the sharing
+    // endpoint disabled must not make every load look like a failure (which
+    // would leave lastSuccessfulLoad stuck and the staleness check firing
+    // on every popup open).
+    function loadAccountInto(account, target) {
+        return new Promise(function (resolve) {
+            PAPI.getVault(account, function (vault) {
+                if (!collectVaultCredentials(account, vault, target)) {
+                    resolve(false);
+                    return;
+                }
+                if (!account.vault || !account.vault.guid) {
+                    resolve(true);
+                    return;
+                }
+                PAPI.getCredendialsSharedWithUs(account, account.vault.guid, function (credentials) {
+                    if (credentials && credentials.length) {
+                        collectSharedCredentials(account, credentials, target);
+                    }
+                    resolve(true);
+                });
+            });
+        });
+    }
+
+    // Full refresh of every configured account. This is what the periodic
+    // ticker, the manual refresh button, unlock and startup all run.
     function getCredentials() {
         if (!master_password) {
             return Promise.resolve();
@@ -256,120 +526,132 @@ var background = (function () {
             // still unlocked — restore the normal icon with a zero count,
             // otherwise the startup locked icon sticks forever
             updateTabsIcon();
+            broadcastCredentialState();
             return Promise.resolve();
         }
-        //console.log('Loading vault with the following settings: ', settings);
+        // A refresh already running serves this caller too. The ticker and
+        // the refresh button used to fire duplicate rounds of requests at
+        // each other, with the loser's results merely discarded afterwards.
+        if (loadInFlight) {
+            return loadInFlight;
+        }
+
         var cycle = ++credentialLoadCycle;
+        var accounts = _self.settings.accounts.slice();
         var tmpList = [];
-        // settles once every account's vault fetch has reported back:
-        // callers refreshing the list (or reloading it after a delete)
-        // must not run before the data they show has actually arrived
-        var pending = _self.settings.accounts.length;
-        return new Promise(function (resolve) {
-            for (var i = 0; i < _self.settings.accounts.length; i++) {
-                var account = _self.settings.accounts[i];
-            /* jshint ignore:start */
-            (function (inner_account) {
-                PAPI.getVault(inner_account, function (vault) {
-                    // settle this account no matter the outcome — even a
-                    // superseded run must release whoever waits on it
-                    pending--;
-                    if (pending === 0) {
-                        resolve();
-                    }
-                    if (cycle !== credentialLoadCycle) {
-                        // a newer load superseded this one — drop its results
-                        return;
-                    }
-                    if (vault.hasOwnProperty('error')) {
-                        // when every vault fetch fails, getSharedCredentials
-                        // never runs and the locked icon would stick despite
-                        // being unlocked — refresh what we can show
-                        updateTabsIcon();
-                        return;
-                    }
-                    var _credentials = vault.credentials;
-                    for (var i = 0; i < _credentials.length; i++) {
-                        var key = inner_account.vault_password;
-                        var credential = _credentials[i];
-                        if (credential.hidden === 1) {
-                            continue;
-                        }
-                        var usedKey = key;
-                        //Shared credentials are not implemented yet
-                        if (credential.hasOwnProperty('shared_key') && credential.shared_key) {
-                            try {
-                                usedKey = PAPI.decryptString(credential.shared_key, key);
-                            } catch (e) {
-                                // one corrupt shared_key must not abort the
-                                // whole account load — skip that credential
-                                continue;
-                            }
-                        }
-                        credential = PAPI.decryptCredential(credential, usedKey);
-                        credential.account = inner_account;
-                        if (credential.delete_time === 0) {
-                            tmpList.push(credential);
-                        }
 
-                    }
-                    delete vault.credentials;
-                    local_credentials = tmpList;
-
-                    getSharedCredentials(inner_account, cycle);
-
-
-                });
-            }(account));
-            /* jshint ignore:end */
+        loadInFlight = Promise.all(accounts.map(function (account) {
+            return loadAccountInto(account, tmpList);
+        })).then(function (results) {
+            loadInFlight = null;
+            // superseded by a newer load, or the vault was locked while this
+            // ran — either way these credentials must not reach the live list
+            if (cycle !== credentialLoadCycle || !master_password) {
+                broadcastCredentialState();
+                return;
             }
+
+            // Replace only what actually loaded. An account whose request
+            // failed keeps the credentials it already had, so a dropped
+            // connection or a restarting server can never empty a working
+            // vault; an account that is no longer configured is dropped.
+            var loadedByKey = {};
+            for (var i = 0; i < accounts.length; i++) {
+                loadedByKey[accountKey(accounts[i])] = results[i];
+            }
+            var retained = local_credentials.filter(function (credential) {
+                var key = accountKey(credential.account);
+                return Object.prototype.hasOwnProperty.call(loadedByKey, key) && !loadedByKey[key];
+            });
+            local_credentials = retained.concat(tmpList);
+
+            var complete = results.every(function (ok) {
+                return ok;
+            });
+            lastLoadFailed = !complete;
+            if (complete) {
+                lastSuccessfulLoad = Date.now();
+            }
+            // even a failed load refreshes the icons: the startup locked
+            // icon would otherwise stick despite the vault being unlocked
+            updateTabsIcon();
+            broadcastCredentialState();
         });
+
+        broadcastCredentialState();
+        return loadInFlight;
     }
 
     _self.getCredentials = getCredentials;
 
-    function getSharedCredentials(account, cycle) {
-        PAPI.getCredendialsSharedWithUs(account, account.vault.guid, function (credentials) {
-            if (cycle !== credentialLoadCycle) {
-                // superseded by a newer load — it rebuilds the list itself
+    // Loads a single account and merges it in, leaving every other account's
+    // credentials untouched. Adding an account needs only the new vault —
+    // the ones already loaded have not changed.
+    function loadAccountCredentials(account) {
+        if (!master_password) {
+            return Promise.resolve();
+        }
+        var cycle = credentialLoadCycle;
+        var key = accountKey(account);
+        var tmpList = [];
+        return loadAccountInto(account, tmpList).then(function (ok) {
+            // a full reload started meanwhile and already covers this
+            // account — its results win
+            if (cycle !== credentialLoadCycle || !master_password) {
                 return;
             }
-            for (var i = 0; i < credentials.length; i++) {
-                var _shared_credential = credentials[i];
-                var _shared_credential_data;
-                var sharedKey;
-                try {
-                    sharedKey = PAPI.decryptString(_shared_credential.shared_key, account.vault_password);
-                    _shared_credential_data = PAPI.decryptSharedCredential(_shared_credential.credential_data, sharedKey);
-                } catch (e) {
-                    // skip the single broken entry, keep the rest of the batch
-                    continue;
-                }
-                if (_shared_credential_data) {
-                    // the same credential shared to several of the user's
-                    // vaults (or delivered twice) must not appear twice
-                    if (_shared_credential_data.guid) {
-                        var isDupe = false;
-                        for (var d = 0; d < local_credentials.length; d++) {
-                            if (local_credentials[d].guid === _shared_credential_data.guid) {
-                                isDupe = true;
-                                break;
-                            }
-                        }
-                        if (isDupe) {
-                            continue;
-                        }
-                    }
-                    delete _shared_credential.credential_data;
-                    _shared_credential_data.acl = _shared_credential;
-                    _shared_credential_data.acl.permissions = new SharingACL(_shared_credential_data.acl.permissions);
-                    _shared_credential_data.tags_raw = _shared_credential_data.tags;
-                    _shared_credential_data.account = account;
-                    local_credentials.push(_shared_credential_data);
-                }
+            if (!ok) {
+                lastLoadFailed = true;
+                broadcastCredentialState();
+                return;
+            }
+            local_credentials = local_credentials.filter(function (credential) {
+                return accountKey(credential.account) !== key;
+            }).concat(tmpList);
+            // With a single configured account this WAS a complete load, so
+            // it can stand in for one — that keeps a fresh setup from
+            // looking permanently stale. With several accounts the periodic
+            // refresh is left to establish that.
+            if (_self.settings.accounts && _self.settings.accounts.length === 1) {
+                lastLoadFailed = false;
+                lastSuccessfulLoad = Date.now();
             }
             updateTabsIcon();
+            broadcastCredentialState();
         });
+    }
+
+    // Applies an account-list change without a blanket refetch: added
+    // accounts load their own vault, removed accounts simply have their
+    // credentials dropped from memory, and a settings save that left the
+    // account list alone touches the server not at all.
+    function reconcileAccounts(before, after) {
+        if (!master_password) {
+            return Promise.resolve();
+        }
+        var beforeKeys = before.map(accountKey);
+        var afterKeys = after.map(accountKey);
+
+        var removed = beforeKeys.filter(function (key) {
+            return afterKeys.indexOf(key) === -1;
+        });
+        if (removed.length > 0) {
+            local_credentials = local_credentials.filter(function (credential) {
+                return removed.indexOf(accountKey(credential.account)) === -1;
+            });
+            updateTabsIcon();
+            broadcastCredentialState();
+        }
+
+        var added = after.filter(function (account) {
+            return beforeKeys.indexOf(accountKey(account)) === -1;
+        });
+        if (added.length === 0) {
+            return Promise.resolve();
+        }
+        return Promise.all(added.map(function (account) {
+            return loadAccountCredentials(account);
+        }));
     }
 
     function getCredentialsByUrl(_url, sender) {
@@ -439,6 +721,8 @@ var background = (function () {
                         return;
                     }
                     local_credentials.push(createdCredential);
+                    updateTabsIcon();
+                    broadcastCredentialState();
                     resolve();
                 });
             });
@@ -465,8 +749,17 @@ var background = (function () {
                     return;
                 }
                 if (credential_index !== undefined) {
-                    local_credentials[credential_index] = updatedCredential;
+                    if (credential.delete_time > 0) {
+                        // Deleted server-side, so drop it here too. This is
+                        // what used to force a full re-download of every
+                        // vault just to notice one record had gone.
+                        local_credentials.splice(credential_index, 1);
+                    } else {
+                        local_credentials[credential_index] = updatedCredential;
+                    }
                 }
+                updateTabsIcon();
+                broadcastCredentialState();
                 resolve();
             });
         });
@@ -1056,8 +1349,13 @@ var background = (function () {
                 color: defaultColor
             });
         }
-        getSettings();
+        getSettings().then(function () {
+            // Nothing is in memory yet at startup, so if the master password
+            // was remembered this is a load that genuinely has to happen.
+            if (master_password) {
+                getCredentials();
+            }
+        });
     });
     return _window;
 }());
-

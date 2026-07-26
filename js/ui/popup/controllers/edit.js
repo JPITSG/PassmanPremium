@@ -201,13 +201,13 @@
                     method: "saveCredential",
                     args: $scope.credential
                 }).then(function () {
-                    API.runtime.sendMessage(API.runtime.id, {method: "getCredentials"}).then(function () {
-                        setTimeout(function () {
-                            $rootScope.$broadcast('status', API.i18n.getMessage('credential_deleted'));
-                            window.location = '#!/';
-                        }, 1900);
-                    });
-
+                    // The background drops the deleted record from its own
+                    // list once the server accepts the write, so there is
+                    // nothing to re-download — and no reason to hold a
+                    // spinner for two seconds while a whole vault comes back.
+                    $scope.saving = false;
+                    $rootScope.$broadcast('status', API.i18n.getMessage('credential_deleted'));
+                    window.location = '#!/';
                 }).catch(function () {
                     $scope.saving = false;
                     $scope.formError = API.i18n.getMessage('error');

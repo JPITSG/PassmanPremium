@@ -68,6 +68,12 @@
 
             initApp();
 
+            // a background refresh finishing while the popup is open must be
+            // reflected here, not just in the header count
+            $scope.$on('credentialsUpdated', function () {
+                getActiveTab();
+            });
+
             $scope.editCredential = function (credential) {
                 window.location = '#!/edit/' + credential.guid;
             };
