@@ -1268,6 +1268,143 @@ var background = (function () {
 
     var defaultColor = '#0082c9';
 
+    // The login count is drawn onto the toolbar icon rather than set through
+    // the native badge API. A native badge hangs past the icon's top-right
+    // corner (Firefox gives it negative margins) and picks its own text
+    // colour — black on the Passman blue. Drawing it keeps the count inside
+    // the icon box with the digits always white: the shield shrinks to 13/16
+    // of the canvas toward the bottom-left, and the counter takes the freed
+    // top-right corner, reproducing the overhang proportions of the real
+    // badge. Tabs with no logins get the plain shield and no badge.
+
+    var normalIconPaths = {
+        '16': '/icons/icon16.png',
+        '19': '/icons/icon19.png',
+        '32': '/icons/icon32.png',
+        '48': '/icons/icon48.png'
+    };
+
+    var ICON_CANVAS_SIZES = [16, 32, 64];
+    var countIconCache = {};   // count -> {size: ImageData}
+    var tabIconSeq = {};       // tabId -> newest icon request for that tab
+    var baseIconPromise = null;
+
+    function loadBaseIcon() {
+        if (!baseIconPromise) {
+            baseIconPromise = new Promise(function (resolve, reject) {
+                var img = new Image();
+                img.onload = function () { resolve(img); };
+                img.onerror = function () { reject(new Error('toolbar icon failed to load')); };
+                img.src = '/icons/icon64.png';
+            });
+        }
+        return baseIconPromise;
+    }
+
+    // Downscale in halving steps — one big drawImage jump blurs the shield.
+    function shrinkCanvas(source, targetW, targetH) {
+        var cur = source;
+        while (cur.width / 2 > targetW && cur.height / 2 > targetH) {
+            var next = document.createElement('canvas');
+            next.width = Math.round(cur.width / 2);
+            next.height = Math.round(cur.height / 2);
+            next.getContext('2d').drawImage(cur, 0, 0, cur.width, cur.height, 0, 0, next.width, next.height);
+            cur = next;
+        }
+        return cur;
+    }
+
+    // One icon size: the shield anchored bottom-left, the count in a rounded
+    // box flush with the canvas' top-right corner — square for one digit,
+    // widening with the count like the native badge's min-width plus
+    // padding, and shrinking the font only when even the widest box (7/8 of
+    // the canvas) cannot hold the digits.
+    function composeCountIcon(master, count, size) {
+        var canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        var ctx = canvas.getContext('2d');
+
+        var tile = Math.round(size * 0.8125);
+        ctx.drawImage(shrinkCanvas(master, tile, tile), 0, size - tile, tile, tile);
+
+        var text = String(count);
+        var bh = Math.round(size * 0.5);
+        var fontPx = Math.round(bh * 0.8);
+        var pad = Math.round(bh * 0.25);
+        var maxW = Math.round(size * 0.875);
+        ctx.font = '600 ' + fontPx + 'px sans-serif';
+        var textW = ctx.measureText(text).width;
+        var bw = Math.min(Math.max(bh, Math.ceil(textW) + pad * 2), maxW);
+        if (textW > bw - pad * 2) {
+            fontPx = Math.max(5, Math.floor(fontPx * (bw - pad * 2) / textW));
+            ctx.font = '600 ' + fontPx + 'px sans-serif';
+        }
+        var bx = size - bw;
+        var radius = size * 0.125;
+
+        ctx.beginPath();
+        ctx.roundRect(bx, 0, bw, bh, radius);
+        ctx.fillStyle = defaultColor;
+        ctx.fill();
+        // keyline so the badge keeps an edge against light toolbar themes
+        ctx.strokeStyle = '#10131a';
+        ctx.lineWidth = Math.max(1, size / 32);
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, bx + bw / 2, bh / 2 + size * 0.02);
+        return ctx.getImageData(0, 0, size, size);
+    }
+
+    function buildCountIcon(count) {
+        return loadBaseIcon().then(function (img) {
+            var master = document.createElement('canvas');
+            master.width = img.width;
+            master.height = img.height;
+            master.getContext('2d').drawImage(img, 0, 0);
+            var set = {};
+            ICON_CANVAS_SIZES.forEach(function (size) {
+                set[size] = composeCountIcon(master, count, size);
+            });
+            countIconCache[count] = set;
+            return set;
+        });
+    }
+
+    function setCountIcon(tab, count) {
+        if (!count) {
+            API.browserAction.setIcon({
+                path: normalIconPaths,
+                tabId: tab.id
+            });
+            return;
+        }
+        var seq = (tabIconSeq[tab.id] || 0) + 1;
+        tabIconSeq[tab.id] = seq;
+        var ready = countIconCache[count]
+            ? Promise.resolve(countIconCache[count])
+            : buildCountIcon(count);
+        ready.then(function (set) {
+            // a newer request for this tab — or a lock meanwhile — wins
+            if (tabIconSeq[tab.id] !== seq || !master_password) {
+                return;
+            }
+            API.browserAction.setIcon({imageData: set, tabId: tab.id});
+        }).catch(function () {
+            // canvas or icon load unavailable — never leave a stale count
+            if (tabIconSeq[tab.id] !== seq || !master_password) {
+                return;
+            }
+            API.browserAction.setIcon({
+                path: normalIconPaths,
+                tabId: tab.id
+            });
+        });
+    }
+
     function createIconForTab(tab) {
         if (!master_password) {
             return;
@@ -1278,23 +1415,7 @@ var background = (function () {
             window.contextMenu.setContextItems(logins);
         }
         var credentialAmount = logins.length;
-        API.browserAction.setIcon({
-            path: {
-                '16': '/icons/icon16.png',
-                '19': '/icons/icon19.png',
-                '32': '/icons/icon32.png',
-                '48': '/icons/icon48.png'
-            },
-            tabId: tab.id
-        });
-        API.browserAction.setBadgeText({
-            text: credentialAmount.toString(),
-            tabId: tab.id
-        });
-        API.browserAction.setBadgeBackgroundColor({
-            color: defaultColor,
-            tabId: tab.id
-        });
+        setCountIcon(tab, credentialAmount);
 
         var plural = (credentialAmount === 1) ? API.i18n.getMessage('credential') : API.i18n.getMessage('credentials');
         API.browserAction.setTitle({
@@ -1340,12 +1461,7 @@ var background = (function () {
     function updateTabsIcon() {
         // restore the normal icon globally (covers tabs opened later)
         API.browserAction.setIcon({
-            path: {
-                '16': '/icons/icon16.png',
-                '19': '/icons/icon19.png',
-                '32': '/icons/icon32.png',
-                '48': '/icons/icon48.png'
-            }
+            path: normalIconPaths
         });
         API.tabs.query({}).then(function (tabs) {
             for (var t = 0; t < tabs.length; t++) {
@@ -1384,6 +1500,7 @@ var background = (function () {
     API.tabs.onRemoved.addListener(function (tabId) {
         delete mined_data[tabId];
         delete doorhangerData[tabId];
+        delete tabIconSeq[tabId];
     });
 
     displayLogoutIcons();
@@ -1392,9 +1509,6 @@ var background = (function () {
     MasterPasswordStore.load().then(function (password) {
         if (password) {
             master_password = password;
-            API.api.browserAction.setBadgeBackgroundColor({
-                color: defaultColor
-            });
         }
         getSettings().then(function () {
             // Nothing is in memory yet at startup, so if the master password
