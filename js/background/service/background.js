@@ -1269,13 +1269,11 @@ var background = (function () {
     var defaultColor = '#0082c9';
 
     // The login count is drawn onto the toolbar icon rather than set through
-    // the native badge API. A native badge hangs past the icon's top-right
-    // corner (Firefox gives it negative margins) and picks its own text
-    // colour — black on the Passman blue. Drawing it keeps the count inside
-    // the icon box with the digits always white: the shield shrinks to 13/16
-    // of the canvas toward the bottom-left, and the counter takes the freed
-    // top-right corner, reproducing the overhang proportions of the real
-    // badge. Tabs with no logins get the plain shield and no badge.
+    // the native badge API, which picks its own text colour — black on the
+    // Passman blue. The counter sits in a rounded box laid over the shield's
+    // top-right corner with the digits always white; the shield itself stays
+    // full size, so the icon keeps the same footprint whether or not a count
+    // is showing. Tabs with no logins get the plain shield and no badge.
 
     var normalIconPaths = {
         '16': '/icons/icon16.png',
@@ -1314,19 +1312,18 @@ var background = (function () {
         return cur;
     }
 
-    // One icon size: the shield anchored bottom-left, the count in a rounded
-    // box flush with the canvas' top-right corner — square for one digit,
-    // widening with the count like the native badge's min-width plus
-    // padding, and shrinking the font only when even the widest box (7/8 of
-    // the canvas) cannot hold the digits.
+    // One icon size: the shield at full size, the count in a rounded box
+    // laid over its top-right corner — square for one digit, widening with
+    // the count like the native badge's min-width plus padding, and
+    // shrinking the font only when even the widest box (7/8 of the canvas)
+    // cannot hold the digits.
     function composeCountIcon(master, count, size) {
         var canvas = document.createElement('canvas');
         canvas.width = size;
         canvas.height = size;
         var ctx = canvas.getContext('2d');
 
-        var tile = Math.round(size * 0.8125);
-        ctx.drawImage(shrinkCanvas(master, tile, tile), 0, size - tile, tile, tile);
+        ctx.drawImage(shrinkCanvas(master, size, size), 0, 0, size, size);
 
         var text = String(count);
         var bh = Math.round(size * 0.5);
