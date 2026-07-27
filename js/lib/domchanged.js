@@ -6,12 +6,25 @@ var observeDOM = (function(){
         if( MutationObserver ){
             // define a new observer
             var obs = new MutationObserver(function(mutations, observer){
-                if( mutations[0].addedNodes.length || mutations[0].removedNodes.length ){
-                    callback();
+                // check every record, not just the first: a batch often
+                // opens with an unrelated mutation while a later record
+                // carries the change that matters
+                for (var i = 0; i < mutations.length; i++) {
+                    if( mutations[i].type === 'attributes' || mutations[i].addedNodes.length || mutations[i].removedNodes.length ){
+                        callback();
+                        return;
+                    }
                 }
             });
-            // have the observer observe foo for changes in children
-            obs.observe( obj, { childList:true, subtree:true });
+            // besides child changes, watch the attributes through which
+            // pages reveal hidden login fields or retype password boxes
+            // (show/hide toggles) — neither adds nor removes a node
+            obs.observe( obj, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['type', 'class', 'style', 'hidden', 'disabled']
+            });
         }
         else if( eventListenerSupported ){
             obj.addEventListener('DOMNodeInserted', callback, false);

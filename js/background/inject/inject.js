@@ -66,6 +66,39 @@ $j(document).ready(function () {
 
     _this.enterLoginDetails = enterLoginDetails;
 
+    function chooseAutoFillLogin(logins) {
+        if (!logins || logins.length === 0) {
+            return null;
+        }
+        if (logins.length === 1) {
+            return logins[0];
+        }
+        // several credentials match this site: prefer the one whose
+        // username matches what the page already shows (sites like PayPal
+        // remember the login email themselves), otherwise take the first —
+        // filling nothing at all just because the choice is ambiguous left
+        // multi-account sites with no autofill whatsoever
+        var prefilled = '';
+        var loginFields = getLoginFields();
+        for (var i = 0; i < loginFields.length && !prefilled; i++) {
+            if (loginFields[i][0] && loginFields[i][0].value) {
+                prefilled = loginFields[i][0].value.trim().toLowerCase();
+            }
+        }
+        if (prefilled) {
+            for (var j = 0; j < logins.length; j++) {
+                var names = [logins[j].username, logins[j].email];
+                for (var n = 0; n < names.length; n++) {
+                    var name = String(names[n] || '').trim().toLowerCase();
+                    if (name && name === prefilled) {
+                        return logins[j];
+                    }
+                }
+            }
+        }
+        return logins[0];
+    }
+
     function enterCustomFields(login, settings) {
         var customFieldPattern = /^\#(.*)$/;
 
@@ -521,8 +554,12 @@ $j(document).ready(function () {
         for (var m = 0; m < loginFields.length; m++) {
             for (var f = 0; f < loginFields[m].length; f++) {
                 var fieldEl = loginFields[m][f];
-                if (fieldEl && !fieldEl.hasAttribute('data-passman-field')) {
-                    fieldEl.setAttribute('data-passman-field', '1');
+                // the stamp records the field's role: a password box keeps
+                // its marker when a show/hide toggle swaps its type to
+                // text, so findForm.js can still recognize it at fill time
+                var role = (f === 0) ? 'username' : 'password';
+                if (fieldEl && fieldEl.getAttribute('data-passman-field') !== role) {
+                    fieldEl.setAttribute('data-passman-field', role);
                     fieldsChanged = true;
                 }
             }
@@ -562,13 +599,15 @@ $j(document).ready(function () {
                     method: "getCredentialsByUrl",
                     args: url
                 }).then(function (logins) {
-                    if (logins.length === 1) {
+                    var login = chooseAutoFillLogin(logins);
+                    if (login) {
                         API.runtime.sendMessage(API.runtime.id, {method: 'isAutoFillEnabled'}).then(function (isEnabled) {
                             if (isEnabled && !flagFilledForm) {
-                                // automatic fill of a single match — the
-                                // only path allowed to auto-submit (and
-                                // only when the user enabled it)
-                                enterLoginDetails(logins[0], true);
+                                // only an unambiguous single match may
+                                // auto-submit (and only when the user
+                                // enabled it) — never submit a guessed
+                                // account
+                                enterLoginDetails(login, logins.length === 1);
                                 flagFilledForm = true;
                             }
                         });
@@ -580,10 +619,11 @@ $j(document).ready(function () {
                 method: "getCredentialsByUrl",
                 args: url
             }).then(function (logins) {
-                if (logins.length === 1) {
+                var login = chooseAutoFillLogin(logins);
+                if (login) {
                     API.runtime.sendMessage(API.runtime.id, {method: 'isAutoFillEnabled'}).then(function (isEnabled) {
                         if (isEnabled) {
-                            enterCustomFields(logins[0], settings);
+                            enterCustomFields(login, settings);
                         }
                     });
                 }
@@ -643,7 +683,19 @@ $j(document).ready(function () {
                 init();
                 var body = document.getElementsByTagName('body')[0];
                 if (body) {
-                    observeDOM(body, initForms);
+                    // the observer also fires on attribute flips, which
+                    // animation-heavy pages produce continuously — coalesce
+                    // bursts so the field scan runs at most every 100ms
+                    var initFormsTimer = 0;
+                    observeDOM(body, function () {
+                        if (initFormsTimer) {
+                            return;
+                        }
+                        initFormsTimer = window.setTimeout(function () {
+                            initFormsTimer = 0;
+                            initForms();
+                        }, 100);
+                    });
                 }
             }
         });

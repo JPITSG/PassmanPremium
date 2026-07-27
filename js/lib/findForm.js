@@ -30,6 +30,30 @@ var formManager = function(){
             return !!( element.offsetWidth || element.offsetHeight || element.getClientRects().length );
         },
         /**
+         * Check if an element is a password box for fill purposes.
+         *
+         * The live type alone is not enough: show/hide toggles swap a
+         * password input's type to "text", which made every later fill
+         * (picker, context menu, doorhanger refill) stop finding the
+         * field. Accept text inputs that were stamped as password fields
+         * when first detected (inject.js sets data-passman-field), and
+         * text inputs the page itself declares to be password boxes
+         * through autocomplete.
+         */
+        isPasswordField: function (element) {
+            if (element.type === "password") {
+                return true;
+            }
+            if (element.type !== "text") {
+                return false;
+            }
+            if (element.getAttribute("data-passman-field") === "password") {
+                return true;
+            }
+            var autocomplete = (element.getAttribute("autocomplete") || "").toLowerCase();
+            return autocomplete === "current-password" || autocomplete === "new-password";
+        },
+        /**
          * _getPasswordFields
          *
          * Returns an array of password field elements for the specified form.
@@ -43,7 +67,7 @@ var formManager = function(){
             var pwFields = [];
             for (var i = 0; i < form.elements.length; i++) {
                 var elem = form.elements[i];
-                if (elem.type !== "password"){
+                if (!this.isPasswordField(elem)){
                     continue;
                 }
 
