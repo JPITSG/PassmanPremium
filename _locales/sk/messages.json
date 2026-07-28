@@ -1,10 +1,10 @@
 {
   "refresh_credential_list": {
-    "message": "Obnoviť zoznam prihlasovacích údajov",
+    "message": "Obnoviť prihlasovacie údaje",
     "description": "Refresh the credential list"
   },
   "extDescription": {
-    "message": "Passman - The password manager for NextCloud / ownCloud",
+    "message": "Passman Premium — správca hesiel pre Nextcloud / ownCloud",
     "description": "Extension description"
   },
   "save_to": {
@@ -22,11 +22,11 @@
     "description": "Vault"
   },
   "ignore_site_tab": {
-    "message": "Ignore site / page",
+    "message": "Ignorovať web / stránku",
     "description": "Invalid server URL"
   },
   "account_added": {
-    "message": "Účet pridaný.",
+    "message": "Účet bol pridaný",
     "description": "Search"
   },
   "label": {
@@ -34,7 +34,7 @@
     "description": "Label"
   },
   "ignore_protocol": {
-    "message": "Ignore protocol for site matching",
+    "message": "Ignorovať protokol pri porovnávaní stránok",
     "description": "Ignore protocol for site matching"
   },
   "settings": {
@@ -46,7 +46,7 @@
     "description": "Finish"
   },
   "detected_changed_url": {
-    "message": "Detected changed URL for",
+    "message": "Zistená nová URL",
     "description": "Detected changed URL for"
   },
   "add_custom_field": {
@@ -54,7 +54,7 @@
     "description": "Add a custom field"
   },
   "enable_update_url": {
-    "message": "Ask to update credential URL if it doesn't match the current URL",
+    "message": "Ponúknuť aktualizáciu URL prihlasovacích údajov, keď sa zmení",
     "description": "Enable form auto submit"
   },
   "credentials": {
@@ -62,8 +62,12 @@
     "description": "credentials"
   },
   "password_picker_gotolist": {
-    "message": "When a password is found, go to list rather than last active tab",
+    "message": "Otvoriť výber na karte zoznamu, keď sa nájdu prihlasovacie údaje",
     "description": "Disable password picker"
+  },
+  "show_login_count": {
+    "message": "Zobrazovať počet prihlásení na ikone v paneli nástrojov",
+    "description": "Toggle the login counter drawn on the toolbar icon"
   },
   "search": {
     "message": "Hľadať",
@@ -74,7 +78,7 @@
     "description": "Toggle advanced options"
   },
   "extension_locked": {
-    "message": "Rozšírenie Passman je uzamknuté, pre použitie ho odomknite",
+    "message": "Zadajte hlavné heslo na odomknutie.",
     "description": "When the extension is locked, and requires an unlock to use it"
   },
   "update": {
@@ -86,15 +90,15 @@
     "description": "Unlock"
   },
   "invalid_vault_password": {
-    "message": "Kľúč do trezora naplatný!",
+    "message": "Nesprávne heslo trezora.",
     "description": "Vault password"
   },
   "msg_reset_extension": {
-    "message": "You can reset your password. This will reset the extension to its default state.",
+    "message": "Hlavné heslo sa nedá obnoviť. Môžete však rozšírenie vrátiť do východiskového stavu a nastaviť ho znova. Vaše trezory na serveri Nextcloud zostanú nedotknuté.",
     "description": "Search"
   },
   "no_vaults": {
-    "message": "Sorry,no vaults found. Please create a vault via the Nextcloud / ownCloud app and try again.",
+    "message": "Nenašli sa žiadne trezory. Vytvorte trezor v aplikácii Passman na svojom serveri Nextcloud a skúste to znova.",
     "description": "Search"
   },
   "edit": {
@@ -106,7 +110,7 @@
     "description": "Minimum amount of digits"
   },
   "enter_master_password_desc": {
-    "message": "This password will be used to encrypt all your settings in the extension. You can choose to save this password locally, but it will be saved in PLAINTEXT.",
+    "message": "Toto heslo šifruje všetko, čo rozšírenie na tomto zariadení ukladá. Ak si ho necháte zapamätať, uloží sa šifrovane, aby sa rozšírenie mohlo odomykať automaticky.",
     "description": "Enter master password"
   },
   "select_vault": {
@@ -122,7 +126,7 @@
     "description": "Add account"
   },
   "credential": {
-    "message": "prístupový údaj",
+    "message": "prihlasovací údaj",
     "description": "credential"
   },
   "delete": {
@@ -134,15 +138,15 @@
     "description": "Search"
   },
   "invalid_server_settings": {
-    "message": "Neplatné nastavenia servera",
+    "message": "Vyplňte prosím URL servera, používateľské meno a heslo.",
     "description": "Search"
   },
   "nextcloud_settings": {
-    "message": "Nastavenia servera Nextcloud / ownCloud",
+    "message": "Pripojte sa k svojmu serveru Nextcloud",
     "description": "Nextcloud / ownCloud server settings"
   },
   "use_generated_password": {
-    "message": "Použiť hesl",
+    "message": "Použiť toto heslo",
     "description": "Use password"
   },
   "one_time_password": {
@@ -162,7 +166,7 @@
     "description": "Select default vault"
   },
   "site_ignored": {
-    "message": "Site ignored",
+    "message": "Web ignorovaný",
     "description": "Site ignored"
   },
   "value": {
@@ -170,7 +174,7 @@
     "description": "Custom fields"
   },
   "ignore_path": {
-    "message": "Ignore path for site matching",
+    "message": "Ignorovať cestu pri porovnávaní stránok",
     "description": "Ignore path for site matching"
   },
   "custom_fields": {
@@ -182,7 +186,7 @@
     "description": "Disable password picker"
   },
   "invalid_master_password": {
-    "message": "Hlavné heslo je neplatné!",
+    "message": "Nesprávne hlavné heslo.",
     "description": "When the master password is invalid"
   },
   "general": {
@@ -198,15 +202,15 @@
     "description": "Close"
   },
   "prev": {
-    "message": "Predch",
+    "message": "Späť",
     "description": "Previous"
   },
   "add_hint": {
-    "message": "After creating it, you can edit the credential in Passman",
+    "message": "Po uložení môžete tieto prihlasovacie údaje upraviť v Passman Premium.",
     "description": "After creating it, you can edit the credential in Passman"
   },
   "text": {
-    "message": "text",
+    "message": "Text",
     "description": "To describe a textual input field"
   },
   "reset_extension": {
@@ -218,15 +222,15 @@
     "description": "Default vault"
   },
   "ignore_port": {
-    "message": "Ignore port for site matching",
+    "message": "Ignorovať port pri porovnávaní stránok",
     "description": "Ignore port for site matching"
   },
   "master_password": {
-    "message": "Nastaviť hlavné heslo",
+    "message": "Hlavné heslo",
     "description": "Set a master password"
   },
   "disable_picker_text": {
-    "message": "Would you like to disable Passman for the current page, or for the entire website?",
+    "message": "Zakázať Passman Premium len na tejto stránke, alebo na celom webe?",
     "description": "Would you like to disable Passman for the current page, or for the entire website?"
   },
   "password": {
@@ -242,19 +246,19 @@
     "description": "Let's begin!"
   },
   "intro_text": {
-    "message": "This wizard will guide you trough the steps to set up the extension and keep all your passwords synchronized.",
+    "message": "Tento sprievodca vás prevedie krokmi nastavenia rozšírenia a udrží všetky vaše heslá synchronizované.",
     "description": "Cancel"
   },
   "credential_deleted": {
-    "message": "Prihlasovací údaj bol zmazaný",
+    "message": "Prihlasovacie údaje boli zmazané",
     "description": "Credential deleted"
   },
   "ignore_site_placeholder": {
-    "message": "Enter a domain or TLD to ignore and press ↵",
+    "message": "Zadajte doménu na ignorovanie a stlačte Enter",
     "description": "Disable auto fill of forms"
   },
   "ignored_sites": {
-    "message": "Ignored sites / URLs",
+    "message": "Ignorované weby",
     "description": "Ignored sites"
   },
   "toggle_visibility": {
@@ -262,11 +266,11 @@
     "description": "Toggle visibility"
   },
   "master_pw_warning": {
-    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "message": "Hlavné heslo je na tomto zariadení uložené šifrovane, aby sa rozšírenie mohlo odomykať automaticky. Ktokoľvek s plným prístupom k tomuto profilu prehliadača by ho napriek tomu mohol získať.",
     "description": "Remember master password"
   },
   "remember_master_password": {
-    "message": "Zapamätať hlavné hesl",
+    "message": "Zapamätať hlavné heslo",
     "description": "Remember master password"
   },
   "btn_save_site": {
@@ -274,11 +278,11 @@
     "description": "Save credentials for this site"
   },
   "browser_action_title_locked": {
-    "message": "Passman - zamknutý",
+    "message": "Passman Premium — zamknuté",
     "description": "Browser extension title when the extension is locked"
   },
   "label_required": {
-    "message": "Zadajte prosím názov!",
+    "message": "Zadajte prosím štítok.",
     "description": "When comparing passwords"
   },
   "enter_master_password": {
@@ -290,15 +294,15 @@
     "description": "Vault password"
   },
   "select_password_picker_default_tab": {
-    "message": "When the Password picker is unable to find any credentials, it will go to:",
+    "message": "Keď výber hesiel nenájde žiadne prihlasovacie údaje, otvorí túto kartu:",
     "description": "Select password picker default tab"
   },
   "save_site": {
-    "message": "Uložiť stránku",
+    "message": "Uložiť prihlasovacie údaje",
     "description": "Save site"
   },
   "extra_accounts": {
-    "message": "After the setup process is complete, you can add more accounts.",
+    "message": "Po dokončení nastavenia môžete pridať ďalšie účty.",
     "description": "Search"
   },
   "next": {
@@ -310,7 +314,7 @@
     "description": "Avoid ambiguous characters"
   },
   "disable_site": {
-    "message": "Disable site",
+    "message": "Zakázať web",
     "description": "Disable site"
   },
   "url_ignored": {
@@ -328,11 +332,11 @@
     }
   },
   "enable_password_picker": {
-    "message": "Povoliť vyberač hesla",
+    "message": "Zobraziť výber hesiel v prihlasovacích poliach",
     "description": "Disable password picker"
   },
   "auto_login": {
-    "message": "Passman vás prihlasuje ako $USERNAME$",
+    "message": "Passman Premium vás prihlasuje ako $USERNAME$",
     "description": "Amount of the credentials in the database",
     "placeholders": {
       "username": {
@@ -342,19 +346,19 @@
     }
   },
   "default_vault_desc": {
-    "message": "Select the vault that you want to keep in sync with the webbrowser.",
+    "message": "Vyberte trezor, ktorý sa bude synchronizovať s týmto prehliadačom.",
     "description": "Select the vault that you want to keep in sync with the webbrowser."
   },
   "detected_new_login": {
-    "message": "Zistené nové prihlasovacie meno",
+    "message": "Zistené nové prihlásenie",
     "description": "Detected new login"
   },
   "detected_changed_login": {
-    "message": "Bola zistená zmena hesla používateľa",
+    "message": "Zistená zmena hesla",
     "description": "Detected changed password for user"
   },
   "invalid_response_from_server": {
-    "message": "Invalid response from server: [$STATUS_CODE$] $STATUS_TEXT$",
+    "message": "Server odpovedal chybou: $STATUS_CODE$ $STATUS_TEXT$",
     "description": "No credentials found for the current site",
     "placeholders": {
       "status_code": {
@@ -375,8 +379,36 @@
     "message": "Generovať heslo",
     "description": "Generate password"
   },
+  "auto_fill": {
+    "message": "Vyplniť automaticky",
+    "description": "Context-menu entry that fills the login form with a credential"
+  },
+  "copy_username": {
+    "message": "Kopírovať používateľské meno",
+    "description": "Context-menu entry that copies a credential's username"
+  },
+  "copy_password": {
+    "message": "Kopírovať heslo",
+    "description": "Context-menu entry that copies a credential's password"
+  },
+  "copy_url": {
+    "message": "Kopírovať URL",
+    "description": "Context-menu entry that copies a credential's URL"
+  },
+  "copy_otp": {
+    "message": "Kopírovať jednorazové heslo",
+    "description": "Context-menu entry that copies a credential's one-time password"
+  },
+  "and_copy_to_clipboard": {
+    "message": "A skopírovať do schránky",
+    "description": "Context-menu entry under Generate password: generate one and copy it"
+  },
+  "and_fill_fields": {
+    "message": "A vyplniť polia",
+    "description": "Context-menu entry under Generate password: generate one and fill the form"
+  },
   "edit_insufficient_permissions": {
-    "message": "You don't have the permission to edit this credential.",
+    "message": "Nemáte oprávnenie upraviť tieto prihlasovacie údaje.",
     "description": "You don't have permissions to edit this credential."
   },
   "server_url": {
@@ -384,7 +416,7 @@
     "description": "Server URL"
   },
   "disable_page": {
-    "message": "Disable page",
+    "message": "Zakázať stránku",
     "description": "Disable page"
   },
   "hide_adv": {
@@ -400,15 +432,15 @@
     "description": "Add"
   },
   "credential_updated": {
-    "message": "Prístupové údaje boli aktualizované",
+    "message": "Prihlasovacie údaje boli aktualizované",
     "description": "updated, lowercase"
   },
   "no_credentials_found": {
-    "message": "No credentials found",
+    "message": "Nenašli sa žiadne prihlasovacie údaje.",
     "description": "No credentials found for the current site"
   },
   "extName": {
-    "message": "Passman",
+    "message": "Passman Premium",
     "description": "Extension name"
   },
   "lock_extension": {
@@ -416,7 +448,7 @@
     "description": "Title on the PayPal button"
   },
   "search_for": {
-    "message": "Hľadať",
+    "message": "Hľadať prihlasovacie údaje…",
     "description": "No credentials found for the current site"
   },
   "password_repeat": {
@@ -424,8 +456,22 @@
     "description": "Password"
   },
   "credential_saved": {
-    "message": "Prístupové údaje boli uložené",
+    "message": "Prihlasovacie údaje boli uložené",
     "description": "saved, lowercase"
+  },
+  "user_at_site": {
+    "message": "$USERNAME$ na $SITE$",
+    "description": "Doorhanger text naming which user on which site, e.g. 'alice at example.com'",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "alice"
+      },
+      "site": {
+        "content": "$2",
+        "example": "example.com"
+      }
+    }
   },
   "require_every_character_type": {
     "message": "Vyžadovať znak z každého typu",
@@ -440,11 +486,11 @@
     "description": "E-mail"
   },
   "welcome_to_passman": {
-    "message": "Welcome to the Passman webextension",
+    "message": "Vitajte v Passman Premium",
     "description": "Intro at the setup"
   },
   "browser_action_title_login": {
-    "message": "Passman - $CREDENTIAL_AMOUNT$ $PLURAL$ found for this page",
+    "message": "Passman Premium — $CREDENTIAL_AMOUNT$ $PLURAL$ pre túto stránku",
     "description": "String for the browser action",
     "placeholders": {
       "credential_amount": {
@@ -466,15 +512,15 @@
     "description": "Done"
   },
   "no_credentials_found_for_site": {
-    "message": "No credentials found for this site.",
+    "message": "Pre túto stránku sa nenašli žiadne prihlasovacie údaje.",
     "description": "No credentials found for the current site"
   },
   "enable_autosubmit": {
-    "message": "Enable form auto submit after picking account",
+    "message": "Odoslať formulár po vyplnení prihlasovacích údajov",
     "description": "Enable form auto submit"
   },
   "saving": {
-    "message": "Ukladá sa",
+    "message": "Ukladá sa…",
     "description": "Saving"
   },
   "url": {
@@ -482,11 +528,11 @@
     "description": "URL"
   },
   "iam_sure": {
-    "message": "Áno, som si istý!",
+    "message": "Áno, obnoviť všetko",
     "description": "Search"
   },
   "no_sites_ignored": {
-    "message": "No sites ignored",
+    "message": "Zatiaľ žiadne ignorované weby.",
     "description": "No sites ignored"
   },
   "accounts": {
@@ -494,23 +540,23 @@
     "description": "Accounts"
   },
   "password_generator": {
-    "message": "Generátor hesla",
+    "message": "Generátor hesiel",
     "description": "Password generator"
   },
   "empty_master_key": {
-    "message": "Hlavný kľúč nemá žiadnu hodnotu!",
+    "message": "Hlavné heslo nemôže byť prázdne.",
     "description": "Empty master key!"
   },
   "ignore_subdomain": {
-    "message": "Ignore subdomain for site matching",
+    "message": "Ignorovať subdoménu pri porovnávaní stránok",
     "description": "Password"
   },
   "btn_search": {
-    "message": "Hladať prihlasovacie údaje",
+    "message": "Hľadať prihlasovacie údaje",
     "description": "Search credentials"
   },
   "credential_created": {
-    "message": "Prihlasovací údaj bol vytvorený",
+    "message": "Prihlasovacie údaje boli vytvorené",
     "description": "Credential created"
   },
   "username": {
@@ -522,7 +568,7 @@
     "description": "Password length"
   },
   "refresh_timer": {
-    "message": "Časovač obnovovania [s]",
+    "message": "Interval obnovovania (sekundy — 0 vypne)",
     "description": "Password"
   },
   "notes": {
@@ -560,6 +606,44 @@
   "about": {
     "message": "O aplikácii",
     "description": "Label for the About section in settings"
+  },
+  "about_created_by": {
+    "message": "Vytvorila s $HEART$ spoločnosť $AUTHOR$",
+    "description": "About section credit line; $HEART$ is a heart icon, $AUTHOR$ a link to the company",
+    "placeholders": {
+      "heart": {
+        "content": "$1",
+        "example": "♥"
+      },
+      "author": {
+        "content": "$2",
+        "example": "JP IT Services Pte. Ltd."
+      }
+    }
+  },
+  "about_upstream_link_text": {
+    "message": "rozšírení Passman",
+    "description": "Link text inside about_upstream pointing at the original Nextcloud extension"
+  },
+  "about_upstream": {
+    "message": "Hrdo postavené na skvelom open source $LINK$ od komunity Nextcloud. Originál bol takmer desať rokov opustený — Passman Premium ho vedie ďalej, osviežený a aktívne udržiavaný.",
+    "description": "About section paragraph crediting the upstream project; $LINK$ is the about_upstream_link_text link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Passman extension"
+      }
+    }
+  },
+  "about_source": {
+    "message": "Passman Premium je tiež open source — kompletný zdrojový kód je na $LINK$, vydaný pod licenciou GNU AGPL‑3.0 v súlade s podmienkami originálu. Hlásenia chýb a príspevky sú vždy vítané.",
+    "description": "About section paragraph pointing at this extension's source repository; $LINK$ is the repository link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "github.com/JPITSG/PassmanPremium"
+      }
+    }
   },
   "no_custom_fields": {
     "message": "Zatiaľ žiadne vlastné polia.",
@@ -600,6 +684,14 @@
         "example": "NetworkError"
       }
     }
+  },
+  "empty_reply_from_server": {
+    "message": "Prázdna odpoveď servera",
+    "description": "Status text when the server answered with an empty body"
+  },
+  "invalid_reply_from_server": {
+    "message": "Neplatná odpoveď servera",
+    "description": "Status text when the server answered with something other than JSON"
   },
   "credentials_refreshed": {
     "message": "Poverenia boli obnovené",

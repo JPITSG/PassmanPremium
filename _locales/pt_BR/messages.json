@@ -4,7 +4,7 @@
     "description": "Refresh the credential list"
   },
   "extDescription": {
-    "message": "Passman - O gerenciador de senha para NextCloud / ownCloud",
+    "message": "Passman Premium — o gerenciador de senhas para Nextcloud / ownCloud",
     "description": "Extension description"
   },
   "save_to": {
@@ -26,7 +26,7 @@
     "description": "Invalid server URL"
   },
   "account_added": {
-    "message": "Conta adicionada.",
+    "message": "Conta adicionada",
     "description": "Search"
   },
   "label": {
@@ -46,7 +46,7 @@
     "description": "Finish"
   },
   "detected_changed_url": {
-    "message": "Foi detectada uma mudança de URL para",
+    "message": "Nova URL detectada",
     "description": "Detected changed URL for"
   },
   "add_custom_field": {
@@ -65,6 +65,10 @@
     "message": "Quando uma senha for encontrada, vá para a lista ao invés da última guia ativa",
     "description": "Disable password picker"
   },
+  "show_login_count": {
+    "message": "Mostrar o número de logins no ícone da barra de ferramentas",
+    "description": "Toggle the login counter drawn on the toolbar icon"
+  },
   "search": {
     "message": "Pesquisar",
     "description": "Search"
@@ -74,7 +78,7 @@
     "description": "Toggle advanced options"
   },
   "extension_locked": {
-    "message": "A extensão Passman está bloqueada, desbloqueie para usar",
+    "message": "Digite sua senha mestra para desbloquear.",
     "description": "When the extension is locked, and requires an unlock to use it"
   },
   "update": {
@@ -86,15 +90,15 @@
     "description": "Unlock"
   },
   "invalid_vault_password": {
-    "message": "Chave do cofre inválida!",
+    "message": "Senha do cofre incorreta.",
     "description": "Vault password"
   },
   "msg_reset_extension": {
-    "message": "Você pode resetar sua senha. Isso colocará a configuração padrão na extensão.",
+    "message": "A senha mestra não pode ser redefinida. O que você pode fazer é restaurar a extensão ao estado inicial e configurá-la novamente. Seus cofres no servidor Nextcloud não são afetados.",
     "description": "Search"
   },
   "no_vaults": {
-    "message": "Desculpe, não foram encontrados cofres. Crie um cofre através do aplicativo Nextcloud / ownCloud e tente novamente.",
+    "message": "Nenhum cofre encontrado. Crie um cofre no aplicativo Passman do seu servidor Nextcloud e tente novamente.",
     "description": "Search"
   },
   "edit": {
@@ -106,7 +110,7 @@
     "description": "Minimum amount of digits"
   },
   "enter_master_password_desc": {
-    "message": "Esta senha será usada para criptografar todas as suas configurações na extensão. Você pode escolher salvar esta senha localmente mas ela será salva em PLAINTEXT.",
+    "message": "Esta senha criptografa tudo o que a extensão armazena neste dispositivo. Se você optar por lembrá-la, ela é armazenada criptografada para que a extensão possa desbloquear automaticamente.",
     "description": "Enter master password"
   },
   "select_vault": {
@@ -134,11 +138,11 @@
     "description": "Search"
   },
   "invalid_server_settings": {
-    "message": "Configuração inválida do servidor",
+    "message": "Preencha a URL do servidor, o nome de usuário e a senha.",
     "description": "Search"
   },
   "nextcloud_settings": {
-    "message": "Configurações do servidor Nextcloud / ownCloud",
+    "message": "Conecte-se ao seu servidor Nextcloud",
     "description": "Nextcloud / ownCloud server settings"
   },
   "use_generated_password": {
@@ -182,7 +186,7 @@
     "description": "Disable password picker"
   },
   "invalid_master_password": {
-    "message": "Senha mestra inválida!",
+    "message": "Senha mestra incorreta.",
     "description": "When the master password is invalid"
   },
   "general": {
@@ -198,11 +202,11 @@
     "description": "Close"
   },
   "prev": {
-    "message": "Anterior",
+    "message": "Voltar",
     "description": "Previous"
   },
   "add_hint": {
-    "message": "Após criá-lo, você pode editar a credencial no Passman",
+    "message": "Após salvar, você pode editar esta credencial no Passman Premium.",
     "description": "After creating it, you can edit the credential in Passman"
   },
   "text": {
@@ -222,11 +226,11 @@
     "description": "Ignore port for site matching"
   },
   "master_password": {
-    "message": "Definir senha Mestra",
+    "message": "Senha mestra",
     "description": "Set a master password"
   },
   "disable_picker_text": {
-    "message": "Gostaria de desativar o Passman para a página atual ou para todo o site?",
+    "message": "Desativar o Passman Premium apenas nesta página ou no site inteiro?",
     "description": "Would you like to disable Passman for the current page, or for the entire website?"
   },
   "password": {
@@ -262,7 +266,7 @@
     "description": "Toggle visibility"
   },
   "master_pw_warning": {
-    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "message": "A senha mestra é armazenada criptografada neste dispositivo para que a extensão possa desbloquear automaticamente. Ainda assim, qualquer pessoa com acesso total a este perfil do navegador poderia recuperá-la.",
     "description": "Remember master password"
   },
   "remember_master_password": {
@@ -274,11 +278,11 @@
     "description": "Save credentials for this site"
   },
   "browser_action_title_locked": {
-    "message": "Passman - Bloqueado",
+    "message": "Passman Premium — bloqueado",
     "description": "Browser extension title when the extension is locked"
   },
   "label_required": {
-    "message": "Por favor preencha uma etiqueta",
+    "message": "Digite uma etiqueta.",
     "description": "When comparing passwords"
   },
   "enter_master_password": {
@@ -294,7 +298,7 @@
     "description": "Select password picker default tab"
   },
   "save_site": {
-    "message": "Salvar site",
+    "message": "Salvar credencial",
     "description": "Save site"
   },
   "extra_accounts": {
@@ -332,7 +336,7 @@
     "description": "Disable password picker"
   },
   "auto_login": {
-    "message": "Passman está logando você como $USERNAME$",
+    "message": "O Passman Premium está conectando você como $USERNAME$",
     "description": "Amount of the credentials in the database",
     "placeholders": {
       "username": {
@@ -350,7 +354,7 @@
     "description": "Detected new login"
   },
   "detected_changed_login": {
-    "message": "Detectada mudança da senha do usuário",
+    "message": "Alteração de senha detectada",
     "description": "Detected changed password for user"
   },
   "invalid_response_from_server": {
@@ -374,6 +378,34 @@
   "generate_password": {
     "message": "Gerar senha",
     "description": "Generate password"
+  },
+  "auto_fill": {
+    "message": "Preencher automaticamente",
+    "description": "Context-menu entry that fills the login form with a credential"
+  },
+  "copy_username": {
+    "message": "Copiar nome de usuário",
+    "description": "Context-menu entry that copies a credential's username"
+  },
+  "copy_password": {
+    "message": "Copiar senha",
+    "description": "Context-menu entry that copies a credential's password"
+  },
+  "copy_url": {
+    "message": "Copiar URL",
+    "description": "Context-menu entry that copies a credential's URL"
+  },
+  "copy_otp": {
+    "message": "Copiar senha de uso único",
+    "description": "Context-menu entry that copies a credential's one-time password"
+  },
+  "and_copy_to_clipboard": {
+    "message": "E copiar para a área de transferência",
+    "description": "Context-menu entry under Generate password: generate one and copy it"
+  },
+  "and_fill_fields": {
+    "message": "E preencher os campos",
+    "description": "Context-menu entry under Generate password: generate one and fill the form"
   },
   "edit_insufficient_permissions": {
     "message": "Você não tem permissão para editar esta senha.",
@@ -404,11 +436,11 @@
     "description": "updated, lowercase"
   },
   "no_credentials_found": {
-    "message": "Nenhuma credencial encontrada",
+    "message": "Nenhuma credencial encontrada.",
     "description": "No credentials found for the current site"
   },
   "extName": {
-    "message": "Passman",
+    "message": "Passman Premium",
     "description": "Extension name"
   },
   "lock_extension": {
@@ -416,7 +448,7 @@
     "description": "Title on the PayPal button"
   },
   "search_for": {
-    "message": "Pesquisar por",
+    "message": "Pesquisar credenciais…",
     "description": "No credentials found for the current site"
   },
   "password_repeat": {
@@ -426,6 +458,20 @@
   "credential_saved": {
     "message": "Credencial salva",
     "description": "saved, lowercase"
+  },
+  "user_at_site": {
+    "message": "$USERNAME$ em $SITE$",
+    "description": "Doorhanger text naming which user on which site, e.g. 'alice at example.com'",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "alice"
+      },
+      "site": {
+        "content": "$2",
+        "example": "example.com"
+      }
+    }
   },
   "require_every_character_type": {
     "message": "Exigir todo tipo de caractere",
@@ -440,11 +486,11 @@
     "description": "E-mail"
   },
   "welcome_to_passman": {
-    "message": "Bem-vindo à extensão web Passman",
+    "message": "Boas-vindas ao Passman Premium",
     "description": "Intro at the setup"
   },
   "browser_action_title_login": {
-    "message": "Passman - $CREDENTIAL_AMOUNT$ $PLURAL$ encontrado para esta página",
+    "message": "Passman Premium — $CREDENTIAL_AMOUNT$ $PLURAL$ para esta página",
     "description": "String for the browser action",
     "placeholders": {
       "credential_amount": {
@@ -474,7 +520,7 @@
     "description": "Enable form auto submit"
   },
   "saving": {
-    "message": "Salvando",
+    "message": "Salvando…",
     "description": "Saving"
   },
   "url": {
@@ -482,7 +528,7 @@
     "description": "URL"
   },
   "iam_sure": {
-    "message": "Sim, tenho certeza!",
+    "message": "Sim, redefinir tudo",
     "description": "Search"
   },
   "no_sites_ignored": {
@@ -498,7 +544,7 @@
     "description": "Password generator"
   },
   "empty_master_key": {
-    "message": "Chave mestra vazia!",
+    "message": "A senha mestra não pode ficar vazia.",
     "description": "Empty master key!"
   },
   "ignore_subdomain": {
@@ -522,7 +568,7 @@
     "description": "Password length"
   },
   "refresh_timer": {
-    "message": "Horário de atualização [s]",
+    "message": "Intervalo de atualização (segundos — 0 para desativar)",
     "description": "Password"
   },
   "notes": {
@@ -560,6 +606,44 @@
   "about": {
     "message": "Sobre",
     "description": "Label for the About section in settings"
+  },
+  "about_created_by": {
+    "message": "Criado com $HEART$ por $AUTHOR$",
+    "description": "About section credit line; $HEART$ is a heart icon, $AUTHOR$ a link to the company",
+    "placeholders": {
+      "heart": {
+        "content": "$1",
+        "example": "♥"
+      },
+      "author": {
+        "content": "$2",
+        "example": "JP IT Services Pte. Ltd."
+      }
+    }
+  },
+  "about_upstream_link_text": {
+    "message": "extensão Passman",
+    "description": "Link text inside about_upstream pointing at the original Nextcloud extension"
+  },
+  "about_upstream": {
+    "message": "Orgulhosamente construído sobre a maravilhosa $LINK$ de código aberto da comunidade Nextcloud. O original ficou parado por quase uma década — o Passman Premium o leva adiante, renovado e mantido ativamente.",
+    "description": "About section paragraph crediting the upstream project; $LINK$ is the about_upstream_link_text link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Passman extension"
+      }
+    }
+  },
+  "about_source": {
+    "message": "O Passman Premium também é de código aberto — o código-fonte completo está em $LINK$, publicado sob a licença GNU AGPL‑3.0, mantendo os termos do original. Relatos de problemas e contribuições são sempre bem-vindos.",
+    "description": "About section paragraph pointing at this extension's source repository; $LINK$ is the repository link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "github.com/JPITSG/PassmanPremium"
+      }
+    }
   },
   "no_custom_fields": {
     "message": "Ainda não há campos personalizados.",
@@ -600,6 +684,14 @@
         "example": "NetworkError"
       }
     }
+  },
+  "empty_reply_from_server": {
+    "message": "Resposta vazia do servidor",
+    "description": "Status text when the server answered with an empty body"
+  },
+  "invalid_reply_from_server": {
+    "message": "Resposta inválida do servidor",
+    "description": "Status text when the server answered with something other than JSON"
   },
   "credentials_refreshed": {
     "message": "Credenciais atualizadas",

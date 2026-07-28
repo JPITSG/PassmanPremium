@@ -60,6 +60,7 @@
                 enableAutoFill: true,
                 enablePasswordPicker: true,
                 enableAutoSubmit: false,
+                showLoginCount: true,
                 debug: false,
                 accounts: []
             };

@@ -4,7 +4,7 @@
     "description": "Refresh the credential list"
   },
   "extDescription": {
-    "message": "Passman - O administrador de contrasinais para NextCloud / ownCloud",
+    "message": "Passman Premium — o xestor de contrasinais para Nextcloud / ownCloud",
     "description": "Extension description"
   },
   "label": {
@@ -24,7 +24,7 @@
     "description": "Finish"
   },
   "detected_changed_url": {
-    "message": "Detectouse un cambio no URL de",
+    "message": "Detectouse un novo URL",
     "description": "Detected changed URL for"
   },
   "credentials": {
@@ -40,7 +40,7 @@
     "description": "Toggle advanced options"
   },
   "extension_locked": {
-    "message": "A extensión Passman está bloqueada, desbloquéea para usala",
+    "message": "Introduce o teu contrasinal mestre para desbloquear.",
     "description": "When the extension is locked, and requires an unlock to use it"
   },
   "update": {
@@ -52,7 +52,7 @@
     "description": "Unlock"
   },
   "invalid_vault_password": {
-    "message": "A chave da bóveda é incorrecta",
+    "message": "Contrasinal da bóveda incorrecto.",
     "description": "Vault password"
   },
   "edit": {
@@ -64,7 +64,7 @@
     "description": "Minimum amount of digits"
   },
   "enter_master_password_desc": {
-    "message": "Este contrasinal usarase para cifrar todas os seus axustes da extensión. Pode escoller entre gardar os seus contrasinais localmente mais serían gardadas en TEXTO SIMPLE.",
+    "message": "Este contrasinal cifra todo o que a extensión garda neste dispositivo. Se escolles lembralo, gárdase cifrado para que a extensión poida desbloquearse automaticamente.",
     "description": "Enter master password"
   },
   "add_account": {
@@ -80,7 +80,7 @@
     "description": "Delete"
   },
   "nextcloud_settings": {
-    "message": "Configuracións do servidor Nextcloud / ownCloud",
+    "message": "Conéctate ao teu servidor Nextcloud",
     "description": "Nextcloud / ownCloud server settings"
   },
   "use_generated_password": {
@@ -120,7 +120,7 @@
     "description": "Custom fields"
   },
   "invalid_master_password": {
-    "message": "Contrasinal mestre incorrecto",
+    "message": "Contrasinal mestre incorrecto.",
     "description": "When the master password is invalid"
   },
   "general": {
@@ -136,11 +136,11 @@
     "description": "Close"
   },
   "prev": {
-    "message": "Previo",
+    "message": "Atrás",
     "description": "Previous"
   },
   "add_hint": {
-    "message": "Despois de crealas, vostede pode editar as credenciais en Passman",
+    "message": "Despois de gardala, podes editar esta credencial en Passman Premium.",
     "description": "After creating it, you can edit the credential in Passman"
   },
   "default_vault": {
@@ -152,7 +152,7 @@
     "description": "Ignore port for site matching"
   },
   "master_password": {
-    "message": "Estabelecer o contrasinal mestre",
+    "message": "Contrasinal mestre",
     "description": "Set a master password"
   },
   "password": {
@@ -184,7 +184,7 @@
     "description": "Toggle visibility"
   },
   "master_pw_warning": {
-    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "message": "O contrasinal mestre gárdase cifrado neste dispositivo para que a extensión poida desbloquearse automaticamente. Aínda así, calquera con acceso completo a este perfil do navegador podería recuperalo.",
     "description": "Remember master password"
   },
   "remember_master_password": {
@@ -196,11 +196,11 @@
     "description": "Save credentials for this site"
   },
   "browser_action_title_locked": {
-    "message": "Passman - Bloqueado",
+    "message": "Passman Premium — bloqueado",
     "description": "Browser extension title when the extension is locked"
   },
   "label_required": {
-    "message": "Encha unha etiqueta",
+    "message": "Escribe unha etiqueta.",
     "description": "When comparing passwords"
   },
   "enter_master_password": {
@@ -212,7 +212,7 @@
     "description": "Vault password"
   },
   "save_site": {
-    "message": "Gardar o sitio",
+    "message": "Gardar a credencial",
     "description": "Save site"
   },
   "next": {
@@ -232,7 +232,7 @@
     "description": "Detected new login"
   },
   "detected_changed_login": {
-    "message": "Detectouse un cambio de contrasinal para o usuario",
+    "message": "Detectouse un cambio de contrasinal",
     "description": "Detected changed password for user"
   },
   "invalid_response_from_server": {
@@ -257,6 +257,34 @@
     "message": "Xerar un contrasinal",
     "description": "Generate password"
   },
+  "auto_fill": {
+    "message": "Encher automaticamente",
+    "description": "Context-menu entry that fills the login form with a credential"
+  },
+  "copy_username": {
+    "message": "Copiar o nome de usuario",
+    "description": "Context-menu entry that copies a credential's username"
+  },
+  "copy_password": {
+    "message": "Copiar o contrasinal",
+    "description": "Context-menu entry that copies a credential's password"
+  },
+  "copy_url": {
+    "message": "Copiar o URL",
+    "description": "Context-menu entry that copies a credential's URL"
+  },
+  "copy_otp": {
+    "message": "Copiar o contrasinal dun só uso",
+    "description": "Context-menu entry that copies a credential's one-time password"
+  },
+  "and_copy_to_clipboard": {
+    "message": "E copialo ao portapapeis",
+    "description": "Context-menu entry under Generate password: generate one and copy it"
+  },
+  "and_fill_fields": {
+    "message": "E encher os campos",
+    "description": "Context-menu entry under Generate password: generate one and fill the form"
+  },
   "server_url": {
     "message": "URL do servidor",
     "description": "Server URL"
@@ -274,11 +302,11 @@
     "description": "updated, lowercase"
   },
   "no_credentials_found": {
-    "message": "Non se atoparon credenciais",
+    "message": "Non se atoparon credenciais.",
     "description": "No credentials found for the current site"
   },
   "extName": {
-    "message": "Passman",
+    "message": "Passman Premium",
     "description": "Extension name"
   },
   "lock_extension": {
@@ -286,7 +314,7 @@
     "description": "Title on the PayPal button"
   },
   "search_for": {
-    "message": "Buscar por",
+    "message": "Buscar credenciais…",
     "description": "No credentials found for the current site"
   },
   "password_repeat": {
@@ -296,6 +324,20 @@
   "credential_saved": {
     "message": "Credenciais gardadas",
     "description": "saved, lowercase"
+  },
+  "user_at_site": {
+    "message": "$USERNAME$ en $SITE$",
+    "description": "Doorhanger text naming which user on which site, e.g. 'alice at example.com'",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "alice"
+      },
+      "site": {
+        "content": "$2",
+        "example": "example.com"
+      }
+    }
   },
   "require_every_character_type": {
     "message": "Requirir todos os tipos de caracteres",
@@ -310,11 +352,11 @@
     "description": "E-mail"
   },
   "welcome_to_passman": {
-    "message": "Benvido á extensión Passman",
+    "message": "Dámosche a benvida a Passman Premium",
     "description": "Intro at the setup"
   },
   "browser_action_title_login": {
-    "message": "Passman - $CREDENTIAL_AMOUNT$ $PLURAL$ atopado para esta páxina",
+    "message": "Passman Premium — $CREDENTIAL_AMOUNT$ $PLURAL$ para esta páxina",
     "description": "String for the browser action",
     "placeholders": {
       "credential_amount": {
@@ -336,7 +378,7 @@
     "description": "No credentials found for the current site"
   },
   "saving": {
-    "message": "Gardando",
+    "message": "Gardando…",
     "description": "Saving"
   },
   "url": {
@@ -356,7 +398,7 @@
     "description": "Password generator"
   },
   "empty_master_key": {
-    "message": "A chave mestra está baleira",
+    "message": "O contrasinal mestre non pode estar baleiro.",
     "description": "Empty master key!"
   },
   "ignore_subdomain": {
@@ -380,7 +422,7 @@
     "description": "Password length"
   },
   "refresh_timer": {
-    "message": "Restabelecer o(s) temporizador(es)",
+    "message": "Intervalo de actualización (segundos — 0 para desactivar)",
     "description": "Password"
   },
   "notes": {
@@ -418,6 +460,44 @@
   "about": {
     "message": "Sobre",
     "description": "Label for the About section in settings"
+  },
+  "about_created_by": {
+    "message": "Creado con $HEART$ por $AUTHOR$",
+    "description": "About section credit line; $HEART$ is a heart icon, $AUTHOR$ a link to the company",
+    "placeholders": {
+      "heart": {
+        "content": "$1",
+        "example": "♥"
+      },
+      "author": {
+        "content": "$2",
+        "example": "JP IT Services Pte. Ltd."
+      }
+    }
+  },
+  "about_upstream_link_text": {
+    "message": "extensión Passman",
+    "description": "Link text inside about_upstream pointing at the original Nextcloud extension"
+  },
+  "about_upstream": {
+    "message": "Construído con orgullo sobre a marabillosa $LINK$ de código aberto da comunidade Nextcloud. O orixinal levaba case unha década parado — Passman Premium continúao, renovado e mantido activamente.",
+    "description": "About section paragraph crediting the upstream project; $LINK$ is the about_upstream_link_text link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Passman extension"
+      }
+    }
+  },
+  "about_source": {
+    "message": "Passman Premium tamén é de código aberto — o código fonte completo está en $LINK$, publicado baixo a licenza GNU AGPL‑3.0, mantendo os termos do orixinal. Os informes de erros e as contribucións son sempre benvidos.",
+    "description": "About section paragraph pointing at this extension's source repository; $LINK$ is the repository link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "github.com/JPITSG/PassmanPremium"
+      }
+    }
   },
   "no_custom_fields": {
     "message": "Aínda non hai campos personalizados.",
@@ -459,6 +539,14 @@
       }
     }
   },
+  "empty_reply_from_server": {
+    "message": "Resposta baleira do servidor",
+    "description": "Status text when the server answered with an empty body"
+  },
+  "invalid_reply_from_server": {
+    "message": "Resposta non válida do servidor",
+    "description": "Status text when the server answered with something other than JSON"
+  },
   "credentials_refreshed": {
     "message": "Credenciais actualizadas",
     "description": "Header status flash after a manual refresh completes"
@@ -486,6 +574,10 @@
   "password_picker_gotolist": {
     "message": "Abrir o seleccionador na lapela de lista cando se atopan credenciais",
     "description": "Disable password picker"
+  },
+  "show_login_count": {
+    "message": "Mostrar o número de inicios de sesión na icona da barra de ferramentas",
+    "description": "Toggle the login counter drawn on the toolbar icon"
   },
   "hide_adv": {
     "message": "Agochar as opcións avanzadas",
@@ -540,7 +632,7 @@
     "description": "Search"
   },
   "msg_reset_extension": {
-    "message": "O teu contrasinal mestre non se pode restablecer. O que podes facer é restablecer a extensión ao seu estado predeterminado e configurala de novo. As túas bóvedas no servidor Nextcloud non se ven afectadas.",
+    "message": "O contrasinal mestre non se pode restablecer. O que podes facer é restaurar a extensión ao seu estado inicial e configurala de novo. As túas bóvedas no servidor Nextcloud non se ven afectadas.",
     "description": "Search"
   },
   "forgot_password": {
@@ -560,7 +652,7 @@
     "description": "You don't have permissions to edit this credential."
   },
   "invalid_server_settings": {
-    "message": "Enche o URL do servidor, o nome de usuario e o contrasinal.",
+    "message": "Completa o URL do servidor, o nome de usuario e o contrasinal.",
     "description": "Search"
   },
   "save_to": {

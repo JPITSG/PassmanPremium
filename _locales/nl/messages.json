@@ -4,7 +4,7 @@
     "description": "Refresh the credential list"
   },
   "extDescription": {
-    "message": "Passman - de wachtwoordbeheerder voor NextCloud / ownCloud",
+    "message": "Passman Premium — de wachtwoordbeheerder voor Nextcloud / ownCloud",
     "description": "Extension description"
   },
   "save_to": {
@@ -26,7 +26,7 @@
     "description": "Invalid server URL"
   },
   "account_added": {
-    "message": "Account toegevoegd.",
+    "message": "Account toegevoegd",
     "description": "Search"
   },
   "label": {
@@ -46,7 +46,7 @@
     "description": "Finish"
   },
   "detected_changed_url": {
-    "message": "Aangepaste URL gevonden voor",
+    "message": "Nieuwe URL gedetecteerd",
     "description": "Detected changed URL for"
   },
   "add_custom_field": {
@@ -65,6 +65,10 @@
     "message": "Als een wachtwoord is gevonden, ga naar de lijst in plaats van naar de laatst actieve tab",
     "description": "Disable password picker"
   },
+  "show_login_count": {
+    "message": "Het aantal logins op het werkbalkpictogram tonen",
+    "description": "Toggle the login counter drawn on the toolbar icon"
+  },
   "search": {
     "message": "Zoek",
     "description": "Search"
@@ -74,7 +78,7 @@
     "description": "Toggle advanced options"
   },
   "extension_locked": {
-    "message": "Passman uitbreiding is vergrendeld, ontgrendel om te gebruiken",
+    "message": "Voer je hoofdwachtwoord in om te ontgrendelen.",
     "description": "When the extension is locked, and requires an unlock to use it"
   },
   "update": {
@@ -86,15 +90,15 @@
     "description": "Unlock"
   },
   "invalid_vault_password": {
-    "message": "ongeldige kluissleutel!",
+    "message": "Onjuist kluiswachtwoord.",
     "description": "Vault password"
   },
   "msg_reset_extension": {
-    "message": "Je kunt alleen je wachtwoord resetten. Dit zal de extensie terugzetten naar de standaard waarde.",
+    "message": "Het hoofdwachtwoord kan niet worden hersteld. Je kunt wel de extensie terugzetten naar de beginstatus en opnieuw instellen. Je kluizen op de Nextcloud-server blijven onaangetast.",
     "description": "Search"
   },
   "no_vaults": {
-    "message": "Sorry, geen kluis gevonden. Creëer een kluis via de Nextcloud / ownCloud app en probeer het opnieuw.",
+    "message": "Geen kluizen gevonden. Maak een kluis aan in de Passman-app op je Nextcloud-server en probeer het opnieuw.",
     "description": "Search"
   },
   "edit": {
@@ -106,7 +110,7 @@
     "description": "Minimum amount of digits"
   },
   "enter_master_password_desc": {
-    "message": "Dit wachtwoord wordt gebruikt om alle instellingen in deze extensie te versleutelen. Je kunt het wachtwoord lokaal opslaan, maar dan wordt het in LEESBARE tekst opgeslagen.",
+    "message": "Dit wachtwoord versleutelt alles wat de extensie op dit apparaat opslaat. Als je kiest om het te onthouden, wordt het versleuteld opgeslagen zodat de extensie automatisch kan ontgrendelen.",
     "description": "Enter master password"
   },
   "select_vault": {
@@ -134,11 +138,11 @@
     "description": "Search"
   },
   "invalid_server_settings": {
-    "message": "Ongeldige serverinstellingen",
+    "message": "Vul de server-URL, gebruikersnaam en wachtwoord in.",
     "description": "Search"
   },
   "nextcloud_settings": {
-    "message": "Nextcloud / owncloud server instellingen",
+    "message": "Verbind met je Nextcloud-server",
     "description": "Nextcloud / ownCloud server settings"
   },
   "use_generated_password": {
@@ -182,7 +186,7 @@
     "description": "Disable password picker"
   },
   "invalid_master_password": {
-    "message": "Ongeldig hoofdwachtwoord!",
+    "message": "Onjuist hoofdwachtwoord.",
     "description": "When the master password is invalid"
   },
   "general": {
@@ -198,11 +202,11 @@
     "description": "Close"
   },
   "prev": {
-    "message": "Vorig",
+    "message": "Terug",
     "description": "Previous"
   },
   "add_hint": {
-    "message": "Na het aanmaken kun je de inloggegevens bewerken in Passman",
+    "message": "Na het opslaan kun je deze inloggegevens bewerken in Passman Premium.",
     "description": "After creating it, you can edit the credential in Passman"
   },
   "text": {
@@ -222,11 +226,11 @@
     "description": "Ignore port for site matching"
   },
   "master_password": {
-    "message": "Instellen hoofdwachtwoord",
+    "message": "Hoofdwachtwoord",
     "description": "Set a master password"
   },
   "disable_picker_text": {
-    "message": "Wil je Passman uitzeten voor de gehele pagina of voor de gehele website?",
+    "message": "Passman Premium alleen op deze pagina uitschakelen, of op de hele website?",
     "description": "Would you like to disable Passman for the current page, or for the entire website?"
   },
   "password": {
@@ -262,7 +266,7 @@
     "description": "Toggle visibility"
   },
   "master_pw_warning": {
-    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "message": "Het hoofdwachtwoord wordt versleuteld op dit apparaat opgeslagen, zodat de extensie automatisch kan ontgrendelen. Iedereen met volledige toegang tot dit browserprofiel zou het toch kunnen achterhalen.",
     "description": "Remember master password"
   },
   "remember_master_password": {
@@ -274,11 +278,11 @@
     "description": "Save credentials for this site"
   },
   "browser_action_title_locked": {
-    "message": "Passman - Vergrendeld",
+    "message": "Passman Premium — vergrendeld",
     "description": "Browser extension title when the extension is locked"
   },
   "label_required": {
-    "message": "Voeg een label toe",
+    "message": "Voer een label in.",
     "description": "When comparing passwords"
   },
   "enter_master_password": {
@@ -294,7 +298,7 @@
     "description": "Select password picker default tab"
   },
   "save_site": {
-    "message": "Site opslaan",
+    "message": "Inloggegevens opslaan",
     "description": "Save site"
   },
   "extra_accounts": {
@@ -332,7 +336,7 @@
     "description": "Disable password picker"
   },
   "auto_login": {
-    "message": "Passman logt je in als $USERNAME$",
+    "message": "Passman Premium logt je in als $USERNAME$",
     "description": "Amount of the credentials in the database",
     "placeholders": {
       "username": {
@@ -350,7 +354,7 @@
     "description": "Detected new login"
   },
   "detected_changed_login": {
-    "message": "Een veranderd wachtwoord voor de gebruiker gevonden",
+    "message": "Wachtwoordwijziging gedetecteerd",
     "description": "Detected changed password for user"
   },
   "invalid_response_from_server": {
@@ -374,6 +378,34 @@
   "generate_password": {
     "message": "Genereer wachtwoord",
     "description": "Generate password"
+  },
+  "auto_fill": {
+    "message": "Automatisch invullen",
+    "description": "Context-menu entry that fills the login form with a credential"
+  },
+  "copy_username": {
+    "message": "Gebruikersnaam kopiëren",
+    "description": "Context-menu entry that copies a credential's username"
+  },
+  "copy_password": {
+    "message": "Wachtwoord kopiëren",
+    "description": "Context-menu entry that copies a credential's password"
+  },
+  "copy_url": {
+    "message": "URL kopiëren",
+    "description": "Context-menu entry that copies a credential's URL"
+  },
+  "copy_otp": {
+    "message": "Eenmalig wachtwoord kopiëren",
+    "description": "Context-menu entry that copies a credential's one-time password"
+  },
+  "and_copy_to_clipboard": {
+    "message": "En naar het klembord kopiëren",
+    "description": "Context-menu entry under Generate password: generate one and copy it"
+  },
+  "and_fill_fields": {
+    "message": "En velden invullen",
+    "description": "Context-menu entry under Generate password: generate one and fill the form"
   },
   "edit_insufficient_permissions": {
     "message": "Je hebt niet de autorisatie om deze inloggegevens te wijzigen.",
@@ -404,11 +436,11 @@
     "description": "updated, lowercase"
   },
   "no_credentials_found": {
-    "message": "Geen inloggegevens gevonden",
+    "message": "Geen inloggegevens gevonden.",
     "description": "No credentials found for the current site"
   },
   "extName": {
-    "message": "Passman",
+    "message": "Passman Premium",
     "description": "Extension name"
   },
   "lock_extension": {
@@ -416,7 +448,7 @@
     "description": "Title on the PayPal button"
   },
   "search_for": {
-    "message": "Zoek naar",
+    "message": "Inloggegevens zoeken…",
     "description": "No credentials found for the current site"
   },
   "password_repeat": {
@@ -426,6 +458,20 @@
   "credential_saved": {
     "message": "Inloggegevens opgeslagen",
     "description": "saved, lowercase"
+  },
+  "user_at_site": {
+    "message": "$USERNAME$ op $SITE$",
+    "description": "Doorhanger text naming which user on which site, e.g. 'alice at example.com'",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "alice"
+      },
+      "site": {
+        "content": "$2",
+        "example": "example.com"
+      }
+    }
   },
   "require_every_character_type": {
     "message": "Vereis elk type teken",
@@ -440,11 +486,11 @@
     "description": "E-mail"
   },
   "welcome_to_passman": {
-    "message": "Welkom bij de Passman webextensie",
+    "message": "Welkom bij Passman Premium",
     "description": "Intro at the setup"
   },
   "browser_action_title_login": {
-    "message": "Passman -$CREDENTIAL_AMOUNT$ $PLURAL$ gevonden voor deze pagina",
+    "message": "Passman Premium — $CREDENTIAL_AMOUNT$ $PLURAL$ voor deze pagina",
     "description": "String for the browser action",
     "placeholders": {
       "credential_amount": {
@@ -474,7 +520,7 @@
     "description": "Enable form auto submit"
   },
   "saving": {
-    "message": "Opslaan",
+    "message": "Opslaan…",
     "description": "Saving"
   },
   "url": {
@@ -482,7 +528,7 @@
     "description": "URL"
   },
   "iam_sure": {
-    "message": "Ja, ik weet het zeker!",
+    "message": "Ja, alles opnieuw instellen",
     "description": "Search"
   },
   "no_sites_ignored": {
@@ -498,7 +544,7 @@
     "description": "Password generator"
   },
   "empty_master_key": {
-    "message": "Hoofdsleutel  leeg maken!",
+    "message": "Het hoofdwachtwoord mag niet leeg zijn.",
     "description": "Empty master key!"
   },
   "ignore_subdomain": {
@@ -522,7 +568,7 @@
     "description": "Password length"
   },
   "refresh_timer": {
-    "message": "Ververs timer [s]",
+    "message": "Vernieuwingsinterval (seconden — 0 om uit te schakelen)",
     "description": "Password"
   },
   "notes": {
@@ -560,6 +606,44 @@
   "about": {
     "message": "Over",
     "description": "Label for the About section in settings"
+  },
+  "about_created_by": {
+    "message": "Gemaakt met $HEART$ door $AUTHOR$",
+    "description": "About section credit line; $HEART$ is a heart icon, $AUTHOR$ a link to the company",
+    "placeholders": {
+      "heart": {
+        "content": "$1",
+        "example": "♥"
+      },
+      "author": {
+        "content": "$2",
+        "example": "JP IT Services Pte. Ltd."
+      }
+    }
+  },
+  "about_upstream_link_text": {
+    "message": "Passman-extensie",
+    "description": "Link text inside about_upstream pointing at the original Nextcloud extension"
+  },
+  "about_upstream": {
+    "message": "Met trots gebouwd op de prachtige open-source $LINK$ van de Nextcloud-gemeenschap. Het origineel lag bijna een decennium stil — Passman Premium zet het voort, vernieuwd en actief onderhouden.",
+    "description": "About section paragraph crediting the upstream project; $LINK$ is the about_upstream_link_text link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Passman extension"
+      }
+    }
+  },
+  "about_source": {
+    "message": "Passman Premium is ook open source — de volledige broncode staat op $LINK$, uitgebracht onder de GNU AGPL‑3.0-licentie, in lijn met de voorwaarden van het origineel. Meldingen en bijdragen zijn altijd welkom.",
+    "description": "About section paragraph pointing at this extension's source repository; $LINK$ is the repository link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "github.com/JPITSG/PassmanPremium"
+      }
+    }
   },
   "no_custom_fields": {
     "message": "Nog geen aangepaste velden.",
@@ -600,6 +684,14 @@
         "example": "NetworkError"
       }
     }
+  },
+  "empty_reply_from_server": {
+    "message": "Leeg antwoord van de server",
+    "description": "Status text when the server answered with an empty body"
+  },
+  "invalid_reply_from_server": {
+    "message": "Ongeldig antwoord van de server",
+    "description": "Status text when the server answered with something other than JSON"
   },
   "credentials_refreshed": {
     "message": "Inloggegevens vernieuwd",

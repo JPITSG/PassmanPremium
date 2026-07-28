@@ -33,7 +33,7 @@
      * Controller of the passmanApp
      */
     angular.module('passmanExtension')
-        .controller('SettingsCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+        .controller('SettingsCtrl', ['$scope', '$routeParams', '$sce', function ($scope, $routeParams, $sce) {
             $scope.settings = {
                 accounts: [],
                 // placeholder until getRuntimeSettings resolves — mirrors
@@ -59,6 +59,22 @@
 
             $scope.tabActive =  ($routeParams.tab) ? parseInt($routeParams.tab) : 1;
             $scope.extension = API.runtime.getManifest().name + ' ' + API.runtime.getManifest().version;
+
+            // The About paragraphs live in the locale files with $HEART$ /
+            // $AUTHOR$ / $LINK$ placeholders so each language keeps its own
+            // word order around the inline links. Everything bound here is
+            // our own static markup plus packaged locale strings — no user
+            // or server data — which is what makes trustAsHtml safe.
+            var aboutLink = function (href, text) {
+                return '<a href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
+            };
+            var heartSvg = '<svg class="heart" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+            $scope.aboutCredit = $sce.trustAsHtml(API.i18n.getMessage('about_created_by',
+                [heartSvg, aboutLink('https://www.jpitsingapore.com/', 'JP IT Services Pte. Ltd.')]));
+            $scope.aboutUpstream = $sce.trustAsHtml(API.i18n.getMessage('about_upstream',
+                [aboutLink('https://github.com/nextcloud/passman-webextension', API.i18n.getMessage('about_upstream_link_text'))]));
+            $scope.aboutSource = $sce.trustAsHtml(API.i18n.getMessage('about_source',
+                [aboutLink('https://github.com/JPITSG/PassmanPremium', 'github.com/JPITSG/PassmanPremium')]));
 
             API.runtime.sendMessage(API.runtime.id, {'method': 'getRuntimeSettings'}).then(function (settings) {
                 $scope.errors = [];

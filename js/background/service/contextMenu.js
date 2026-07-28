@@ -78,7 +78,7 @@ window.contextMenu = (function () {
 
         },
         addPasswordGenerator: function(){
-            createMenuItem('generatePassword', 'copyGen', 'And copy to clipboard', function(info){
+            createMenuItem('generatePassword', 'copyGen', API.i18n.getMessage('and_copy_to_clipboard'), function(info){
                 generatePass(function (generated_password) {
                     API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
                         if (!tabs[0]) {
@@ -89,7 +89,7 @@ window.contextMenu = (function () {
                 });
             });
 
-            createMenuItem('generatePassword', 'fill', 'And fill fields', function(info){
+            createMenuItem('generatePassword', 'fill', API.i18n.getMessage('and_fill_fields'), function(info){
                 generatePass(function (generated_password) {
                     var login = {
                         password: generated_password
@@ -160,28 +160,28 @@ window.contextMenu = (function () {
 
         API.contextMenus.create({
             id: 'autoFill:',
-            title: 'Auto fill',
+            title: API.i18n.getMessage('auto_fill'),
             contexts: ['page'],
             parentId: 'passman'
         });
 
         API.contextMenus.create({
             id: 'generatePassword',
-            title: 'Generate password',
+            title: API.i18n.getMessage('generate_password'),
             contexts: ['page'],
             parentId: 'passman'
         });
 
         API.contextMenus.create({
             id: 'copy:User',
-            title: 'Copy username',
+            title: API.i18n.getMessage('copy_username'),
             contexts: ['page'],
             parentId: 'passman'
         });
 
         API.contextMenus.create({
             id: 'copy:Pass',
-            title: 'Copy password',
+            title: API.i18n.getMessage('copy_password'),
             contexts: ['page'],
             parentId: 'passman'
         });
@@ -189,14 +189,14 @@ window.contextMenu = (function () {
 
         API.contextMenus.create({
             id: 'copy:Url',
-            title: 'Copy URL',
+            title: API.i18n.getMessage('copy_url'),
             contexts: ['page'],
             parentId: 'passman'
         });
 
         API.contextMenus.create({
             id: 'copy:OTP',
-            title: 'Copy OTP',
+            title: API.i18n.getMessage('copy_otp'),
             contexts: ['page'],
             parentId: 'passman'
         });

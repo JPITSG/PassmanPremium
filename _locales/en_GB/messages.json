@@ -4,7 +4,7 @@
     "description": "Refresh the credential list"
   },
   "extDescription": {
-    "message": "Passman - The password manager for NextCloud / ownCloud",
+    "message": "Passman Premium — the password manager for Nextcloud / ownCloud",
     "description": "Extension description"
   },
   "save_to": {
@@ -26,7 +26,7 @@
     "description": "Invalid server URL"
   },
   "account_added": {
-    "message": "Account added.",
+    "message": "Account added",
     "description": "Search"
   },
   "label": {
@@ -46,7 +46,7 @@
     "description": "Finish"
   },
   "detected_changed_url": {
-    "message": "Detected changed URL for",
+    "message": "New URL detected",
     "description": "Detected changed URL for"
   },
   "add_custom_field": {
@@ -65,6 +65,10 @@
     "message": "When a password is found, go to list rather than last active tab",
     "description": "Disable password picker"
   },
+  "show_login_count": {
+    "message": "Show the login count on the toolbar icon",
+    "description": "Toggle the login counter drawn on the toolbar icon"
+  },
   "search": {
     "message": "Search",
     "description": "Search"
@@ -74,7 +78,7 @@
     "description": "Toggle advanced options"
   },
   "extension_locked": {
-    "message": "Passman extension is locked, unlock to use it",
+    "message": "Enter your master password to unlock.",
     "description": "When the extension is locked, and requires an unlock to use it"
   },
   "update": {
@@ -86,15 +90,15 @@
     "description": "Unlock"
   },
   "invalid_vault_password": {
-    "message": "Invalid vault key!",
+    "message": "Incorrect vault password.",
     "description": "Vault password"
   },
   "msg_reset_extension": {
-    "message": "You can reset your password. This will reset the extension to its default state.",
+    "message": "Your master password cannot be reset. What you can do is reset the extension back to its default state and set it up again. Your vaults on the Nextcloud server are not affected.",
     "description": "Search"
   },
   "no_vaults": {
-    "message": "Sorry, no vaults found. Please create a vault via the Nextcloud / ownCloud app and try again.",
+    "message": "No vaults found. Create a vault in the Passman app on your Nextcloud server, then try again.",
     "description": "Search"
   },
   "edit": {
@@ -106,7 +110,7 @@
     "description": "Minimum amount of digits"
   },
   "enter_master_password_desc": {
-    "message": "This password will be used to encrypt all your settings in the extension. You can choose to save this password locally, but it will be saved in PLAINTEXT.",
+    "message": "This password encrypts everything the extension stores on this device. If you choose to remember it, it is stored encrypted so the extension can unlock automatically.",
     "description": "Enter master password"
   },
   "select_vault": {
@@ -134,11 +138,11 @@
     "description": "Search"
   },
   "invalid_server_settings": {
-    "message": "Invalid server settings",
+    "message": "Please fill in the server URL, username and password.",
     "description": "Search"
   },
   "nextcloud_settings": {
-    "message": "Nextcloud / ownCloud server settings",
+    "message": "Connect to your Nextcloud server",
     "description": "Nextcloud / ownCloud server settings"
   },
   "use_generated_password": {
@@ -182,7 +186,7 @@
     "description": "Disable password picker"
   },
   "invalid_master_password": {
-    "message": "Invalid master password!",
+    "message": "Incorrect master password.",
     "description": "When the master password is invalid"
   },
   "general": {
@@ -198,11 +202,11 @@
     "description": "Close"
   },
   "prev": {
-    "message": "Prev",
+    "message": "Back",
     "description": "Previous"
   },
   "add_hint": {
-    "message": "After creating it, you can edit the credential in Passman",
+    "message": "After saving, you can edit this credential in Passman Premium.",
     "description": "After creating it, you can edit the credential in Passman"
   },
   "text": {
@@ -222,11 +226,11 @@
     "description": "Ignore port for site matching"
   },
   "master_password": {
-    "message": "Set Master password",
+    "message": "Master password",
     "description": "Set a master password"
   },
   "disable_picker_text": {
-    "message": "Would you like to disable Passman for the current page, or for the entire website?",
+    "message": "Disable Passman Premium on this page only, or on the entire site?",
     "description": "Would you like to disable Passman for the current page, or for the entire website?"
   },
   "password": {
@@ -274,11 +278,11 @@
     "description": "Save credentials for this site"
   },
   "browser_action_title_locked": {
-    "message": "Passman - Locked",
+    "message": "Passman Premium — locked",
     "description": "Browser extension title when the extension is locked"
   },
   "label_required": {
-    "message": "Please fill in a label",
+    "message": "Please enter a label.",
     "description": "When comparing passwords"
   },
   "enter_master_password": {
@@ -294,7 +298,7 @@
     "description": "Select password picker default tab"
   },
   "save_site": {
-    "message": "Save site",
+    "message": "Save credential",
     "description": "Save site"
   },
   "extra_accounts": {
@@ -332,7 +336,7 @@
     "description": "Disable password picker"
   },
   "auto_login": {
-    "message": "Passman is logging you in as $USERNAME$",
+    "message": "Passman Premium is signing you in as $USERNAME$",
     "description": "Amount of the credentials in the database",
     "placeholders": {
       "username": {
@@ -350,7 +354,7 @@
     "description": "Detected new login"
   },
   "detected_changed_login": {
-    "message": "Detected changed password for user",
+    "message": "Password change detected",
     "description": "Detected changed password for user"
   },
   "invalid_response_from_server": {
@@ -374,6 +378,34 @@
   "generate_password": {
     "message": "Generate password",
     "description": "Generate password"
+  },
+  "auto_fill": {
+    "message": "Auto fill",
+    "description": "Context-menu entry that fills the login form with a credential"
+  },
+  "copy_username": {
+    "message": "Copy username",
+    "description": "Context-menu entry that copies a credential's username"
+  },
+  "copy_password": {
+    "message": "Copy password",
+    "description": "Context-menu entry that copies a credential's password"
+  },
+  "copy_url": {
+    "message": "Copy URL",
+    "description": "Context-menu entry that copies a credential's URL"
+  },
+  "copy_otp": {
+    "message": "Copy OTP",
+    "description": "Context-menu entry that copies a credential's one-time password"
+  },
+  "and_copy_to_clipboard": {
+    "message": "And copy to clipboard",
+    "description": "Context-menu entry under Generate password: generate one and copy it"
+  },
+  "and_fill_fields": {
+    "message": "And fill fields",
+    "description": "Context-menu entry under Generate password: generate one and fill the form"
   },
   "edit_insufficient_permissions": {
     "message": "You don't have the permission to edit this credential.",
@@ -404,11 +436,11 @@
     "description": "updated, lowercase"
   },
   "no_credentials_found": {
-    "message": "No credentials found",
+    "message": "No credentials found.",
     "description": "No credentials found for the current site"
   },
   "extName": {
-    "message": "Passman",
+    "message": "Passman Premium",
     "description": "Extension name"
   },
   "lock_extension": {
@@ -416,7 +448,7 @@
     "description": "Title on the PayPal button"
   },
   "search_for": {
-    "message": "Search for",
+    "message": "Search credentials…",
     "description": "No credentials found for the current site"
   },
   "password_repeat": {
@@ -426,6 +458,20 @@
   "credential_saved": {
     "message": "Credential saved",
     "description": "saved, lowercase"
+  },
+  "user_at_site": {
+    "message": "$USERNAME$ at $SITE$",
+    "description": "Doorhanger text naming which user on which site, e.g. 'alice at example.com'",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "alice"
+      },
+      "site": {
+        "content": "$2",
+        "example": "example.com"
+      }
+    }
   },
   "require_every_character_type": {
     "message": "Require every character type",
@@ -440,11 +486,11 @@
     "description": "E-mail"
   },
   "welcome_to_passman": {
-    "message": "Welcome to the Passman webextension",
+    "message": "Welcome to Passman Premium",
     "description": "Intro at the setup"
   },
   "browser_action_title_login": {
-    "message": "Passman - $CREDENTIAL_AMOUNT$ $PLURAL$ found for this page",
+    "message": "Passman Premium — $CREDENTIAL_AMOUNT$ $PLURAL$ for this page",
     "description": "String for the browser action",
     "placeholders": {
       "credential_amount": {
@@ -474,7 +520,7 @@
     "description": "Enable form auto submit"
   },
   "saving": {
-    "message": "Saving",
+    "message": "Saving…",
     "description": "Saving"
   },
   "url": {
@@ -482,7 +528,7 @@
     "description": "URL"
   },
   "iam_sure": {
-    "message": "Yes, I'm sure!",
+    "message": "Yes, reset everything",
     "description": "Search"
   },
   "no_sites_ignored": {
@@ -498,7 +544,7 @@
     "description": "Password generator"
   },
   "empty_master_key": {
-    "message": "Empty master key!",
+    "message": "The master password cannot be empty.",
     "description": "Empty master key!"
   },
   "ignore_subdomain": {
@@ -522,7 +568,7 @@
     "description": "Password length"
   },
   "refresh_timer": {
-    "message": "Refresh timer [s]",
+    "message": "Refresh interval (seconds - 0 to disable)",
     "description": "Password"
   },
   "notes": {
@@ -560,6 +606,44 @@
   "about": {
     "message": "About",
     "description": "Label for the About section in settings"
+  },
+  "about_created_by": {
+    "message": "Created with $HEART$ by $AUTHOR$",
+    "description": "About section credit line; $HEART$ is a heart icon, $AUTHOR$ a link to the company",
+    "placeholders": {
+      "heart": {
+        "content": "$1",
+        "example": "♥"
+      },
+      "author": {
+        "content": "$2",
+        "example": "JP IT Services Pte. Ltd."
+      }
+    }
+  },
+  "about_upstream_link_text": {
+    "message": "Passman extension",
+    "description": "Link text inside about_upstream pointing at the original Nextcloud extension"
+  },
+  "about_upstream": {
+    "message": "Proudly built on the wonderful open-source $LINK$ by the Nextcloud community. The original has been dormant for the better part of a decade — Passman Premium carries it forward, refreshed and actively maintained.",
+    "description": "About section paragraph crediting the upstream project; $LINK$ is the about_upstream_link_text link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Passman extension"
+      }
+    }
+  },
+  "about_source": {
+    "message": "Passman Premium is open source too — the complete source lives at $LINK$, released under the GNU AGPL‑3.0 licence, carrying forward the original's terms. Issues and contributions are always welcome.",
+    "description": "About section paragraph pointing at this extension's source repository; $LINK$ is the repository link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "github.com/JPITSG/PassmanPremium"
+      }
+    }
   },
   "no_custom_fields": {
     "message": "No custom fields yet.",
@@ -600,6 +684,14 @@
         "example": "NetworkError"
       }
     }
+  },
+  "empty_reply_from_server": {
+    "message": "Empty reply from server",
+    "description": "Status text when the server answered with an empty body"
+  },
+  "invalid_reply_from_server": {
+    "message": "Invalid reply from server",
+    "description": "Status text when the server answered with something other than JSON"
   },
   "credentials_refreshed": {
     "message": "Credentials refreshed",

@@ -43,23 +43,9 @@
             <div class="settings-section">
                 <div class="section-label">{{ 'about' | translate }}</div>
                 <div class="about-version">{{extension}}</div>
-                <p class="about-credit">
-                    Created with
-                    <svg class="heart" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                    by <a href="https://www.jpitsingapore.com/" target="_blank" rel="noopener">JP IT Services Pte. Ltd.</a>
-                </p>
-                <p class="about-attribution">
-                    Proudly built on the wonderful open-source
-                    <a href="https://github.com/nextcloud/passman-webextension" target="_blank" rel="noopener">Passman extension</a>
-                    by the Nextcloud community. The original has been dormant for the better part of a
-                    decade &mdash; Passman Premium carries it forward, refreshed and actively maintained.
-                </p>
-                <p class="about-attribution">
-                    Passman Premium is open source too &mdash; the complete source lives at
-                    <a href="https://github.com/JPITSG/PassmanPremium" target="_blank" rel="noopener">github.com/JPITSG/PassmanPremium</a>,
-                    released under the GNU AGPL&#8209;3.0 license, carrying forward the original's terms.
-                    Issues and contributions are always welcome.
-                </p>
+                <p class="about-credit" ng-bind-html="aboutCredit"></p>
+                <p class="about-attribution" ng-bind-html="aboutUpstream"></p>
+                <p class="about-attribution" ng-bind-html="aboutSource"></p>
             </div>
 
             <div ng-init="showAdvanced = false" ng-click="showAdvanced = !showAdvanced" class="adv-toggle" tabindex="0" role="button" aria-expanded="{{showAdvanced}}">
@@ -107,6 +93,10 @@
                            class="switch-input">
                     <label for="password_picker_gotolist" class="switch-label">{{'password_picker_gotolist' |
                         translate}}</label>
+                </div>
+                <div class="switch-row">
+                    <input type="checkbox" id="show_login_count" ng-model="settings.showLoginCount" class="switch-input">
+                    <label for="show_login_count" class="switch-label">{{'show_login_count' | translate}}</label>
                 </div>
                 <div class="switch-row">
                     <input type="checkbox" id="enable_debug" ng-model="settings.debug" class="switch-input">

@@ -4,7 +4,7 @@
     "description": "Refresh the credential list"
   },
   "extDescription": {
-    "message": "Passman - správce hesel pro Nextcloud / ownCloud",
+    "message": "Passman Premium — správce hesel pro Nextcloud / ownCloud",
     "description": "Extension description"
   },
   "save_to": {
@@ -26,7 +26,7 @@
     "description": "Invalid server URL"
   },
   "account_added": {
-    "message": "Účet byl přidán.",
+    "message": "Účet byl přidán",
     "description": "Search"
   },
   "label": {
@@ -46,7 +46,7 @@
     "description": "Finish"
   },
   "detected_changed_url": {
-    "message": "Detekována změna URL pro",
+    "message": "Zjištěna nová URL",
     "description": "Detected changed URL for"
   },
   "add_custom_field": {
@@ -62,8 +62,12 @@
     "description": "credentials"
   },
   "password_picker_gotolist": {
-    "message": "When a password is found, go to list rather than last active tab",
+    "message": "Otevřít výběr hesel na kartě seznamu, když jsou nalezena pověření",
     "description": "Disable password picker"
+  },
+  "show_login_count": {
+    "message": "Zobrazovat počet přihlášení na ikoně v panelu nástrojů",
+    "description": "Toggle the login counter drawn on the toolbar icon"
   },
   "search": {
     "message": "Hledat",
@@ -74,7 +78,7 @@
     "description": "Toggle advanced options"
   },
   "extension_locked": {
-    "message": "Rozšíření Passman je uzamčeno, před použitím ho musíte odemknout",
+    "message": "Zadejte hlavní heslo pro odemknutí.",
     "description": "When the extension is locked, and requires an unlock to use it"
   },
   "update": {
@@ -86,15 +90,15 @@
     "description": "Unlock"
   },
   "invalid_vault_password": {
-    "message": "Neplatný klíč trezoru!",
+    "message": "Nesprávné heslo trezoru.",
     "description": "Vault password"
   },
   "msg_reset_extension": {
-    "message": "Můžete resetovat vaše heslo. To resetuje rozšíření do výchozího stavu.",
+    "message": "Hlavní heslo nelze obnovit. Můžete ale rozšíření vrátit do výchozího stavu a nastavit je znovu. Vaše trezory na serveru Nextcloud zůstanou nedotčeny.",
     "description": "Search"
   },
   "no_vaults": {
-    "message": "Je nám líto, nebyly nalezeny žádné trezory. Vytvořte trezor pomocí aplikace Nextcloud / ownCloud a zkuste to znovu.",
+    "message": "Nebyly nalezeny žádné trezory. Vytvořte trezor v aplikaci Passman na svém serveru Nextcloud a zkuste to znovu.",
     "description": "Search"
   },
   "edit": {
@@ -106,7 +110,7 @@
     "description": "Minimum amount of digits"
   },
   "enter_master_password_desc": {
-    "message": "Toto heslo bude použito k šifrování všech nastavení v rozšíření. Můžete si vybrat toto heslo uložit místně, ale bude uloženo v PLAINTEXTu.",
+    "message": "Toto heslo šifruje vše, co rozšíření na tomto zařízení ukládá. Pokud si je necháte zapamatovat, uloží se šifrovaně, aby se rozšíření mohlo odemykat automaticky.",
     "description": "Enter master password"
   },
   "select_vault": {
@@ -134,11 +138,11 @@
     "description": "Search"
   },
   "invalid_server_settings": {
-    "message": "Neplatné nastavení serveru",
+    "message": "Vyplňte prosím URL serveru, uživatelské jméno a heslo.",
     "description": "Search"
   },
   "nextcloud_settings": {
-    "message": "Nastavení Nextcloud / ownCloud serveru",
+    "message": "Připojte se ke svému serveru Nextcloud",
     "description": "Nextcloud / ownCloud server settings"
   },
   "use_generated_password": {
@@ -182,7 +186,7 @@
     "description": "Disable password picker"
   },
   "invalid_master_password": {
-    "message": "Neplatné hlavní heslo!",
+    "message": "Nesprávné hlavní heslo.",
     "description": "When the master password is invalid"
   },
   "general": {
@@ -202,7 +206,7 @@
     "description": "Previous"
   },
   "add_hint": {
-    "message": "Po vytvoření můžete pověření spravovat přes Passman",
+    "message": "Po uložení můžete toto pověření upravit v Passman Premium.",
     "description": "After creating it, you can edit the credential in Passman"
   },
   "text": {
@@ -222,11 +226,11 @@
     "description": "Ignore port for site matching"
   },
   "master_password": {
-    "message": "Nastavit hlavní heslo",
+    "message": "Hlavní heslo",
     "description": "Set a master password"
   },
   "disable_picker_text": {
-    "message": "Chcete passman zakázat pouze pro tuto stránku, nebo pro celé webové stránky?",
+    "message": "Zakázat Passman Premium jen na této stránce, nebo na celém webu?",
     "description": "Would you like to disable Passman for the current page, or for the entire website?"
   },
   "password": {
@@ -262,7 +266,7 @@
     "description": "Toggle visibility"
   },
   "master_pw_warning": {
-    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "message": "Hlavní heslo je na tomto zařízení uloženo šifrovaně, aby se rozšíření mohlo odemykat automaticky. Kdokoli s plným přístupem k tomuto profilu prohlížeče by je přesto mohl získat.",
     "description": "Remember master password"
   },
   "remember_master_password": {
@@ -274,11 +278,11 @@
     "description": "Save credentials for this site"
   },
   "browser_action_title_locked": {
-    "message": "Passman - uzamčen",
+    "message": "Passman Premium — uzamčeno",
     "description": "Browser extension title when the extension is locked"
   },
   "label_required": {
-    "message": "Prosím, vyplňte popisek",
+    "message": "Zadejte prosím štítek.",
     "description": "When comparing passwords"
   },
   "enter_master_password": {
@@ -294,7 +298,7 @@
     "description": "Select password picker default tab"
   },
   "save_site": {
-    "message": "Uložit stránku",
+    "message": "Uložit pověření",
     "description": "Save site"
   },
   "extra_accounts": {
@@ -332,7 +336,7 @@
     "description": "Disable password picker"
   },
   "auto_login": {
-    "message": "Passman vás přihlašuje jako $USERNAME$",
+    "message": "Passman Premium vás přihlašuje jako $USERNAME$",
     "description": "Amount of the credentials in the database",
     "placeholders": {
       "username": {
@@ -350,7 +354,7 @@
     "description": "Detected new login"
   },
   "detected_changed_login": {
-    "message": "Detekováno změněné heslo uživatele",
+    "message": "Zjištěna změna hesla",
     "description": "Detected changed password for user"
   },
   "invalid_response_from_server": {
@@ -374,6 +378,34 @@
   "generate_password": {
     "message": "Generovat heslo",
     "description": "Generate password"
+  },
+  "auto_fill": {
+    "message": "Vyplnit automaticky",
+    "description": "Context-menu entry that fills the login form with a credential"
+  },
+  "copy_username": {
+    "message": "Kopírovat uživatelské jméno",
+    "description": "Context-menu entry that copies a credential's username"
+  },
+  "copy_password": {
+    "message": "Kopírovat heslo",
+    "description": "Context-menu entry that copies a credential's password"
+  },
+  "copy_url": {
+    "message": "Kopírovat URL",
+    "description": "Context-menu entry that copies a credential's URL"
+  },
+  "copy_otp": {
+    "message": "Kopírovat jednorázové heslo",
+    "description": "Context-menu entry that copies a credential's one-time password"
+  },
+  "and_copy_to_clipboard": {
+    "message": "A zkopírovat do schránky",
+    "description": "Context-menu entry under Generate password: generate one and copy it"
+  },
+  "and_fill_fields": {
+    "message": "A vyplnit pole",
+    "description": "Context-menu entry under Generate password: generate one and fill the form"
   },
   "edit_insufficient_permissions": {
     "message": "Nemáte oprávnění k úpravě těchto pověření.",
@@ -404,11 +436,11 @@
     "description": "updated, lowercase"
   },
   "no_credentials_found": {
-    "message": "Nebyla nalezena žádná pověření",
+    "message": "Nenalezena žádná pověření.",
     "description": "No credentials found for the current site"
   },
   "extName": {
-    "message": "Passman",
+    "message": "Passman Premium",
     "description": "Extension name"
   },
   "lock_extension": {
@@ -416,7 +448,7 @@
     "description": "Title on the PayPal button"
   },
   "search_for": {
-    "message": "Hledat",
+    "message": "Hledat pověření…",
     "description": "No credentials found for the current site"
   },
   "password_repeat": {
@@ -426,6 +458,20 @@
   "credential_saved": {
     "message": "Pověření uloženo",
     "description": "saved, lowercase"
+  },
+  "user_at_site": {
+    "message": "$USERNAME$ na $SITE$",
+    "description": "Doorhanger text naming which user on which site, e.g. 'alice at example.com'",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "alice"
+      },
+      "site": {
+        "content": "$2",
+        "example": "example.com"
+      }
+    }
   },
   "require_every_character_type": {
     "message": "Vyžadovat každý typ znaků",
@@ -440,11 +486,11 @@
     "description": "E-mail"
   },
   "welcome_to_passman": {
-    "message": "Vítejte v rozšíření Passman",
+    "message": "Vítejte v Passman Premium",
     "description": "Intro at the setup"
   },
   "browser_action_title_login": {
-    "message": "Passsman - pro tuto stránku bylo nalezeno $CREDENTIAL_AMOUNT$ $PLURAL$ ",
+    "message": "Passman Premium — $CREDENTIAL_AMOUNT$ $PLURAL$ pro tuto stránku",
     "description": "String for the browser action",
     "placeholders": {
       "credential_amount": {
@@ -474,7 +520,7 @@
     "description": "Enable form auto submit"
   },
   "saving": {
-    "message": "Ukládání",
+    "message": "Ukládá se…",
     "description": "Saving"
   },
   "url": {
@@ -482,7 +528,7 @@
     "description": "URL"
   },
   "iam_sure": {
-    "message": "Ano jsem si jistý!",
+    "message": "Ano, obnovit vše",
     "description": "Search"
   },
   "no_sites_ignored": {
@@ -498,7 +544,7 @@
     "description": "Password generator"
   },
   "empty_master_key": {
-    "message": "Prázdný hlavní klíč!",
+    "message": "Hlavní heslo nemůže být prázdné.",
     "description": "Empty master key!"
   },
   "ignore_subdomain": {
@@ -522,7 +568,7 @@
     "description": "Password length"
   },
   "refresh_timer": {
-    "message": "Obnovit časovač [s]",
+    "message": "Interval obnovení (sekundy — 0 vypne)",
     "description": "Password"
   },
   "notes": {
@@ -560,6 +606,44 @@
   "about": {
     "message": "O aplikaci",
     "description": "Label for the About section in settings"
+  },
+  "about_created_by": {
+    "message": "Vytvořeno s $HEART$ společností $AUTHOR$",
+    "description": "About section credit line; $HEART$ is a heart icon, $AUTHOR$ a link to the company",
+    "placeholders": {
+      "heart": {
+        "content": "$1",
+        "example": "♥"
+      },
+      "author": {
+        "content": "$2",
+        "example": "JP IT Services Pte. Ltd."
+      }
+    }
+  },
+  "about_upstream_link_text": {
+    "message": "rozšíření Passman",
+    "description": "Link text inside about_upstream pointing at the original Nextcloud extension"
+  },
+  "about_upstream": {
+    "message": "Hrdě postaveno na skvělém open source $LINK$ od komunity Nextcloud. Originál byl téměř deset let opuštěný — Passman Premium jej vede dál, osvěžený a aktivně udržovaný.",
+    "description": "About section paragraph crediting the upstream project; $LINK$ is the about_upstream_link_text link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Passman extension"
+      }
+    }
+  },
+  "about_source": {
+    "message": "Passman Premium je také open source — kompletní zdrojový kód je na $LINK$, vydaný pod licencí GNU AGPL‑3.0 v souladu s podmínkami originálu. Hlášení chyb a příspěvky jsou vždy vítány.",
+    "description": "About section paragraph pointing at this extension's source repository; $LINK$ is the repository link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "github.com/JPITSG/PassmanPremium"
+      }
+    }
   },
   "no_custom_fields": {
     "message": "Zatím žádná vlastní pole.",
@@ -600,6 +684,14 @@
         "example": "NetworkError"
       }
     }
+  },
+  "empty_reply_from_server": {
+    "message": "Prázdná odpověď serveru",
+    "description": "Status text when the server answered with an empty body"
+  },
+  "invalid_reply_from_server": {
+    "message": "Neplatná odpověď serveru",
+    "description": "Status text when the server answered with something other than JSON"
   },
   "credentials_refreshed": {
     "message": "Pověření byla obnovena",

@@ -4,7 +4,7 @@
     "description": "Refresh the credential list"
   },
   "extDescription": {
-    "message": "Passman - პაროლების მენეჯერი Nextcloud / ownCloud-ისთვის",
+    "message": "Passman Premium — პაროლების მენეჯერი Nextcloud / ownCloud-ისთვის",
     "description": "Extension description"
   },
   "save_to": {
@@ -26,7 +26,7 @@
     "description": "Invalid server URL"
   },
   "account_added": {
-    "message": "ანგარიში დაემატა.",
+    "message": "ანგარიში დაემატა",
     "description": "Search"
   },
   "label": {
@@ -46,7 +46,7 @@
     "description": "Finish"
   },
   "detected_changed_url": {
-    "message": "აღმოჩენილია URL-ს ცვლილება საიტისთვის",
+    "message": "აღმოჩენილია ახალი URL",
     "description": "Detected changed URL for"
   },
   "add_custom_field": {
@@ -65,6 +65,10 @@
     "message": "პაროლის პოვნის შემთხვევაში, აქტიური ტაბულის ნაცვლად გადასვლა ჩამონათვალზე",
     "description": "Disable password picker"
   },
+  "show_login_count": {
+    "message": "შესვლების რაოდენობის ჩვენება ხელსაწყოთა ზოლის ხატულაზე",
+    "description": "Toggle the login counter drawn on the toolbar icon"
+  },
   "search": {
     "message": "ძიება",
     "description": "Search"
@@ -74,7 +78,7 @@
     "description": "Toggle advanced options"
   },
   "extension_locked": {
-    "message": "Passman-ის გაფართოება ჩაკეტილია, მის გამოსაყენბლად ის უნდა გახსნათ",
+    "message": "განსაბლოკად შეიყვანეთ მთავარი პაროლი.",
     "description": "When the extension is locked, and requires an unlock to use it"
   },
   "update": {
@@ -86,15 +90,15 @@
     "description": "Unlock"
   },
   "invalid_vault_password": {
-    "message": "სეიფის არასწორი გასაღები!",
+    "message": "საცავის პაროლი არასწორია.",
     "description": "Vault password"
   },
   "msg_reset_extension": {
-    "message": "შეგიძლიათ აღადგინოთ პაროლი. ეს გაფართოებას მოაქცევს საწყის მდომარეობაში.",
+    "message": "მთავარი პაროლის განულება შეუძლებელია. შეგიძლიათ გაფართოება საწყის მდგომარეობას დაუბრუნოთ და თავიდან გამართოთ. თქვენი საცავები Nextcloud სერვერზე უცვლელი რჩება.",
     "description": "Search"
   },
   "no_vaults": {
-    "message": "ბოდიში, სეიფები ვერ მოიძებნა. გთხოვთ სეიფი შექმნათ Nextcloud / ownCloud აპლიკაციით და სცადოთ ახლიდან.",
+    "message": "საცავები ვერ მოიძებნა. შექმენით საცავი Passman აპლიკაციაში თქვენს Nextcloud სერვერზე და სცადეთ ხელახლა.",
     "description": "Search"
   },
   "edit": {
@@ -106,7 +110,7 @@
     "description": "Minimum amount of digits"
   },
   "enter_master_password_desc": {
-    "message": "ეს პაროლი გამოყენებულ იქნება, თქვენს გაფართოებაში არსებული ყველა პარაოლის დასაშიფრად. შესაძლებელია პაროლის ლოკალურად დამახსოვრება, მაგრამ ის შენახულ იქნება ჩვეულებრივი ტექსტის სახით.",
+    "message": "ეს პაროლი შიფრავს ყველაფერს, რასაც გაფართოება ამ მოწყობილობაზე ინახავს. თუ აირჩევთ მის დამახსოვრებას, ის დაშიფრულად შეინახება, რათა გაფართოებამ ავტომატურად განბლოკვა შეძლოს.",
     "description": "Enter master password"
   },
   "select_vault": {
@@ -134,11 +138,11 @@
     "description": "Search"
   },
   "invalid_server_settings": {
-    "message": "არასწორი სერვერის პარამეტრები",
+    "message": "შეავსეთ სერვერის URL, მომხმარებლის სახელი და პაროლი.",
     "description": "Search"
   },
   "nextcloud_settings": {
-    "message": "Nextcloud / ownCloud სერვერის პარამეტრები",
+    "message": "დაუკავშირდით თქვენს Nextcloud სერვერს",
     "description": "Nextcloud / ownCloud server settings"
   },
   "use_generated_password": {
@@ -182,7 +186,7 @@
     "description": "Disable password picker"
   },
   "invalid_master_password": {
-    "message": "მთავარი პაროლი არასწორია!",
+    "message": "მთავარი პაროლი არასწორია.",
     "description": "When the master password is invalid"
   },
   "general": {
@@ -198,11 +202,11 @@
     "description": "Close"
   },
   "prev": {
-    "message": "წინა",
+    "message": "უკან",
     "description": "Previous"
   },
   "add_hint": {
-    "message": "შექმნის შემდეგ, შეძლებთ უფლებამოსილებების შეცვლას Passman-ით",
+    "message": "შენახვის შემდეგ ამ უფლებამოსილების რედაქტირება Passman Premium-ში შეგიძლიათ.",
     "description": "After creating it, you can edit the credential in Passman"
   },
   "text": {
@@ -222,11 +226,11 @@
     "description": "Ignore port for site matching"
   },
   "master_password": {
-    "message": "მთავარი პაროლის დაყენება",
+    "message": "მთავარი პაროლი",
     "description": "Set a master password"
   },
   "disable_picker_text": {
-    "message": "მთელი საიტისთვის გსურთ Passman-ის გათიშვა, თუ მხოლოდ ამ გვერდისთვის?",
+    "message": "გავთიშოთ Passman Premium მხოლოდ ამ გვერდზე თუ მთელ საიტზე?",
     "description": "Would you like to disable Passman for the current page, or for the entire website?"
   },
   "password": {
@@ -262,7 +266,7 @@
     "description": "Toggle visibility"
   },
   "master_pw_warning": {
-    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "message": "მთავარი პაროლი ამ მოწყობილობაზე დაშიფრულად ინახება, რათა გაფართოებამ ავტომატურად განბლოკვა შეძლოს. მიუხედავად ამისა, ვისაც ამ ბრაუზერის პროფილზე სრული წვდომა აქვს, შეძლებს მის აღდგენას.",
     "description": "Remember master password"
   },
   "remember_master_password": {
@@ -274,11 +278,11 @@
     "description": "Save credentials for this site"
   },
   "browser_action_title_locked": {
-    "message": "Passman - ჩაკეტილია",
+    "message": "Passman Premium — ჩაკეტილია",
     "description": "Browser extension title when the extension is locked"
   },
   "label_required": {
-    "message": "გთოვთ შეავსოთ ლეიბლი",
+    "message": "შეიყვანეთ სახელწოდება.",
     "description": "When comparing passwords"
   },
   "enter_master_password": {
@@ -294,7 +298,7 @@
     "description": "Select password picker default tab"
   },
   "save_site": {
-    "message": "საიტის შენახვა",
+    "message": "უფლებამოსილების შენახვა",
     "description": "Save site"
   },
   "extra_accounts": {
@@ -332,7 +336,7 @@
     "description": "Disable password picker"
   },
   "auto_login": {
-    "message": "Passman-ს შეყავხართ როგორც $USERNAME$",
+    "message": "Passman Premium შედის როგორც $USERNAME$",
     "description": "Amount of the credentials in the database",
     "placeholders": {
       "username": {
@@ -350,7 +354,7 @@
     "description": "Detected new login"
   },
   "detected_changed_login": {
-    "message": "მომხმარებელზე დაფიქრსირდა პაროლის ცვლილება",
+    "message": "აღმოჩენილია პაროლის შეცვლა",
     "description": "Detected changed password for user"
   },
   "invalid_response_from_server": {
@@ -374,6 +378,34 @@
   "generate_password": {
     "message": "პაროლის გენერირება",
     "description": "Generate password"
+  },
+  "auto_fill": {
+    "message": "ავტომატური შევსება",
+    "description": "Context-menu entry that fills the login form with a credential"
+  },
+  "copy_username": {
+    "message": "მომხმარებლის სახელის კოპირება",
+    "description": "Context-menu entry that copies a credential's username"
+  },
+  "copy_password": {
+    "message": "პაროლის კოპირება",
+    "description": "Context-menu entry that copies a credential's password"
+  },
+  "copy_url": {
+    "message": "URL-ის კოპირება",
+    "description": "Context-menu entry that copies a credential's URL"
+  },
+  "copy_otp": {
+    "message": "ერთჯერადი პაროლის კოპირება",
+    "description": "Context-menu entry that copies a credential's one-time password"
+  },
+  "and_copy_to_clipboard": {
+    "message": "და ბუფერში კოპირება",
+    "description": "Context-menu entry under Generate password: generate one and copy it"
+  },
+  "and_fill_fields": {
+    "message": "და ველების შევსება",
+    "description": "Context-menu entry under Generate password: generate one and fill the form"
   },
   "edit_insufficient_permissions": {
     "message": "ამ უფლებამოსილების გამოყენების უფლება არ გაქვთ.",
@@ -404,11 +436,11 @@
     "description": "updated, lowercase"
   },
   "no_credentials_found": {
-    "message": "უფლებამოსილებები ვერ მოიძებნა",
+    "message": "უფლებამოსილებები ვერ მოიძებნა.",
     "description": "No credentials found for the current site"
   },
   "extName": {
-    "message": "Passman",
+    "message": "Passman Premium",
     "description": "Extension name"
   },
   "lock_extension": {
@@ -416,7 +448,7 @@
     "description": "Title on the PayPal button"
   },
   "search_for": {
-    "message": "მოძებნეთ",
+    "message": "უფლებამოსილებების ძიება…",
     "description": "No credentials found for the current site"
   },
   "password_repeat": {
@@ -426,6 +458,20 @@
   "credential_saved": {
     "message": "უფლებამოსილებები შენახულია",
     "description": "saved, lowercase"
+  },
+  "user_at_site": {
+    "message": "$USERNAME$ საიტზე $SITE$",
+    "description": "Doorhanger text naming which user on which site, e.g. 'alice at example.com'",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "alice"
+      },
+      "site": {
+        "content": "$2",
+        "example": "example.com"
+      }
+    }
   },
   "require_every_character_type": {
     "message": "ყველა ნიშნის სახეობის მოთხოვნა",
@@ -440,11 +486,11 @@
     "description": "E-mail"
   },
   "welcome_to_passman": {
-    "message": "კეთილი იყოს თქვენი მობრძანება Passman ვებ-გაფართოებაში",
+    "message": "კეთილი იყოს თქვენი მობრძანება Passman Premium-ში",
     "description": "Intro at the setup"
   },
   "browser_action_title_login": {
-    "message": "Passman - ამ გვერდისთვის ნაპოვნია $CREDENTIAL_AMOUNT$ $PLURAL$",
+    "message": "Passman Premium — $CREDENTIAL_AMOUNT$ $PLURAL$ ამ გვერდისთვის",
     "description": "String for the browser action",
     "placeholders": {
       "credential_amount": {
@@ -474,7 +520,7 @@
     "description": "Enable form auto submit"
   },
   "saving": {
-    "message": "მიმდინარეობს შენახვა",
+    "message": "ინახება…",
     "description": "Saving"
   },
   "url": {
@@ -482,7 +528,7 @@
     "description": "URL"
   },
   "iam_sure": {
-    "message": "კი, დარწმუნებული ვარ!",
+    "message": "დიახ, ყველაფრის განულება",
     "description": "Search"
   },
   "no_sites_ignored": {
@@ -498,7 +544,7 @@
     "description": "Password generator"
   },
   "empty_master_key": {
-    "message": "მთავარი გასაღები ცარიელია!",
+    "message": "მთავარი პაროლი ცარიელი ვერ იქნება.",
     "description": "Empty master key!"
   },
   "ignore_subdomain": {
@@ -522,7 +568,7 @@
     "description": "Password length"
   },
   "refresh_timer": {
-    "message": "განახლების ტაიმერი [წმ]",
+    "message": "განახლების ინტერვალი (წამები — 0 გამორთავს)",
     "description": "Password"
   },
   "notes": {
@@ -560,6 +606,44 @@
   "about": {
     "message": "შესახებ",
     "description": "Label for the About section in settings"
+  },
+  "about_created_by": {
+    "message": "შექმნილია $HEART$-ით $AUTHOR$-ის მიერ",
+    "description": "About section credit line; $HEART$ is a heart icon, $AUTHOR$ a link to the company",
+    "placeholders": {
+      "heart": {
+        "content": "$1",
+        "example": "♥"
+      },
+      "author": {
+        "content": "$2",
+        "example": "JP IT Services Pte. Ltd."
+      }
+    }
+  },
+  "about_upstream_link_text": {
+    "message": "Passman გაფართოებაზე",
+    "description": "Link text inside about_upstream pointing at the original Nextcloud extension"
+  },
+  "about_upstream": {
+    "message": "ამაყად აშენებულია Nextcloud საზოგადოების შესანიშნავ ღია კოდის $LINK$. ორიგინალი თითქმის ათწლეულია მიძინებული იყო — Passman Premium აგრძელებს მას, განახლებულს და აქტიურად მოვლილს.",
+    "description": "About section paragraph crediting the upstream project; $LINK$ is the about_upstream_link_text link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Passman extension"
+      }
+    }
+  },
+  "about_source": {
+    "message": "Passman Premium ასევე ღია კოდისაა — სრული საწყისი კოდი განთავსებულია $LINK$-ზე, გამოქვეყნებული GNU AGPL‑3.0 ლიცენზიით, ორიგინალის პირობების შენარჩუნებით. შეცდომების შეტყობინებები და წვლილი ყოველთვის მისასალმებელია.",
+    "description": "About section paragraph pointing at this extension's source repository; $LINK$ is the repository link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "github.com/JPITSG/PassmanPremium"
+      }
+    }
   },
   "no_custom_fields": {
     "message": "ჯერ არ არის მორგებული ველები.",
@@ -600,6 +684,14 @@
         "example": "NetworkError"
       }
     }
+  },
+  "empty_reply_from_server": {
+    "message": "ცარიელი პასუხი სერვერიდან",
+    "description": "Status text when the server answered with an empty body"
+  },
+  "invalid_reply_from_server": {
+    "message": "არასწორი პასუხი სერვერიდან",
+    "description": "Status text when the server answered with something other than JSON"
   },
   "credentials_refreshed": {
     "message": "რწმუნებათა სიგელები განახლდა",

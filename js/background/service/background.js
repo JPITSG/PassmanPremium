@@ -230,6 +230,9 @@ var background = (function () {
             if (!_self.settings.hasOwnProperty('passwordPickerGotoList')) {
                 _self.settings.passwordPickerGotoList = false;
             }
+            if (!_self.settings.hasOwnProperty('showLoginCount')) {
+                _self.settings.showLoginCount = true;
+            }
             // setup never wrote this one, so it stayed undefined (= port
             // respected) while every sibling matching option defaults true
             if (!_self.settings.hasOwnProperty('ignorePort')) {
@@ -362,6 +365,13 @@ var background = (function () {
         // the caller the real outcome instead of an instant ack
         return Promise.resolve(storage.set('settings', storedSettings)).then(function () {
             return getSettings();
+        }).then(function () {
+            // icon-affecting settings (the login-count toggle, matching
+            // rules) must show on the toolbar right away, not on the next
+            // tab event
+            if (master_password) {
+                updateTabsIcon();
+            }
         }).then(function () {
             // The only credential work a settings save may cause: pull in an
             // account that was just added, forget one that was just removed.
@@ -1273,7 +1283,8 @@ var background = (function () {
     // Passman blue. The counter sits in a rounded box laid over the shield's
     // top-right corner with the digits always white; the shield itself stays
     // full size, so the icon keeps the same footprint whether or not a count
-    // is showing. Tabs with no logins get the plain shield and no badge.
+    // is showing. Tabs with no logins get the plain shield and no badge, and
+    // the advanced showLoginCount setting turns the counter off everywhere.
 
     var normalIconPaths = {
         '16': '/icons/icon16.png',
@@ -1372,7 +1383,7 @@ var background = (function () {
     }
 
     function setCountIcon(tab, count) {
-        if (!count) {
+        if (!count || (_self.settings && _self.settings.showLoginCount === false)) {
             API.browserAction.setIcon({
                 path: normalIconPaths,
                 tabId: tab.id

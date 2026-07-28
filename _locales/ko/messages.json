@@ -4,7 +4,7 @@
     "description": "Refresh the credential list"
   },
   "extDescription": {
-    "message": "Passman - NextCloud / ownCloud 암호 관리자",
+    "message": "Passman Premium — Nextcloud / ownCloud용 암호 관리자",
     "description": "Extension description"
   },
   "save_to": {
@@ -26,7 +26,7 @@
     "description": "Invalid server URL"
   },
   "account_added": {
-    "message": "계정이 추가되었습니다.",
+    "message": "계정이 추가됨",
     "description": "Search"
   },
   "label": {
@@ -46,7 +46,7 @@
     "description": "Finish"
   },
   "detected_changed_url": {
-    "message": "다음의 URL 변경 감지됨:",
+    "message": "새 URL 감지됨",
     "description": "Detected changed URL for"
   },
   "add_custom_field": {
@@ -65,6 +65,10 @@
     "message": "암호를 찾았을 때 마지막 탭 대신 목록으로 이동",
     "description": "Disable password picker"
   },
+  "show_login_count": {
+    "message": "도구 모음 아이콘에 로그인 수 표시",
+    "description": "Toggle the login counter drawn on the toolbar icon"
+  },
   "search": {
     "message": "검색",
     "description": "Search"
@@ -74,7 +78,7 @@
     "description": "Toggle advanced options"
   },
   "extension_locked": {
-    "message": "Passman 확장 기능이 잠겼습니다. 사용하려면 잠금을 해제하십시오",
+    "message": "잠금을 해제하려면 마스터 암호를 입력하세요.",
     "description": "When the extension is locked, and requires an unlock to use it"
   },
   "update": {
@@ -86,15 +90,15 @@
     "description": "Unlock"
   },
   "invalid_vault_password": {
-    "message": "비밀 저장소 키가 잘못되었습니다!",
+    "message": "비밀 저장소 암호가 올바르지 않습니다.",
     "description": "Vault password"
   },
   "msg_reset_extension": {
-    "message": "암호를 초기화할 수 있습니다. 확장 기능을 기본 상태로 초기화합니다.",
+    "message": "마스터 암호는 초기화할 수 없습니다. 대신 확장 기능을 기본 상태로 되돌린 후 다시 설정할 수 있습니다. Nextcloud 서버의 비밀 저장소는 영향을 받지 않습니다.",
     "description": "Search"
   },
   "no_vaults": {
-    "message": "비밀 저장소를 찾을 수 없습니다. Nextcloud / ownCloud 앱에서 비밀 저장소를 만든 다음 다시 시도하십시오.",
+    "message": "비밀 저장소를 찾을 수 없습니다. Nextcloud 서버의 Passman 앱에서 비밀 저장소를 만든 후 다시 시도하세요.",
     "description": "Search"
   },
   "edit": {
@@ -106,7 +110,7 @@
     "description": "Minimum amount of digits"
   },
   "enter_master_password_desc": {
-    "message": "이 암호로 확장 기능의 모든 설정을 암호화합니다. 이 암호를 로컬에 저장할 수 있지만 평문으로 저장됩니다.",
+    "message": "이 암호는 확장 기능이 이 기기에 저장하는 모든 것을 암호화합니다. 기억하도록 선택하면 확장 기능이 자동으로 잠금 해제될 수 있도록 암호화되어 저장됩니다.",
     "description": "Enter master password"
   },
   "select_vault": {
@@ -134,11 +138,11 @@
     "description": "Search"
   },
   "invalid_server_settings": {
-    "message": "잘못된 서버 설정",
+    "message": "서버 URL, 사용자 이름, 암호를 입력하세요.",
     "description": "Search"
   },
   "nextcloud_settings": {
-    "message": "Nextcloud / ownCloud 서버 설정",
+    "message": "Nextcloud 서버에 연결",
     "description": "Nextcloud / ownCloud server settings"
   },
   "use_generated_password": {
@@ -182,7 +186,7 @@
     "description": "Disable password picker"
   },
   "invalid_master_password": {
-    "message": "잘못된 마스터 암호!",
+    "message": "마스터 암호가 올바르지 않습니다.",
     "description": "When the master password is invalid"
   },
   "general": {
@@ -198,11 +202,11 @@
     "description": "Close"
   },
   "prev": {
-    "message": "이전",
+    "message": "뒤로",
     "description": "Previous"
   },
   "add_hint": {
-    "message": "인증 정보를 만든 후에는 Passman에서 편집할 수 있습니다",
+    "message": "저장한 후 Passman Premium에서 이 자격 증명을 편집할 수 있습니다.",
     "description": "After creating it, you can edit the credential in Passman"
   },
   "text": {
@@ -222,11 +226,11 @@
     "description": "Ignore port for site matching"
   },
   "master_password": {
-    "message": "마스터 암호 설정",
+    "message": "마스터 암호",
     "description": "Set a master password"
   },
   "disable_picker_text": {
-    "message": "Passman을 현재 페이지에서만 비활성화하시겠습니까? 아니면 전체 웹사이트에서 비활성화하시겠습니까?",
+    "message": "이 페이지에서만 Passman Premium을 비활성화할까요, 아니면 사이트 전체에서 비활성화할까요?",
     "description": "Would you like to disable Passman for the current page, or for the entire website?"
   },
   "password": {
@@ -262,7 +266,7 @@
     "description": "Toggle visibility"
   },
   "master_pw_warning": {
-    "message": "The master password is stored encrypted on this device so the extension can unlock automatically. Anyone with full access to this browser profile could still recover it.",
+    "message": "마스터 암호는 확장 기능이 자동으로 잠금 해제될 수 있도록 이 기기에 암호화되어 저장됩니다. 그래도 이 브라우저 프로필에 대한 전체 접근 권한이 있는 사람은 복구할 수 있습니다.",
     "description": "Remember master password"
   },
   "remember_master_password": {
@@ -274,11 +278,11 @@
     "description": "Save credentials for this site"
   },
   "browser_action_title_locked": {
-    "message": "Passman - 잠김",
+    "message": "Passman Premium — 잠김",
     "description": "Browser extension title when the extension is locked"
   },
   "label_required": {
-    "message": "레이블을 입력하십시오",
+    "message": "레이블을 입력하세요.",
     "description": "When comparing passwords"
   },
   "enter_master_password": {
@@ -294,7 +298,7 @@
     "description": "Select password picker default tab"
   },
   "save_site": {
-    "message": "사이트 저장",
+    "message": "자격 증명 저장",
     "description": "Save site"
   },
   "extra_accounts": {
@@ -314,7 +318,7 @@
     "description": "Disable site"
   },
   "url_ignored": {
-    "message": "URL ignored",
+    "message": "URL 무시됨",
     "description": "URL ignored"
   },
   "saving_to": {
@@ -332,7 +336,7 @@
     "description": "Disable password picker"
   },
   "auto_login": {
-    "message": "Passman에서 $USERNAME$(으)로 로그인함",
+    "message": "Passman Premium이 $USERNAME$(으)로 로그인하는 중입니다",
     "description": "Amount of the credentials in the database",
     "placeholders": {
       "username": {
@@ -350,7 +354,7 @@
     "description": "Detected new login"
   },
   "detected_changed_login": {
-    "message": "사용자의 암호 변경을 감지함",
+    "message": "암호 변경 감지됨",
     "description": "Detected changed password for user"
   },
   "invalid_response_from_server": {
@@ -374,6 +378,34 @@
   "generate_password": {
     "message": "암호 생성",
     "description": "Generate password"
+  },
+  "auto_fill": {
+    "message": "자동 입력",
+    "description": "Context-menu entry that fills the login form with a credential"
+  },
+  "copy_username": {
+    "message": "사용자 이름 복사",
+    "description": "Context-menu entry that copies a credential's username"
+  },
+  "copy_password": {
+    "message": "암호 복사",
+    "description": "Context-menu entry that copies a credential's password"
+  },
+  "copy_url": {
+    "message": "URL 복사",
+    "description": "Context-menu entry that copies a credential's URL"
+  },
+  "copy_otp": {
+    "message": "일회용 암호 복사",
+    "description": "Context-menu entry that copies a credential's one-time password"
+  },
+  "and_copy_to_clipboard": {
+    "message": "그리고 클립보드에 복사",
+    "description": "Context-menu entry under Generate password: generate one and copy it"
+  },
+  "and_fill_fields": {
+    "message": "그리고 필드 채우기",
+    "description": "Context-menu entry under Generate password: generate one and fill the form"
   },
   "edit_insufficient_permissions": {
     "message": "이 인증 정보를 편집할 수 있는 권한이 없습니다.",
@@ -404,11 +436,11 @@
     "description": "updated, lowercase"
   },
   "no_credentials_found": {
-    "message": "인증 정보를 찾을 수 없음",
+    "message": "자격 증명을 찾을 수 없습니다.",
     "description": "No credentials found for the current site"
   },
   "extName": {
-    "message": "Passman",
+    "message": "Passman Premium",
     "description": "Extension name"
   },
   "lock_extension": {
@@ -416,7 +448,7 @@
     "description": "Title on the PayPal button"
   },
   "search_for": {
-    "message": "검색 항목",
+    "message": "자격 증명 검색…",
     "description": "No credentials found for the current site"
   },
   "password_repeat": {
@@ -426,6 +458,20 @@
   "credential_saved": {
     "message": "암호 저장됨",
     "description": "saved, lowercase"
+  },
+  "user_at_site": {
+    "message": "$SITE$의 $USERNAME$",
+    "description": "Doorhanger text naming which user on which site, e.g. 'alice at example.com'",
+    "placeholders": {
+      "username": {
+        "content": "$1",
+        "example": "alice"
+      },
+      "site": {
+        "content": "$2",
+        "example": "example.com"
+      }
+    }
   },
   "require_every_character_type": {
     "message": "모든 문자 종류 포함",
@@ -440,11 +486,11 @@
     "description": "E-mail"
   },
   "welcome_to_passman": {
-    "message": "Passman 확장 기능에 오신 것을 환영합니다",
+    "message": "Passman Premium에 오신 것을 환영합니다",
     "description": "Intro at the setup"
   },
   "browser_action_title_login": {
-    "message": "Passman - 이 페이지에서 $CREDENTIAL_AMOUNT$ $PLURAL$개 찾음",
+    "message": "Passman Premium — 이 페이지에 해당하는 $PLURAL$ $CREDENTIAL_AMOUNT$개",
     "description": "String for the browser action",
     "placeholders": {
       "credential_amount": {
@@ -474,7 +520,7 @@
     "description": "Enable form auto submit"
   },
   "saving": {
-    "message": "저장 중",
+    "message": "저장 중…",
     "description": "Saving"
   },
   "url": {
@@ -482,7 +528,7 @@
     "description": "URL"
   },
   "iam_sure": {
-    "message": "예, 알겠습니다!",
+    "message": "예, 모두 초기화",
     "description": "Search"
   },
   "no_sites_ignored": {
@@ -498,7 +544,7 @@
     "description": "Password generator"
   },
   "empty_master_key": {
-    "message": "마스터 키가 비어 있음!",
+    "message": "마스터 암호는 비워 둘 수 없습니다.",
     "description": "Empty master key!"
   },
   "ignore_subdomain": {
@@ -522,7 +568,7 @@
     "description": "Password length"
   },
   "refresh_timer": {
-    "message": "새로 고침 타이머 [초]",
+    "message": "새로 고침 간격(초 — 0이면 비활성화)",
     "description": "Password"
   },
   "notes": {
@@ -560,6 +606,44 @@
   "about": {
     "message": "정보",
     "description": "Label for the About section in settings"
+  },
+  "about_created_by": {
+    "message": "$AUTHOR$에서 $HEART$을 담아 만들었습니다",
+    "description": "About section credit line; $HEART$ is a heart icon, $AUTHOR$ a link to the company",
+    "placeholders": {
+      "heart": {
+        "content": "$1",
+        "example": "♥"
+      },
+      "author": {
+        "content": "$2",
+        "example": "JP IT Services Pte. Ltd."
+      }
+    }
+  },
+  "about_upstream_link_text": {
+    "message": "Passman 확장 기능",
+    "description": "Link text inside about_upstream pointing at the original Nextcloud extension"
+  },
+  "about_upstream": {
+    "message": "Nextcloud 커뮤니티의 훌륭한 오픈 소스 $LINK$을 기반으로 자랑스럽게 만들어졌습니다. 원본은 거의 10년 동안 방치되어 있었지만, Passman Premium이 새롭게 다듬어 활발히 유지 관리하며 이어가고 있습니다.",
+    "description": "About section paragraph crediting the upstream project; $LINK$ is the about_upstream_link_text link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Passman extension"
+      }
+    }
+  },
+  "about_source": {
+    "message": "Passman Premium 역시 오픈 소스입니다 — 전체 소스 코드는 $LINK$에 있으며, 원본의 조건을 이어받아 GNU AGPL‑3.0 라이선스로 배포됩니다. 문제 보고와 기여는 언제나 환영합니다.",
+    "description": "About section paragraph pointing at this extension's source repository; $LINK$ is the repository link",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "github.com/JPITSG/PassmanPremium"
+      }
+    }
   },
   "no_custom_fields": {
     "message": "아직 사용자 지정 필드가 없습니다.",
@@ -600,6 +684,14 @@
         "example": "NetworkError"
       }
     }
+  },
+  "empty_reply_from_server": {
+    "message": "서버 응답이 비어 있음",
+    "description": "Status text when the server answered with an empty body"
+  },
+  "invalid_reply_from_server": {
+    "message": "서버 응답이 잘못됨",
+    "description": "Status text when the server answered with something other than JSON"
   },
   "credentials_refreshed": {
     "message": "자격 증명을 새로 고쳤습니다",

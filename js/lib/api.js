@@ -337,12 +337,12 @@ window.PAPI = (function () {
                     if(json){
                         finish(json);
                     } else {
-                        finish({error: true, result: {statusText: 'Empty reply from server', status: 0}});
+                        finish({error: true, result: {statusText: API.i18n.getMessage('empty_reply_from_server'), status: 0}});
                     }
 
                 });
             } else {
-                finish({error: true, result: {statusText: 'Invalid reply from server', status: 0}});
+                finish({error: true, result: {statusText: API.i18n.getMessage('invalid_reply_from_server'), status: 0}});
             }
 
         }).catch(function (e) {
