@@ -18,6 +18,35 @@ $(document).ready(function () {
         });
     }
 
+    // The Cancel button doubles as the auto-dismiss timer: its label ticks
+    // "Cancel (10)" .. "Cancel (1)" and at zero the doorhanger hides itself
+    // (nothing is cleared — the prompt may reappear on a later visit).
+    // Hovering the button stops the countdown and restores the plain label.
+    function startCancelCountdown(btn) {
+        var label = btn.find('.btn-text');
+        var cancelText = API.i18n.getMessage('cancel');
+        var remaining = 10;
+        label.text(cancelText + ' (' + remaining + ')');
+        var timer = setInterval(function () {
+            remaining--;
+            if (remaining <= 0) {
+                clearInterval(timer);
+                closeDoorhanger();
+                return;
+            }
+            label.text(cancelText + ' (' + remaining + ')');
+        }, 1000);
+        btn.one('mouseenter', function () {
+            clearInterval(timer);
+            label.text(cancelText);
+        });
+        // any click inside the box answers the prompt (or opens the vault
+        // chooser) before the timer runs out — stop counting
+        btn.closest('#password-toolbar').one('click', function () {
+            clearInterval(timer);
+        });
+    }
+
     function resizeIframe(height) {
         API.runtime.sendMessage(API.runtime.id, {
             method: "passToParent",
@@ -97,11 +126,28 @@ $(document).ready(function () {
             data = data.data;
             var username = (data.username) ? data.username : data.email;
             var doorhanger_div = $('<div id="password-toolbar" style="display: none;">');
-            var text = data.selfAdded ? API.i18n.getMessage('credential_saved') : data.title + ' ' + API.i18n.getMessage('user_at_site', [username, data.url]);
-            $('<span>', {
-                class: 'toolbar-text',
-                text: text
-            }).appendTo(doorhanger_div);
+            var text_span = $('<span>', {class: 'toolbar-text'});
+            if (data.selfAdded) {
+                text_span.text(API.i18n.getMessage('credential_saved'));
+            } else {
+                // "<b>title</b> username <b>at</b> url" — the connector word
+                // is lifted out of the localized user_at_site message with
+                // sentinel substitutions, so every locale keeps its own
+                // wording and word order; anything unexpected falls back to
+                // the plain one-string rendering
+                var U = '\u0001', S = '\u0002';
+                var template = API.i18n.getMessage('user_at_site', [U, S]);
+                var at_start = template.indexOf(U), at_end = template.indexOf(S);
+                if (at_start > -1 && at_end > at_start) {
+                    text_span.append($('<b>').text(data.title));
+                    text_span.append(document.createTextNode(' ' + template.substring(0, at_start) + username));
+                    text_span.append($('<b>').text(template.substring(at_start + 1, at_end)));
+                    text_span.append(document.createTextNode(data.url + template.substring(at_end + 1)));
+                } else {
+                    text_span.text(data.title + ' ' + API.i18n.getMessage('user_at_site', [username, data.url]));
+                }
+            }
+            text_span.appendTo(doorhanger_div);
 
             $.each(buttons, function (k, button) {
                 var btn = button;
@@ -173,6 +219,10 @@ $(document).ready(function () {
             });
             dh.html(doorhanger_div);
             doorhanger_div.slideDown();
+            var cancel_btn = doorhanger_div.find('.btn-cancel');
+            if (cancel_btn.length) {
+                startCancelCountdown(cancel_btn);
+            }
         });
     });
     var _this = {};

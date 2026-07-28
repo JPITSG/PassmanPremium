@@ -24,15 +24,12 @@ body {
 	height: 44px;
 	margin: 6px 8px;
 	padding: 0 7px 0 12px;
-	background: var(--card);
+	background: var(--bg);
 	color: var(--text);
-	border: 1px solid var(--border-strong);
-	border-radius: 10px;
-	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.08);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	box-shadow: var(--shadow-pop);
 	font-size: 13px;
-}
-:root[data-theme="light"] #password-toolbar {
-	box-shadow: 0 6px 18px rgba(18, 26, 38, 0.18);
 }
 
 #password-toolbar .toolbar-text {
@@ -42,12 +39,15 @@ body {
 	margin-top: 12px;
 	padding-left: 24px;
 	color: var(--text);
-	font-weight: 600;
+	font-weight: 400;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	background: url('/icons/icon.svg') no-repeat left center / 16px 16px;
 }
+/* "New login detected:" and the localized "at" render bold, the detected
+   username and URL stay regular (see doorhanger.js) */
+#password-toolbar .toolbar-text b { font-weight: 700; }
 
 #password-toolbar .passman-btn {
 	outline: none;
@@ -58,7 +58,7 @@ body {
 	margin: 7px 0 0 6px;
 	padding: 0 12px;
 	font-family: inherit;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: 600;
 	text-align: center;
 	white-space: nowrap;
@@ -69,7 +69,7 @@ body {
 	background: transparent;
 	color: var(--muted);
 	border: 1px solid var(--border);
-	border-radius: 7px;
+	border-radius: 8px;
 	transition: color 0.2s, background 0.2s, border-color 0.2s, filter 0.2s;
 }
 #password-toolbar .passman-btn:hover {
@@ -83,19 +83,12 @@ body {
 	border-color: transparent;
 	color: var(--on-accent);
 	font-weight: 700;
-	box-shadow: 0 3px 10px var(--accent-glow);
+	box-shadow: 0 3px 12px var(--accent-glow);
 }
 #password-toolbar .passman-btn.btn-success:hover {
 	color: var(--on-accent);
 	filter: brightness(1.06);
-	box-shadow: 0 4px 14px var(--accent-glow-strong);
-}
-
-#password-toolbar .passman-btn.btn-cancel { color: var(--muted); }
-#password-toolbar .passman-btn.btn-cancel:hover {
-	color: var(--danger);
-	background: var(--danger-soft);
-	border-color: var(--danger-border);
+	box-shadow: 0 5px 18px var(--accent-glow-strong);
 }
 
 #password-toolbar .passman-btn.btn-ignore:hover,
