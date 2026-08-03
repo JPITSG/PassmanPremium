@@ -855,7 +855,7 @@ var background = (function () {
                 else {
                     //console.log('No changes detected');
                     delete mined_data[sender.tab.id];
-                    return;
+                    return false;
                 }
             }
         }
@@ -869,6 +869,7 @@ var background = (function () {
         };
 
         //console.log('Done mining, ', mined_data, sender.tab.id);
+        return true;
     }
 
     _self.minedForm = minedForm;

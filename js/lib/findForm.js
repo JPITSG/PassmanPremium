@@ -4,6 +4,12 @@ var formManager = function(){
      @url https://dxr.mozilla.org/firefox/source/toolkit/components/passwordmgr/src/nsLoginManager.js#655
      */
     var settings = {};
+    // Sites may hide a login form immediately before submitting it (LuCI is
+    // one example). Remember only fields that Passman actually saw while
+    // visible, so submission-time analysis can still read them without
+    // admitting arbitrary hidden decoy fields into login detection.
+    var knownPasswordFields = new WeakSet();
+    var knownUsernameFields = new WeakSet();
 
     return {
         _init_: function () {
@@ -41,14 +47,16 @@ var formManager = function(){
          * through autocomplete.
          */
         isPasswordField: function (element) {
+            // Once Passman has identified a password field, keep recognizing
+            // it even if the page changes its type while submitting.
+            if (element.getAttribute("data-passman-field") === "password") {
+                return true;
+            }
             if (element.type === "password") {
                 return true;
             }
             if (element.type !== "text") {
                 return false;
-            }
-            if (element.getAttribute("data-passman-field") === "password") {
-                return true;
             }
             var autocomplete = (element.getAttribute("autocomplete") || "").toLowerCase();
             return autocomplete === "current-password" || autocomplete === "new-password";
@@ -61,18 +69,25 @@ var formManager = function(){
          * is returned.
          *
          * skipEmptyFields can be set to ignore password fields with no value.
+         * allowKnownHiddenFields admits fields that were previously observed
+         * while visible, for sites that hide their form before submission.
          */
-        _getPasswordFields: function (form, skipEmptyFields) {
+        _getPasswordFields: function (form, skipEmptyFields, allowKnownHiddenFields) {
             // Locate the password fields in the form.
             var pwFields = [];
             for (var i = 0; i < form.elements.length; i++) {
                 var elem = form.elements[i];
-                if (!this.isPasswordField(elem)){
+                var isKnownPassword = knownPasswordFields.has(elem);
+                if (!this.isPasswordField(elem) && !(allowKnownHiddenFields && isKnownPassword)){
                     continue;
                 }
 
-                if(!this.isElementVisible(elem)){
+                var isVisible = this.isElementVisible(elem);
+                if(!isVisible && !(allowKnownHiddenFields && isKnownPassword)){
                     continue;
+                }
+                if (isVisible) {
+                    knownPasswordFields.add(elem);
                 }
 
                 if (skipEmptyFields && !elem.value){
@@ -118,7 +133,7 @@ var formManager = function(){
 
             // Locate the password field(s) in the form. Up to 3 supported.
             // If there's no password field, there's nothing for us to do.
-            var pwFields = this._getPasswordFields(form, isSubmission);
+            var pwFields = this._getPasswordFields(form, isSubmission, isSubmission);
             if (!pwFields){
                 return [null, null, null];
             }
@@ -130,13 +145,21 @@ var formManager = function(){
             // username. We might not find a username field if the user is
             // already logged in to the site.
             for (var i = pwFields[0].index - 1; i >= 0; i--) {
-                if(!this.isElementVisible(form.elements[i])){
+                var elem = form.elements[i];
+                var type = (elem.type || "").toLowerCase();
+                var isKnownUsername = knownUsernameFields.has(elem);
+                if (type !== "text" && type !== "email" && !(isSubmission && isKnownUsername)) {
                     continue;
                 }
-                if (form.elements[i].type.toLowerCase() === "text" || form.elements[i].type.toLowerCase() === "email") {
-                    usernameField = form.elements[i];
-                    break;
+                var isVisible = this.isElementVisible(elem);
+                if(!isVisible && !(isSubmission && isKnownUsername)){
+                    continue;
                 }
+                if (isVisible) {
+                    knownUsernameFields.add(elem);
+                }
+                usernameField = elem;
+                break;
             }
 
             if (!usernameField){

@@ -453,6 +453,32 @@ $j(document).ready(function () {
         }
     }
 
+    // A standards-based submission can surface through submit, formdata, or
+    // both. Direct form.submit() deliberately skips submit but still builds a
+    // form-data entry list; FormData-backed SPA logins do the same. Bind both
+    // signals once per detected form and funnel them through one miner.
+    var miningBoundForms = new WeakSet();
+    var pendingSubmitForms = new WeakMap();
+    var recentMinedForms = new WeakMap();
+    var minedCheckTimer = 0;
+    var MINE_DEDUP_MS = 1500;
+
+    function scheduleMinedCheck() {
+        if (inIframe()) {
+            return;
+        }
+        if (minedCheckTimer) {
+            window.clearTimeout(minedCheckTimer);
+        }
+        // A normal navigation destroys this timer and the next document runs
+        // checkForMined during init. If the document survives (fetch/XHR SPA),
+        // show the same prompt here without requiring a reload.
+        minedCheckTimer = window.setTimeout(function () {
+            minedCheckTimer = 0;
+            checkForMined();
+        }, 750);
+    }
+
     function formSubmitted(form) {
         // analyze the fields at submit time, with their values: on
         // old/new/confirm forms the FIRST password field holds the old
@@ -476,8 +502,72 @@ $j(document).ready(function () {
         if (!params.password) {
             return;
         }
-        API.runtime.sendMessage(API.runtime.id, {method: "minedForm", args: params});
 
+        // Normal submissions produce submit followed by formdata. Suppress
+        // only that short duplicate, while allowing a corrected credential to
+        // be submitted immediately because its values produce a new attempt.
+        var now = Date.now();
+        var previous = recentMinedForms.get(form);
+        if (previous && previous.username === params.username &&
+                previous.password === params.password &&
+                now - previous.time < MINE_DEDUP_MS) {
+            return;
+        }
+        var attempt = {
+            username: params.username,
+            password: params.password,
+            time: now
+        };
+        recentMinedForms.set(form, attempt);
+        window.setTimeout(function () {
+            if (recentMinedForms.get(form) === attempt) {
+                recentMinedForms.delete(form);
+            }
+        }, MINE_DEDUP_MS);
+
+        API.runtime.sendMessage(API.runtime.id, {method: "minedForm", args: params}).then(function (mined) {
+            if (mined) {
+                scheduleMinedCheck();
+            }
+        });
+
+    }
+
+    function submissionDetected(event) {
+        var form = event.currentTarget;
+        var now = Date.now();
+        if (event.type === 'submit') {
+            // submit is followed synchronously by formdata during a native
+            // submission. Remember that relationship separately from value
+            // deduplication: page handlers may transform a field between the
+            // two events, and the user-entered value captured here must win.
+            pendingSubmitForms.set(form, now);
+            window.setTimeout(function () {
+                if (pendingSubmitForms.get(form) === now) {
+                    pendingSubmitForms.delete(form);
+                }
+            }, MINE_DEDUP_MS);
+            formSubmitted(form);
+            return;
+        }
+        var submitTime = pendingSubmitForms.get(form);
+        if (submitTime && now - submitTime < MINE_DEDUP_MS) {
+            pendingSubmitForms.delete(form);
+            return;
+        }
+        formSubmitted(form);
+    }
+
+    function bindFormMining(form) {
+        if (!form || miningBoundForms.has(form)) {
+            return;
+        }
+        miningBoundForms.add(form);
+        // Capture submit before page-level bubbling handlers can stop it.
+        form.addEventListener('submit', submissionDetected, true);
+        // formdata is the reliable signal for direct form.submit() and for
+        // pages that serialize a real form before sending it with fetch/XHR.
+        form.addEventListener('formdata', submissionDetected, true);
     }
 
     function inIframe() {
@@ -577,22 +667,17 @@ $j(document).ready(function () {
 
             if (loginFields.length > 0) {
                 for (var i = 0; i < loginFields.length; i++) {
-                    var form = getFormFromElement(loginFields[i][0]);
+                    var form = getFormFromElement(loginFields[i][0] || loginFields[i][1]);
+                    if (!form) {
+                        continue;
+                    }
                     if (enablePasswordPicker) {
                         createPasswordPicker(loginFields[i], form);
                     }
 
-                    //Password miner — namespaced binding: re-runs replace the
-                    //handler instead of stacking a duplicate on every pass.
-                    //The form is re-analyzed at submit time (values in hand),
-                    //not from this page-load field list
-                    /* jshint ignore:start */
-                    $j(form).off('submit.passman').on('submit.passman', (function (form) {
-                        return function () {
-                            formSubmitted(form);
-                        };
-                    })(form));
-                    /* jshint ignore:end */
+                    // The form is re-analyzed at submission time with its
+                    // current values; binding is idempotent across DOM scans.
+                    bindFormMining(form);
                 }
 
                 API.runtime.sendMessage(API.runtime.id, {

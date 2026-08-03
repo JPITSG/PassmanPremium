@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Passman submission mining regression</title>
+</head>
+<body>
+    <iframe name="sink" hidden></iframe>
+
+    <form id="standard">
+        <input type="text" value="standard-user">
+        <input type="password" value="standard-password">
+        <button>Standard submit</button>
+    </form>
+
+    <form id="direct" action="/__sink" method="post" target="sink">
+        <input type="text" value="direct-user">
+        <input type="password" value="direct-password">
+    </form>
+    <button id="direct-button" type="button">Direct submit</button>
+
+    <form id="spa">
+        <input type="email" value="spa-user@example.test">
+        <input type="password" value="spa-password">
+    </form>
+
+    <form id="duplicate" action="/__sink" method="post" target="sink">
+        <input type="text" value="duplicate-user">
+        <input type="password" value="duplicate-password">
+        <button>Native submit</button>
+    </form>
+
+    <form id="password-only">
+        <input type="password" value="password-only-value">
+    </form>
+
+    <form id="ordinary">
+        <input type="text" value="not-a-login">
+    </form>
+
+    <script>
+        var minedCalls = [];
+
+        function resultFor(message) {
+            switch (message.method) {
+            case 'getSetting':
+                return false;
+            case 'getMasterPasswordSet':
+                return true;
+            case 'getRuntimeSettings':
+                return {
+                    enablePasswordPicker: false,
+                    ignored_sites: []
+                };
+            case 'getCredentialsByUrl':
+                return [];
+            case 'getMinedData':
+                return null;
+            case 'minedForm':
+                minedCalls.push(message.args);
+                return true;
+            default:
+                return false;
+            }
+        }
+
+        var API = {
+            runtime: {
+                id: 'submission-mining-test',
+                sendMessage: function (extensionId, message) {
+                    return Promise.resolve(resultFor(message));
+                },
+                onMessage: {
+                    addListener: function () {}
+                }
+            },
+            extension: {
+                getURL: function (path) { return path; }
+            }
+        };
+
+        function processURL(url) { return url; }
+        function observeDOM() {}
+    </script>
+    <script src="../js/vendor/jquery/jquery.js"></script>
+    <script src="../js/lib/findForm.js"></script>
+    <script src="../js/background/inject/inject.js"></script>
+    <script>
+        function report(passed, detail) {
+            var image = new Image();
+            image.src = '/__result?passed=' + encodeURIComponent(String(passed)) +
+                '&detail=' + encodeURIComponent(detail);
+        }
+
+        function waitForBindings() {
+            return new Promise(function (resolve, reject) {
+                var attempts = 0;
+                var timer = window.setInterval(function () {
+                    attempts++;
+                    var password = document.querySelector('#direct input[type="password"]');
+                    if (password.getAttribute('data-passman-field') === 'password') {
+                        window.clearInterval(timer);
+                        resolve();
+                    } else if (attempts > 100) {
+                        window.clearInterval(timer);
+                        reject(new Error('Passman did not bind the forms'));
+                    }
+                }, 20);
+            });
+        }
+
+        window.addEventListener('load', function () {
+            waitForBindings().then(function () {
+                var standard = document.getElementById('standard');
+                standard.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                });
+                standard.requestSubmit();
+
+                var direct = document.getElementById('direct');
+                document.getElementById('direct-button').addEventListener('click', function () {
+                    Array.prototype.forEach.call(direct.elements, function (field) {
+                        field.style.display = 'none';
+                    });
+                    direct.submit();
+                });
+                document.getElementById('direct-button').click();
+
+                new FormData(document.getElementById('spa'));
+                var duplicate = document.getElementById('duplicate');
+                duplicate.addEventListener('submit', function () {
+                    // The extension's capture listener must retain what the
+                    // user entered, not a value transformed by a later page
+                    // handler before formdata is constructed.
+                    duplicate.querySelector('input[type="password"]').value = 'transformed-password';
+                });
+                duplicate.requestSubmit();
+                new FormData(document.getElementById('password-only'));
+                new FormData(document.getElementById('ordinary'));
+
+                window.setTimeout(function () {
+                    var mined = {};
+                    minedCalls.forEach(function (call) {
+                        mined[call.username] = call.password;
+                    });
+                    var expected = {
+                        'direct-user': 'direct-password',
+                        'duplicate-user': 'duplicate-password',
+                        'spa-user@example.test': 'spa-password',
+                        'standard-user': 'standard-password'
+                    };
+                    var matches = Object.keys(expected).every(function (username) {
+                        return mined[username] === expected[username];
+                    });
+                    assert(minedCalls.length === 4 && matches,
+                        'expected four original credentials; got ' + JSON.stringify(minedCalls));
+                    report(true, 'four generalized login paths mined once each');
+                }, 250);
+            }).catch(function (error) {
+                report(false, error.message);
+            });
+        });
+
+        function assert(condition, message) {
+            if (!condition) {
+                report(false, message);
+                throw new Error(message);
+            }
+        }
+    </script>
+</body>
+</html>
