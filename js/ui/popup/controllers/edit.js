@@ -87,19 +87,6 @@
                 });
             }
 
-            $scope.autoFillHintKey = function () {
-                if (!$scope.autoFill) {
-                    return '';
-                }
-                if ($scope.autoFill.mode === 'on') {
-                    return 'autofill_hint_on';
-                }
-                if ($scope.autoFill.mode === 'off') {
-                    return 'autofill_hint_off';
-                }
-                return $scope.autoFill.globalEnabled ? 'autofill_hint_global_on' : 'autofill_hint_global_off';
-            };
-
             $scope.setAutoFillMode = function (mode) {
                 if (!$scope.autoFill || !$scope.credential || mode === $scope.autoFill.mode) {
                     return;

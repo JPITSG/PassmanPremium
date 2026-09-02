@@ -535,22 +535,6 @@
     "message": "Wyłączone",
     "description": "Per-credential auto-fill option: never fill this credential"
   },
-  "autofill_hint_global_on": {
-    "message": "Zgodnie z ustawieniem globalnym, które jest obecnie włączone.",
-    "description": "Hint under the auto-fill control when following a global setting that is on"
-  },
-  "autofill_hint_global_off": {
-    "message": "Zgodnie z ustawieniem globalnym, które jest obecnie wyłączone.",
-    "description": "Hint under the auto-fill control when following a global setting that is off"
-  },
-  "autofill_hint_on": {
-    "message": "Uzupełnia to poświadczenie automatycznie, nawet gdy ustawienie globalne jest wyłączone.",
-    "description": "Hint under the auto-fill control when this credential is pinned to on"
-  },
-  "autofill_hint_off": {
-    "message": "Nigdy nie uzupełnia tego poświadczenia automatycznie.",
-    "description": "Hint under the auto-fill control when this credential is pinned to off"
-  },
   "saving": {
     "message": "Zapisywanie…",
     "description": "Saving"

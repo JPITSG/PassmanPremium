@@ -672,13 +672,6 @@ button:focus-visible,
 	border-color: var(--accent1);
 	color: var(--accent-text);
 }
-/* one-line explanation under a segmented control */
-.segmented-hint {
-	margin: 8px 2px 0;
-	font-size: 11px;
-	line-height: 1.4;
-	color: var(--muted);
-}
 
 /* --- tabs (settings / edit credential) -----------------------------------
    Flex layout: tab titles form a row, the gradient slide sits beneath them,

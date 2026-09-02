@@ -535,22 +535,6 @@
     "message": "Kapalı",
     "description": "Per-credential auto-fill option: never fill this credential"
   },
-  "autofill_hint_global_on": {
-    "message": "Şu anda açık olan genel ayarı izler.",
-    "description": "Hint under the auto-fill control when following a global setting that is on"
-  },
-  "autofill_hint_global_off": {
-    "message": "Şu anda kapalı olan genel ayarı izler.",
-    "description": "Hint under the auto-fill control when following a global setting that is off"
-  },
-  "autofill_hint_on": {
-    "message": "Genel ayar kapalı olsa bile bu kimlik doğrulama bilgisini otomatik olarak doldurur.",
-    "description": "Hint under the auto-fill control when this credential is pinned to on"
-  },
-  "autofill_hint_off": {
-    "message": "Bu kimlik doğrulama bilgisini hiçbir zaman otomatik olarak doldurmaz.",
-    "description": "Hint under the auto-fill control when this credential is pinned to off"
-  },
   "saving": {
     "message": "Kaydediliyor…",
     "description": "Saving"

@@ -535,22 +535,6 @@
     "message": "關閉",
     "description": "Per-credential auto-fill option: never fill this credential"
   },
-  "autofill_hint_global_on": {
-    "message": "依照全域設定，目前為開啟。",
-    "description": "Hint under the auto-fill control when following a global setting that is on"
-  },
-  "autofill_hint_global_off": {
-    "message": "依照全域設定，目前為關閉。",
-    "description": "Hint under the auto-fill control when following a global setting that is off"
-  },
-  "autofill_hint_on": {
-    "message": "即使全域設定已關閉，仍會自動填入此憑證。",
-    "description": "Hint under the auto-fill control when this credential is pinned to on"
-  },
-  "autofill_hint_off": {
-    "message": "永不自動填入此憑證。",
-    "description": "Hint under the auto-fill control when this credential is pinned to off"
-  },
   "saving": {
     "message": "儲存中…",
     "description": "Saving"

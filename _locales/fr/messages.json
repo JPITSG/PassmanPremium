@@ -535,22 +535,6 @@
     "message": "Désactivé",
     "description": "Per-credential auto-fill option: never fill this credential"
   },
-  "autofill_hint_global_on": {
-    "message": "Suit le paramètre global, actuellement activé.",
-    "description": "Hint under the auto-fill control when following a global setting that is on"
-  },
-  "autofill_hint_global_off": {
-    "message": "Suit le paramètre global, actuellement désactivé.",
-    "description": "Hint under the auto-fill control when following a global setting that is off"
-  },
-  "autofill_hint_on": {
-    "message": "Remplit automatiquement cette information d'identification même lorsque le paramètre global est désactivé.",
-    "description": "Hint under the auto-fill control when this credential is pinned to on"
-  },
-  "autofill_hint_off": {
-    "message": "Ne remplit jamais automatiquement cette information d'identification.",
-    "description": "Hint under the auto-fill control when this credential is pinned to off"
-  },
   "saving": {
     "message": "Enregistrement…",
     "description": "Saving"

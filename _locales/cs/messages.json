@@ -535,22 +535,6 @@
     "message": "Vypnuto",
     "description": "Per-credential auto-fill option: never fill this credential"
   },
-  "autofill_hint_global_on": {
-    "message": "Řídí se globálním nastavením, které je nyní zapnuté.",
-    "description": "Hint under the auto-fill control when following a global setting that is on"
-  },
-  "autofill_hint_global_off": {
-    "message": "Řídí se globálním nastavením, které je nyní vypnuté.",
-    "description": "Hint under the auto-fill control when following a global setting that is off"
-  },
-  "autofill_hint_on": {
-    "message": "Toto pověření se vyplní automaticky i tehdy, když je globální nastavení vypnuté.",
-    "description": "Hint under the auto-fill control when this credential is pinned to on"
-  },
-  "autofill_hint_off": {
-    "message": "Toto pověření se nikdy nevyplní automaticky.",
-    "description": "Hint under the auto-fill control when this credential is pinned to off"
-  },
   "saving": {
     "message": "Ukládá se…",
     "description": "Saving"

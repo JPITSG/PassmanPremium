@@ -535,22 +535,6 @@
     "message": "Disattivato",
     "description": "Per-credential auto-fill option: never fill this credential"
   },
-  "autofill_hint_global_on": {
-    "message": "Segue l'impostazione globale, attualmente attiva.",
-    "description": "Hint under the auto-fill control when following a global setting that is on"
-  },
-  "autofill_hint_global_off": {
-    "message": "Segue l'impostazione globale, attualmente disattivata.",
-    "description": "Hint under the auto-fill control when following a global setting that is off"
-  },
-  "autofill_hint_on": {
-    "message": "Compila automaticamente questa credenziale anche quando l'impostazione globale è disattivata.",
-    "description": "Hint under the auto-fill control when this credential is pinned to on"
-  },
-  "autofill_hint_off": {
-    "message": "Non compila mai automaticamente questa credenziale.",
-    "description": "Hint under the auto-fill control when this credential is pinned to off"
-  },
   "saving": {
     "message": "Salvataggio…",
     "description": "Saving"

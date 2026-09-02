@@ -1210,10 +1210,7 @@ var background = (function () {
     }
 
     function getCredentialAutoFillMode(guid) {
-        return {
-            mode: autoFillOverrideFor(guid),
-            globalEnabled: !!isAutoFillEnabled()
-        };
+        return {mode: autoFillOverrideFor(guid)};
     }
 
     _self.getCredentialAutoFillMode = getCredentialAutoFillMode;
