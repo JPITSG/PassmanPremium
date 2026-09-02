@@ -519,6 +519,38 @@
     "message": "Ativar formulário de envio automático após escolher a conta",
     "description": "Enable form auto submit"
   },
+  "autofill_section": {
+    "message": "Preenchimento automático",
+    "description": "Section label in the credential editor for the per-credential auto-fill choice"
+  },
+  "autofill_mode_global": {
+    "message": "Global",
+    "description": "Per-credential auto-fill option: follow the global setting"
+  },
+  "autofill_mode_on": {
+    "message": "Ativado",
+    "description": "Per-credential auto-fill option: always fill this credential"
+  },
+  "autofill_mode_off": {
+    "message": "Desativado",
+    "description": "Per-credential auto-fill option: never fill this credential"
+  },
+  "autofill_hint_global_on": {
+    "message": "Segue a configuração global, que está ativada no momento.",
+    "description": "Hint under the auto-fill control when following a global setting that is on"
+  },
+  "autofill_hint_global_off": {
+    "message": "Segue a configuração global, que está desativada no momento.",
+    "description": "Hint under the auto-fill control when following a global setting that is off"
+  },
+  "autofill_hint_on": {
+    "message": "Preenche esta credencial automaticamente mesmo quando a configuração global está desativada.",
+    "description": "Hint under the auto-fill control when this credential is pinned to on"
+  },
+  "autofill_hint_off": {
+    "message": "Nunca preenche esta credencial automaticamente.",
+    "description": "Hint under the auto-fill control when this credential is pinned to off"
+  },
   "saving": {
     "message": "Salvando…",
     "description": "Saving"

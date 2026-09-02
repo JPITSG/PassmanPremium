@@ -519,6 +519,38 @@
     "message": "계정을 선택한 다음 폼 자동으로 제출",
     "description": "Enable form auto submit"
   },
+  "autofill_section": {
+    "message": "자동 입력",
+    "description": "Section label in the credential editor for the per-credential auto-fill choice"
+  },
+  "autofill_mode_global": {
+    "message": "전역",
+    "description": "Per-credential auto-fill option: follow the global setting"
+  },
+  "autofill_mode_on": {
+    "message": "켬",
+    "description": "Per-credential auto-fill option: always fill this credential"
+  },
+  "autofill_mode_off": {
+    "message": "끔",
+    "description": "Per-credential auto-fill option: never fill this credential"
+  },
+  "autofill_hint_global_on": {
+    "message": "전역 설정을 따릅니다. 현재 켜져 있습니다.",
+    "description": "Hint under the auto-fill control when following a global setting that is on"
+  },
+  "autofill_hint_global_off": {
+    "message": "전역 설정을 따릅니다. 현재 꺼져 있습니다.",
+    "description": "Hint under the auto-fill control when following a global setting that is off"
+  },
+  "autofill_hint_on": {
+    "message": "전역 설정이 꺼져 있어도 이 인증 정보를 자동으로 입력합니다.",
+    "description": "Hint under the auto-fill control when this credential is pinned to on"
+  },
+  "autofill_hint_off": {
+    "message": "이 인증 정보를 자동으로 입력하지 않습니다.",
+    "description": "Hint under the auto-fill control when this credential is pinned to off"
+  },
   "saving": {
     "message": "저장 중…",
     "description": "Saving"

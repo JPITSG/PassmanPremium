@@ -680,37 +680,34 @@ $j(document).ready(function () {
                     bindFormMining(form);
                 }
 
+                // the background applies the global switch and every
+                // per-credential choice before answering, so an empty list
+                // simply means "fill nothing" here
                 API.runtime.sendMessage(API.runtime.id, {
-                    method: "getCredentialsByUrl",
+                    method: "getAutoFillCredentialsByUrl",
                     args: url
                 }).then(function (logins) {
                     var login = chooseAutoFillLogin(logins);
-                    if (login) {
-                        API.runtime.sendMessage(API.runtime.id, {method: 'isAutoFillEnabled'}).then(function (isEnabled) {
-                            if (isEnabled && !flagFilledForm) {
-                                // only an unambiguous single match may
-                                // auto-submit (and only when the user
-                                // enabled it) — never submit a guessed
-                                // account
-                                enterLoginDetails(login, logins.length === 1);
-                                flagFilledForm = true;
-                            }
-                        });
+                    if (login && !flagFilledForm) {
+                        // only an unambiguous single match may auto-submit
+                        // (and only when the user enabled it) — never
+                        // submit a guessed account. Matches pinned to
+                        // "off" are not candidates, so a single remaining
+                        // entry among several stored logins for the site
+                        // is still unambiguous
+                        enterLoginDetails(login, logins.length === 1);
+                        flagFilledForm = true;
                     }
                 });
             }
 
             API.runtime.sendMessage(API.runtime.id, {
-                method: "getCredentialsByUrl",
+                method: "getAutoFillCredentialsByUrl",
                 args: url
             }).then(function (logins) {
                 var login = chooseAutoFillLogin(logins);
                 if (login) {
-                    API.runtime.sendMessage(API.runtime.id, {method: 'isAutoFillEnabled'}).then(function (isEnabled) {
-                        if (isEnabled) {
-                            enterCustomFields(login, settings);
-                        }
-                    });
+                    enterCustomFields(login, settings);
                 }
             });
 

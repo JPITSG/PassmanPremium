@@ -519,6 +519,38 @@
     "message": "Automatikus űrlapküldő engedélyezése fiókválasztás után",
     "description": "Enable form auto submit"
   },
+  "autofill_section": {
+    "message": "Automatikus kitöltés",
+    "description": "Section label in the credential editor for the per-credential auto-fill choice"
+  },
+  "autofill_mode_global": {
+    "message": "Globális",
+    "description": "Per-credential auto-fill option: follow the global setting"
+  },
+  "autofill_mode_on": {
+    "message": "Be",
+    "description": "Per-credential auto-fill option: always fill this credential"
+  },
+  "autofill_mode_off": {
+    "message": "Ki",
+    "description": "Per-credential auto-fill option: never fill this credential"
+  },
+  "autofill_hint_global_on": {
+    "message": "A globális beállítást követi, amely jelenleg be van kapcsolva.",
+    "description": "Hint under the auto-fill control when following a global setting that is on"
+  },
+  "autofill_hint_global_off": {
+    "message": "A globális beállítást követi, amely jelenleg ki van kapcsolva.",
+    "description": "Hint under the auto-fill control when following a global setting that is off"
+  },
+  "autofill_hint_on": {
+    "message": "Ezeket a hitelesítőadatokat akkor is automatikusan kitölti, ha a globális beállítás ki van kapcsolva.",
+    "description": "Hint under the auto-fill control when this credential is pinned to on"
+  },
+  "autofill_hint_off": {
+    "message": "Ezeket a hitelesítőadatokat soha nem tölti ki automatikusan.",
+    "description": "Hint under the auto-fill control when this credential is pinned to off"
+  },
   "saving": {
     "message": "Mentés…",
     "description": "Saving"

@@ -519,6 +519,38 @@
     "message": "Mundëso dërgimin automatik të formës pas zgjedhjes së llogarisë",
     "description": "Enable form auto submit"
   },
+  "autofill_section": {
+    "message": "Plotësim automatik",
+    "description": "Section label in the credential editor for the per-credential auto-fill choice"
+  },
+  "autofill_mode_global": {
+    "message": "Globale",
+    "description": "Per-credential auto-fill option: follow the global setting"
+  },
+  "autofill_mode_on": {
+    "message": "Aktiv",
+    "description": "Per-credential auto-fill option: always fill this credential"
+  },
+  "autofill_mode_off": {
+    "message": "Joaktiv",
+    "description": "Per-credential auto-fill option: never fill this credential"
+  },
+  "autofill_hint_global_on": {
+    "message": "Ndjek cilësimin global, i cili aktualisht është aktiv.",
+    "description": "Hint under the auto-fill control when following a global setting that is on"
+  },
+  "autofill_hint_global_off": {
+    "message": "Ndjek cilësimin global, i cili aktualisht është joaktiv.",
+    "description": "Hint under the auto-fill control when following a global setting that is off"
+  },
+  "autofill_hint_on": {
+    "message": "E plotëson këtë kredencial automatikisht edhe kur cilësimi global është joaktiv.",
+    "description": "Hint under the auto-fill control when this credential is pinned to on"
+  },
+  "autofill_hint_off": {
+    "message": "Nuk e plotëson kurrë këtë kredencial automatikisht.",
+    "description": "Hint under the auto-fill control when this credential is pinned to off"
+  },
   "saving": {
     "message": "Po ruhet…",
     "description": "Saving"

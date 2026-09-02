@@ -10,8 +10,9 @@ privacy, localization and accessibility work.
 - **Client-side encrypted vaults** — credentials are encrypted in the browser
   (AES-256-CCM via Stanford's sjcl) before they ever reach your server.
 - **Autofill** with origin-scoped matching (scheme + host + port by default),
-  an in-field password picker, a right-click context menu, and save/update
-  prompts for new or changed logins — including change-password forms.
+  a per-credential on/off override of the global setting, an in-field
+  password picker, a right-click context menu, and save/update prompts for
+  new or changed logins — including change-password forms.
 - **Password generator** with configurable character classes and per-field
   refill; custom fields and OTP/TOTP codes supported.
 - **Multiple Nextcloud accounts** and shared (team) credentials.

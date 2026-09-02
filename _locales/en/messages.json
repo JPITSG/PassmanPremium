@@ -223,6 +223,38 @@
     "message": "Submit the form after filling a credential",
     "description": "Enable form auto submit"
   },
+  "autofill_section": {
+    "message": "Auto-fill",
+    "description": "Section label in the credential editor for the per-credential auto-fill choice"
+  },
+  "autofill_mode_global": {
+    "message": "Global",
+    "description": "Per-credential auto-fill option: follow the global setting"
+  },
+  "autofill_mode_on": {
+    "message": "On",
+    "description": "Per-credential auto-fill option: always fill this credential"
+  },
+  "autofill_mode_off": {
+    "message": "Off",
+    "description": "Per-credential auto-fill option: never fill this credential"
+  },
+  "autofill_hint_global_on": {
+    "message": "Follows the global setting, which is currently on.",
+    "description": "Hint under the auto-fill control when following a global setting that is on"
+  },
+  "autofill_hint_global_off": {
+    "message": "Follows the global setting, which is currently off.",
+    "description": "Hint under the auto-fill control when following a global setting that is off"
+  },
+  "autofill_hint_on": {
+    "message": "Fills this credential automatically even when the global setting is off.",
+    "description": "Hint under the auto-fill control when this credential is pinned to on"
+  },
+  "autofill_hint_off": {
+    "message": "Never fills this credential automatically.",
+    "description": "Hint under the auto-fill control when this credential is pinned to off"
+  },
   "enable_update_url": {
     "message": "Offer to update a credential's URL when it changes",
     "description": "Enable form auto submit"

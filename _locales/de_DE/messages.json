@@ -519,6 +519,38 @@
     "message": "Automatisches Absenden der ausgefüllten Eingabefelder nach dem Erkennen des Kontos",
     "description": "Enable form auto submit"
   },
+  "autofill_section": {
+    "message": "Automatisch ausfüllen",
+    "description": "Section label in the credential editor for the per-credential auto-fill choice"
+  },
+  "autofill_mode_global": {
+    "message": "Global",
+    "description": "Per-credential auto-fill option: follow the global setting"
+  },
+  "autofill_mode_on": {
+    "message": "An",
+    "description": "Per-credential auto-fill option: always fill this credential"
+  },
+  "autofill_mode_off": {
+    "message": "Aus",
+    "description": "Per-credential auto-fill option: never fill this credential"
+  },
+  "autofill_hint_global_on": {
+    "message": "Folgt der globalen Einstellung, die derzeit aktiviert ist.",
+    "description": "Hint under the auto-fill control when following a global setting that is on"
+  },
+  "autofill_hint_global_off": {
+    "message": "Folgt der globalen Einstellung, die derzeit deaktiviert ist.",
+    "description": "Hint under the auto-fill control when following a global setting that is off"
+  },
+  "autofill_hint_on": {
+    "message": "Füllt diese Anmeldeinformationen automatisch aus, auch wenn die globale Einstellung deaktiviert ist.",
+    "description": "Hint under the auto-fill control when this credential is pinned to on"
+  },
+  "autofill_hint_off": {
+    "message": "Füllt diese Anmeldeinformationen nie automatisch aus.",
+    "description": "Hint under the auto-fill control when this credential is pinned to off"
+  },
   "saving": {
     "message": "Wird gespeichert…",
     "description": "Saving"

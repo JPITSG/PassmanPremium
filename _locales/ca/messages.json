@@ -519,6 +519,38 @@
     "message": "Habiliteu el formulari per enviar automàticament després de seleccionar el compte",
     "description": "Enable form auto submit"
   },
+  "autofill_section": {
+    "message": "Ompliment automàtic",
+    "description": "Section label in the credential editor for the per-credential auto-fill choice"
+  },
+  "autofill_mode_global": {
+    "message": "Global",
+    "description": "Per-credential auto-fill option: follow the global setting"
+  },
+  "autofill_mode_on": {
+    "message": "Activat",
+    "description": "Per-credential auto-fill option: always fill this credential"
+  },
+  "autofill_mode_off": {
+    "message": "Desactivat",
+    "description": "Per-credential auto-fill option: never fill this credential"
+  },
+  "autofill_hint_global_on": {
+    "message": "Segueix la configuració global, que ara mateix està activada.",
+    "description": "Hint under the auto-fill control when following a global setting that is on"
+  },
+  "autofill_hint_global_off": {
+    "message": "Segueix la configuració global, que ara mateix està desactivada.",
+    "description": "Hint under the auto-fill control when following a global setting that is off"
+  },
+  "autofill_hint_on": {
+    "message": "Omple aquesta credencial automàticament encara que la configuració global estigui desactivada.",
+    "description": "Hint under the auto-fill control when this credential is pinned to on"
+  },
+  "autofill_hint_off": {
+    "message": "No omple mai aquesta credencial automàticament.",
+    "description": "Hint under the auto-fill control when this credential is pinned to off"
+  },
   "saving": {
     "message": "S'està desant…",
     "description": "Saving"

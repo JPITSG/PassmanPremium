@@ -233,6 +233,11 @@ var background = (function () {
             if (!_self.settings.hasOwnProperty('showLoginCount')) {
                 _self.settings.showLoginCount = true;
             }
+            // per-credential auto-fill choices (credential guid -> 'on' |
+            // 'off'); a credential without an entry follows enableAutoFill
+            if (!_self.settings.autoFillOverrides || typeof _self.settings.autoFillOverrides !== 'object') {
+                _self.settings.autoFillOverrides = {};
+            }
             // setup never wrote this one, so it stayed undefined (= port
             // respected) while every sibling matching option defaults true
             if (!_self.settings.hasOwnProperty('ignorePort')) {
@@ -764,6 +769,7 @@ var background = (function () {
                         // what used to force a full re-download of every
                         // vault just to notice one record had gone.
                         local_credentials.splice(credential_index, 1);
+                        forgetAutoFillOverride(credential.guid);
                     } else {
                         local_credentials[credential_index] = updatedCredential;
                     }
@@ -1179,6 +1185,82 @@ var background = (function () {
 
     _self.isAutoFillEnabled = isAutoFillEnabled;
 
+    // Per-credential auto-fill. The global switch above stays the default;
+    // a credential can be pinned to 'on' or 'off' regardless of it. The
+    // choice lives in the local settings keyed by credential guid — never
+    // in the server record — so it needs no write permission on the
+    // credential and is available for shared, read-only entries as well.
+    var AUTOFILL_MODES = ['global', 'on', 'off'];
+
+    function autoFillOverrideFor(guid) {
+        var overrides = _self.settings.autoFillOverrides;
+        if (!guid || !overrides || !Object.prototype.hasOwnProperty.call(overrides, guid)) {
+            return 'global';
+        }
+        var mode = overrides[guid];
+        return (mode === 'on' || mode === 'off') ? mode : 'global';
+    }
+
+    function isAutoFillEnabledFor(credential) {
+        var mode = autoFillOverrideFor(credential ? credential.guid : null);
+        if (mode === 'global') {
+            return isAutoFillEnabled();
+        }
+        return mode === 'on';
+    }
+
+    function getCredentialAutoFillMode(guid) {
+        return {
+            mode: autoFillOverrideFor(guid),
+            globalEnabled: !!isAutoFillEnabled()
+        };
+    }
+
+    _self.getCredentialAutoFillMode = getCredentialAutoFillMode;
+
+    function setCredentialAutoFillMode(args) {
+        if (!master_password || !args || !args.guid || AUTOFILL_MODES.indexOf(args.mode) === -1) {
+            return Promise.reject(new Error('Invalid auto-fill mode'));
+        }
+        // only credentials that exist can carry a choice — this is what
+        // keeps the map from collecting keys for arbitrary strings
+        if (!getCredentialByGuid(args.guid)) {
+            return Promise.reject(new Error('Unknown credential'));
+        }
+        if (!_self.settings.autoFillOverrides || typeof _self.settings.autoFillOverrides !== 'object') {
+            _self.settings.autoFillOverrides = {};
+        }
+        if (args.mode === 'global') {
+            delete _self.settings.autoFillOverrides[args.guid];
+        } else {
+            _self.settings.autoFillOverrides[args.guid] = args.mode;
+        }
+        return saveSettings(_self.settings);
+    }
+
+    _self.setCredentialAutoFillMode = setCredentialAutoFillMode;
+
+    // A deleted credential's choice has nothing left to apply to. Deletions
+    // made outside the extension (the Passman web UI) are not observed, so
+    // the odd orphaned entry can remain — a guid mapped to a short word,
+    // affecting nothing.
+    function forgetAutoFillOverride(guid) {
+        var overrides = _self.settings.autoFillOverrides;
+        if (!guid || !overrides || !Object.prototype.hasOwnProperty.call(overrides, guid)) {
+            return;
+        }
+        delete overrides[guid];
+        saveSettings(_self.settings).catch(function () {});
+    }
+
+    // What the content script may fill on page load: the URL matches, with
+    // the global switch and every per-credential choice already applied.
+    function getAutoFillCredentialsByUrl(url) {
+        return getCredentialsByUrl(url).filter(isAutoFillEnabledFor);
+    }
+
+    _self.getAutoFillCredentialsByUrl = getAutoFillCredentialsByUrl;
+
     function isAutoSubmitEnabled() {
         if (!_self.settings.hasOwnProperty('enableAutoSubmit')) {
             return false;
@@ -1237,8 +1319,9 @@ var background = (function () {
     // message handler.
     var messageHandlers = {
         clearMined: true, closeSetupTab: true, consumeCredentialEdit: true,
-        getActiveTab: true,
-        getCredentialByGuid: true, getCredentials: true, getCredentialsByUrl: true,
+        getActiveTab: true, getAutoFillCredentialsByUrl: true,
+        getCredentialAutoFillMode: true, getCredentialByGuid: true, getCredentials: true,
+        getCredentialsByUrl: true,
         getDoorhangerData: true, getMasterPasswordSet: true, getMinedData: true,
         getRuntimeSettings: true, getSetting: true, getSettings: true,
         ignoreSite: true, ignoreURL: true, injectCreateCredential: true,
@@ -1247,7 +1330,8 @@ var background = (function () {
         resetSettings: true,
         saveCredential: true, saveMined: true, saveSettings: true,
         searchCredential: true,
-        setDoorhangerData: true, setMasterPassword: true, themeChanged: true,
+        setCredentialAutoFillMode: true, setDoorhangerData: true, setMasterPassword: true,
+        themeChanged: true,
         updateCredentialUrl: true, updateCredentialUrlDoorhanger: true
     };
 

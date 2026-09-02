@@ -519,6 +519,38 @@
     "message": "Lähetä lomake kirjautumistiedon täyttämisen jälkeen",
     "description": "Enable form auto submit"
   },
+  "autofill_section": {
+    "message": "Automaattinen täyttö",
+    "description": "Section label in the credential editor for the per-credential auto-fill choice"
+  },
+  "autofill_mode_global": {
+    "message": "Yleinen",
+    "description": "Per-credential auto-fill option: follow the global setting"
+  },
+  "autofill_mode_on": {
+    "message": "Päällä",
+    "description": "Per-credential auto-fill option: always fill this credential"
+  },
+  "autofill_mode_off": {
+    "message": "Pois",
+    "description": "Per-credential auto-fill option: never fill this credential"
+  },
+  "autofill_hint_global_on": {
+    "message": "Noudattaa yleistä asetusta, joka on nyt päällä.",
+    "description": "Hint under the auto-fill control when following a global setting that is on"
+  },
+  "autofill_hint_global_off": {
+    "message": "Noudattaa yleistä asetusta, joka on nyt pois päältä.",
+    "description": "Hint under the auto-fill control when following a global setting that is off"
+  },
+  "autofill_hint_on": {
+    "message": "Täyttää tämän kirjautumistiedon automaattisesti, vaikka yleinen asetus olisi pois päältä.",
+    "description": "Hint under the auto-fill control when this credential is pinned to on"
+  },
+  "autofill_hint_off": {
+    "message": "Ei koskaan täytä tätä kirjautumistietoa automaattisesti.",
+    "description": "Hint under the auto-fill control when this credential is pinned to off"
+  },
   "saving": {
     "message": "Tallennetaan…",
     "description": "Saving"

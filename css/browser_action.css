@@ -652,6 +652,7 @@ button:focus-visible,
 
 .segmented { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 .segmented.theme-seg { grid-template-columns: repeat(3, 1fr); }
+.segmented.autofill-seg { grid-template-columns: repeat(3, 1fr); }
 .segmented button {
 	padding: 8px 0;
 	background: var(--input-bg);
@@ -670,6 +671,13 @@ button:focus-visible,
 	background: var(--accent-soft);
 	border-color: var(--accent1);
 	color: var(--accent-text);
+}
+/* one-line explanation under a segmented control */
+.segmented-hint {
+	margin: 8px 2px 0;
+	font-size: 11px;
+	line-height: 1.4;
+	color: var(--muted);
 }
 
 /* --- tabs (settings / edit credential) -----------------------------------

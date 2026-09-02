@@ -13,8 +13,9 @@
 		.directive('themeSwitch', ['$timeout', function ($timeout) {
 			return {
 				restrict: 'E',
-				template: '<div class="segmented theme-seg">' +
+				template: '<div class="segmented theme-seg" role="radiogroup" aria-label="{{\'theme\' | translate}}">' +
 					'<button type="button" ng-repeat="opt in options" ' +
+					'role="radio" aria-checked="{{current === opt.value}}" ' +
 					'ng-class="{active: current === opt.value}" ' +
 					'ng-click="set(opt.value)">{{opt.labelKey | translate}}</button>' +
 					'</div>',

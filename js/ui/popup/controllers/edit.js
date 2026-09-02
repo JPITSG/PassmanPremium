@@ -52,11 +52,71 @@
                 $scope.credential = credential;
                 $scope.credential.password_repeat = angular.copy(credential.password);
                 $scope.$apply();
+                loadAutoFillMode(credential.guid);
             });
 
             var storage = new API.Storage();
 
             $scope.tabActive = 1;
+
+            // Per-credential auto-fill. 'global' follows the "Fill login
+            // forms automatically" switch in Settings; 'on' and 'off' pin
+            // this credential regardless of it. The choice is a local
+            // extension preference, not part of the server record, so —
+            // like the theme switch — it applies the moment it is clicked,
+            // needs no Save, and stays available for shared credentials the
+            // user is not allowed to edit.
+            $scope.autoFillOptions = [
+                {value: 'global', labelKey: 'autofill_mode_global'},
+                {value: 'on', labelKey: 'autofill_mode_on'},
+                {value: 'off', labelKey: 'autofill_mode_off'}
+            ];
+            // null until the background answers: the control renders only
+            // once it can show the stored choice
+            $scope.autoFill = null;
+
+            function loadAutoFillMode(guid) {
+                API.runtime.sendMessage(API.runtime.id, {
+                    method: 'getCredentialAutoFillMode',
+                    args: guid
+                }).then(function (state) {
+                    if (state && state.mode) {
+                        $scope.autoFill = state;
+                        $scope.$apply();
+                    }
+                });
+            }
+
+            $scope.autoFillHintKey = function () {
+                if (!$scope.autoFill) {
+                    return '';
+                }
+                if ($scope.autoFill.mode === 'on') {
+                    return 'autofill_hint_on';
+                }
+                if ($scope.autoFill.mode === 'off') {
+                    return 'autofill_hint_off';
+                }
+                return $scope.autoFill.globalEnabled ? 'autofill_hint_global_on' : 'autofill_hint_global_off';
+            };
+
+            $scope.setAutoFillMode = function (mode) {
+                if (!$scope.autoFill || !$scope.credential || mode === $scope.autoFill.mode) {
+                    return;
+                }
+                var previous = $scope.autoFill.mode;
+                // show the choice at once; a failed write puts it back
+                $scope.autoFill.mode = mode;
+                $scope.formError = null;
+                API.runtime.sendMessage(API.runtime.id, {
+                    method: 'setCredentialAutoFillMode',
+                    args: {guid: $scope.credential.guid, mode: mode}
+                }).catch(function () {
+                    $scope.autoFill.mode = previous;
+                    $scope.formError = API.i18n.getMessage('error');
+                    $scope.$apply();
+                });
+            };
 
             function genPwd(settings) {
                 /* jshint ignore:start */
