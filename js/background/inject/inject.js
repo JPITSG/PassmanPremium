@@ -54,6 +54,13 @@ $j(document).ready(function () {
         }
 
         fillPassword(username, login.password);
+        // An explicit fill covers everything the credential knows about
+        // this page. The context menu and the picker both relay the whole
+        // record, and filling only the username and password left mapped
+        // custom fields (customer numbers, PINs, memorable-word boxes) to
+        // be typed by hand. Runs before the submit below so a form that
+        // auto-submits carries them.
+        enterCustomFields(login);
 
         if (allowSubmit) {
             API.runtime.sendMessage(API.runtime.id, {method: 'isAutoSubmitEnabled'}).then(function (isEnabled) {
@@ -129,7 +136,7 @@ $j(document).ready(function () {
                 }
             }
             catch (e) {
-                if (settings.debug) {
+                if (settings && settings.debug) {
                     console.log('While attempting to auto fill custom fields the following exception was thrown: ' + e);
                 }
             }
@@ -695,21 +702,26 @@ $j(document).ready(function () {
                         // "off" are not candidates, so a single remaining
                         // entry among several stored logins for the site
                         // is still unambiguous
+                        // fills the custom fields too
                         enterLoginDetails(login, logins.length === 1);
                         flagFilledForm = true;
                     }
                 });
+            } else {
+                // No login form to fill, but a credential's custom fields
+                // can still map to inputs on this page — that is what this
+                // second pass has always been for. With a login form
+                // present the fill above covers them.
+                API.runtime.sendMessage(API.runtime.id, {
+                    method: "getAutoFillCredentialsByUrl",
+                    args: url
+                }).then(function (logins) {
+                    var login = chooseAutoFillLogin(logins);
+                    if (login) {
+                        enterCustomFields(login, settings);
+                    }
+                });
             }
-
-            API.runtime.sendMessage(API.runtime.id, {
-                method: "getAutoFillCredentialsByUrl",
-                args: url
-            }).then(function (logins) {
-                var login = chooseAutoFillLogin(logins);
-                if (login) {
-                    enterCustomFields(login, settings);
-                }
-            });
 
         });
     }
