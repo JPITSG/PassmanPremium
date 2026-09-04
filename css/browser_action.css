@@ -408,7 +408,8 @@ select {
 select option { background: var(--card); color: var(--text); }
 
 /* icon buttons beside inputs — copy-text renders <i class="mdi mdi-content-copy"> */
-.input-row .mdi {
+.input-row .mdi,
+.input-row .icon-action {
 	flex-shrink: 0;
 	width: 36px;
 	display: grid;
@@ -421,12 +422,13 @@ select option { background: var(--card); color: var(--text); }
 	cursor: pointer;
 	transition: color 0.18s, background 0.18s, border-color 0.18s;
 }
-.input-row .mdi:hover {
+.input-row .mdi:hover,
+.input-row .icon-action:hover {
 	color: var(--accent1);
 	background: var(--accent-soft);
 	border-color: var(--accent1);
 }
-.input-row .mdi-delete:hover {
+.input-row .icon-action.danger:hover {
 	color: var(--danger);
 	background: var(--danger-soft);
 	border-color: var(--danger-border);

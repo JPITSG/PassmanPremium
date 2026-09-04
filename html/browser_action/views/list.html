@@ -12,6 +12,9 @@
                 {{'one_time_password' | translate}}: <div otp-generator secret="credential.otp.secret"></div>
             </div>
         </div>
+        <div class="edit fill" data-tip="{{'auto_fill' | translate}}" ng-click="fillCredential(credential); $event.stopPropagation()" tabindex="0" role="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        </div>
         <div class="edit" data-tip="{{'edit' | translate}}" ng-click="editCredential(credential); $event.stopPropagation()" tabindex="0" role="button">
             <span class="fa fa-pencil" aria-hidden="true"></span>
         </div>

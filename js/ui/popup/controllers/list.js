@@ -33,7 +33,7 @@
      * Controller of the passmanApp
      */
     angular.module('passmanExtension')
-        .controller('ListCtrl', ['$scope', function ($scope) {
+        .controller('ListCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
             $scope.app = 'passman';
 
 
@@ -73,6 +73,27 @@
             $scope.$on('credentialsUpdated', function () {
                 getActiveTab();
             });
+
+            // Fill this credential into the page the popup was opened over.
+            // The background resolves the guid and routes the secret to the
+            // tab's top frame, so the plaintext never travels through the
+            // popup's message channel or into a third-party subframe.
+            $scope.fillCredential = function (credential) {
+                API.runtime.sendMessage(API.runtime.id, {
+                    method: 'fillCredential',
+                    args: credential.guid
+                }).then(function (filled) {
+                    if (filled) {
+                        window.close();
+                        return;
+                    }
+                    // nothing to fill into (an about: page, a tab whose
+                    // content script never ran) — say so instead of
+                    // closing on a fill that did not happen
+                    $rootScope.$broadcast('status', API.i18n.getMessage('error'));
+                    $scope.$apply();
+                });
+            };
 
             $scope.editCredential = function (credential) {
                 window.location = '#!/edit/' + credential.guid;

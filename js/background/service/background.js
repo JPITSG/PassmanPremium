@@ -1258,6 +1258,35 @@ var background = (function () {
 
     _self.getAutoFillCredentialsByUrl = getAutoFillCredentialsByUrl;
 
+    // Fill a credential the popup picked into the active tab. The popup
+    // sends only the guid; the credential is resolved here and delivered
+    // to the top frame alone — a tab-wide message would hand the plaintext
+    // to every frame in the page, hostile iframes included (the same
+    // reasoning as the doorhanger and the picker's frame token). Resolves
+    // false when there is nothing to fill into, so the popup can say so
+    // rather than close on a fill that never happened.
+    function fillCredential(guid) {
+        var credential = getCredentialByGuid(guid);
+        if (!master_password || !credential) {
+            return Promise.resolve(false);
+        }
+        return API.tabs.query({active: true, currentWindow: true}).then(function (tabs) {
+            if (!tabs || !tabs[0]) {
+                return false;
+            }
+            return API.tabs.sendMessage(tabs[0].id, {
+                method: 'enterLoginDetails',
+                args: credential
+            }, {frameId: 0}).then(function () {
+                return true;
+            }).catch(function () {
+                return false;
+            });
+        });
+    }
+
+    _self.fillCredential = fillCredential;
+
     function isAutoSubmitEnabled() {
         if (!_self.settings.hasOwnProperty('enableAutoSubmit')) {
             return false;
@@ -1319,6 +1348,7 @@ var background = (function () {
         getActiveTab: true, getAutoFillCredentialsByUrl: true,
         getCredentialAutoFillMode: true, getCredentialByGuid: true, getCredentials: true,
         getCredentialsByUrl: true,
+        fillCredential: true,
         getDoorhangerData: true, getMasterPasswordSet: true, getMinedData: true,
         getRuntimeSettings: true, getSetting: true, getSettings: true,
         ignoreSite: true, ignoreURL: true, injectCreateCredential: true,
