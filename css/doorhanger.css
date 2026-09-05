@@ -96,6 +96,65 @@ body {
 
 #password-toolbar .passman-btn.btn-save .btn-txt { padding-right: 2px; }
 
+/* Title confirmation keeps the same card height and button styling. */
+#password-toolbar.editing-title {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+#password-toolbar.editing-title .toolbar-text {
+	float: none;
+	margin-top: 0;
+	max-width: 45%;
+	min-width: 0;
+}
+#password-toolbar .title-form {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex: 1;
+	min-width: 0;
+}
+#password-toolbar .title-form .passman-btn {
+	float: none;
+	flex-shrink: 0;
+	margin: 0;
+}
+#password-toolbar .credential-title {
+	flex: 1;
+	min-width: 0;
+	box-sizing: border-box;
+	height: 30px;
+	padding: 4px 10px;
+	font: inherit;
+	border: 1px solid var(--border);
+	border-radius: 7px;
+	background: var(--input-bg);
+	color: var(--text);
+	outline: none;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+#password-toolbar .credential-title:focus {
+	border-color: var(--accent1);
+	box-shadow: 0 0 0 3px var(--accent-ring);
+}
+#password-toolbar .passman-btn:disabled {
+	opacity: 0.55;
+	cursor: default;
+}
+#password-toolbar .passman-btn:focus-visible {
+	outline: 2px solid var(--accent1);
+	outline-offset: 2px;
+}
+@media (max-width: 600px) {
+	#password-toolbar.editing-title .toolbar-text {
+		/* Keep the shield, giving the title and actions room on narrow pages. */
+		width: 0;
+		flex-shrink: 0;
+		padding-left: 16px;
+	}
+}
+
 /* vault chooser chip (multi-account) */
 #password-toolbar .passman-btn.caret-container {
 	background: var(--accent-softer);
@@ -158,4 +217,3 @@ body {
     outline: 2px solid #0082c9;
     outline-offset: 2px;
 }
-

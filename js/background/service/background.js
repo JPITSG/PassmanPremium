@@ -870,7 +870,7 @@ var background = (function () {
             url: url,
             username: data.username,
             password: data.password,
-            label: sender.title,
+            label: sender.tab.title,
             guid: minedMatchingID
         };
 
@@ -897,6 +897,9 @@ var background = (function () {
         if (minedSite !== site) {
             return null;
         }
+        // Preview the title that saving would use now, including after a
+        // post-login navigation. Editing the preview must not alter mining.
+        mined = $.extend({}, mined, {label: sender.tab.title});
         if (!_self.settings.hasOwnProperty('ignored_sites')) {
             return mined;
         }
@@ -1066,6 +1069,9 @@ var background = (function () {
 
     function saveMined(args, sender) {
         var data = mined_data[sender.tab.id];
+        if (!data) {
+            return Promise.reject(new Error('No detected credential to save'));
+        }
         var credential = {},
             credential_index;
 
@@ -1103,7 +1109,7 @@ var background = (function () {
                 });
             });
         }
-        credential.label = sender.tab.title;
+        credential.label = typeof args.label === 'string' && args.label.trim() ? args.label : sender.tab.title;
         credential.vault_id = credential.account.vault.vault_id;
         return new Promise(function (resolve, reject) {
             PAPI.createCredential(credential.account, credential, credential.account.vault_password, function (createdCredential) {

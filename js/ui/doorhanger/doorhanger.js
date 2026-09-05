@@ -27,6 +27,10 @@ $(document).ready(function () {
         var cancelText = API.i18n.getMessage('cancel');
         var remaining = 10;
         label.text(cancelText + ' (' + remaining + ')');
+        function stopCountdown() {
+            clearInterval(timer);
+            label.text(cancelText);
+        }
         var timer = setInterval(function () {
             remaining--;
             if (remaining <= 0) {
@@ -36,15 +40,11 @@ $(document).ready(function () {
             }
             label.text(cancelText + ' (' + remaining + ')');
         }, 1000);
-        btn.one('mouseenter', function () {
-            clearInterval(timer);
-            label.text(cancelText);
-        });
+        btn.one('mouseenter', stopCountdown);
         // any click inside the box answers the prompt (or opens the vault
         // chooser) before the timer runs out — stop counting
-        btn.closest('#password-toolbar').one('click', function () {
-            clearInterval(timer);
-        });
+        btn.closest('#password-toolbar').one('click', stopCountdown);
+        return stopCountdown;
     }
 
     function resizeIframe(height) {
@@ -56,6 +56,62 @@ $(document).ready(function () {
 
     var default_account;
     var dh = $('#password-doorhanger');
+    var stopCancelCountdown = function () {};
+
+    function editMinedTitle(data, account) {
+        stopCancelCountdown();
+        var toolbar = dh.find('#password-toolbar');
+        toolbar.find('.select_account').stop(true, true).hide();
+        resizeIframe(0);
+        toolbar.children('.passman-btn').hide();
+        toolbar.addClass('editing-title');
+
+        var form = $('<form>', {class: 'title-form'});
+        var input = $('<input>', {
+            type: 'text',
+            class: 'credential-title',
+            'aria-label': API.i18n.getMessage('label'),
+            autocomplete: 'off'
+        }).val(data.label || '').appendTo(form);
+        var cancel = $('<button>', {type: 'button', class: 'passman-btn btn-cancel'})
+            .text(API.i18n.getMessage('cancel')).appendTo(form);
+        var save = $('<button>', {type: 'submit', class: 'passman-btn btn-save btn-success'})
+            .text(API.i18n.getMessage('save')).appendTo(form);
+        var saving = false;
+
+        function validateTitle() {
+            save.prop('disabled', !input.val().trim());
+        }
+        input.on('input', validateTitle);
+        validateTitle();
+        cancel.on('click', function () {
+            btn_config.cancel().onClickFn();
+        });
+        form.on('submit', function (e) {
+            e.preventDefault();
+            if (saving || !input.val().trim()) {
+                return;
+            }
+            saving = true;
+            form.hide();
+            toolbar.removeClass('editing-title');
+            toolbar.find('.toolbar-text').text(API.i18n.getMessage('saving_to', [account.vault.name]) + '...');
+            API.runtime.sendMessage(API.runtime.id, {
+                method: 'saveMined',
+                args: {account: account, label: input.val()}
+            }).catch(function () {
+                saving = false;
+                toolbar.find('.toolbar-text').text(API.i18n.getMessage('error'));
+                toolbar.addClass('editing-title');
+                form.show();
+                input.trigger('focus');
+            });
+        });
+        toolbar.append(form);
+        input.trigger('focus');
+        input[0].select();
+    }
+
     var btn_config = {
         'cancel': function () {
             return {
@@ -73,6 +129,10 @@ $(document).ready(function () {
             return {
                 text: btnText,
                 onClickFn: function (account) {
+                    if (data.guid === null) {
+                        editMinedTitle(data, account);
+                        return;
+                    }
                     API.runtime.sendMessage(API.runtime.id, {method: "saveMined", args: {account: account}}).catch(function () {
                         // the write failed — restore the buttons and say so
                         // instead of hanging on "Saving to …" forever
@@ -221,7 +281,7 @@ $(document).ready(function () {
             doorhanger_div.slideDown();
             var cancel_btn = doorhanger_div.find('.btn-cancel');
             if (cancel_btn.length) {
-                startCancelCountdown(cancel_btn);
+                stopCancelCountdown = startCancelCountdown(cancel_btn);
             }
         });
     });

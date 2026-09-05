@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Passman doorhanger title regression</title>
+<style>
+    body { font: 14px system-ui; background: #d9dde4; margin: 20px; }
+    iframe { display: block; width: 100%; height: 125px; border: 0; margin: 12px 0; }
+    .test-frame { position: absolute; left: -10000px; width: 1000px; }
+</style>
+<h1>Doorhanger title confirmation</h1>
+<pre id="results">Running…</pre>
+<button onclick="location.reload()">Reset previews and rerun tests</button>
+<div id="previews"></div>
+<script>
+// Serve the repo over HTTP and open /tests/doorhanger-title-browser.html.
+// The production controller, jQuery and styles run inside real 60px bar layouts.
+// Only runtime messaging and the dismissal clock are replaced. No vault is used.
+var messages;
+var accounts = [{vault: {name: 'Personal', vault_id: 1}}, {vault: {name: 'Work', vault_id: 2}}];
+function assert(value, message) { if (!value) { throw new Error(message); } }
+function tick() { return new Promise(function (resolve) { setTimeout(resolve, 0); }); }
+function frameFixture(win, options) {
+    var state = {calls: [], timers: new Map(), listener: null, failNext: false};
+    win.setInterval = function (fn) { var id = {}; state.timers.set(id, fn); return id; };
+    win.clearInterval = function (id) { state.timers.delete(id); };
+    state.advanceCountdown = function () {
+        for (var i = 0; i < 12; i++) { state.timers.forEach(function (fn) { fn(); }); }
+    };
+    win.API = {
+        i18n: {getMessage: function (key, substitutions) {
+            var entry = messages[key];
+            var text = entry.message;
+            Object.keys(entry.placeholders || {}).forEach(function (name) {
+                var index = Number(entry.placeholders[name].content.slice(1)) - 1;
+                text = text.replace(new RegExp('\\$' + name + '\\$', 'gi'), function () { return (substitutions || [])[index] || ''; });
+            });
+            return text;
+        }},
+        runtime: {
+            id: 'doorhanger-test',
+            onMessage: {addListener: function (listener) { state.listener = listener; }},
+            sendMessage: function (id, message) {
+                state.calls.push(message);
+                if (message.method === 'getRuntimeSettings') { return Promise.resolve({accounts: options.multi ? accounts : accounts.slice(0, 1)}); }
+                if (message.method === 'getDoorhangerData') {
+                    return Promise.resolve({buttons: ['cancel', 'ignore', 'save'], data: {
+                        guid: options.update ? 'existing' : null,
+                        title: options.update ? 'Changed login detected:' : 'New login detected:',
+                        username: 'alice@example.test', url: 'https://example.test', label: 'Example account'
+                    }});
+                }
+                if (message.method === 'saveMined' && state.failNext) {
+                    state.failNext = false;
+                    return Promise.reject(new Error('Simulated write failure'));
+                }
+                if (message.method === 'saveMined' && options.preview) {
+                    document.getElementById('last-save').textContent = 'Preview saved: ' + (message.args.label || '(existing title)');
+                    setTimeout(function () { state.listener({method: 'minedLoginSaved', args: {updated: false}}); }, 200);
+                }
+                return Promise.resolve();
+            }
+        }
+    };
+    state.saves = function () { return state.calls.filter(function (call) { return call.method === 'saveMined'; }); };
+    state.closed = function () { return state.calls.some(function (call) { return call.method === 'passToParent' && call.args.injectMethod === 'closeDoorhanger'; }); };
+    return state;
+}
+async function fixture(options) {
+    options = options || {};
+    var frame = document.createElement('iframe');
+    if (!options.preview) { frame.className = 'test-frame'; }
+    if (options.width) { frame.style.width = options.width + 'px'; }
+    (options.preview ? document.getElementById('previews') : document.body).appendChild(frame);
+    var doc = frame.contentDocument;
+    doc.open();
+    doc.write('<!doctype html><html data-theme="' + (options.theme || 'dark') + '"><link rel="stylesheet" href="../css/theme.css"><link rel="stylesheet" href="../css/doorhanger.css"><link rel="stylesheet" href="../css/vendor/font-awesome.css"><div id="password-doorhanger"></div>');
+    doc.close();
+    var state = frameFixture(frame.contentWindow, options);
+    async function script(src) {
+        await new Promise(function (resolve, reject) {
+            var tag = doc.createElement('script'); tag.src = src; tag.onload = resolve; tag.onerror = reject; doc.body.appendChild(tag);
+        });
+    }
+    await script('../js/vendor/jquery/jquery.js');
+    frame.contentWindow.$.fx.off = true;
+    await script('../js/ui/doorhanger/doorhanger.js');
+    for (var attempt = 0; attempt < 100 && !doc.querySelector('.btn-save'); attempt++) { await tick(); }
+    assert(doc.querySelector('.btn-save'), 'doorhanger did not load');
+    return Object.assign(state, {frame: frame, doc: doc, win: frame.contentWindow,
+        start: function () { doc.querySelector('.btn-save').click(); },
+        input: function () { return doc.querySelector('.credential-title'); },
+        submit: function () { doc.querySelector('.title-form').requestSubmit(); }
+    });
+}
+async function tests() {
+    var reports = [];
+    async function test(name, run) { await run(); reports.push('PASS ' + name); document.getElementById('results').textContent = reports.join('\n'); }
+    await test('Save opens a selected, prefilled title; no write or timeout while editing', async function () {
+        var f = await fixture();
+        assert(!f.input(), 'initial bar changed');
+        f.start();
+        assert(f.input().value === 'Example account', 'default title');
+        assert(f.doc.activeElement === f.input() && f.input().selectionEnd === f.input().value.length, 'title focus/selection');
+        assert(f.saves().length === 0, 'first Save wrote a credential');
+        f.advanceCountdown();
+        assert(!f.closed(), 'timer dismissed the editor');
+        assert(!f.win.$('.btn-ignore').is(':visible'), 'old actions still visible');
+        f.input().value = 'Work <mail> & 私用';
+        f.submit(); f.submit();
+        assert(f.saves().length === 1 && f.saves()[0].args.label === f.input().value, 'edited title / duplicate write');
+        f.listener({method: 'minedLoginSaved', args: {updated: false}});
+        assert(f.doc.querySelector('.toolbar-text').textContent === 'Credential saved!', 'success feedback');
+        f.frame.remove();
+    });
+    await test('Cancel clears the detected login and hides the bar without saving', async function () {
+        var f = await fixture(); f.start(); f.doc.querySelector('.title-form .btn-cancel').click();
+        assert(f.closed() && f.saves().length === 0, 'cancel did not close cleanly');
+        assert(f.calls.some(function (call) { return call.method === 'clearMined'; }), 'mined credential not cleared');
+        f.frame.remove();
+    });
+    await test('Alternate vault selection opens title editing and stops the countdown', async function () {
+        var f = await fixture({multi: true});
+        f.doc.querySelector('.caret-container').click();
+        f.doc.querySelector('.account').click();
+        assert(f.input() && f.saves().length === 0, 'vault choice saved immediately');
+        f.advanceCountdown(); assert(!f.closed(), 'vault-choice countdown still running');
+        assert(f.calls.some(function (call) { return call.method === 'passToParent' && call.args.injectMethod === 'resizeIframe' && call.args.args === 0; }), 'dropdown height not reset');
+        f.submit(); assert(f.saves()[0].args.account.vault.vault_id === 2, 'selected vault lost');
+        f.frame.remove();
+    });
+    await test('Blank titles are blocked; failed saves retain the title and allow retry', async function () {
+        var f = await fixture(); f.start();
+        f.input().value = '   '; f.input().dispatchEvent(new Event('input')); f.submit();
+        assert(f.saves().length === 0 && f.doc.querySelector('.title-form .btn-save').disabled, 'blank title saved');
+        f.input().value = 'Retry title'; f.input().dispatchEvent(new Event('input'));
+        f.failNext = true; f.submit(); await tick();
+        assert(f.input().value === 'Retry title' && f.win.$('.title-form').is(':visible'), 'failed write lost editor');
+        assert(f.doc.querySelector('.toolbar-text').textContent === 'Error', 'error feedback missing');
+        f.submit(); assert(f.saves().length === 2, 'retry failed'); f.frame.remove();
+    });
+    await test('Existing credential Update keeps its one-click flow', async function () {
+        var f = await fixture({update: true}); f.start();
+        assert(!f.input() && f.saves().length === 1 && !('label' in f.saves()[0].args), 'Update flow changed');
+        f.frame.remove();
+    });
+    await test('Title and buttons fit within the 60px iframe in both themes and narrow pages', async function () {
+        for (var theme of ['dark', 'light']) {
+            for (var width of [360, 600, 1000]) {
+                var f = await fixture({theme: theme, width: width}); f.start();
+                for (var control of f.doc.querySelectorAll('.title-form input, .title-form button')) {
+                    var rect = control.getBoundingClientRect();
+                    assert(rect.width > 20 && rect.left >= 0 && rect.right <= width && rect.bottom < 60, theme + ' ' + width + ': control clipped');
+                }
+                f.frame.remove();
+            }
+        }
+    });
+    document.getElementById('results').textContent += '\nAll doorhanger title regression tests passed.';
+    document.title = 'PASS — Passman doorhanger title regression';
+    for (var theme of ['dark', 'light']) {
+        var heading = document.createElement('h2'); heading.textContent = theme + ' preview'; document.getElementById('previews').appendChild(heading);
+        var preview = await fixture({preview: true, theme: theme, multi: true}); preview.start();
+    }
+    await fixture({preview: true, theme: 'dark', width: 360});
+}
+fetch('../_locales/en/messages.json').then(function (response) { return response.json(); }).then(function (data) { messages = data; return tests(); }).catch(function (error) {
+    document.getElementById('results').textContent += '\nFAIL ' + error.stack;
+    document.title = 'FAIL — Passman doorhanger title regression';
+});
+</script>
+<p id="last-save">Preview saves use fake data only.</p>
+</html>
