@@ -54,9 +54,11 @@ body {
 	float: right;
 	display: inline-block;
 	height: 30px;
-	line-height: 28px;
+	/* 26px line box over 2px bottom padding: label lifted 1px (theme.css,
+	   "optical centering"); the countdown grid centres in the same 26px */
+	line-height: 26px;
 	margin: 7px 0 0 6px;
-	padding: 0 12px;
+	padding: 0 12px 2px;
 	font-family: inherit;
 	font-size: 13px;
 	font-weight: 600;
@@ -93,8 +95,6 @@ body {
 
 #password-toolbar .passman-btn.btn-ignore:hover,
 #password-toolbar .passman-btn.btn-updateUrl:hover { color: var(--accent-text); }
-
-#password-toolbar .passman-btn.btn-save .btn-txt { padding-right: 2px; }
 
 /* Reserve the initial countdown label's width, even after hover stops it. */
 #password-toolbar .passman-btn.has-countdown {

@@ -617,7 +617,9 @@ select option { background: var(--card); color: var(--text); }
 .md-btn:disabled:hover { filter: none; }
 
 .md-btn > * { position: relative; }
-.md-btn span { display: inline-block; padding: 10px 22px; }
+/* 1px more padding below than above lifts the label 1px (theme.css,
+   "optical centering") — same for the block variants further down */
+.md-btn span { display: inline-block; padding: 9px 22px 11px; }
 
 .md-btn.orange {
 	background: var(--warning-soft);
@@ -648,7 +650,7 @@ button:focus-visible,
 	margin: 20px 0 12px;
 }
 .form-actions .md-btn { flex: 1; margin: 0; text-align: center; }
-.form-actions .md-btn > span { display: block; padding: 11px 12px; }
+.form-actions .md-btn > span { display: block; padding: 10px 12px 12px; }
 
 /* --- segmented control (theme switch) ------------------------------------ */
 
@@ -656,7 +658,8 @@ button:focus-visible,
 .segmented.theme-seg { grid-template-columns: repeat(3, 1fr); }
 .segmented.autofill-seg { grid-template-columns: repeat(3, 1fr); }
 .segmented button {
-	padding: 8px 0;
+	/* all-caps 11px labels sit only half a pixel low: half the usual lift */
+	padding: 7.5px 0 8.5px;
 	background: var(--input-bg);
 	border: 1px solid var(--border);
 	border-radius: 6px;
@@ -896,7 +899,7 @@ button:focus-visible,
 	width: 100%;
 	margin: 14px 0 0;
 }
-.unlock .md-btn.default > span { display: block; padding: 11px 12px; }
+.unlock .md-btn.default > span { display: block; padding: 10px 12px 12px; }
 .unlock .reset-actions {
 	display: flex;
 	justify-content: center;

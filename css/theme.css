@@ -53,6 +53,19 @@
 	color-scheme: dark;
 }
 
+/* --- optical centering ---------------------------------------------------
+   The UI fonts (Segoe UI, SF, Roboto, DejaVu) all carry more ascent than
+   descent, so a label whose line box is centred geometrically renders with
+   its glyphs about a pixel below the visual centre of its button — most
+   visibly in Firefox on Windows. Every text button in the extension
+   therefore lifts its label by 1px: one pixel less padding above the line
+   box than below it (or a 2px-shorter line box over 2px bottom padding
+   where the height is fixed). The small all-caps segmented control lifts
+   half a pixel. Rules: .passman-btn (doorhanger.css), .md-btn and
+   .segmented button (browser_action.css), .btn (password_picker.css).
+   Keep the bias when adding a button; measured with glyph-ink analysis
+   of 4x renders in Firefox and Chromium. */
+
 /* --- light theme ---------------------------------------------------------
    Neutral surfaces flip; the accent deepens a step so gradient text and
    accent-tinted controls keep their contrast on white. */
