@@ -96,6 +96,21 @@ body {
 
 #password-toolbar .passman-btn.btn-save .btn-txt { padding-right: 2px; }
 
+/* Reserve the initial countdown label's width, even after hover stops it. */
+#password-toolbar .passman-btn.has-countdown {
+	display: inline-grid;
+	place-items: center;
+	font-variant-numeric: tabular-nums;
+}
+#password-toolbar .has-countdown::after {
+	content: attr(data-countdown-label);
+	visibility: hidden;
+}
+#password-toolbar .has-countdown > .btn-text,
+#password-toolbar .has-countdown::after {
+	grid-area: 1 / 1;
+}
+
 /* Title confirmation keeps the same card height and button styling. */
 #password-toolbar.editing-title {
 	display: flex;
@@ -111,6 +126,7 @@ body {
 #password-toolbar .title-form {
 	display: flex;
 	align-items: center;
+	justify-content: flex-end;
 	gap: 6px;
 	flex: 1;
 	min-width: 0;
@@ -123,6 +139,7 @@ body {
 #password-toolbar .credential-title {
 	flex: 1;
 	min-width: 0;
+	max-width: 320px;
 	box-sizing: border-box;
 	height: 30px;
 	padding: 4px 10px;

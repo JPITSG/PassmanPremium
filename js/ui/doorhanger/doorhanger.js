@@ -27,6 +27,7 @@ $(document).ready(function () {
         var cancelText = API.i18n.getMessage('cancel');
         var remaining = 10;
         label.text(cancelText + ' (' + remaining + ')');
+        btn.addClass('has-countdown').attr('data-countdown-label', label.text());
         function stopCountdown() {
             clearInterval(timer);
             label.text(cancelText);
