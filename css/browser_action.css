@@ -13,7 +13,8 @@
 
 * { box-sizing: border-box; }
 
-html {
+html,
+#page-content-wrapper {
 	scrollbar-width: thin;
 	scrollbar-color: var(--scrollbar) transparent;
 }
@@ -71,13 +72,25 @@ a:hover { color: var(--accent-text); }
 .clearfix { clear: both; }
 .text-danger { color: var(--danger); }
 
-#wrapper { position: relative; z-index: 1; }
+/* Scrolling happens INSIDE the view container, not on the document: the
+   wrapper is a column capped at Firefox's 600px popup limit, the header
+   keeps its natural height and #page-content-wrapper takes the rest and
+   scrolls. The popup still sizes itself to the content up to the cap,
+   but a long list no longer runs a scrollbar up over the header. */
+#wrapper {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	max-height: 600px;
+}
+/* setup runs in a real tab: cap at the viewport instead */
+body.setup #wrapper { max-height: 100vh; }
 
 /* --- header ------------------------------------------------------------- */
 
 header.header {
-	position: sticky;
-	top: 0;
+	flex-shrink: 0;
 	z-index: 100;
 	display: flex;
 	align-items: center;
@@ -184,6 +197,10 @@ h1.brand-title {
 	position: relative;
 	z-index: 1;
 	width: 100%;
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 #page-content-wrapper > * { animation: viewIn 0.22s ease backwards; }
